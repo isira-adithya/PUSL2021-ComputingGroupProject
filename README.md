@@ -10,4 +10,4 @@ This system will also have a review and commentary section which can be used by 
 The system will also have a notification system where the users will be notified when a new event is registered. Notifications will be sent through emails. The users will have the option to have this functionality on or off. 
 This system can be accessible by both mobile and PC users via a Web Browser. 
 This system will be powered by a Linux Server, an Apache web server, and a MySQL database. The system will be available to users at all times.
-This is Hashen.(Wadda)
+
