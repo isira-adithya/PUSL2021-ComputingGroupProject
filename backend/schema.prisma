@@ -1,6 +1,6 @@
 // schema.prisma
 generator client {
-  output   = "./modules/prima_client"
+  output   = "./modules/prisma_client"
   provider = "prisma-client-js"
 }
 
@@ -10,7 +10,16 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
-  password String
+  id                 Int                  @id @default(autoincrement())
+  username           String               @unique
+  password           String
+  PasswordResetToken PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int      @unique
+  createdAt Int 
+  user      User     @relation(fields: [userId], references: [id])
 }

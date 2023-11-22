@@ -1,3 +1,5 @@
+### Create New User Account
+
 POST http://www.eventhive.local/api/auth/signup
 Content-Type: application/json
 
@@ -6,25 +8,42 @@ Content-Type: application/json
     "password": "SuperSecurePass123"
 }
 
-###
+### Login
 
 POST http://www.eventhive.local/api/auth/login
 Content-Type: application/json
 
 {
     "username": "isira_adithya",
-    "password": "SuperSecurePass123"
+    "password": "HelloWorld"
 }
 
-###
+### Logout
 
 DELETE  http://www.eventhive.local/api/auth/logout
 Content-Type: application/json
-Cookie: connect.sid=s%3AqdcKoRND5JN6iHQe54gyZBh5Jgl84m4y.yz3oXAIsUJ71hbhJQ5sj9UW7jmptFjQgiWWF83bmU9I;
+Cookie: connect.sid=s%3AQ-Dm1nwYCQkDxrMhVoZbpTGa1MaKYsZ_.6c1apYPBVlQhwJqD84aMhawUhLQeB6olpHRAkzlRDxo;
 
 {
     "username": "isira_adithya",
     "password": "SuperSecurePass123"
 }
 
-###
+### Request a Password Reset Token
+
+POST  http://www.eventhive.local/api/auth/reset-password/request
+Content-Type: application/json
+
+{
+    "username": "isira_adithya"
+}
+
+### Reset Password using token
+
+POST  http://www.eventhive.local/api/auth/reset-password/reset
+Content-Type: application/json
+
+{
+    "token": "16660fd7f24fc485562f11aa5d4234df0e4affbe46d373dcfa111e81b13966f1",
+    "newPassword": "HelloWorld"
+}
