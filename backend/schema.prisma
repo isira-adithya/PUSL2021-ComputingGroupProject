@@ -1,0 +1,16 @@
+// schema.prisma
+generator client {
+  output   = "./modules/prima_client"
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://eventhive:9uCfUfDi3afp75uNJT95ITnE@localhost:3306/eventhive"
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  password String
+}

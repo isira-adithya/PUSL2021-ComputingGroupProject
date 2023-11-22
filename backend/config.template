@@ -1,0 +1,9 @@
+export default {
+    HOST: "www.eventhive.local",
+    SQL_SERVER_HOST: "127.0.0.1",
+    SQL_SERVER_PORT: "3306",
+    SQL_SERVER_USER: "eventhive",
+    SQL_SERVER_PASSWORD: "test",
+    SQL_SERVER_DB: "eventhive",
+    EXPRESS_SESSION_SECRET: "test"
+}
