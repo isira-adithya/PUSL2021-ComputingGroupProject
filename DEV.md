@@ -4,8 +4,8 @@
     ServerAdmin admin@eventhive.local
     ServerName www.eventhive.local
     ServerAlias eventhive.local
-    DocumentRoot "D:/Github/PUSL2021-ComputingGroupProject/frontend"
-    <Directory "D:/Github/PUSL2021-ComputingGroupProject/frontend">
+    DocumentRoot "D:/Github/PUSL2021-ComputingGroupProject/frontend/dist"
+    <Directory "D:/Github/PUSL2021-ComputingGroupProject/frontend/dist">
      Allow from all
      Require all granted
     </Directory>
