@@ -1,0 +1,30 @@
+POST http://www.eventhive.local/api/auth/signup
+Content-Type: application/json
+
+{
+    "username": "isira_adithya",
+    "password": "SuperSecurePass123"
+}
+
+###
+
+POST http://www.eventhive.local/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "isira_adithya",
+    "password": "SuperSecurePass123"
+}
+
+###
+
+DELETE  http://www.eventhive.local/api/auth/logout
+Content-Type: application/json
+Cookie: connect.sid=s%3AqdcKoRND5JN6iHQe54gyZBh5Jgl84m4y.yz3oXAIsUJ71hbhJQ5sj9UW7jmptFjQgiWWF83bmU9I;
+
+{
+    "username": "isira_adithya",
+    "password": "SuperSecurePass123"
+}
+
+###
