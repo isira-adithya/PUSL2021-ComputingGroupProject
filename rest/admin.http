@@ -1,0 +1,3 @@
+# Test Admin Endpoint
+GET http://www.eventhive.local/api/admin/test
+Cookie: connect.sid=s%3AcMJmkf-awUrs-LQEb8fBxYo684c_Gqpb.9NNQrgT%2FTX6ewCMVBUdXb5vIVFG5p%2FedUQPtmjuIAME;
