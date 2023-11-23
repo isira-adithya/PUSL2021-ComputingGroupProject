@@ -2,3 +2,4 @@ node_modules
 backend/logs/
 backend/config.js
 backend/modules/prisma_client/
+backend/.env

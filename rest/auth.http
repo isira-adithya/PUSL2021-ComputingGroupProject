@@ -5,7 +5,8 @@ Content-Type: application/json
 
 {
     "username": "isira_adithya",
-    "password": "SuperSecurePass123"
+    "password": "SuperSecurePass123",
+    "role": "VISITOR"
 }
 
 ### Login
@@ -15,7 +16,7 @@ Content-Type: application/json
 
 {
     "username": "isira_adithya",
-    "password": "HelloWorld"
+    "password": "SuperSecurePass123"
 }
 
 ### Logout
