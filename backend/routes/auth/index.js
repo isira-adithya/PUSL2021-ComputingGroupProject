@@ -13,8 +13,34 @@ router.post('/signup', async (req, res) => {
     try {
         const {
             username,
-            password
+            password,
+            role
         } = req.body;
+
+        var isAccountActive = true;
+
+        // Checking the role
+        if (role){
+            switch (role) {
+                case 'VISITOR':
+                    isAccountActive = true;
+                    break;
+
+                case 'EVENT_OWNER':
+                    isAccountActive = false;
+                    break;
+
+                case 'ADMIN':
+                    return res.status(400).send("Not Implemented");
+                    break;
+            
+                default:
+                    return res.status(400).send("Invalid role");
+                    break;
+            }
+        } else {
+            return res.status(400).send("Invalid role");
+        }
 
         // Check if the username already exists
         const existingUser = await prisma.user.findUnique({
@@ -35,10 +61,16 @@ router.post('/signup', async (req, res) => {
             data: {
                 username,
                 password: hashedPassword,
+                role: role,
+                isActive: isAccountActive
             },
         });
 
-        res.status(201).send('User created successfully');
+        if (role == "EVENT_OWNER"){
+            res.status(201).send('Your account will be enabled after further review');
+        } else {
+            res.status(201).send('User created successfully');
+        }
     } catch (error) {
         console.error(error);
         res.status(500);
@@ -65,6 +97,10 @@ router.post('/login', async (req, res) => {
             return res.status(401).send('Invalid username or password');
         }
 
+        if (!user.isActive){
+            return res.status(401).send('Account is under review');
+        }
+
         // Compare the provided password with the hashed password
         const passwordMatch = await bcrypt.compare(password, user.password);
 
@@ -75,6 +111,7 @@ router.post('/login', async (req, res) => {
         // Store user information in the session
         req.session.userId = user.id;
         req.session.username = user.username;
+        req.session.role = user.role;
         req.session.isLoggedIn = true;
 
         res.status(200).send('Login successful');
