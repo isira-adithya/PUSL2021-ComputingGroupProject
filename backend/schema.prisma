@@ -6,13 +6,15 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://eventhive:9uCfUfDi3afp75uNJT95ITnE@localhost:3306/eventhive"
+  url      = env("EVENTHIVE_SQL_CONNECTIONURI") // mysql://user:pass@localhost:3306/dbname
 }
 
 model User {
   id                 Int                  @id @default(autoincrement())
   username           String               @unique
   password           String
+  role               String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
+  isActive           Boolean              @default(false)
   PasswordResetToken PasswordResetToken[]
 }
 

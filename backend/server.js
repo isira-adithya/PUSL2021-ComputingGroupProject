@@ -6,6 +6,8 @@ const server = express();
 
 // Routes
 import authRoute from './routes/auth/index.js';
+import adminRoute from './routes/admin/index.js';
+import eventOwnerRoute from './routes/eventowner/index.js';
 
 // Need to support application/json content
 server.use(bodyParser.json());
@@ -21,6 +23,8 @@ server.use(session({
 }));
 
 server.use("/auth", authRoute);
+server.use("/admin", adminRoute);
+server.use("/eventowner", eventOwnerRoute);
 
 server.listen(8654, '127.0.0.1', () => {
     console.log("[+] Server started at http://127.0.0.1:8654")
