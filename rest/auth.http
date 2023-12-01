@@ -5,8 +5,29 @@ Content-Type: application/json
 
 {
     "username": "isira_adithya",
+    "firstname": "Isira",
+    "lastname": "Adithya",
+    "email": "me@isiraadithya.com",
+    "phone": "123456789",
+    "address": "No 123, Sample Road, Test City",
     "password": "SuperSecurePass123",
     "role": "VISITOR"
+}
+
+### Create New EventOwner Account
+
+POST http://www.eventhive.local/api/auth/signup
+Content-Type: application/json
+
+{
+    "username": "isira_adithya_eo",
+    "firstname": "Isira",
+    "lastname": "Adithya (EventOwner)",
+    "email": "eo@isiraadithya.com",
+    "phone": "123456780",
+    "address": "No 123, Sample Road, Test City",
+    "password": "SuperSecurePass123",
+    "role": "EVENT_OWNER"
 }
 
 ### Login
@@ -16,14 +37,14 @@ Content-Type: application/json
 
 {
     "username": "isira_adithya",
-    "password": "SuperSecurePass123"
+    "password": "HelloWorld"
 }
 
 ### Logout
 
 DELETE  http://www.eventhive.local/api/auth/logout
 Content-Type: application/json
-Cookie: connect.sid=s%3AQ-Dm1nwYCQkDxrMhVoZbpTGa1MaKYsZ_.6c1apYPBVlQhwJqD84aMhawUhLQeB6olpHRAkzlRDxo;
+Cookie: connect.sid=s%3AP0ODPxXW4oVS8yJ4GR-SGvu9v5mw304q.uJQVuNs8TbA4MV5vlUjwVF5f4NC4loCKipvRPJahCNg;
 
 {
     "username": "isira_adithya",
@@ -45,6 +66,6 @@ POST  http://www.eventhive.local/api/auth/reset-password/reset
 Content-Type: application/json
 
 {
-    "token": "16660fd7f24fc485562f11aa5d4234df0e4affbe46d373dcfa111e81b13966f1",
+    "token": "895ccb1c399430eda115ff38a7f0b029ba6e210078dcbeeeec0fd1f8af1349c7",
     "newPassword": "HelloWorld"
 }

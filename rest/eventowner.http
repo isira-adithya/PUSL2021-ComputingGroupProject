@@ -1,2 +1,2 @@
 # Test route
-GET /test
+POST http://www.eventhive.local/api/eventowner/verify-account
