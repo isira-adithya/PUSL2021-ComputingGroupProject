@@ -21,6 +21,7 @@ model User {
   password                String
   role                    String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
   is_active               Boolean              @default(false)
+  is_verified             Boolean              @default(false)
   PasswordResetToken      PasswordResetToken[]
   Notification            Notification[]
   Commentary              Commentary[]

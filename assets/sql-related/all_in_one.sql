@@ -17,6 +17,7 @@ CREATE TABLE `user` (
   `password` varchar(256) DEFAULT NULL,
   `role` varchar(100) DEFAULT NULL,
   `is_active` boolean DEFAULT NULL,
+  `is_verified` boolean DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
