@@ -30,10 +30,10 @@ CREATE TABLE `verification` (
   `nicback_image_link` varchar(512) DEFAULT NULL,
   `face_image_link` varchar(512) DEFAULT NULL,
   `verificarion_status` varchar(100) DEFAULT NULL,
-  `event_owner_id` int DEFAULT NULL,
+  `owner_id` int DEFAULT NULL,
   PRIMARY KEY (`verification_id`),
-  KEY `event_owner_id` (`event_owner_id`),
-  CONSTRAINT `verification_ibfk_1` FOREIGN KEY (`event_owner_id`) REFERENCES `event_owner` (`event_owner_id`)
+  KEY `owner_id` (`owner_id`),
+  CONSTRAINT `verification_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
