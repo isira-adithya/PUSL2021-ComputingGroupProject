@@ -18,8 +18,8 @@ model User {
   PasswordResetToken PasswordResetToken[]
   Notification       Notification[]
   Commentary         Commentary[]
-  EventOwner         EventOwner[]
   Event              Event[]
+  Verification       Verification[]
 }
 
 model PasswordResetToken {
@@ -42,9 +42,12 @@ model Notification {
 model Verification {
   verification_id             Int           @id @default(autoincrement())
   verification_notes          String?
-  verificarion_status         String?
-  event_owner_id              Int?
-  event_owner                 EventOwner?   @relation(fields: [event_owner_id], references: [event_owner_id])
+  verificarion_status         String? // VERIFIED, PENDING, REJECTED
+  face_image_link             String?
+  nicback_image_link          String?
+  nicfront_image_link         String?
+  owner_id                    Int?
+  user                        User?         @relation(fields: [owner_id], references: [user_id])
   Notification                Notification? @relation(fields: [notificationNotification_id], references: [notification_id])
   notificationNotification_id Int?
 }
@@ -57,14 +60,6 @@ model Commentary {
   rating        String?
   user          User?   @relation(fields: [user_id], references: [user_id])
   event         Event?  @relation(fields: [event_id], references: [event_id])
-}
-
-model EventOwner {
-  event_owner_id Int            @id @default(autoincrement())
-  contact        Int?
-  user_id        Int?
-  user           User?          @relation(fields: [user_id], references: [user_id])
-  Verification   Verification[]
 }
 
 model Event {
