@@ -24,7 +24,11 @@ DROP TABLE IF EXISTS `verification`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `verification` (
   `verification_id` int NOT NULL AUTO_INCREMENT,
-  `verification_notes` varchar(100) DEFAULT NULL,
+  `verification_notes` varchar(2048) DEFAULT NULL,
+  `verificarion_status` varchar(100) DEFAULT NULL,
+  `nicfront_image_link` varchar(512) DEFAULT NULL,
+  `nicback_image_link` varchar(512) DEFAULT NULL,
+  `face_image_link` varchar(512) DEFAULT NULL,
   `verificarion_status` varchar(100) DEFAULT NULL,
   `event_owner_id` int DEFAULT NULL,
   PRIMARY KEY (`verification_id`),
