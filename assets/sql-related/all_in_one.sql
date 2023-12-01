@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) DEFAULT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
   `email_address` varchar(108) DEFAULT NULL,
   `phone_number` varchar(24) DEFAULT NULL,
   `address` varchar(256) DEFAULT NULL,
