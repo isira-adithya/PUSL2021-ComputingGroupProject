@@ -10,24 +10,28 @@ datasource db {
 }
 
 model User {
-  user_id            Int                  @id @default(autoincrement())
-  username           String               @unique
-  password           String
-  role               String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
-  isActive           Boolean              @default(false)
-  PasswordResetToken PasswordResetToken[]
-  Notification       Notification[]
-  Commentary         Commentary[]
-  Event              Event[]
-  Verification       Verification[]
+  user_id                 Int                  @id @default(autoincrement())
+  user_name               String               @unique
+  email_address           String               @unique
+  phone_number            String               @unique
+  address                 String               @unique
+  notification_preference String
+  password                String
+  role                    String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
+  is_active               Boolean              @default(false)
+  PasswordResetToken      PasswordResetToken[]
+  Notification            Notification[]
+  Commentary              Commentary[]
+  Event                   Event[]
+  Verification            Verification[]
 }
 
 model PasswordResetToken {
-  id        Int    @id @default(autoincrement())
-  token     String @unique
-  userId    Int    @unique
-  createdAt Int
-  user      User   @relation(fields: [userId], references: [user_id])
+  preset_token_id Int    @id @default(autoincrement())
+  token           String @unique
+  user_id         Int    @unique
+  createdAt       Int
+  user            User   @relation(fields: [user_id], references: [user_id])
 }
 
 model Notification {

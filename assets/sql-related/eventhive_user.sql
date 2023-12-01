@@ -26,9 +26,10 @@ CREATE TABLE `user` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) DEFAULT NULL,
   `email_address` varchar(1000) DEFAULT NULL,
-  `role` varchar(100) DEFAULT NULL,
-  `device` varchar(100) DEFAULT NULL,
   `notification_preference` varchar(100) DEFAULT NULL,
+  `password` varchar(256) DEFAULT NULL,
+  `role` varchar(100) DEFAULT NULL,
+  `is_active` boolean DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
