@@ -37,7 +37,17 @@ Content-Type: application/json
 
 {
     "username": "isira_adithya",
-    "password": "HelloWorld"
+    "password": "SuperSecurePass123"
+}
+
+### Login EO
+
+POST http://www.eventhive.local/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "isira_adithya_eo",
+    "password": "SuperSecurePass123"
 }
 
 ### Logout

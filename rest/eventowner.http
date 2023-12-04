@@ -1,2 +1,17 @@
-# Test route
+### Submit Images for verification
 POST http://www.eventhive.local/api/eventowner/verify-account
+Cookie: connect.sid=s%3A_nMARuSrNuCmF0tJqyAcWA2YsxAAT271.QdA4RR%2BGXJT72J%2FFp8noHIrn%2B73glo5O74hzMV8h9fs;
+Content-Type: application/json
+
+{
+    "face_image": "https://uploads.eventhive.io/image.jpg",
+    "nic_front": "https://uploads.eventhive.io/image.jpg",
+    "nic_back": "https://uploads.eventhive.io/image.jpg",
+    "notes": "loremipsum"
+}
+
+
+### Check verification status
+GET http://www.eventhive.local/api/eventowner/verification-status
+Cookie: connect.sid=s%3AXDm_V8-qNSfmeKdMnDmU7lcGb0vktlSY.0sGDzGZUC%2BtObTOl%2BAgFa4AdWyREqGDgopY69fPAydU;
+
