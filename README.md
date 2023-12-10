@@ -1,5 +1,7 @@
 # EventHive - Local Event Discovery Website
 
+![Alt](https://repobeats.axiom.co/api/embed/150fb164e2ac3a0d83f8f2e0aaa4652f3a15f58a.svg "Repobeats analytics image")
+
 ## Description
 
 
