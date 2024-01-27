@@ -2,7 +2,13 @@
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `verification`;
+DROP TABLE IF EXISTS `passwordresettoken`;
+DROP TABLE IF EXISTS `event`;
+DROP TABLE IF EXISTS `commentary`;
+DROP TABLE IF EXISTS `notification`;
 DROP TABLE IF EXISTS `user`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
@@ -27,7 +33,6 @@ CREATE TABLE `user` (
 --
 -- Table structure for table `passwordresettoken`
 --
-DROP TABLE IF EXISTS `passwordresettoken`;
 CREATE TABLE passwordresettoken (
   preset_token_id INT AUTO_INCREMENT PRIMARY KEY,
   token VARCHAR(255) NOT NULL,
@@ -36,34 +41,11 @@ CREATE TABLE passwordresettoken (
   FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Table structure for table `commentary`
---
-
-DROP TABLE IF EXISTS `commentary`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `commentary` (
-  `commentary_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `event_id` int DEFAULT NULL,
-  `comment` varchar(100) DEFAULT NULL,
-  `rating` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`commentary_id`),
-  KEY `user_id` (`user_id`),
-  KEY `event_id` (`event_id`),
-  CONSTRAINT `commentary_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `commentary_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
 
 --
 -- Table structure for table `event`
 --
 
-DROP TABLE IF EXISTS `event`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event` (
@@ -88,10 +70,30 @@ CREATE TABLE `event` (
 
 
 --
+-- Table structure for table `commentary`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `commentary` (
+  `commentary_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `event_id` int DEFAULT NULL,
+  `comment` varchar(100) DEFAULT NULL,
+  `rating` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`commentary_id`),
+  KEY `user_id` (`user_id`),
+  KEY `event_id` (`event_id`),
+  CONSTRAINT `commentary_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `commentary_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
 -- Table structure for table `notification`
 --
 
-DROP TABLE IF EXISTS `notification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notification` (
@@ -112,17 +114,16 @@ CREATE TABLE `notification` (
 -- Table structure for table `verification`
 --
 
-DROP TABLE IF EXISTS `verification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `verification` (
   `verification_id` int NOT NULL AUTO_INCREMENT,
-  `verification_notes` varchar(2048) DEFAULT NULL,
-  `verificarion_status` varchar(100) DEFAULT NULL,
-  `nicfront_image_link` varchar(512) DEFAULT NULL,
-  `nicback_image_link` varchar(512) DEFAULT NULL,
-  `face_image_link` varchar(512) DEFAULT NULL,
-  `owner_id` int DEFAULT NULL,
+  `verification_notes` varchar(2048) NOT NULL,
+  `verificarion_status` varchar(100) NOT NULL,
+  `nicfront_image_link` varchar(512) NOT NULL,
+  `nicback_image_link` varchar(512) NOT NULL,
+  `face_image_link` varchar(512) NOT NULL,
+  `owner_id` UNIQUE int NOT NULL,
   PRIMARY KEY (`verification_id`),
   KEY `owner_id` (`owner_id`),
   CONSTRAINT `verification_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`user_id`)

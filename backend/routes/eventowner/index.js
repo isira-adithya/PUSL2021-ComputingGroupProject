@@ -18,6 +18,7 @@ const checkAuth = (req, res, next) => {
         if (req.session.role == "EVENT_OWNER") {
             next();
         } else {
+            console.log(req.session)
             res.status(401);
             return res.send("Unauthorized");
         }
@@ -29,31 +30,70 @@ const checkAuth = (req, res, next) => {
 
 router.use(checkAuth);
 
+const imageUrlValidator = (value) => {
+    const url = new URL(value);
+    const host = url.hostname;
+
+    if (!host.endsWith('.example.com')) {
+        throw new Error('Invalid URL');
+    }
+
+    return true;
+}
+
 router.post(
     "/verify-account",
     body("face_image").notEmpty().isURL({
         protocols: ["https"],
-        host_whitelist: "uploads.eventhive.io" // TODO: Change this to our own S3 bucket later
+        host_whitelist: ["uploads.eventhive.io"]
     }),
-    body("nic_front").notEmpty().isURL(),
-    body("nic_back").notEmpty().isURL(),
-    body("notes").notEmpty().isLength({
+    body("nic_front").notEmpty().isURL({
+        protocols: ["https"],
+        host_whitelist: ["uploads.eventhive.io"] // TODO: Change this to our own S3 bucket later
+    }),
+    body("nic_back").notEmpty().isURL({
+        protocols: ["https"],
+        host_whitelist: ["uploads.eventhive.io"] // TODO: Change this to our own S3 bucket later
+    }),
+    body("notes").isLength({
         max: 1024
     }),
     async (req, res) => {
 
+        // Input Validation
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            res.status(400);
+            return res.send({ errors: result.array() });
+        }
+
         try {
+            // Checking if there are any previous verifications
+            const _prevObj = await prisma.verification.findFirst({
+                where: {
+                    owner_id: req.session.user_id
+                }
+            })
+            if (_prevObj) {
+                return res.json({
+                    success: false,
+                    msg: "You have a verification request pending. Please wait."
+                })
+            }
+
+            // Creating the new verification request
             await prisma.verification.create({
                 data: {
-                    event_owner_id: req.session.userId,
+                    owner_id: req.session.user_id,
                     verificarion_status: "PENDING",
-                    verification_notes: body['notes'],
-                    face_image_link: res.body['face_image'],
-                    nicback_image_link: res.body['nic_front'],
-                    nicfront_image_link: res.body['nic_back'],
+                    verification_notes: req.body['notes'],
+                    face_image_link: req.body['face_image'],
+                    nicback_image_link: req.body['nic_front'],
+                    nicfront_image_link: req.body['nic_back'],
                 }
             });
         } catch (error) {
+            console.error(error)
             res.status(500)
             return res.json({
                 success: false,
@@ -66,5 +106,16 @@ router.post(
             msg: "Please wait until we verify your account."
         });
     })
+
+router.get("/verification-status", async (req, res) => {
+    const verificationObj = await prisma.verification.findFirst({
+        where: {
+            owner_id: req.session.user_id
+        }
+    })
+    return res.json({
+        status: verificationObj.verificarion_status
+    });
+})
 
 export default router;
