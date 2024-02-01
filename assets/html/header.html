@@ -8,6 +8,9 @@
         .user-navbar{
             background-color: black
         }
+        .button-color{
+            background-color: #111F4D;
+        }
         @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
         * {
             font-family: 'Poppins', sans-serif;
@@ -26,32 +29,25 @@
               <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
+            <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 ">
+              <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                <li class="nav-item mx-2">
                   <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
+                <li class="nav-item mx-2">
+                  <a class="nav-link" href="events">Events</a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
+                <li class="nav-item mx-2">
+                  <a class="nav-link" href="about_us.html">About Us</a>
                 </li>
-              </ul>
-              <form class="d-flex mt-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
+                <li class="nav-item mx-2">
+                  <a class="nav-link" href="contact_us">Contact Us</a>
+                </li>
+              </ul>    
+              <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+                <a href="login.html" class="text-white">LOGIN</a>
+                <a href="#signup" class="text-white text-decoration-none px-3 py-1 button-color" >SIGN UP</a>
+              </div>      
             </div>
           </div>
         </div>
