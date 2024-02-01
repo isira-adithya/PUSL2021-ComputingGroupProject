@@ -15,6 +15,10 @@
         .button-color{
             background-color: #111F4D;
         }
+        .custom-logo{
+            height: fill;
+            width: 120px;
+        }
         @media(max-width:991px){
             .sidebar{
                 background-color: rgba(54, 50, 50);
@@ -26,13 +30,17 @@
   <body class="user-navbar">
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
         <div class="container">
-          <a class="navbar-brand" href="#">Offcanvas navbar</a>
+          <a class="navbar-brand" href="#">
+            <img src="/assets/images/event hive (1).png" alt="logo" class="custom-logo">
+          </a>
           <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                <img src="/assets/images/event hive (1).png" alt="logo" class="custom-logo">
+              </h5>
               <button type="button" class="btn-close btn-close-white shadow-none border-0 " data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 ">
