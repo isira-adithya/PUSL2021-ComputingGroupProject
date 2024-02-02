@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,29 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
   <style>
     body {
-      background-color: #000000; /* Set black background for the entire page */
-      color: #ffffff; /* Set white text color for the entire page */
+      background-color: #000000;
+      /* Set black background for the entire page */
+      color: #ffffff;
+      /* Set white text color for the entire page */
+    }
+
+    .card img {
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .card-title {
+      color: white;
+      font-size: 20px;
+      font-family: Poppins;
+      font-weight: 800;
+      text-transform: capitalize;
+      line-height: 24px;
+      word-wrap: break-word
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1 class="text-center mt-4 mb-4">Events Available</h1>
@@ -20,9 +39,10 @@
 
     <div class="row">
       <div class="col-md-4">
-        <div class="card mb-4"> 
+        <div class="card mb-4">
           <div class="card-body">
-            <img style="width: 380px; height: 388px; border-radius: 20px" src="https://via.placeholder.com/537x378" />
+            <img class="img-fluid" style="width: 100%; height: 100%; border-radius: 20px"
+              src="/assets/images/EventsPic1.jpeg" alt="Event Image">
           </div>
         </div>
         <h5 class="card-title">Musical Event By Gen M</h5>
@@ -31,43 +51,49 @@
       <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Nighto Carnival By Veno</h5>
+            <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic2.jpeg" alt="Event Image">
           </div>
         </div>
+        <h5 class="card-title">Nighto Carnival By Veno</h5>
       </div>
+
       <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Rugby Event By Rollo</h5>
+            <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic3.jpeg" alt="Event Image">
           </div>
         </div>
+        <h5 class="card-title">Rugby Event By Rollo</h5>
       </div>
     </div>
-
+    <br><br>
     <div class="row">
       <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Dambulla Perahara Event</h5>
+            <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic4.jpeg" alt="Event Image">
           </div>
         </div>
+        <h5 class="card-title">Dambulla Perahara Event</h5>
       </div>
       <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Charity Event By Eve</h5>
+            <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic5.jpeg" alt="Event Image">
           </div>
         </div>
+        <h5 class="card-title">Charity Event By Eve</h5>
       </div>
       <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Ronax Musical By Dino</h5>
+            <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic6.jpeg" alt="Event Image">
           </div>
         </div>
+        <h5 class="card-title">Ronax Musical By Dino</h5>
       </div>
     </div>
-
+    <br><br><br>
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
         <li class="page-item disabled">
@@ -83,18 +109,22 @@
         </li>
       </ul>
     </nav>
+    <br>
 
-    <p class="text-center mt-4">For More Details</p>
+    <p class="text-center mt-4"
+      style="width: 100%; height: 100%; text-align: center; color: white; font-size: 25px; font-family: Post No Bills Jaffna ExtraBold; font-weight: 800; text-transform: capitalize; word-wrap: break-word">
+      For More Details</p>
 
     <div class="row justify-content-center mt-4">
-      <div class="col-md-3">
+      <div class="col-md-3 text-center mb-3">
         <a href="#" class="btn btn-primary btn-block">CONTACT US</a>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 text-center">
         <a href="#" class="btn btn-secondary btn-block">ABOUT US</a>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
+</html>
