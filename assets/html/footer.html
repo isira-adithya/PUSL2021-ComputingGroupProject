@@ -10,27 +10,39 @@
     .footer-bg-black {
       background-color: black;
       color: white;
+    }   
+    .footer-icons a:hover {
+      opacity: 0.4; 
+    }
+    .white-hr {
+      border-top: 1px solid white;
+      width: 95%;
     }
   </style>
 </head>
 <body>
 
-  <!-- Bootstrap Footer -->
-  <footer class="footer-bg-black text-left py-3 d-flex justify-content-between">
-    <div class="container d-flex align-items-center">
-      <p class="mb-0"> Copyright&copy; Event Hive 2024.</p>
-    </div>
-    <!-- Add even smaller PNG icons as clickable links to socials -->
-    <div>
-      <a href="#" target="_blank">
-        <img src="/assets/images/linkdin_Icon.png" alt="Icon 1" class="img-fluid w-10 mr-3">
-      </a>
-      <a href="#" target="_blank">
-        <img src="/assets/images/intagram.png" alt="Icon 2" class="img-fluid w-10 mr-3">
-      </a>
-      <a href="#" target="_blank">
-        <img src="/assets/images/facbook.png" alt="Icon 3" class="img-fluid w-10 mr-3">
-      </a>
+  <footer class="footer-bg-black text-left py-3">
+    <hr class="white-hr my-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-3 text-center text-md-left "> Copyright&copy; Event Hive 2024.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-r">
+          <div class="footer-icons ml-md-4 d-flex justify-content-center justify-content-md-end">
+            <a href="#" target="_blank">
+              <img src="/assets/images/linkdin_Icon.png" alt="Icon 1" style="width: 100%; max-width: 30px;" class="mr-3">
+            </a>
+            <a href="#" target="_blank">
+              <img src="/assets/images/intagram.png" alt="Icon 2" style="width: 100%; max-width: 30px;" class="mr-3">
+            </a>
+            <a href="#" target="_blank">
+              <img src="/assets/images/facbook.png" alt="Icon 3" style="width: 100%; max-width: 30px;" class="mr-3">
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </footer>
 
@@ -41,6 +53,10 @@
 
 </body>
 </html>
+
+
+
+
 
 
 
