@@ -12,65 +12,92 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://unpkg.com/vue-scrollto"></script>
     <style>
-        .section-1{
-           
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(/assets/images/home-pageBG.jpg);
-            background-size: cover;
+        body, html {
+          height: 100%;
+          margin: 0;
         }
+
+        #section1{
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(/assets/images/home-pageBG.jpg);
+          background-size: cover;
+        }
+    
+        .section {
+          height: 100vh;
+          display: flex;
+
+          text-align: center;
+          color: #fff;
+          
+          background-position: center;
+        }
+
         .font-1{
-            font-family: 'Stick No Bills', sans-serif;
+          font-family: 'Stick No Bills', sans-serif;
         }
+
         .font-2{
-            font-family: 'Poppins', sans-serif;
+          font-family: 'Poppins', sans-serif;
         }
-        .arrow-container {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-  
+
+        .scroll-down {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
         }
-    </style>
-</head>
-<body >
-    <section id="first-section" class="vh-100 d-flex justify-content-center align-items-center section-1">
-        <div id="scroll">
+
+        .fa-color{
+            color:rgb(255, 255, 255);
+
+        }
+        .fa-color:hover{
+          color: rgb(207, 206, 206);
+        }
+
+        
+      </style>
+    </head>
+    <body>
+    
+      <!-- Section 1 -->
+      <div id="section1" class="vh-100 text-center text-white d-flex justify-content-center align-items-center">
         <div class="container">
             <div class="row">
-                <div class="col-12 text-center text-white">
-                    <p class="display-3 font-1">WELCOME TO EVENT HIVE</p>
-                    <p class="fs-3 font-2">Find Your Favourite Events</p>
-                </div>
+                <h1 class="font-1 display-3">WELCOME TO EVENT HIVE</h1>
+            </div>
+            <div class="row">
+                <p class="font-2 h3">Find Your Favourite Events</p>
             </div>
         </div>
         <div class="arrow-container text-center">
-            <a @click="scrollTo('#second-section')" class="scroll-down">
-                <i class="fas fa-chevron-down"></i>
+            <a href="#section2" class="scroll-down">
+                <i class="fas fa-chevron-down fa-color"></i>
             </a>
         </div>
-    </section>
-
-    <section id="second-section" class="vh-100 d-flex justify-content-center align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p>Content of the next section goes here.</p>
-                </div>
-            </div>
+      </div>
+    
+      <!-- Section 2 -->
+      <div id="section2" class="vh-100 text-white d-flex">
+        <div class="h-25 w-100" style="background-color: aqua;">
+            
         </div>
-    </section>
+        <div class="h-75 w-100" ">
+
+        </div>
     </div>
+    
+      <!-- Section 3 -->
+      <div id="section3" class="section bg-warning" >
+        <h1>Section 3</h1>
+        
+      </div>
+    
+      <!-- Section 4 -->
+      <div id="section4" class="section bg-danger" >
+        <h1>Section 4</h1>
+      </div>
 
-
-    <script>
-        new Vue({
-            el: '#scroll',
-            methods: {
-                scrollTo(element) {
-                    this.$scrollTo(element, 500, { easing: 'ease-in-out' });
-                }
-            }
-        });
-    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
