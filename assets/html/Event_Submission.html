@@ -6,62 +6,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Submit An Event</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-  <style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Stick+No+Bills:wght@700&display=swap" rel="stylesheet">
 
-   
+  
+  <style>
     h1 {
-        font-family: 'Stick No Bills', sans-serif; 
-        font-weight: 600; 
-        
+        font-family: 'Stick No Bills', sans-serif;
+        font-weight: 600;
     }
 
     body {
-      background-color: #000000; 
-      color: #ffffff; 
+        background-color: #000000;
+        color: #ffffff;
     }
 
-    
     .form-control {
-    border: none;
-    border-bottom: 2px solid #ffffff;
-    border-radius: 0;
-    margin-bottom: 2rem;
-    color: #ffffff;
-    background-color: transparent; 
+        border: none;
+        border-bottom: 2px solid #ffffff;
+        border-radius: 0;
+        margin-bottom: 2rem;
+        color: #ffffff;
+        background-color: transparent;
     }
 
     .form-control:focus {
-        background-color: transparent; 
-        box-shadow: none; 
+        background-color: transparent;
+        box-shadow: none;
         color: #ffffff;
     }
 
     .transparent-background {
         background-color: transparent !important;
     }
+    
+    .font-1{
+            font-family: 'Stick No Bills', sans-serif;
+            margin-top: 20px;
+        }
 
-
-   
     label.form-label {
-      text-align: left;
-      display: block;
-      margin-bottom: 0.2rem;
+        text-align: left;
+        display: block;
+        margin-bottom: 0.2rem;
     }
 
-   
     a {
-      color: #ffffff;
+        color: #ffffff;
     }
-   
-  </style>
+
+    .BGimg {
+    background-image: url('/assets/images/evensubmissionBg.png');
+    
+    background-repeat: no-repeat;
+}
+
+
+    .main-container {
+        background-color: rgba(0, 0, 0, 0.5); /* Add a transparent overlay on top of the background image */
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+</style>
 </head>
 
+<style>
+  p {
+    background-image: url('/assets/images/evensubmissionBg.png');
+  }
+  </style>
 <body>
+  
+  <div class="BGimg">
   <div class="container">
-    <div class="col-md-4 mx-auto text-center">
-        <h1 class="mb-4" style="font-family: 'Stick No Bills', sans-serif; font-weight: 600;">Submit An Event</h1><br>
+    <div class="col-md-4 mx-auto text-center" >
+        <h1 class="mb-4 font-1" >Submit An Event</h1><br>
         
-      <p class="mb-4">Submit Your Event And Let Others Know</p><br><br>
+      <p class="mb-4 ">Submit Your Event And Let Others Know</p><br><br>
 
       <form>
         <div class="row mb-3">
@@ -103,19 +126,26 @@
 
         <button type="submit" class="btn btn-primary" style="width: 90%; border-radius: 10px; background-color: #111F4D; border: none;">Submit</button>
         
-      </form>
-
-      <br>
-      <div class="text-center mt-4">
-        <a href="#">For More Details</a>
+      </form></div>
+      </div>
+      <br><br>
+      <div>
+      <div class="text-center mt-4 font-1">
+        <h2 style="margin-bottom: 4%; margin-top: 2%;">For More Details</h2>
       </div>
 
-      <div class="text-center">
-        <a href="#">CONTACT US</a> | <a href="#">ABOUT US</a>
-      </div>
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-3 text-center mb-3">
+          <a href="#" class="btn btn-primary btn-block"style="width: 40%;  background-color: #111F4D; border: none;">CONTACT US</a>
+        </div>
+        <div class="col-md-3 text-center">
+          <a href="#" class="btn btn-secondary btn-block"style="width: 40%;: 10px; background-color: #111F4D; border: none;">ABOUT US</a>
+        </div>
+      </div><br>
     </div>
   </div>
   
 </body>
+
 </html>
 
