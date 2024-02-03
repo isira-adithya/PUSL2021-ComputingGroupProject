@@ -23,11 +23,12 @@
     .card-title {
       color: white;
       font-size: 20px;
-      font-family: Poppins;
+      font-family: 'Poppins', sans-serif;
       font-weight: 800;
       text-transform: capitalize;
       line-height: 24px;
-      word-wrap: break-word
+      word-wrap: break-word;
+      text-align: center;
     }
 
     
@@ -80,51 +81,53 @@
   <div class="container">
     <h1 class="text-center mt-4 mb-4">Events Available</h1>
 
-  <!--Navbar-->
+    <br>
+ 
 
-
-<nav class="navbar navbar-dark bg-dark"  >
-  <nav class="navbar navbar-dark bg-dark" >
-
-    <a class="navbar-brand" href="#" >Categories</a>
+  <div class="row justify-content-between">
+    <div class="col-4">
+      <a class="navbar-brand" href="#" >Categories</a>
   
-    <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
-    aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-  
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-  
-      <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Music <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sports</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"></a>
-        </li>
-      </ul>
-      <!-- Links -->
-  
+      <!-- Collapse button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
+      aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><i class="bi bi-list"></i></button>
+    
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+    
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Music <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"></a>
+          </li>
+        </ul>
+        <!-- Links -->
+    
+      </div>
     </div>
-    <!-- Collapsible content -->
+    <div class="col-4">
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+
   
-  </nav>
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</nav>
+
   <br>
   <br>
     <div class="row">
       <div class="col-md-4">
-        <div class="card mb-4">
+        <div class=" mb-4">
           <div class="card-body">
-            <img class="img-fluid" style="width: 100%; height: 100%; border-radius: 20px"
+            <img class="img-fluid" style="width: 100%; height: 100%; border-radius: 20px;" 
               src="/assets/images/EventsPic1.jpeg" alt="Event Image">
           </div>
         </div>
@@ -132,7 +135,7 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card mb-4">
+        <div class=" mb-4">
           <div class="card-body">
             <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic2.jpeg" alt="Event Image">
           </div>
@@ -141,7 +144,7 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card mb-4">
+        <div class=" mb-4">
           <div class="card-body">
             <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic3.jpeg" alt="Event Image">
           </div>
@@ -152,15 +155,15 @@
     <br><br>
     <div class="row">
       <div class="col-md-4">
-        <div class="card mb-4">
+        <div class=" mb-4">
           <div class="card-body">
             <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic4.jpeg" alt="Event Image">
           </div>
         </div>
-        <h5 class="card-title">Dambulla Perahara Event</h5>
+        <h5 class="card-title">Kandy Perahara Event</h5>
       </div>
       <div class="col-md-4">
-        <div class="card mb-4">
+        <div class=" mb-4">
           <div class="card-body">
             <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic5.jpeg" alt="Event Image">
           </div>
@@ -168,7 +171,7 @@
         <h5 class="card-title">Charity Event By Eve</h5>
       </div>
       <div class="col-md-4">
-        <div class="card mb-4">
+        <div class=" mb-4">
           <div class="card-body">
             <img class="img-fluid" style="border-radius: 5px;" src="/assets/images/Events Pic6.jpeg" alt="Event Image">
           </div>
@@ -208,5 +211,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>
