@@ -22,7 +22,27 @@
           background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(/assets/images/home-pageBG.jpg);
           background-size: cover;
         }
-    
+        
+        
+        #section2{
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(/assets/images/header-bg\ 1.png);
+          background-size: cover;     
+          height: 35%;
+          padding: 70px !important;
+        }
+
+        #section3{
+          background-color: aquamarine;
+          background-size: cover;    
+          height: 65%;
+        }
+
+        .custom-hr {
+          height: 2px; /* Set your desired height in pixels */
+          background-color: rgba(255,255,255); /* Set your desired background color */
+          margin: 20px 0; /* Set your desired margin */
+        }
+
         .section {
           height: 100vh;
           display: flex;
@@ -49,49 +69,81 @@
         }
 
         .fa-color{
-            color:rgb(255, 255, 255);
+          color:rgb(255, 255, 255);
 
         }
         .fa-color:hover{
           color: rgb(207, 206, 206);
         }
+        .sub-sec-1{
+          padding: 70px !important;
+        }
+
+        @media screen and (max-width: 767px) {
+          #section2 {
+            min-height: 100vh;  /* Adjust the height for smaller screens */
+            padding: 120px 15px !important;
+          }
+        }
+
+
       </style>
     </head>
     <body>
     
       <!-- Section 1 -->
-      <div id="section1" class="vh-100 text-center text-white d-flex justify-content-center align-items-center">
+      <div id="section1" class="section vh-100 text-center text-white d-flex justify-content-center align-items-center">
         <div class="container">
             <div class="row">
-                <h1 class="font-1 display-3">WELCOME TO EVENT HIVE</h1>
+              <h1 class="font-1 display-1">WELCOME TO EVENT HIVE</h1>
             </div>
             <div class="row">
-                <p class="font-2 h3">Find Your Favourite Events</p>
+              <p class="font-2 h3">Find Your Favourite Events</p>
             </div>
         </div>
         <div class="arrow-container text-center">
             <a href="#section2" class="scroll-down">
-                <i class="fas fa-chevron-down fa-color"></i>
+              <i class="fas fa-chevron-down fa-color"></i>
             </a>
         </div>
       </div>
     
       <!-- Section 2 -->
 
-      <div id="section2" class="vh-100 text-white d-flex" style="background-color: blueviolet;">
-        <div class="container-fluid m-0 p-0">
-            <div class="col-12 h-25 w-100">
-              <!-- Your content for the first column -->
+      <div id="section2" class="section text-white d-flex" style="background-color: blueviolet;"> 
+            <div class=" container">
+              <div>
+                <a>
+                  <img src="/assets/images/event hive (1).png" alt="logo" class="custom-logo">
+                </a>
+              </div>
+              <div class="custom-hr"></div>
+              <div>
+                <p class="font-2">
+                  Event Hive is a platform where you can find any type of extraordinary events happening island-wide including sport events, musical events, carnivals, charity events and concerts.
+                  with our website you can find information about your favorite events.
+                </p>
+              </div>
             </div>
-            <div class="col-12 h-75 w-100">
-              <!-- Your content for the second column -->
-            </div>
-        </div>
       </div>
       
       <!-- Section 3 -->
-      <div id="section3" class="section bg-warning" >
-        <h1>Section 3</h1>
+      <div id="section3" class="section " >
+        <div class="col-12">
+          <div>
+            <a>
+              <img src="/assets/images/event hive (1).png" alt="logo" class="custom-logo">
+            </a>
+          </div>
+          <div>
+            <p class="font-2">
+              Event Hive is a platform where you can find any type of extraordinary events happening island-wide including sport events, musical events, carnivals, charity events and concerts.
+              with our website you can find information about your favorite events.
+            </p>
+          </div>
+        </div>
+              
+       
         
       </div>
     
