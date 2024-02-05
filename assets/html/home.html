@@ -13,7 +13,7 @@
     <script src="https://unpkg.com/vue-scrollto"></script>
     <style>
         body, html {
-          height: 100%;
+          
           margin: 0px;
           padding: 0px;
         }
@@ -27,14 +27,15 @@
         #section2{
           background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(/assets/images/header-bg\ 1.png);
           background-size: cover;     
-          height: 35%;
           padding: 70px !important;
         }
 
         #section3{
-          background-color: aquamarine;
-          background-size: cover;    
-          height: 65%;
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(/assets/images/lanterns.jpg);
+          background-size: cover; 
+          background-position: center;   
+          padding: 70px !important;
+          
         }
 
         .custom-hr {
@@ -42,9 +43,28 @@
           background-color: rgba(255,255,255); /* Set your desired background color */
           margin: 20px 0; /* Set your desired margin */
         }
+        .custom-boxes{
+          background-color: #111F4D;
+          height: 30px;
+        }
+        .custom-box-width-1{
+          width:100%;
+        }
+        .custom-box-width-2{
+          width:80%;
+        }
+        .custom-box-width-3{
+          width:60%;
+        }
+        .custom-box-width-4{
+          width:40%;
+        }
+        .custom-box-width-5{
+          width:20%;
+        }
 
         .section {
-          height: 100vh;
+          
           display: flex;
 
           text-align: center;
@@ -79,9 +99,9 @@
           padding: 70px !important;
         }
 
-        @media screen and (max-width: 767px) {
-          #section2 {
-            min-height: 100vh;  /* Adjust the height for smaller screens */
+        @media(max-width: 767px) {
+          #section2, #section3 {
+            /* Adjust the height for smaller screens */
             padding: 120px 15px !important;
           }
         }
@@ -110,8 +130,8 @@
     
       <!-- Section 2 -->
 
-      <div id="section2" class="section text-white d-flex" style="background-color: blueviolet;"> 
-            <div class=" container">
+      <div id="section2" class="section text-white d-flex"> 
+            <div class="container">
               <div>
                 <a>
                   <img src="/assets/images/event hive (1).png" alt="logo" class="custom-logo">
@@ -128,25 +148,26 @@
       </div>
       
       <!-- Section 3 -->
-      <div id="section3" class="section " >
-        <div class="col-12">
-          <div>
-            <a>
-              <img src="/assets/images/event hive (1).png" alt="logo" class="custom-logo">
-            </a>
-          </div>
-          <div>
-            <p class="font-2">
-              Event Hive is a platform where you can find any type of extraordinary events happening island-wide including sport events, musical events, carnivals, charity events and concerts.
-              with our website you can find information about your favorite events.
-            </p>
+      <div id="section3" class="justify-content-center align-items-center text-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mt-4">
+                <h1 class="font-1 text-white display-5 mb-4">Events We Support</h1>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="custom-boxes custom-box-width-1 mb-5"></div>
+              <div class="custom-boxes custom-box-width-2 mb-5"></div>
+              <div class="custom-boxes custom-box-width-3 mb-5"></div>
+              <div class="custom-boxes custom-box-width-4 mb-5"></div>
+              <div class="custom-boxes custom-box-width-5 mb-5"></div>
+            </div>
           </div>
         </div>
-              
-       
-        
       </div>
-    
+       
+      
       <!-- Section 4 -->
       <div id="section4" class="section bg-danger" >
         <h1>Section 4</h1>
