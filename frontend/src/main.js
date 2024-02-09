@@ -2,8 +2,9 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import { createApp } from 'vue';
 
 // Components
-import HomeVue from './Home.vue';
-import LoginVue from './components/Login.vue'; 
+import TemplateVue from './Template.vue';
+import HomeVue from './pages/Home.vue';
+import LoginVue from './pages/Login.vue'; 
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -20,7 +21,9 @@ const router = createRouter({
     routes,
 });
 
-const app = createApp(HomeVue);
-app.mount("#app");
+const app = createApp(TemplateVue);
 app.use(router);
 app.use(bootstrap);
+
+
+app.mount("#app");
