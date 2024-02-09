@@ -1,10 +1,10 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <p>Test</p>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'HomeVue',
   components: {
     
   }
