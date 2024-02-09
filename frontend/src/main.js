@@ -3,7 +3,11 @@ import { createApp } from 'vue';
 
 // Components
 import HomeVue from './Home.vue';
-import LoginVue from './components/Login.vue';
+import LoginVue from './components/Login.vue'; 
+
+// Bootstrap
+import 'bootstrap/dist/css/bootstrap.css'
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
 // Routes
 const routes = [
@@ -19,3 +23,4 @@ const router = createRouter({
 const app = createApp(HomeVue);
 app.mount("#app");
 app.use(router);
+app.use(bootstrap);
