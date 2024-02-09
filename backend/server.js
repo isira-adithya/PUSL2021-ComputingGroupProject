@@ -27,5 +27,5 @@ server.use("/admin", adminRoute);
 server.use("/eventowner", eventOwnerRoute);
 
 server.listen(8654, '127.0.0.1', () => {
-    console.log("[+] Server started at http://127.0.0.1:8654")
+    console.log("[+] Server started at http://127.0.0.1:8654");
 })
