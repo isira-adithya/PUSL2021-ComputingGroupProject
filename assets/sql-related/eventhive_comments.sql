@@ -16,14 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `commentary`
+-- Table structure for table `comments`
 --
 
-DROP TABLE IF EXISTS `commentary`;
+DROP TABLE IF EXISTS `comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `commentary` (
-  `commentary_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comments` (
+  `comment_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `event_id` int DEFAULT NULL,
   `comment` varchar(100) DEFAULT NULL,
@@ -31,18 +31,18 @@ CREATE TABLE `commentary` (
   PRIMARY KEY (`commentary_id`),
   KEY `user_id` (`user_id`),
   KEY `event_id` (`event_id`),
-  CONSTRAINT `commentary_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `commentary_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`)
+  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `commentary`
+-- Dumping data for table `comments`
 --
 
-LOCK TABLES `commentary` WRITE;
-/*!40000 ALTER TABLE `commentary` DISABLE KEYS */;
-/*!40000 ALTER TABLE `commentary` ENABLE KEYS */;
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -30,17 +30,6 @@ const checkAuth = (req, res, next) => {
 
 router.use(checkAuth);
 
-const imageUrlValidator = (value) => {
-    const url = new URL(value);
-    const host = url.hostname;
-
-    if (!host.endsWith('.example.com')) {
-        throw new Error('Invalid URL');
-    }
-
-    return true;
-}
-
 router.post(
     "/verify-account",
     body("face_image").notEmpty().isURL({
