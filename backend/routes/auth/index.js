@@ -159,6 +159,7 @@ router.post(
             req.session.username = user.user_name;
             req.session.role = user.role;
             req.session.isLoggedIn = true;
+            req.session.is_verified = user.is_verified;
 
             res.status(200).json({
                 msg: 'Login successful'

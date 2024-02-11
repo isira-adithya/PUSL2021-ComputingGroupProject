@@ -5,5 +5,5 @@ export default {
     SQL_SERVER_USER: "eventhive",
     SQL_SERVER_PASSWORD: "test",
     SQL_SERVER_DB: "eventhive",
-    EXPRESS_SESSION_SECRET: "test"
+    EXPRESS_SESSION_SECRETS: ["test","test1"]
 }
