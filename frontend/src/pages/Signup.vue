@@ -23,7 +23,7 @@
               type="text"
               id="form2Example1"
               class="form-control"
-              v-model="email"
+              v-model="username"
             />
             <label class="form-label" for="form2Example1">Username</label>
           </div>
@@ -36,7 +36,7 @@
                   type="text"
                   id="form2Example1"
                   class="form-control"
-                  v-model="email"
+                  v-model="first_name"
                 />
                 <label class="form-label" for="form2Example1">First Name</label>
               </div>
@@ -48,7 +48,7 @@
                   type="text"
                   id="form2Example1"
                   class="form-control"
-                  v-model="email"
+                  v-model="last_name"
                 />
                 <label class="form-label" for="form2Example1">Last Name</label>
               </div>
@@ -61,7 +61,7 @@
               type="text"
               id="form2Example1"
               class="form-control"
-              v-model="email"
+              v-model="address"
             />
             <label class="form-label" for="form2Example1">Address</label>
           </div>
@@ -72,7 +72,7 @@
               type="text"
               id="form2Example1"
               class="form-control"
-              v-model="email"
+              v-model="phone"
             />
             <label class="form-label" for="form2Example1">Phone Number</label>
           </div>
@@ -86,7 +86,7 @@
                   type="password"
                   id="form2Example1"
                   class="form-control"
-                  v-model="email"
+                  v-model="password"
                 />
                 <label class="form-label" for="form2Example1">Password</label>
               </div>
@@ -98,7 +98,7 @@
                   type="password"
                   id="form2Example1"
                   class="form-control"
-                  v-model="email"
+                  v-model="repeat_password"
                 />
                 <label class="form-label" for="form2Example1">Repeat Password</label>
               </div>
@@ -138,17 +138,28 @@ export default {
   data() {
     return {
       email: "",
+      username: "",
+      first_name: "",
+      last_name: "",
+      phone: "",
+      address: "",
       password: "",
+      repeat_password: "", 
       shouldRemember: "",
     };
   },
   methods: {
     submitForm() {
       axios
-        .post("/api/auth/login", {
-          username: this.email,
+        .post("/api/auth/signup", {
+          username: this.username,
+          firstname: this.first_name,
+          lastname: this.last_name,
+          email: this.email,
+          phone: this.phone,
+          address: this.address,
+          role: "VISITOR",
           password: this.password,
-          rememberme: this.shouldRemember,
         })
         .then((response) => {
           console.log(response.data);
