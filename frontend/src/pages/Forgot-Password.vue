@@ -4,7 +4,7 @@
       <div class="col-lg-4"></div>
       <div class="col-lg-4">
         <form @submit.prevent="">
-          <h3 class="mb-5">Login</h3>
+          <h3 class="mb-5">Forgot Password?</h3>
 
           <!-- Email input -->
           <div class="form-outline mb-4">
@@ -18,52 +18,26 @@
             />
           </div>
 
-          <!-- Password input -->
-          <div class="form-outline mb-4">
-            <label class="form-label text-black-50">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              v-model="password"
-            />
-          </div>
-
           <!-- 2 column grid layout for inline styling -->
           <div class="row mb-4">
-            <div class="col">
-              <!-- Checkbox -->
-              <div class="form-check mt-2">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="form2Example31"
-                  checked
-                  v-model="shouldRemember"
-                />
-                <label class="form-check-label" for="form2Example31">
-                  Remember me
-                </label>
-              </div>
-            </div>
-
+          
             <div class="col text-end">
               <button
                 type="button"
                 class="btn btn-dark"
                 @click="submitForm"
               >
-                Sign in
+                Submit
               </button>
             </div>
+
           </div>
 
           <!-- Submit button -->
 
           <!-- Register buttons -->
           <div class="text-center">
-            <router-link to="/forgot-password">Forgot password?</router-link>
-            <p>Not a member? <router-link to="/signup">Sign up</router-link></p>
+            <p>Go back to <router-link to="/signup">Login</router-link></p>
           </div>
         </form>
       </div>
@@ -77,23 +51,24 @@ import axios from "axios";
 import Notiflix from 'notiflix';
 
 export default {
-  name: "LoginVue",
+  name: "ForgotPasswordVue",
   components: {},
   data() {
     return {
       email: "",
-      password: "",
-      shouldRemember: "",
     };
   },
   methods: {
     submitForm() {
+      if (this.email.length <= 0){
+        Notiflix.Notify.failure("Please enter your username or email")
+        return;
+      }
+
       Notiflix.Loading.standard();
       axios
-        .post("/api/auth/login", {
+        .post("/api/auth/reset-password/request", {
           username: this.email,
-          password: this.password,
-          rememberme: this.shouldRemember,
         })
         .then((response) => {
           
@@ -101,20 +76,24 @@ export default {
             throw 'Internal Server Error';
           }
 
-          Notiflix.Notify.success("Success!", "", "OK");
-          localStorage.setItem("isLoggedIn", JSON.stringify(true));
-          this.$parent.isLoggedIn = true;
+          Notiflix.Report.success("Success!", "Please check your email inbox.", "OK");
           window.setTimeout(() => {
             Notiflix.Loading.remove();
-            this.$router.push('/');
           }, 1000);
 
 
         })
         .catch((err) => {
-          console.error(err)
           Notiflix.Loading.remove();
-          Notiflix.Notify.failure("Invalid Credentials", "", "OK");
+          if (Object.keys(err.response.data).includes("errors")){
+            err.response.data['errors'].forEach(errObj => {
+              Notiflix.Notify.failure(`Invalid value at ${errObj['path']}`);
+            })
+          } else if (Object.keys(err.response.data).includes("msg")){
+            Notiflix.Report.failure("Error", err.response.data.msg, "OK");
+          } else {
+            Notiflix.Report.failure("Error", "Something went wrong, try again later.", "OK");
+          }
         });
     },
   },

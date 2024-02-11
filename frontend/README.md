@@ -20,5 +20,30 @@ npm run build
 npm run lint
 ```
 
+### Boilerplate
+```html
+<template>
+  <div class="container mt-5">
+  </div>
+</template>
+
+<script>
+export default {
+  name: "FileVue",
+  components: {},
+  mounted() {
+  },
+  data() {
+    return {
+    };
+  },
+  methods() {
+    return;
+  },
+};
+</script>
+  
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

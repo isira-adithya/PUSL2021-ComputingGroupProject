@@ -27,7 +27,7 @@ router.post(
         const result = validationResult(req);
         if (!result.isEmpty()) {
             res.status(400);
-            return res.send({ errors: result.array() });
+            return res.json({ errors: result.array() });
         }
         
         try {
@@ -46,15 +46,21 @@ router.post(
                         break;
 
                     case 'ADMIN':
-                        return res.status(400).send("Not Implemented");
+                        return res.status(400).json({
+                            msg: "Not Implemented"
+                        });
                         break;
                 
                     default:
-                        return res.status(400).send("Invalid role");
+                        return res.status(400).json({
+                            msg: "Invalid role"
+                        });
                         break;
                 }
             } else {
-                return res.status(400).send("Invalid role");
+                return res.status(400).json({
+                    msg: "Invalid role"
+                });
             }
 
             // Check if the username already exists
@@ -69,7 +75,9 @@ router.post(
             })
 
             if (existingUser) {
-                return res.status(409).send('Username/Phone Number/Email Address already exists in our database');
+                return res.status(409).json({
+                    msg: 'Username/Phone Number/Email Address already exists in our database'
+                });
             }
 
             // Hash the password
@@ -92,7 +100,9 @@ router.post(
                 },
             });
 
-            res.status(201).send('User created successfully');
+            res.status(201).json({
+                msg: 'User created successfully'
+            });
         } catch (error) {
             console.error(error);
             res.status(500);
@@ -110,7 +120,7 @@ router.post(
         const result = validationResult(req);
         if (!result.isEmpty()) {
             res.status(400);
-            return res.send({ errors: result.array() });
+            return res.json({ errors: result.array() });
         }
         try {
 
@@ -124,18 +134,24 @@ router.post(
             })
 
             if (!user) {
-                return res.status(401).send('Invalid username or password');
+                return res.status(401).json({
+                    msg: 'Invalid username or password'
+                });
             }
 
             if (!user.is_active){
-                return res.status(401).send('Account is under review');
+                return res.status(401).json({
+                    msg: 'Account is under review'
+                });
             }
 
             // Compare the provided password with the hashed password
             const passwordMatch = await bcrypt.compare(req.body['password'], user.password);
 
             if (!passwordMatch) {
-                return res.status(401).send('Invalid username or password');
+                return res.status(401).json({
+                    msg: 'Invalid username or password'
+                });
             }
 
             // Store user information in the session
@@ -144,7 +160,9 @@ router.post(
             req.session.role = user.role;
             req.session.isLoggedIn = true;
 
-            res.status(200).send('Login successful');
+            res.status(200).json({
+                msg: 'Login successful'
+            });
         } catch (error) {
             console.error(error);
             res.status(500);
@@ -158,7 +176,9 @@ router.delete('/logout', (req, res) => {
     if (req.session.isLoggedIn) {
         req.session.destroy();
     }
-    res.status(200).send('Logout successful');
+    res.status(200).json({
+        msg: 'Logout successful'
+    });
 });
 
 // Password reset request
@@ -170,7 +190,7 @@ router.post(
         const result = validationResult(req);
         if (!result.isEmpty()) {
             res.status(400);
-            return res.send({ errors: result.array() });
+            return res.json({ errors: result.array() });
         }
         try {
             const user = await prisma.user.findUnique({
@@ -180,7 +200,9 @@ router.post(
             });
 
             if (!user) {
-                return res.status(404).send('User not found');
+                return res.status(404).json({
+                    msg: 'User not found'
+                });
             }
 
             // Delete old tokens for the user
@@ -201,12 +223,14 @@ router.post(
                 },
             });
 
-            console.log(`[DEV] Password Reset Token for ${req.body['username']} is ${token}`);
+            console.log(`[DEV] Password Reset Token for ${req.body['username']} is ${token}\n[DEV] Visit http://www.eventhive.local/#/reset-password/${token} to reset your password.`);
 
             // TODO:
             // Send the token to the user (e.g., via email)
 
-            res.status(200).send('Password reset token generated successfully');
+            res.status(200).json({
+                msg: 'Password reset token generated successfully'
+            });
         } catch (error) {
             console.error(error);
             res.status(500);
@@ -224,7 +248,7 @@ router.post(
         const result = validationResult(req);
         if (!result.isEmpty()) {
             res.status(400);
-            return res.send({ errors: result.array() });
+            return res.json({ errors: result.array() });
         }
         try {
 
@@ -238,7 +262,9 @@ router.post(
             });
 
             if (!tokenOwner || !tokenOwner.user) {
-                return res.status(404).send('Invalid token');
+                return res.status(404).json({
+                    msg: 'Invalid token'
+                });
             }
 
             // Checking if it is expired
@@ -247,7 +273,7 @@ router.post(
             const tokenDuration = 60 * 10;
             if (differenceInSeconds > tokenDuration){
                 res.status(401)
-                return res.send('Token expired')
+                return res.json({msg: 'Token expired'})
             }
 
             // Update the user's password
@@ -268,7 +294,9 @@ router.post(
                 },
             });
 
-            res.status(200).send('Password reset successful');
+            res.status(200).json({
+                msg: 'Password reset successful'
+            });
         } catch (error) {
             console.error(error);
             res.status(500);

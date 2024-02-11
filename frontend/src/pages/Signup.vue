@@ -8,73 +8,67 @@
 
           <!-- Email input -->
           <div class="form-outline mb-2">
+            <label class="form-label text-black-50" for="form2Example1">Email address</label>
             <input
               type="email"
-              id="form2Example1"
               class="form-control"
               v-model="email"
             />
-            <label class="form-label" for="form2Example1">Email address</label>
           </div>
 
           <!-- Username input -->
           <div class="form-outline mb-2">
+            <label class="form-label text-black-50" for="form2Example1">Username</label>
             <input
               type="text"
-              id="form2Example1"
               class="form-control"
               v-model="username"
             />
-            <label class="form-label" for="form2Example1">Username</label>
           </div>
 
           <div class="row">
             <div class="col">
               <!-- Firstname input -->
               <div class="form-outline mb-2">
+                <label class="form-label text-black-50" for="form2Example1">First Name</label>
                 <input
                   type="text"
-                  id="form2Example1"
                   class="form-control"
                   v-model="first_name"
                 />
-                <label class="form-label" for="form2Example1">First Name</label>
               </div>
             </div>
             <div class="col">
               <!-- Lastname input -->
               <div class="form-outline mb-2">
+                <label class="form-label text-black-50" for="form2Example1">Last Name</label>
                 <input
                   type="text"
-                  id="form2Example1"
                   class="form-control"
                   v-model="last_name"
                 />
-                <label class="form-label" for="form2Example1">Last Name</label>
               </div>
             </div>
           </div>
 
           <!-- Address input -->
           <div class="form-outline mb-2">
+            <label class="form-label text-black-50" for="form2Example1">Address</label>
             <input
               type="text"
-              id="form2Example1"
               class="form-control"
               v-model="address"
             />
-            <label class="form-label" for="form2Example1">Address</label>
           </div>
 
           <!-- Phone number input -->
           <div class="form-outline mb-2">
+            <label class="form-label text-black-50" for="form2Example1">Phone Number</label>
             <input
               type="text"
-              id="form2Example1"
               class="form-control"
               v-model="phone"
             />
-            <label class="form-label" for="form2Example1">Phone Number</label>
           </div>
 
           <!-- Password inputs -->
@@ -82,25 +76,23 @@
             <div class="col">
               <!-- Password input -->
               <div class="form-outline mb-2">
+                <label class="form-label text-black-50" for="form2Example1">Password</label>
                 <input
                   type="password"
-                  id="form2Example1"
                   class="form-control"
                   v-model="password"
                 />
-                <label class="form-label" for="form2Example1">Password</label>
               </div>
             </div>
             <div class="col">
               <!-- RepeatPassword input -->
               <div class="form-outline mb-2">
+                <label class="form-label text-black-50" for="form2Example1">Repeat Password</label>
                 <input
                   type="password"
-                  id="form2Example1"
                   class="form-control"
                   v-model="repeat_password"
                 />
-                <label class="form-label" for="form2Example1">Repeat Password</label>
               </div>
             </div>
           </div>
@@ -131,6 +123,7 @@
 
 <script>
 import axios from "axios";
+import Notiflix from 'notiflix';
 
 export default {
   name: "SignupVue",
@@ -150,6 +143,16 @@ export default {
   },
   methods: {
     submitForm() {
+      if (this.password !== this.repeat_password){
+        Notiflix.Notify.failure("Passwords doesn't match")
+        return;
+      }
+
+      if (this.password.length < 8){
+        Notiflix.Notify.failure("Password should be longer than 8 characters")
+        return;
+      }
+
       axios
         .post("/api/auth/signup", {
           username: this.username,
@@ -162,10 +165,21 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          console.log(response.data);
+          Notiflix.Report.success("Success", "Your account is created.", "OK", () => {
+            this.$router.push("/login");
+          });
         })
         .catch((err) => {
-          console.error(err);
+          if (Object.keys(err.response.data).includes("errors")){
+            err.response.data['errors'].forEach(errObj => {
+              Notiflix.Notify.failure(`Invalid value at ${errObj['path']}`);
+            })
+          } else if (Object.keys(err.response.data).includes("msg")){
+            Notiflix.Report.failure("Error", err.response.data.msg, "OK");
+          } else {
+            Notiflix.Report.failure("Error", "Something went wrong, try again later.", "OK");
+          }
+          
         });
     },
   },
