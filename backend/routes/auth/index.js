@@ -223,7 +223,7 @@ router.post(
                 },
             });
 
-            console.log(`[DEV] Password Reset Token for ${req.body['username']} is ${token}`);
+            console.log(`[DEV] Password Reset Token for ${req.body['username']} is ${token}\n[DEV] Visit http://www.eventhive.local/#/reset-password/${token} to reset your password.`);
 
             // TODO:
             // Send the token to the user (e.g., via email)
