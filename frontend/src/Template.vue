@@ -96,7 +96,17 @@ export default {
         axios
           .get("/api/session")
           .then((data) => {
-            localStorage.setItem("isLoggedIn", JSON.stringify(true));
+            
+            if (data.data['success']){
+              localStorage.setItem("isLoggedIn", JSON.stringify(true));
+
+              const session = data.data['session'];
+              // Checking EventOwners' verification status
+              if (session['role'] == "EVENT_OWNER" && session['is_verfied'] != false){
+                document.location.href = "/#/eventowner/verification";
+              }
+            }
+
           })
           .catch((err) => {
             // console.error(err);
