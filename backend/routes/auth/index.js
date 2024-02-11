@@ -175,7 +175,7 @@ router.post(
 router.delete('/logout', (req, res) => {
     // Implement logout logic (e.g., invalidate session or JWT)
     if (req.session.isLoggedIn) {
-        req.session.destroy();
+        req.session = null;
     }
     res.status(200).json({
         msg: 'Logout successful'
