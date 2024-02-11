@@ -1,5 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand mx-4" href="#">EventHive</a>
     <button
       class="navbar-toggler"
@@ -56,6 +57,7 @@
       </ul>
     </footer>
   </div>
+  </div>
 </template>
   
   <script>
@@ -65,11 +67,12 @@ export default {
 };
 </script>
   
-  <style>
+<style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 #app {
   font-family: "Poppins", sans-serif;
 }
+
 </style>
   
