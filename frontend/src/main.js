@@ -13,7 +13,9 @@ import SignupVue from './pages/auth/Signup.vue';
 import ForgotPasswordVue from './pages/auth/Forgot-Password.vue'; 
 import PasswordResetVue from './pages/auth/Reset-Password.vue'; 
 // Components - EventOwner
-import VerificationVue from './pages/eventowner/Verification.vue'
+import VerificationVue from './pages/eventowner/Verification.vue';
+// Components - User
+import UserProfileVue from './pages/user/Profile.vue';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -32,6 +34,9 @@ const routes = [
 
     // EventOwner
     { path: '/eventowner/verification', component: VerificationVue},
+    
+    // User
+    { path: '/user/profile', component: UserProfileVue},
 ];
 
 const router = createRouter({
