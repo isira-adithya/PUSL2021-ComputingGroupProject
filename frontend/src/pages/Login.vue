@@ -76,6 +76,7 @@
 
 <script>
 import axios from "axios";
+import Notiflix from 'notiflix';
 
 export default {
   name: "LoginVue",
@@ -89,6 +90,7 @@ export default {
   },
   methods: {
     submitForm() {
+      Notiflix.Loading.standard();
       axios
         .post("/api/auth/login", {
           username: this.email,
@@ -96,10 +98,24 @@ export default {
           rememberme: this.shouldRemember,
         })
         .then((response) => {
-          console.log(response.data);
+          
+          if (response.status != 200) {
+            throw 'Internal Server Error';
+          }
+
+          Notiflix.Notify.success("Success!", "", "OK");
+          window.setTimeout(() => {
+            Notiflix.Loading.remove();
+            localStorage.setItem("isLoggedIn", JSON.stringify(true));
+            this.$router.push('/');
+          }, 1000);
+
+
         })
         .catch((err) => {
-          console.error(err);
+          console.error(err)
+          Notiflix.Loading.remove();
+          Notiflix.Notify.failure("Invalid Credentials", "", "OK");
         });
     },
   },
