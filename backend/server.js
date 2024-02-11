@@ -25,6 +25,25 @@ server.use(session({
 server.use("/auth", authRoute);
 server.use("/admin", adminRoute);
 server.use("/eventowner", eventOwnerRoute);
+server.get("/session", (req, res) => {
+    if (req.session.isLoggedIn){
+        res.json({
+            success: true,
+            session: {
+                user_id: req.session.user_id,
+                username: req.session.username,
+                role: req.session.role
+            }
+        })
+    } else {
+        res.status(401);
+        res.json({
+            success: false,
+            msg: "Unauthorized"
+        })
+    }
+    
+})
 
 server.listen(8654, '127.0.0.1', () => {
     console.log("[+] Server started at http://127.0.0.1:8654");
