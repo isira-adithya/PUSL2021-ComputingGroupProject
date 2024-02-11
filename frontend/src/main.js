@@ -21,6 +21,12 @@ import UserProfileVue from './pages/user/Profile.vue';
 import 'bootstrap/dist/css/bootstrap.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
+// Fontawesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+library.add(faTrash);
+
 // Routes
 const routes = [
     { path: '/', component: HomeVue},
@@ -45,6 +51,7 @@ const router = createRouter({
 });
 
 const app = createApp(TemplateVue);
+app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(router);
 app.use(bootstrap);
 app.use(axios);
