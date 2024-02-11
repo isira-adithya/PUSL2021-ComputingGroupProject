@@ -104,9 +104,10 @@ export default {
           }
 
           Notiflix.Notify.success("Success!", "", "OK");
+          localStorage.setItem("isLoggedIn", JSON.stringify(true));
+          this.$parent.isLoggedIn = true;
           window.setTimeout(() => {
             Notiflix.Loading.remove();
-            localStorage.setItem("isLoggedIn", JSON.stringify(true));
             this.$router.push('/');
           }, 1000);
 
