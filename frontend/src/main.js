@@ -9,6 +9,7 @@ import HomeVue from './pages/Home.vue';
 import LoginVue from './pages/Login.vue'; 
 import LogoutVue from './pages/Logout.vue'; 
 import SignupVue from './pages/Signup.vue'; 
+import ForgotPasswordVue from './pages/Forgot-Password.vue'; 
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -20,6 +21,7 @@ const routes = [
     { path: '/login', component: LoginVue},
     { path: '/logout', component: LogoutVue},
     { path: '/signup', component: SignupVue},
+    { path: '/forgot-password', component: ForgotPasswordVue},
 ];
 
 const router = createRouter({
