@@ -161,8 +161,7 @@ export default {
         return;
       }
 
-      axios
-        .post("/api/auth/signup", {
+      var data = {
           username: this.username,
           firstname: this.first_name,
           lastname: this.last_name,
@@ -171,7 +170,10 @@ export default {
           address: this.address,
           role: this.role,
           password: this.password,
-        })
+      };
+
+      axios
+        .post("/api/auth/signup", data)
         .then((response) => {
           Notiflix.Report.success("Success", "Your account is created.", "OK", () => {
             this.$router.push("/login");
