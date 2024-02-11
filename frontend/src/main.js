@@ -1,3 +1,4 @@
+// Important libraries
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { createApp } from 'vue';
 
@@ -24,6 +25,5 @@ const router = createRouter({
 const app = createApp(TemplateVue);
 app.use(router);
 app.use(bootstrap);
-
 
 app.mount("#app");
