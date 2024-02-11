@@ -8,26 +8,24 @@
 
           <!-- Email input -->
           <div class="form-outline mb-4">
+            <label class="form-label text-black-50"
+              >Email address or Username</label
+            >
             <input
               type="email"
-              id="form2Example1"
               class="form-control"
               v-model="email"
             />
-            <label class="form-label" for="form2Example1"
-              >Email address or Username</label
-            >
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
+            <label class="form-label text-black-50">Password</label>
             <input
               type="password"
-              id="form2Example2"
               class="form-control"
               v-model="password"
             />
-            <label class="form-label" for="form2Example2">Password</label>
           </div>
 
           <!-- 2 column grid layout for inline styling -->
