@@ -77,8 +77,6 @@ export default {
           }
 
           Notiflix.Report.success("Success!", "Please check your email inbox.", "OK");
-          localStorage.setItem("isLoggedIn", JSON.stringify(true));
-          this.$parent.isLoggedIn = true;
           window.setTimeout(() => {
             Notiflix.Loading.remove();
           }, 1000);
