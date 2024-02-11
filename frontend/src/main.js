@@ -1,6 +1,7 @@
 // Important libraries
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { createApp } from 'vue';
+import axios from 'axios';
 
 // Components
 import TemplateVue from './Template.vue';
@@ -27,5 +28,6 @@ const router = createRouter({
 const app = createApp(TemplateVue);
 app.use(router);
 app.use(bootstrap);
+app.use(axios);
 
 app.mount("#app");
