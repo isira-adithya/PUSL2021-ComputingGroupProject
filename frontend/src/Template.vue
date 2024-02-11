@@ -68,10 +68,15 @@ import Notiflix from "notiflix";
 export default {
   name: "TemplateVue",
   components: {},
-  mounted: () => {
-
+  mounted() {
     // Authentication WatchDog
+    this.checkAuth();
     window.setInterval(() => {
+      this.checkAuth();
+    }, 5000);
+  },
+  methods: {
+    checkAuth() {
       if (
         document.location.href.includes("/user") ||
         document.location.href.includes("/eventowner") ||
@@ -96,7 +101,7 @@ export default {
             }
           });
       }
-    }, 5000);
+    },
   },
   data() {
     return {
