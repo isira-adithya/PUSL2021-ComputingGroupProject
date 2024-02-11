@@ -94,7 +94,7 @@ export default {
         document.location.href.includes("/admin")
       ) {
         axios
-          .get("/api/status")
+          .get("/api/session")
           .then((data) => {
             localStorage.setItem("isLoggedIn", JSON.stringify(true));
           })
