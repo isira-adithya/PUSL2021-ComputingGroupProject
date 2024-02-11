@@ -159,6 +159,7 @@ router.post(
             req.session.username = user.user_name;
             req.session.role = user.role;
             req.session.isLoggedIn = true;
+            req.session.is_verified = user.is_verified;
 
             res.status(200).json({
                 msg: 'Login successful'
@@ -174,7 +175,7 @@ router.post(
 router.delete('/logout', (req, res) => {
     // Implement logout logic (e.g., invalidate session or JWT)
     if (req.session.isLoggedIn) {
-        req.session.destroy();
+        req.session = null;
     }
     res.status(200).json({
         msg: 'Logout successful'
