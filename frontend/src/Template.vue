@@ -79,7 +79,12 @@ export default {
   methods: {
     checkAuth() {
       if (localStorage.getItem("isLoggedIn")){
-        this.isLoggedIn = true;
+        if (JSON.parse(localStorage.getItem("isLoggedIn"))){
+          this.isLoggedIn = true;
+        } else {
+          this.isLoggedIn = false;
+        }
+        
       } else {
         this.isLoggedIn = false;
       }
