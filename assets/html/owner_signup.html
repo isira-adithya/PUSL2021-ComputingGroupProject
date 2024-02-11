@@ -4,60 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Stick+No+Bills:wght@700&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-
+        body{
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url(/assets/images/Events\ Pic6.jpeg);
+          background-size:cover; 
+          background-position: center;   
+         
+        }
+        .font-1{
+            font-family: 'Stick No Bills', sans-serif;
+        }
+        .font-2{
+          font-family: 'Poppins', sans-serif;
+        }
+        .form-box{
+            
+            width: 25%;
+            padding: 50px;
+            border-radius:20px;
+            margin-top: 150px;
+        }
         
+        .btn-primary{
+            width: 100%; 
+            border-radius: 10px; 
+            background-color: #111F4D; 
+            color: rgba(255, 255, 255);
+            border: none; 
+            margin-top: 20px;
+            padding: 12px 0;
+        }
+        .btn-primary:hover{
+            background-color: rgba(255, 255, 255); 
+            color: #111F4D;
+        }
+
+        .btn-primary:focus,
+        .btn-primary:active {
+            background-color: rgba(255, 255, 255); 
+            color: #111F4D;
+            
+        }
+
+        .form-control {
+            border: none;
+            border-bottom: 2px solid #ffffff;
+            border-radius: 0;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            background-color: transparent;
+        }
+
+        .form-control:focus {
+            background-color: transparent;
+            box-shadow: none;
+            color: #ffffff;
+            border-bottom: 2px solid #111F4D;
+        }
+
+        @media(max-width: 767px) {
+          .form-box {
+            width: 100%;
+            padding: 15px !important;
+          }
+        }
+
     </style>
     </head>
     <body>
-      
-    <div class="container d-flex justify-content-center align-items-center text-center">
-        <div class="col-md-4 ">
-            <h1 class="mb-5 p-5 font-1">Create account</h1>
-            <div>
-                <form>
-                    <div class="mb-5 ">
-                        <input type="text" class="form-control shadow-none border-0 border-bottom " id="OwnFullName" placeholder="Full Name">
+        <div class="container-fluid">
+            <div class="font-1 ">
+                <h4 class="text-center display-4 p-5 text-white">Owner SignUp</h4>
+            </div>
+            <div class="form-box mx-auto mt-5 font-2">
+                <form class="text-white">
+                    <div class="mb-3 ">
+                        <label for="exampleInputName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="exampleInputName" aria-describedby="name">
                     </div>
-                    
-                    <div class="mb-5">
-                        
-                        <input type="text" class="form-control shadow-none border-0 border-bottom" id="OwnE-Mail" placeholder="E-Mail">
+                    <div class="mb-3 ">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="email">
                     </div>
-                    
-                    <div class="mb-5">
-                        
-                        <input type="text" class="form-control shadow-none border-0 border-bottom" id="OwnPassword" placeholder="Password">
-                    </div>
-                    
-                    <div class="mb-5">
-                        
-                        <input type="text" class="form-control shadow-none border-0 border-bottom" id="OwnConfirmPassword" placeholder="Confirm Password">
-                    </div>
-                    
-                    <div class="mb-5">
-                        
-                        <input type="text" class="form-control shadow-none border-0 border-bottom" id="OwnPhoneNo" placeholder="Phone No">
-                    </div>
-
-                    <div class="mb-5">
-                        
-                        <input type="text" class="form-control shadow-none border-0 border-bottom" id="OwnState" placeholder="State">
-                    </div>
-                    
-                    <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input shadow-none" id="confirmDetails">
-                        <label class="form-check-label" for="confirmDetails">I Hereby Confirm The Above Details Are True And Correct</label>
-                    </div>
-
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary" style="width: 90%; border-radius: 10px; background-color: #111F4D; border: none; padding: 12px 0;">Submit</button>
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword2">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputMobNumber" class="form-label">Mobile Number</label>
+                        <input type="tel" class="form-control" id="exampleInputMobNumber" aria-describedby="mobilHelp">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleInputState" class="form-label">State</label>
+                        <input type="text" class="form-control" id="exampleInputState" aria-describedby="state">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input shadow-none border-0" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">I Hereby Confirm The Above Details Are True And Correct</label>
+                    </div>
+                    <button type="submit" class=" btn-primary ">Submit</button>
                 </form>
             </div>
         </div>
-    </div>
-    
-</body>
-</html>
+    </body>
+    </html>
