@@ -6,11 +6,11 @@ import axios from 'axios';
 // Components
 import TemplateVue from './Template.vue';
 import HomeVue from './pages/Home.vue';
-import LoginVue from './pages/Login.vue'; 
-import LogoutVue from './pages/Logout.vue'; 
-import SignupVue from './pages/Signup.vue'; 
-import ForgotPasswordVue from './pages/Forgot-Password.vue'; 
-import PasswordResetVue from './pages/Reset-Password.vue'; 
+import LoginVue from './pages/auth/Login.vue'; 
+import LogoutVue from './pages/auth/Logout.vue'; 
+import SignupVue from './pages/auth/Signup.vue'; 
+import ForgotPasswordVue from './pages/auth/Forgot-Password.vue'; 
+import PasswordResetVue from './pages/auth/Reset-Password.vue'; 
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
