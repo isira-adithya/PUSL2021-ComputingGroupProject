@@ -1,8 +1,8 @@
 <template>
   <div class="container mt-5">
     <div class="row">
-      <div class="col-4"></div>
-      <div class="col-4">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
         <form @submit.prevent="">
           <h3 class="mb-5">Login</h3>
 
@@ -52,7 +52,7 @@
             <div class="col text-end">
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-dark"
                 @click="submitForm"
               >
                 Sign in
@@ -69,7 +69,7 @@
           </div>
         </form>
       </div>
-      <div class="col-4"></div>
+      <div class="col-lg-4"></div>
     </div>
   </div>
 </template>
