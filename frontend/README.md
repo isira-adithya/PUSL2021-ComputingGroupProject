@@ -37,8 +37,10 @@ export default {
     return {
     };
   },
-  methods() {
-    return;
+  methods: {
+    test() {
+      alert(1)
+    }
   },
 };
 </script>
