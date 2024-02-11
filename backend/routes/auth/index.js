@@ -157,10 +157,8 @@ router.delete('/logout', (req, res) => {
     // Implement logout logic (e.g., invalidate session or JWT)
     if (req.session.isLoggedIn) {
         req.session.destroy();
-        res.status(200).send('Logout successful');
-    } else {
-        res.status(409).send('You are not logged in');
     }
+    res.status(200).send('Logout successful');
 });
 
 // Password reset request
