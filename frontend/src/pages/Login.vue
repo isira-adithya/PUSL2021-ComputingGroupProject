@@ -106,7 +106,7 @@ export default {
           this.$parent.isLoggedIn = true;
           window.setTimeout(() => {
             Notiflix.Loading.remove();
-            this.$router.push('/');
+            this.$router.push('/user/profile');
           }, 1000);
 
 
