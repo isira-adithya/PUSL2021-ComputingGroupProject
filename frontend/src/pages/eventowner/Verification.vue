@@ -40,7 +40,7 @@
           <!-- NIC Front -->
           <div class="mb-3">
             <label for="nicFront" class="form-label text-black-50"
-              >Front Facing Portrait</label
+              >NIC Front Image</label
             >
             <br />
             <img
@@ -70,7 +70,7 @@
           <!-- NIC Back -->
           <div class="mb-3">
             <label for="nicBack" class="form-label text-black-50"
-              >Front Facing Portrait</label
+              >NIC Back Image</label
             >
             <br />
             <img
