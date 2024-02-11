@@ -131,6 +131,7 @@
 
 <script>
 import axios from "axios";
+import Notiflix from 'notiflix';
 
 export default {
   name: "SignupVue",
@@ -150,6 +151,16 @@ export default {
   },
   methods: {
     submitForm() {
+      if (this.password !== this.repeat_password){
+        Notiflix.Notify.failure("Passwords doesn't match")
+        return;
+      }
+
+      if (this.password.length < 8){
+        Notiflix.Notify.failure("Password should be longer than 8 characters")
+        return;
+      }
+
       axios
         .post("/api/auth/signup", {
           username: this.username,
@@ -162,10 +173,21 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          console.log(response.data);
+          Notiflix.Report.success("Success", "Your account is created.", "OK", () => {
+            this.$router.push("/login");
+          });
         })
         .catch((err) => {
-          console.error(err);
+          if (Object.keys(err.response.data).includes("errors")){
+            err.response.data['errors'].forEach(errObj => {
+              Notiflix.Notify.failure(`Invalid value at ${errObj['path']}`);
+            })
+          } else if (Object.keys(err.response.data).includes("msg")){
+            Notiflix.Report.failure("Error", err.response.data.msg, "OK");
+          } else {
+            Notiflix.Report.failure("Error", "Something went wrong, try again later.", "OK");
+          }
+          
         });
     },
   },
