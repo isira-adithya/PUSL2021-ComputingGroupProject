@@ -6,6 +6,13 @@
         <form @submit.prevent="">
           <h3 class="mb-5">Signup</h3>
 
+          <!-- Role Input -->
+          <div class="form-outline mb-2">
+            <label class="form-label text-black-50" for="form2Example1">Role</label><br>
+            <button @click="role = 'VISITOR'" :class="(role == 'VISITOR') ? 'btn btn-success btn-sm me-2' : 'btn btn-sm me-2'">Visitor</button>
+            <button @click="role = 'EVENT_OWNER'" :class="(role == 'EVENT_OWNER') ? 'btn btn-success btn-sm ms-2' : 'btn btn-sm ms-2'">Event Owner</button>
+          </div>
+
           <!-- Email input -->
           <div class="form-outline mb-2">
             <label class="form-label text-black-50" for="form2Example1">Email address</label>
@@ -137,7 +144,8 @@ export default {
       phone: "",
       address: "",
       password: "",
-      repeat_password: "", 
+      repeat_password: "",
+      role: "VISITOR", 
       shouldRemember: "",
     };
   },
@@ -161,7 +169,7 @@ export default {
           email: this.email,
           phone: this.phone,
           address: this.address,
-          role: "VISITOR",
+          role: this.role,
           password: this.password,
         })
         .then((response) => {
