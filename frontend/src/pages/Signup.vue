@@ -1,8 +1,8 @@
 <template>
   <div class="container mt-5">
     <div class="row">
-      <div class="col-3"></div>
-      <div class="col-6">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
         <form @submit.prevent="">
           <h3 class="mb-5">Signup</h3>
 
@@ -20,7 +20,7 @@
           <!-- Username input -->
           <div class="form-outline mb-2">
             <input
-              type="email"
+              type="text"
               id="form2Example1"
               class="form-control"
               v-model="email"
@@ -108,15 +108,23 @@
 
 
           <!-- Submit button -->
+          <div class="col mb-4 mt-2">
+              <button
+                type="button"
+                class="btn btn-dark"
+                @click="submitForm"
+              >
+                Create Account
+              </button>
+          </div>
 
           <!-- Register buttons -->
           <div class="text-center">
-            <router-link to="/forgot-password">Forgot password?</router-link>
-            <p>Not a member? <router-link to="/signup">Sign up</router-link></p>
+            <p>Already have an account? <router-link to="/login">Login</router-link></p>
           </div>
         </form>
       </div>
-      <div class="col-3"></div>
+      <div class="col-lg-3"></div>
     </div>
   </div>
 </template>
