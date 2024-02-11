@@ -16,7 +16,8 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link class="nav-item nav-link" to="/">Home</router-link>
-          <router-link class="nav-item nav-link" to="/login">Login</router-link>
+          <router-link v-if="!isLoggedIn" class="nav-item nav-link" to="/login">Login</router-link>
+          <router-link v-if="isLoggedIn" class="nav-item nav-link" to="/logout">Logout</router-link>
         </div>
       </div>
     </nav>
@@ -77,6 +78,11 @@ export default {
   },
   methods: {
     checkAuth() {
+      if (localStorage.getItem("isLoggedIn")){
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
       if (
         document.location.href.includes("/user") ||
         document.location.href.includes("/eventowner") ||
