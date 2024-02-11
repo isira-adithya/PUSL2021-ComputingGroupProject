@@ -6,6 +6,7 @@ import { createApp } from 'vue';
 import TemplateVue from './Template.vue';
 import HomeVue from './pages/Home.vue';
 import LoginVue from './pages/Login.vue'; 
+import SignupVue from './pages/Signup.vue'; 
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -15,6 +16,7 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 const routes = [
     { path: '/', component: HomeVue},
     { path: '/login', component: LoginVue},
+    { path: '/signup', component: SignupVue},
 ];
 
 const router = createRouter({
