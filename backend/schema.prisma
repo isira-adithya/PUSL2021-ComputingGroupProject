@@ -14,11 +14,6 @@ model User {
   user_name               String               @unique
   first_name              String               @unique
   last_name               String               @unique
-  email_address           String               @unique
-  email_address_verified  Boolean              @default(false)
-  phone_number            String               @unique
-  phone_number_verified   Boolean              @default(false)
-  verification_code       String               @default("")
   address                 String               @unique
   notification_preference String
   password                String
@@ -30,6 +25,8 @@ model User {
   Commentary              Commentary[]
   Event                   Event[]
   Verification            Verification[]
+  PhoneNumber             PhoneNumber[]
+  EmailAddress            EmailAddress[]
 }
 
 model PasswordResetToken {
@@ -83,4 +80,24 @@ model Event {
   user_id           Int?
   user              User?        @relation(fields: [user_id], references: [user_id])
   Commentary        Commentary[]
+}
+
+model PhoneNumber {
+  phone_id          Int       @id @default(autoincrement())
+  user_id           Int
+  number            String
+  is_verified       Boolean   @default(false)
+  verified_at       DateTime?
+  verification_code String?
+  user              User?     @relation(fields: [user_id], references: [user_id])
+}
+
+model EmailAddress {
+  email_id          Int       @id @default(autoincrement())
+  user_id           Int
+  email             String
+  is_verified       Boolean   @default(false)
+  verification_code String?
+  verified_at       DateTime?
+  user              User?     @relation(fields: [user_id], references: [user_id])
 }
