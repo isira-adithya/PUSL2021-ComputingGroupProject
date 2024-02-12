@@ -20,26 +20,19 @@ const checkAuth = (req, res, next) => {
         } else {
             console.log(req.session)
             res.status(401);
-            return res.send("Unauthorized");
+            return res.json({
+                msg: "Unauthorized"
+            });
         }
     } else {
         res.status(403);
-        return res.send("Forbidden");
+        return res.json({
+            msg: "Forbidden"
+        });
     }
 }
 
 router.use(checkAuth);
-
-const imageUrlValidator = (value) => {
-    const url = new URL(value);
-    const host = url.hostname;
-
-    if (!host.endsWith('.example.com')) {
-        throw new Error('Invalid URL');
-    }
-
-    return true;
-}
 
 router.post(
     "/verify-account",
@@ -64,7 +57,7 @@ router.post(
         const result = validationResult(req);
         if (!result.isEmpty()) {
             res.status(400);
-            return res.send({ errors: result.array() });
+            return res.json({ errors: result.array() });
         }
 
         try {

@@ -4,9 +4,9 @@
 
 DROP TABLE IF EXISTS `verification`;
 DROP TABLE IF EXISTS `passwordresettoken`;
-DROP TABLE IF EXISTS `event`;
-DROP TABLE IF EXISTS `commentary`;
+DROP TABLE IF EXISTS `comments`;
 DROP TABLE IF EXISTS `notification`;
+DROP TABLE IF EXISTS `event`;
 DROP TABLE IF EXISTS `user`;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -70,22 +70,22 @@ CREATE TABLE `event` (
 
 
 --
--- Table structure for table `commentary`
+-- Table structure for table `comment`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `commentary` (
-  `commentary_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comments` (
+  `comment_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `event_id` int DEFAULT NULL,
   `comment` varchar(100) DEFAULT NULL,
   `rating` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`commentary_id`),
+  PRIMARY KEY (`comment_id`),
   KEY `user_id` (`user_id`),
   KEY `event_id` (`event_id`),
-  CONSTRAINT `commentary_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `commentary_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`)
+  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,9 +123,8 @@ CREATE TABLE `verification` (
   `nicfront_image_link` varchar(512) NOT NULL,
   `nicback_image_link` varchar(512) NOT NULL,
   `face_image_link` varchar(512) NOT NULL,
-  `owner_id` UNIQUE int NOT NULL,
+  `owner_id` int UNIQUE NOT NULL,
   PRIMARY KEY (`verification_id`),
-  KEY `owner_id` (`owner_id`),
   CONSTRAINT `verification_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

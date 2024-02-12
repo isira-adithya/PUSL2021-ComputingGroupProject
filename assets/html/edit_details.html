@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     
-    <title>Event Hive - User Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <title>Event Hive - Edit User Details</title>
     <style>
+        body {
+            background: url('https://media.istockphoto.com/id/1443022226/photo/black-leather-texture-background.webp?b=1&s=170667a&w=0&k=20&c=JluczfcCJXPyUSgATnnnuA33X2Rma_pOfDif9LdTb9Y=');
+        }
         .user-details-container {
             font-family: Arial, sans-serif;
-            background-color: #000;
-            background: url(' https://media.istockphoto.com/id/1443022226/photo/black-leather-texture-background.webp?b=1&s=170667a&w=0&k=20&c=JluczfcCJXPyUSgATnnnuA33X2Rma_pOfDif9LdTb9Y=');
             color: #fff;
             margin: 0;
             display: flex;
@@ -43,8 +42,9 @@
             height: 100%;
             object-fit: cover;
         }
+
         .social-link i {
-        color: #fff;
+            color: #fff;
         }
 
         .logout-btn {
@@ -66,7 +66,7 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            width: 300px;
+            width: 500px;
             text-align: left;
             margin-right: 300px;
             margin-left: 5px;
@@ -74,17 +74,13 @@
 
         .details-form h2 {
             margin-bottom: 20px;
-            
         }
 
         .form-input-container {
             display: flex;
             flex-direction: column;
             margin-bottom: 15px;
-
-            .edit-btn-container {
-                margin-bottom: 0.2in;
-            }
+            position: relative;
         }
 
         .form-label {
@@ -94,7 +90,8 @@
         }
 
         .form-input {
-            width: 100%;
+            position: relative;
+            width: 350px;
             padding: 10px;
             box-sizing: border-box;
             border: 1px solid #fff;
@@ -105,29 +102,56 @@
             margin-bottom: 0.2in;
         }
 
+        .form-input::after {
+            content: 'change';
+            color: black;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #fff;
+            padding: 2px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .change-btn {
+            position: absolute;
+            right: 6px; /* Adjusted position */
+            top: 6px; /* Adjusted position */
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 6px;
+            border-radius: 0px; /* Changed to rectangle */
+            cursor: pointer;
+        }
+
         .edit-btn-container {
             margin-bottom: 0.2in;
         }
 
-        .edit-btn {
+        .save-btn,
+        .reset-btn {
             background-color: #3498db;
             color: #fff;
             padding: 10px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-top: 2px;
+            width:100px;
         }
 
-        .edit-btn:hover {
+        .save-btn:hover,
+        .reset-btn:hover {
             background-color: #2980b9;
         }
 
         .more-details {
             text-align: center;
-            margin-bottom:0px;
+            margin-bottom: 0px;
             margin-top: 0px;
-            
-            background: url(' https://media.istockphoto.com/id/1443022226/photo/black-leather-texture-background.webp?b=1&s=170667a&w=0&k=20&c=JluczfcCJXPyUSgATnnnuA33X2Rma_pOfDif9LdTb9Y=');
+            background: url('https://media.istockphoto.com/id/1443022226/photo/black-leather-texture-background.webp?b=1&s=170667a&w=0&k=20&c=JluczfcCJXPyUSgATnnnuA33X2Rma_pOfDif9LdTb9Y=');
         }
 
         .contact-btn,
@@ -138,16 +162,20 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-top:2px;
+            margin-top: 2px;
             margin: 80px;
-            
         }
 
         .contact-btn:hover,
         .about-btn:hover {
             background-color: #2980b9;
-
         }
+        
+         .button-gap {
+            margin-left: 2in;
+        }
+
+
     </style>
 </head>
 
@@ -166,69 +194,93 @@
             </div>
         </div>
         <div class="details-form">
-          <h2>
-                <center>User Details</center>
+            <h2>
+                <center>Edit User Details</center>
             </h2><br>
             <table>
                 <tr>
                     <td><label for="name" class="form-label">Name</label></td>
-                    <td><input type="text" class="form-input" id="name" name="name" placeholder="Enter your name" required>
+                    <td>
+                        <div class="form-input-container">
+                            <input type="text" class="form-input" id="name" name="name" placeholder="Enter your name" required>
+                            
+                        </div>
                     </td>
                 </tr>
-    
+
                 <tr>
                     <td><label for="email" class="form-label">Email</label></td>
-                    <td><input type="email" class="form-input" id="email" name="email" placeholder="Enter your email"
-                            required></td>
+                    <td>
+                        <div class="form-input-container">
+                            <input type="email" class="form-input" id="email" name="email" placeholder="Enter your email" required>
+                            
+                        </div>
+                    </td>
                 </tr>
-    
+
                 <tr>
                     <td><label for="mobile" class="form-label">Mobile Number</label></td>
-                    <td><input type="tel" class="form-input" id="mobile" name="mobile"
-                            placeholder="Enter your mobile number" required></td>
+                    <td>
+                        <div class="form-input-container">
+                            <input type="tel" class="form-input" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+                            
+                        </div>
+                    </td>
                 </tr>
-    
+
                 <tr>
                     <td><label for="address" class="form-label">Address</label></td>
-                    <td><input type="text" class="form-input" id="address" name="address" placeholder="Enter your address"
-                            required></td>
+                    <td>
+                        <div class="form-input-container">
+                            <input type="text" class="form-input" id="address" name="address" placeholder="Enter your address" required>
+                            
+                        </div>
+                    </td>
                 </tr>
-    
+
                 <tr>
                     <td><label for="state" class="form-label">State</label></td>
-                    <td><input type="text" class="form-input" id="state" name="state" placeholder="Enter your state"
-                            required></td>
+                    <td>
+                        <div class="form-input-container">
+                            <input type="text" class="form-input" id="state" name="state" placeholder="Enter your state" required>
+                            
+                        </div>
+                    </td>
                 </tr>
-    
+
                 <tr>
                     <td><label for="password" class="form-label">Password</label></td>
-                    <td><input type="password" class="form-input" id="password" name="password"
-                            placeholder="Enter your password" required></td>
+                    <td>
+                        <div class="form-input-container">
+                            <input type="password" class="form-input" id="password" name="password" placeholder="Enter your password" required>
+                            
+                        </div>
+                    </td>
                 </tr>
-    
+
             </table><br>
-    
+
             <div class="edit-btn-container">
-                <center><button type="submit" class="edit-btn">Edit Details</button></center>
-    
+                <center>
+                    <button type="submit" class="save-btn">Save</button>
+                    <span class="button-gap"></span>
+
+
+                    <button type="reset" class="reset-btn">Reset</button>
+                </center>
             </div>
-    
+
         </div>
     </div>
-    
 
     <h2 class="more-details" style="color: white;">
         <center>For More Details</center>
     </h2>
 
-
     <div class="more-details">
         <button class="contact-btn">Contact Us</button>
         <button class="about-btn">About Us</button>
     </div>
-
-
-
 
 </body>
 

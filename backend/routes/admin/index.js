@@ -17,11 +17,15 @@ const checkAuth = (req, res, next) => {
             next();
         } else {
             res.status(401);
-            return res.send("Unauthorized");
+            return res.json({
+                msg: "Unauthorized"
+            });
         }
     } else {
         res.status(403);
-        return res.send("Forbidden");
+        return res.json({
+            msg: "Forbidden"
+        });
     }
 }
 
