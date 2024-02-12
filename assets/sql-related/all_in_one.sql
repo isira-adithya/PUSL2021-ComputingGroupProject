@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS `passwordresettoken`;
 DROP TABLE IF EXISTS `comments`;
 DROP TABLE IF EXISTS `notification`;
 DROP TABLE IF EXISTS `event`;
+DROP TABLE IF EXISTS `phonenumber`;
+DROP TABLE IF EXISTS `emailaddress`;
 DROP TABLE IF EXISTS `user`;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -129,5 +131,44 @@ CREATE TABLE `verification` (
   `owner_id` int UNIQUE NOT NULL,
   PRIMARY KEY (`verification_id`),
   CONSTRAINT `verification_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+
+--
+-- Table structure for table `phonenumber`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `phonenumber` (
+  `phone_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `number` varchar(100) NOT NULL,
+  `is_verified` BOOLEAN default(false),  
+  `verified_at` TIMESTAMP NOT NULL,
+  `verification_code` varchar(24) NOT NULL,
+  PRIMARY KEY (`phone_id`),
+  CONSTRAINT `phonenumber_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `emailaddress`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `emailaddress` (
+  `email_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `email` varchar(512) NOT NULL,
+  `is_verified` BOOLEAN default(false),  
+  `verified_at` TIMESTAMP NOT NULL,
+  `verification_code` varchar(24) NOT NULL,
+  PRIMARY KEY (`email_id`),
+  CONSTRAINT `emailaddress_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
