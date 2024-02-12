@@ -160,6 +160,10 @@ router.post(
             req.session.role = user.role;
             req.session.isLoggedIn = true;
             req.session.is_verified = user.is_verified;
+            req.session.phone = user.phone_number;
+            req.session.phone_number_verified = user.phone_number_verified;
+            req.session.email = user.email_address;
+            req.session.email_address_verified = user.email_address_verified;
 
             res.status(200).json({
                 msg: 'Login successful'
