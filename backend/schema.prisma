@@ -38,25 +38,22 @@ model PasswordResetToken {
 }
 
 model Notification {
-  notification_id     Int            @id @default(autoincrement())
+  notification_id     Int     @id @default(autoincrement())
   content             String?
   notification_status String?
   user_id             Int?
-  user                User?          @relation(fields: [user_id], references: [user_id])
-  verification        Verification[]
+  user                User?   @relation(fields: [user_id], references: [user_id])
 }
 
 model Verification {
-  verification_id             Int           @id @default(autoincrement())
-  verification_notes          String?
-  verificarion_status         String? // VERIFIED, PENDING, REJECTED
-  face_image_link             String?
-  nicback_image_link          String?
-  nicfront_image_link         String?
-  owner_id                    Int?
-  user                        User?         @relation(fields: [owner_id], references: [user_id])
-  Notification                Notification? @relation(fields: [notificationNotification_id], references: [notification_id])
-  notificationNotification_id Int?
+  verification_id     Int     @id @default(autoincrement())
+  verification_notes  String?
+  verificarion_status String? // VERIFIED, PENDING, REJECTED
+  face_image_link     String?
+  nicback_image_link  String?
+  nicfront_image_link String?
+  owner_id            Int?
+  user                User?   @relation(fields: [owner_id], references: [user_id])
 }
 
 model Commentary {

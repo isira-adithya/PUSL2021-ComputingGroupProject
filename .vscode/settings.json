@@ -1,0 +1,4 @@
+{
+    "codeQL.githubDatabase.download": "never",
+    "C_Cpp.intelliSenseEngineFallback": "enabled"
+}

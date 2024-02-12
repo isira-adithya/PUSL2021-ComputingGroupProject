@@ -1,0 +1,152 @@
+<html>
+<head>
+    
+    <title>Event Planner Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: url('https://img.freepik.com/free-photo/dark-abstract-background_1048-1920.jpg?size=338&ext=jpg&ga=GA1.1.1880011253.1706572800&semt=ais') center/cover no-repeat;
+            background-color: #001f3f;
+            color: white;
+            display: flex;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 300px;            
+            padding: 20px;
+            border-radius: 8px;
+          
+        }
+
+        .login-container h2 {
+            text-align: center;
+            color:#FFFFFF ;
+            margin-bottom: 50px;
+            font-family:castellar;
+            
+        }
+        
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #FF;
+            transition: 0.3s;
+            position: absolute;
+            pointer-events: none;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background: transparent;
+            color: white;
+            outline: none;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:valid + label {
+            top: 0;
+            font-size: 12px;
+        }
+
+        .forgot-password {
+            text-align: right; 
+             margin-bottom: 15px;
+         
+          
+        }
+
+        .forgot-password a {
+            color: #FFFFFF;
+            text-decoration: none;
+           
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+            text-align:right;
+        }
+
+        .login-button {
+            background-color: #001f3f;
+            color: #fff;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 2in;
+           
+            width:80%;
+            
+        }
+
+        .login-button:hover {
+            background-color: #003366;
+            width:80%;
+            
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .signup-link a {
+            color: #0000FF;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+            margin-top:50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <div class="login-form">
+            <div class="form-group">
+                <input type="text" id="username" name="username" required>
+                <label for="username">Username or Email</label>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" required>
+                <label for="password">Password</label>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+            <center><button type="submit" class="login-button">Login</button></center>
+        </div>
+        <div class="signup-link">
+            Don't have an account? <a href="#">Create a new account</a>
+        </div>
+    </div>
+</body>
+</html>
+
