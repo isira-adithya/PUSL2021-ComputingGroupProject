@@ -15,7 +15,10 @@ model User {
   first_name              String               @unique
   last_name               String               @unique
   email_address           String               @unique
+  email_address_verified  Boolean              @default(false)
   phone_number            String               @unique
+  phone_number_verified   Boolean              @default(false)
+  verification_code       String               @default("")
   address                 String               @unique
   notification_preference String
   password                String
