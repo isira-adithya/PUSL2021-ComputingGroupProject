@@ -23,9 +23,9 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
 // Fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faTrash);
+library.add(faTrash, faRightToBracket);
 
 // Routes
 const routes = [
