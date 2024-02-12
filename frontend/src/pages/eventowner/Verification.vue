@@ -3,11 +3,11 @@
     <div class="row">
       <div class="col-lg-3"></div>
       <div class="col-lg-6">
-        <h3 class="mb-5">Account Verification</h3>
+        <h3 class="mb-5">Step 01: Account Verification</h3>
         <div class="alert alert-dark" role="alert">
-          <small
-            >Please verify your phone number by requesting a PIN code.</small
-          >
+          <p>
+            <small>Please verify your phone number by requesting a PIN code.</small>
+          </p>
           <button
             class="btn btn-sm btn-dark my-2"
             v-if="!isRequestedPin"
@@ -32,107 +32,11 @@
           </div>
         </div>
 
-        <h4 class="mb-4 mt-5">Documents & Images Uploads</h4>
+        <h4 class="mb-4 mt-5">Step 02: Documents & Images Uploads</h4>
         <form @submit.prevent="submitForm" class="alert alert-dark">
-          <!-- Face Image -->
-          <div class="mb-3">
-            <label for="faceImage" class="form-label text-black-50"
-              >Front Facing Portrait</label
-            >
-            <br />
-            <img
-              v-if="formData.face_image"
-              :src="formData.face_image"
-              alt="Face Image Preview"
-              width="150px"
-              class="m-2 rounded"
-            />
-            <div class="row">
-              <div class="col-8">
-                <input
-                  type="file"
-                  class="form-control"
-                  id="faceImage"
-                  @change="handleFileUpload('face_image')"
-                  required
-                />
-              </div>
-              <button
-                class="btn btn-danger btn-sm col-1"
-                v-if="formData.face_image"
-              >
-                <font-awesome-icon icon="fa-solid fa-trash" />
-              </button>
-              <div class="col-3"></div>
-            </div>
-          </div>
-
-          <!-- NIC Front -->
-          <div class="mb-3">
-            <label for="nicFront" class="form-label text-black-50"
-              >NIC Front Image</label
-            >
-            <br />
-            <img
-              v-if="formData.nic_front"
-              :src="formData.nic_front"
-              alt="Face Image Preview"
-              width="150px"
-              class="mt-2 img-thumbnail rounded"
-            />
-            <div class="row">
-              <div class="col-8">
-                <input
-                  type="file"
-                  class="form-control"
-                  id="nicFront"
-                  @change="handleFileUpload('nic_front')"
-                  required
-                />
-              </div>
-              <button
-                class="btn btn-danger btn-sm col-1"
-                v-if="formData.nic_front"
-              >
-                <font-awesome-icon icon="fa-solid fa-trash" />
-              </button>
-              <div class="col-3"></div>
-            </div>
-          </div>
-
-          <!-- NIC Back -->
-          <div class="mb-3">
-            <label for="nicBack" class="form-label text-black-50"
-              >NIC Back Image</label
-            >
-            <br />
-            <img
-              v-if="formData.nic_back"
-              :src="formData.nic_back"
-              alt="Face Image Preview"
-              width="150px"
-              class="mt-2 img-thumbnail rounded"
-            />
-            <div class="row">
-              <div class="col-8">
-                <input
-                  type="file"
-                  class="form-control"
-                  id="nicBack"
-                  @change="handleFileUpload('nic_back')"
-                  required
-                />
-              </div>
-              
-              <button
-                class="btn btn-danger btn-sm col-1"
-                v-if="formData.nic_back"
-              >
-                <font-awesome-icon icon="fa-solid fa-trash" />
-              </button>
-              <div class="col-3"></div>
-            </div>
-          </div>
+          <ImageUploaderVue :label="'Front Facing Portrait'"></ImageUploaderVue>
+          <ImageUploaderVue :label="'NIC Front Image'"></ImageUploaderVue>
+          <ImageUploaderVue :label="'NIC Back Image'"></ImageUploaderVue>
 
           <!-- Notes -->
           <div class="mb-3">
@@ -155,9 +59,12 @@
 </template>
   
   <script>
+import ImageUploaderVue from "../../components/ImageUploader.vue";
 export default {
   name: "VerificationVue",
-  components: {},
+  components: {
+    ImageUploaderVue,
+  },
   mounted() {},
   data() {
     return {
