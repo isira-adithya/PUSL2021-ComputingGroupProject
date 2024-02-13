@@ -7,9 +7,9 @@ DROP TABLE IF EXISTS `passwordresettoken`;
 DROP TABLE IF EXISTS `comments`;
 DROP TABLE IF EXISTS `notification`;
 DROP TABLE IF EXISTS `event`;
+DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `phonenumber`;
 DROP TABLE IF EXISTS `emailaddress`;
-DROP TABLE IF EXISTS `user`;
 
 --
 -- Table structure for table `phonenumber`
@@ -54,7 +54,6 @@ CREATE TABLE `user` (
   `last_name` varchar(100) DEFAULT NULL,
   `email_id` int DEFAULT NULL,
   `phone_id` int DEFAULT NULL,
-  `verification_code` varchar(12) DEFAULT NULL,
   `address` varchar(256) DEFAULT NULL,
   `notification_preference` varchar(100) DEFAULT NULL,
   `password` varchar(256) DEFAULT NULL,
