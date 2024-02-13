@@ -8,6 +8,42 @@ DROP TABLE IF EXISTS `comments`;
 DROP TABLE IF EXISTS `notification`;
 DROP TABLE IF EXISTS `event`;
 DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `phonenumber`;
+DROP TABLE IF EXISTS `emailaddress`;
+
+--
+-- Table structure for table `phonenumber`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `phonenumber` (
+  `phone_id` int NOT NULL AUTO_INCREMENT,
+  `number` varchar(100) NOT NULL,
+  `is_verified` BOOLEAN default(false),  
+  `verified_at` TIMESTAMP NOT NULL,
+  `verification_code` varchar(24) NOT NULL,
+  PRIMARY KEY (`phone_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `emailaddress`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `emailaddress` (
+  `email_id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(512) NOT NULL,
+  `is_verified` BOOLEAN default(false),  
+  `verified_at` TIMESTAMP NOT NULL,
+  `verification_code` varchar(24) NOT NULL,
+  PRIMARY KEY (`email_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -16,15 +52,17 @@ CREATE TABLE `user` (
   `user_name` varchar(100) DEFAULT NULL,
   `first_name` varchar(100) DEFAULT NULL,
   `last_name` varchar(100) DEFAULT NULL,
-  `email_address` varchar(108) DEFAULT NULL,
-  `phone_number` varchar(24) DEFAULT NULL,
+  `email_id` int DEFAULT NULL,
+  `phone_id` int DEFAULT NULL,
   `address` varchar(256) DEFAULT NULL,
   `notification_preference` varchar(100) DEFAULT NULL,
   `password` varchar(256) DEFAULT NULL,
   `role` varchar(100) DEFAULT NULL,
   `is_active` boolean DEFAULT NULL,
   `is_verified` boolean DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
+  FOREIGN KEY (email_id) REFERENCES emailaddress(email_id) ON DELETE CASCADE,
+  FOREIGN KEY (phone_id) REFERENCES phonenumber(phone_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -120,7 +158,7 @@ CREATE TABLE `verification` (
   `verification_id` int NOT NULL AUTO_INCREMENT,
   `verification_notes` varchar(2048) NOT NULL,
   `verificarion_status` varchar(100) NOT NULL,
-  `nicfront_image_link` varchar(512) NOT NULL,
+  `nicfront_image_link` varchar(512) NOT NULL,  
   `nicback_image_link` varchar(512) NOT NULL,
   `face_image_link` varchar(512) NOT NULL,
   `owner_id` int UNIQUE NOT NULL,
@@ -128,3 +166,6 @@ CREATE TABLE `verification` (
   CONSTRAINT `verification_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+
+

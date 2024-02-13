@@ -40,6 +40,16 @@ Content-Type: application/json
     "password": "SuperSecurePass123"
 }
 
+### Login - Email
+
+POST http://www.eventhive.local/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "me@isiraadithya.com",
+    "password": "SuperSecurePass123"
+}
+
 ### Login EO
 
 POST http://www.eventhive.local/api/auth/login

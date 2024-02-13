@@ -8,6 +8,9 @@ import {
     validationResult
 } from 'express-validator';
 
+// Routes
+import MobileVerificationRouter from './mobile-pin.js';
+
 const prisma = new PrismaClient()
 const router = express.Router();
 
@@ -110,5 +113,8 @@ router.get("/verification-status", async (req, res) => {
         status: verificationObj.verificarion_status
     });
 })
+
+// Mobile PIN Verification routes
+router.use("/mobile-verification", MobileVerificationRouter);
 
 export default router;

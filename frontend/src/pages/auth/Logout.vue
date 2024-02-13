@@ -23,6 +23,7 @@ export default {
       Notiflix.Loading.remove();
       Notiflix.Report.success("Logout Success", "You can safely navigate away from the website now.", "OK", () => {
         localStorage.setItem("isLoggedIn", JSON.stringify(false));
+        localStorage.setItem("session", null);
         this.$parent.isLoggedIn = false;
         this.$router.push("/");
       });

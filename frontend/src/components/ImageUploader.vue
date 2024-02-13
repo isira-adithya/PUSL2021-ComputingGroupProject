@@ -34,6 +34,8 @@
 </template>
   
   <script>
+import Notiflix from 'notiflix';
+import axios from 'axios';
 export default {
   props: {
     label: {
@@ -49,14 +51,29 @@ export default {
   },
   methods: {
     handleFileUpload() {
-      const fileInput = this.$refs.fileInput;
+      const fileInput = document.getElementById(this.fileInputId);
       const file = fileInput.files[0];
+      
+      Notiflix.Loading.hourglass();
 
-      // Handle file upload logic here
-      // For example, you can use FormData to send the file to the server
+      const formData = new FormData();
+      formData.append('file', file);
+      axios.post('/api/eventowner/upload', formData).then((res) => {
+        Notiflix.Loading.remove();
 
-      // Assuming you want to update formData.nic_front with the file URL
-      // this.formData.nic_front = 'URL_TO_YOUR_UPLOADED_FILE';
+        if (res.data['success']){
+          this.imageUrl = res.data['url'];
+        } else {
+          throw 'Something went wrong';
+        }
+
+        Notiflix.Notify.success("Image uploaded!");
+      }).catch((err) => {
+        console.error(err);
+        Notiflix.Loading.remove();
+        Notiflix.Notify.failure("Something went wrong, please try again later.");
+        fileInput.value = null;
+      })
     },
     deleteNicFront() {
       // Handle deletion logic here
