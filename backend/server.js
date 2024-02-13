@@ -30,7 +30,11 @@ server.get("/session", (req, res) => {
                 user_id: req.session.user_id,
                 username: req.session.username,
                 role: req.session.role,
-                is_verified: req.session.is_verified
+                is_verified: req.session.is_verified,
+                phone_number: req.session.phone,
+                phone_number_verified: req.session.phone_number_verified,
+                email_address: req.session.email,
+                email_address_verified: req.session.email_address_verified,
             }
         })
     } else {
