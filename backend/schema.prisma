@@ -9,6 +9,24 @@ datasource db {
   url      = env("EVENTHIVE_SQL_CONNECTIONURI") // mysql://user:pass@localhost:3306/dbname
 }
 
+model PhoneNumber {
+  phone_id          Int       @id @default(autoincrement())
+  number            String
+  is_verified       Boolean   @default(false)
+  verified_at       DateTime?
+  verification_code String?
+  User              User[]
+}
+
+model EmailAddress {
+  email_id          Int       @id @default(autoincrement())
+  email             String
+  is_verified       Boolean   @default(false)
+  verification_code String?
+  verified_at       DateTime?
+  User              User[]
+}
+
 model User {
   user_id                 Int                  @id @default(autoincrement())
   user_name               String               @unique
@@ -17,6 +35,8 @@ model User {
   address                 String               @unique
   notification_preference String
   password                String
+  phone_id                Int
+  email_id                Int
   role                    String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
   is_active               Boolean              @default(false)
   is_verified             Boolean              @default(false)
@@ -25,8 +45,8 @@ model User {
   Commentary              Commentary[]
   Event                   Event[]
   Verification            Verification[]
-  PhoneNumber             PhoneNumber[]
-  EmailAddress            EmailAddress[]
+  phone                   PhoneNumber          @relation(fields: [phone_id], references: [phone_id])
+  email_address           EmailAddress         @relation(fields: [email_id], references: [email_id])
 }
 
 model PasswordResetToken {
@@ -80,24 +100,4 @@ model Event {
   user_id           Int?
   user              User?        @relation(fields: [user_id], references: [user_id])
   Commentary        Commentary[]
-}
-
-model PhoneNumber {
-  phone_id          Int       @id @default(autoincrement())
-  user_id           Int
-  number            String
-  is_verified       Boolean   @default(false)
-  verified_at       DateTime?
-  verification_code String?
-  user              User?     @relation(fields: [user_id], references: [user_id])
-}
-
-model EmailAddress {
-  email_id          Int       @id @default(autoincrement())
-  user_id           Int
-  email             String
-  is_verified       Boolean   @default(false)
-  verification_code String?
-  verified_at       DateTime?
-  user              User?     @relation(fields: [user_id], references: [user_id])
 }
