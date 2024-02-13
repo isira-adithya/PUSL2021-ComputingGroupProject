@@ -158,7 +158,7 @@ router.post(
         try {
 
             // FIXME: Add Email Checking
-            const emailObj = await prisma.emailAddress.findFirst({
+            var emailObj = await prisma.emailAddress.findFirst({
                 where: {
                     email: req.body['username']
                 }
@@ -198,16 +198,28 @@ router.post(
                 });
             }
 
+            // Email and Phone
+            const phoneObj = await prisma.phoneNumber.findFirst({
+                where: {
+                    phone_id: user.phone_id
+                }
+            });
+            emailObj = await prisma.emailAddress.findFirst({
+                where: {
+                    email_id: user.email_id
+                }
+            });
+
             // Store user information in the session
             req.session.user_id = user.user_id;
             req.session.username = user.user_name;
             req.session.role = user.role;
             req.session.isLoggedIn = true;
             req.session.is_verified = user.is_verified;
-            req.session.phone = user.phone_number;
-            req.session.phone_number_verified = user.phone_number_verified;
-            req.session.email = user.email_address;
-            req.session.email_address_verified = user.email_address_verified;
+            req.session.phone = phoneObj.number;
+            req.session.phone_number_verified = phoneObj.is_verified;
+            req.session.email = emailObj.email;
+            req.session.email_address_verified = emailObj.is_verified;
 
             res.status(200).json({
                 msg: 'Login successful'
