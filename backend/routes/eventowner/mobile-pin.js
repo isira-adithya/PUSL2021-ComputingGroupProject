@@ -18,23 +18,39 @@ router.post(
     async (req, res) => {
         try {
             const pinCode = Math.floor(100000 + Math.random() * 900000);
-            await prisma.user.update(
+            const user = await prisma.user.findFirst({
+                where: {
+                    user_id: req.session['user_id']
+                }
+            });
+
+            const phoneNumber = await prisma.phoneNumber.update(
                 {
                     where: {
-                        user_id: req.session['user_id']
+                        phone_id: user.phone_id
                     },
                     data: {
-                        verification_code: pinCode
+                        verification_code: pinCode.toString()
                     }
                 }
             );
-            const phonenumber = req.session['phone_number'];
-            sendSms(phonenumber, pinCode);
+
+            if (phoneNumber.is_verified){
+                res.status(400);
+                return res.json({
+                    success: true,
+                    msg: "Phone number is already verified"
+                });
+            }
+            
+            sendSms(phoneNumber.number, pinCode);
+
             return res.json({
                 success: true,
                 msg: "PIN Code was sent."
             });
         } catch (err) {
+            console.log(err)
             res.status(501);
             return res.json({
                 success: false,
@@ -60,25 +76,42 @@ router.post(
                     user_id: req.session['user_id']
                 }
             });
+            const phoneNumber = await prisma.phoneNumber.findFirst({
+                where: {
+                    phone_id: user.phone_id
+                }
+            });
             
-            if (user.verification_code == pinCode){
-                await prisma.user.update(
-                    {
-                        where: {
-                            user_id: req.session['user_id']
-                        },
-                        data: {
-                            phone_number_verified: true
-                        }
+            if (phoneNumber.verification_code == parseInt(pinCode)){
+                await prisma.phoneNumber.update({
+                    where: {
+                        phone_id: user.phone_id
+                    },
+                    data: {
+                        is_verified: true,
+                        verified_at: new Date()
                     }
-                );
+                })
+
+                // Updating the session
+                req.session['phone_number_verified'] = true;
+
+                return res.json({
+                    success: true,
+                    msg: "Phone Number is verified"
+                });
+            } else {
+                res.status(401);
+                return res.json({
+                    success: true,
+                    msg: "Invalid PIN"
+                });
             }
             
-            return res.json({
-                success: true,
-                msg: "PIN Code was sent."
-            });
+            
         } catch (err) {
+            console.error(err)
+
             res.status(501);
             return res.json({
                 success: false,
