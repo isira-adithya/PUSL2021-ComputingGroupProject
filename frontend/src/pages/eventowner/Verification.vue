@@ -42,7 +42,9 @@
             <div class="col-5"></div>
           </div>
         </div>
-        
+        <div v-else class="alert alert-success" role="alert">
+          <p><small>Your Mobile Number is already verified.</small></p>
+        </div>
 
         <h4 class="mb-4 mt-5">Step 02: Documents & Images Uploads</h4>
         <form @submit.prevent="submitForm" class="alert alert-dark">
