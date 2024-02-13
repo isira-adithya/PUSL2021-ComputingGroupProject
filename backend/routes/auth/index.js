@@ -66,17 +66,38 @@ router.post(
             // Check if the username already exists
             const existingUser = await prisma.user.findFirst({
                 where: {
-                    OR: [
-                        {user_name: req.body["username"]},
-                        {email_address: req.body["email"]},
-                        {phone_number: req.body["phone"]}
-                    ]
+                    user_name: req.body["username"],
+                }
+            })
+
+            //FIXME: check existing phone number, email address
+            const emailObj = await prisma.emailAddress.findFirst({
+                where: {
+                    email: req.body['email']
+                }
+            })
+
+            const phoneObj = await prisma.phoneNumber.findFirst({
+                where: {
+                    number: req.body['phone']
                 }
             })
 
             if (existingUser) {
                 return res.status(409).json({
-                    msg: 'Username/Phone Number/Email Address already exists in our database'
+                    msg: 'Username already exists in our database'
+                });
+            }
+
+            if (emailObj) {
+                return res.status(409).json({
+                    msg: 'Email Address already exists in our database'
+                });
+            }
+
+            if (phoneObj) {
+                return res.status(409).json({
+                    msg: 'Phone Number already exists in our database'
                 });
             }
 
@@ -84,11 +105,21 @@ router.post(
             const hashedPassword = await bcrypt.hash(req.body["password"], 10);
 
             // Create user using Prisma
+            const createdEmailObj = await prisma.emailAddress.create({
+                data: {
+                    email: req.body["email"]
+                }
+            });
+
+            const createdPhoneObj = await prisma.phoneNumber.create({
+                data: {
+                    number: req.body["phone"]
+                }
+            });
+
             const createdUser = await prisma.user.create({
                 data: {
                     user_name: req.body["username"],
-                    email_address: req.body["email"],
-                    phone_number: req.body["phone"],
                     first_name: req.body["firstname"],
                     last_name: req.body["lastname"],
                     address: req.body["address"],
@@ -96,7 +127,9 @@ router.post(
                     role: req.body["role"],
                     is_active: isAccountActive,
                     notification_preference: "ENABLED",
-                    is_verified: false
+                    is_verified: false,
+                    phone_id: createdPhoneObj.phone_id,
+                    email_id: createdEmailObj.email_id
                 },
             });
 
@@ -124,11 +157,22 @@ router.post(
         }
         try {
 
+            // FIXME: Add Email Checking
+            const emailObj = await prisma.emailAddress.findFirst({
+                where: {
+                    email: req.body['username']
+                }
+            })
+
             const user = await prisma.user.findFirst({
                 where: {
                     OR: [
-                        {user_name: req.body["username"]},
-                        {email_address: req.body["username"]},
+                        {
+                            user_name: req.body["username"],
+                        },
+                        {
+                            user_id: emailObj ? emailObj.user_id : -1
+                        }
                     ]
                 }
             })
