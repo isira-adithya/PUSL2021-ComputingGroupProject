@@ -171,7 +171,7 @@ router.post(
                             user_name: req.body["username"],
                         },
                         {
-                            user_id: emailObj ? emailObj.user_id : -1
+                            email_id: emailObj ? emailObj.email_id : -1
                         }
                     ]
                 }
