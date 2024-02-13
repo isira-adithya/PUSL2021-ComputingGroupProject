@@ -6,12 +6,13 @@
         <h3 class="mb-5">Step 01: Account Verification</h3>
         <div class="alert alert-dark" role="alert">
           <p>
-            <small>Please verify your phone number by requesting a PIN code.</small>
+            <small>Please verify your phone number by requesting a PIN code.</small><br>
+            <small v-if="session">Phone Number: <b><a :href="'tel:' + session.phone_number">{{ session.phone_number }}</a></b></small>
           </p>
           <button
             class="btn btn-sm btn-dark my-2"
             v-if="!isRequestedPin"
-            @click="isRequestedPin = true"
+            @click="requestPIN"
           >
             <small>Request PIN</small>
           </button>
@@ -44,7 +45,7 @@
             <textarea
               class="form-control"
               id="notes"
-              v-model="formData.notes"
+              v-model="notes"
               rows="3"
               required
             ></textarea>
@@ -65,22 +66,20 @@ export default {
   components: {
     ImageUploaderVue,
   },
-  mounted() {},
+  mounted() {
+    this.session = JSON.parse(localStorage.getItem("session"));
+  },
   data() {
     return {
       isRequestedPin: false,
-      formData: {
-        face_image: "https://xsgames.co/randomusers/avatar.php?g=male",
-        nic_front: "",
-        nic_back: "",
-        notes: "",
-      },
+      notes: "",
+      session: null,
     };
   },
   methods: {
-    handleFileUpload(type) {
-      console.log(`Uploading ${type} image...`);
-    },
+    requestPIN(){
+
+    }
   },
 };
 </script>
