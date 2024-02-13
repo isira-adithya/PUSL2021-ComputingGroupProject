@@ -99,6 +99,7 @@ export default {
             
             if (data.data['success']){
               localStorage.setItem("isLoggedIn", JSON.stringify(true));
+              localStorage.setItem("session", JSON.stringify(data.data['session']));
 
               const session = data.data['session'];
               // Checking EventOwners' verification status
