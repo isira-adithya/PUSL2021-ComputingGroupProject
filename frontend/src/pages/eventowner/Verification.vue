@@ -60,6 +60,7 @@
 </template>
   
   <script>
+import axios from 'axios';
 import ImageUploaderVue from "../../components/ImageUploader.vue";
 export default {
   name: "VerificationVue",
@@ -78,7 +79,11 @@ export default {
   },
   methods: {
     requestPIN(){
-
+      axios.post("/api/eventowner/mobile-verification/request-pin").then(data => {
+        console.log(data)
+      }).catch(err => {
+        console.error(err)
+      })
     }
   },
 };
