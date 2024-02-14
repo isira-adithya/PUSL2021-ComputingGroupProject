@@ -58,7 +58,7 @@ async function readObject(path) {
     }
 }
 
-async function generateSignedURL(path) {
+async function generateSignedReadURL(path) {
     try {
         const command = new GetObjectCommand({
           Bucket: config.S3_BUCKET_NAME,
@@ -81,5 +81,5 @@ async function generateSignedURL(path) {
 export {
     uploadObject,
     readObject,
-    generateSignedURL
+    generateSignedReadURL
 }
