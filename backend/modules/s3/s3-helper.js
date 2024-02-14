@@ -77,3 +77,9 @@ async function generateSignedURL(path) {
         return null;
       }
 }
+
+export {
+    uploadObject,
+    readObject,
+    generateSignedURL
+}
