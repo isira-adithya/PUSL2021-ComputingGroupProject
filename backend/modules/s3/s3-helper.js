@@ -78,8 +78,30 @@ async function generateSignedReadURL(path) {
       }
 }
 
+async function generateSignedUploadURL(path, contentType) {
+    try {
+        const command = new PutObjectCommand({
+          Bucket: config.S3_BUCKET_NAME,
+          Key: path,
+          ContentType: contentType
+        });
+
+        const signedUrl = await s3RequestPresigner.getSignedUrl(
+          s3Client,
+          command,
+          { expiresIn: 3600 * 24 } // Expiration time in seconds (e.g., 1 hour)
+        );
+    
+        return signedUrl;
+      } catch (err) {
+        console.error('Error generating signed URL:', err);
+        return null;
+      }
+}
+
 export {
     uploadObject,
     readObject,
-    generateSignedReadURL
+    generateSignedReadURL,
+    generateSignedUploadURL
 }
