@@ -48,13 +48,13 @@
 
         <h4 class="mb-4 mt-5">Step 02: Documents & Images Uploads</h4>
         <form @submit.prevent="submitForm" class="alert alert-dark">
-          <ImageUploaderVue :label="'Front Facing Portrait'"></ImageUploaderVue>
-          <ImageUploaderVue :label="'NIC Front Image'"></ImageUploaderVue>
-          <ImageUploaderVue :label="'NIC Back Image'"></ImageUploaderVue>
+          <ImageUploaderVue ref="ffpUploader" :label="'Front Facing Portrait'"></ImageUploaderVue>
+          <ImageUploaderVue ref="nicfUploader" :label="'NIC Front Image'"></ImageUploaderVue>
+          <ImageUploaderVue ref="nicbUploader" :label="'NIC Back Image'"></ImageUploaderVue>
 
           <!-- Notes -->
           <div class="mb-3">
-            <label for="notes" class="form-label">Notes</label>
+            <label for="notes" class="form-label">Notes <small><i>(Optional)</i></small></label>
             <textarea
               class="form-control"
               id="notes"
@@ -64,7 +64,7 @@
             ></textarea>
           </div>
 
-          <button type="submit" class="btn btn-dark">Submit</button>
+          <button @click="submitVerficationDetails" type="button" class="btn btn-dark">Submit</button>
         </form>
       </div>
       <div class="col-lg-3"></div>
@@ -135,6 +135,13 @@ export default {
           Notiflix.Notify.failure("Invalid PIN", "", "OK");
         });
     },
+    submitVerficationDetails() {
+      if ((this.$refs.nicfUploader.imageUrl.length <= 0) || (this.$refs.nicbUploader.imageUrl.length <= 0) || (this.$refs.ffpUploader.imageUrl.length <= 0)) {
+        Notiflix.Report.failure("Error", "Please upload all the required images/documents")
+      } else {
+        console.log(1337)
+      }
+    }
   },
 };
 </script>
