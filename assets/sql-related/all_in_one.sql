@@ -157,7 +157,7 @@ CREATE TABLE `notification` (
 CREATE TABLE `verification` (
   `verification_id` int NOT NULL AUTO_INCREMENT,
   `verification_notes` varchar(2048) NOT NULL,
-  `verificarion_status` varchar(100) NOT NULL,
+  `verification_status` varchar(100) NOT NULL,
   `nicfront_image_link` varchar(512) NOT NULL,  
   `nicback_image_link` varchar(512) NOT NULL,
   `face_image_link` varchar(512) NOT NULL,

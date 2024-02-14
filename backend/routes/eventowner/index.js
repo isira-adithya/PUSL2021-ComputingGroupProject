@@ -10,6 +10,7 @@ import {
 
 // Routes
 import MobileVerificationRouter from './mobile-pin.js';
+import FileUploadHandler from './file-upload-handling.js';
 
 const prisma = new PrismaClient()
 const router = express.Router();
@@ -41,15 +42,15 @@ router.post(
     "/verify-account",
     body("face_image").notEmpty().isURL({
         protocols: ["https"],
-        host_whitelist: ["uploads.eventhive.io"]
+        host_whitelist: ["pusl2024-cgp.sgp1.digitaloceanspaces.com"]
     }),
     body("nic_front").notEmpty().isURL({
         protocols: ["https"],
-        host_whitelist: ["uploads.eventhive.io"] // TODO: Change this to our own S3 bucket later
+        host_whitelist: ["pusl2024-cgp.sgp1.digitaloceanspaces.com"] // TODO: Change this to our own S3 bucket later
     }),
     body("nic_back").notEmpty().isURL({
         protocols: ["https"],
-        host_whitelist: ["uploads.eventhive.io"] // TODO: Change this to our own S3 bucket later
+        host_whitelist: ["pusl2024-cgp.sgp1.digitaloceanspaces.com"] // TODO: Change this to our own S3 bucket later
     }),
     body("notes").isLength({
         max: 1024
@@ -109,12 +110,21 @@ router.get("/verification-status", async (req, res) => {
             owner_id: req.session.user_id
         }
     })
-    return res.json({
-        status: verificationObj.verificarion_status
-    });
+
+    if (verificationObj != null){
+        return res.json({
+            status: verificationObj.verificarion_status
+        });
+    } else {
+        return res.json({
+            status: "N/A"
+        });
+    }
+    
 })
 
 // Mobile PIN Verification routes
 router.use("/mobile-verification", MobileVerificationRouter);
+router.use("/file", FileUploadHandler);
 
 export default router;

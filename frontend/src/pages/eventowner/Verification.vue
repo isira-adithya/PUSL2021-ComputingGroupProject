@@ -47,14 +47,21 @@
         </div>
 
         <h4 class="mb-4 mt-5">Step 02: Documents & Images Uploads</h4>
-        <form @submit.prevent="submitForm" class="alert alert-dark">
-          <ImageUploaderVue :label="'Front Facing Portrait'"></ImageUploaderVue>
-          <ImageUploaderVue :label="'NIC Front Image'"></ImageUploaderVue>
-          <ImageUploaderVue :label="'NIC Back Image'"></ImageUploaderVue>
+        <div class="alert alert-danger" v-if="verification_status == 'REJECTED'">
+          <small>
+            <p>Your previous verification attempt was failed.</p>
+            <p>Please re-submit the verification documents.</p>
+          </small>
+        </div>
+        <form @submit.prevent="submitForm" class="alert alert-dark" v-if="verification_status == 'N/A' || verification_status == 'REJECTED'">
+          
+          <ImageUploaderVue ref="ffpUploader" :label="'Front Facing Portrait'"></ImageUploaderVue>
+          <ImageUploaderVue ref="nicfUploader" :label="'NIC Front Image'"></ImageUploaderVue>
+          <ImageUploaderVue ref="nicbUploader" :label="'NIC Back Image'"></ImageUploaderVue>
 
           <!-- Notes -->
           <div class="mb-3">
-            <label for="notes" class="form-label">Notes</label>
+            <label for="notes" class="form-label">Notes <small><i>(Optional)</i></small></label>
             <textarea
               class="form-control"
               id="notes"
@@ -64,8 +71,14 @@
             ></textarea>
           </div>
 
-          <button type="submit" class="btn btn-dark">Submit</button>
+          <button @click="submitVerficationDetails" type="button" class="btn btn-dark">Submit</button>
         </form>
+        <div class="alert alert-info" v-if="verification_status == 'PENDING'">
+          <small>
+            <p>Your profile is being verified.</p>
+            <p>Please check back in later.</p>
+          </small>
+        </div>
       </div>
       <div class="col-lg-3"></div>
     </div>
@@ -84,6 +97,15 @@ export default {
   mounted() {
     this.session = JSON.parse(localStorage.getItem("session"));
     this.isPhoneNumberVerified = this.session['phone_number_verified'];
+
+    // Checking if there is an existing verification, if so, we are disabling the submission forms
+    axios.get("/api/eventowner/verification-status").then(response => {
+      this.verification_status = response.data['status'];
+    }).catch(err => {
+      console.error(err);
+      Notiflix.Notify.failure("Something went wrong.")
+      this.$router.push("/user/profile");
+    })
   },
   data() {
     return {
@@ -92,6 +114,7 @@ export default {
       notes: "",
       pinCode: "",
       session: null,
+      verification_status: "N/A"
     };
   },
   methods: {
@@ -135,6 +158,40 @@ export default {
           Notiflix.Notify.failure("Invalid PIN", "", "OK");
         });
     },
+    submitVerficationDetails() {
+      const faceImageUrl = this.$refs.ffpUploader.imageUrl;
+      const nicFrontImageUrl = this.$refs.nicfUploader.imageUrl;
+      const nicBackImageUrl = this.$refs.nicbUploader.imageUrl;
+      if ((faceImageUrl.length <= 0) || (nicFrontImageUrl.length <= 0) || (nicBackImageUrl.length <= 0)) {
+        Notiflix.Report.failure("Error", "Please upload all the required images/documents")
+      } else {
+        Notiflix.Loading.standard();
+        axios.post("/api/eventowner/verify-account", {
+          face_image: faceImageUrl,
+          nic_front: nicFrontImageUrl,
+          nic_back: nicBackImageUrl,
+          notes: this.notes
+        }).then(response => {
+          Notiflix.Loading.remove();
+          if (response.status != 200){
+            throw 'Something went wrong'
+          }
+
+          if (response.data['success']){
+            Notiflix.Report.success("Success", "Please wait until we verify your account.\n(Usually within 2 business days)");
+            this.verification_status = "PENDING";
+          } else {
+            Notiflix.Report.info("Message", response.data['msg'] ? response.data['msg'] : 'Please try again later.');
+          }
+
+          
+        }).catch(err => {
+          console.error(err);
+          Notiflix.Loading.remove();
+          Notiflix.Notify.failure("Something went wrong, please try again later.")
+        })
+      }
+    }
   },
 };
 </script>
