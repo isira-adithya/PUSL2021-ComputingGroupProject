@@ -68,7 +68,7 @@ model Notification {
 model Verification {
   verification_id     Int     @id @default(autoincrement())
   verification_notes  String?
-  verification_status String? // VERIFIED, PENDING, REJECTED
+  verification_status String? // VERIFIED, PENDING, REJECTED, N/A
   face_image_link     String?
   nicback_image_link  String?
   nicfront_image_link String?

@@ -110,9 +110,17 @@ router.get("/verification-status", async (req, res) => {
             owner_id: req.session.user_id
         }
     })
-    return res.json({
-        status: verificationObj.verificarion_status
-    });
+
+    if (verificationObj != null){
+        return res.json({
+            status: verificationObj.verificarion_status
+        });
+    } else {
+        return res.json({
+            status: "N/A"
+        });
+    }
+    
 })
 
 // Mobile PIN Verification routes
