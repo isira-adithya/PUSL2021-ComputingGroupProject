@@ -11,6 +11,13 @@ import {
     validationResult
 } from 'express-validator';
 
+
+const ALLOWED_MIME_TYPES = [
+    'application/pdf',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/msword'
+];
+
 router.post(
     "/upload",
     body("content_type").isString(),
@@ -28,21 +35,33 @@ router.post(
         const filename = crypto.randomBytes(20).toString('hex');
         const contentType = req.body['content_type'];
 
-        try {
-            const signedUrl = await generateSignedUploadURL(`eventowner/${req.session['user_id']}/files/images/${filename}`, contentType);
+        if (ALLOWED_MIME_TYPES.includes(contentType) || contentType.startsWith("image/")) {
 
-            return res.json({
-                success: true,
-                upload_url: signedUrl
-            });
-        } catch (error) {
-            console.error(error);
-            res.status(500);
+            try {
+                const signedUrl = await generateSignedUploadURL(`eventowner/${req.session['user_id']}/files/images/${filename}`, contentType, true);
+
+                return res.json({
+                    success: true,
+                    upload_url: signedUrl
+                });
+            } catch (error) {
+                console.error(error);
+                res.status(500);
+                return res.json({
+                    success: false,
+                    msg: "Internal Server Error"
+                })
+            }
+
+        } else {
+            res.status(403);
             return res.json({
                 success: false,
-                msg: "Internal Server Error"
+                msg: `${contentType} is not allowed to upload.`
             })
         }
+
+
 
     });
 
