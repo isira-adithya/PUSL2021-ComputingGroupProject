@@ -58,7 +58,7 @@ export default {
 
       const formData = new FormData();
       formData.append('file', file);
-      axios.post('/api/eventowner/upload', formData).then((res) => {
+      axios.post('/api/eventowner/file/upload', formData).then((res) => {
         Notiflix.Loading.remove();
 
         if (res.data['success']){
@@ -76,9 +76,28 @@ export default {
       })
     },
     deleteNicFront() {
+      const fileInput = document.getElementById(this.fileInputId);
       // Handle deletion logic here
       // For example, you can reset formData.nic_front to null
       // this.formData.nic_front = null;
+      axios.delete('/api/eventowner/file/delete', {
+        file: "FIXME: Add the correct identifier here."
+      }).then((res) => {
+        Notiflix.Loading.remove();
+
+        if (res.data['success']){
+          this.imageUrl = res.data['url'];
+        } else {
+          throw 'Something went wrong';
+        }
+
+        Notiflix.Notify.success("Image deleted!");
+      }).catch((err) => {
+        console.error(err);
+        Notiflix.Loading.remove();
+        Notiflix.Notify.failure("Something went wrong, please try again later.");
+        fileInput.value = null;
+      })
     },
   },
 };
