@@ -6,6 +6,7 @@ import {
 import s3RequestPresigner  from "@aws-sdk/s3-request-presigner";
 import config from '../../config.js';
 
+
 const s3Client = new S3Client({
     endpoint: config.S3_ENDPOINT,
     forcePathStyle: false,
@@ -15,6 +16,8 @@ const s3Client = new S3Client({
         secretAccessKey: config.S3_SECRET_KEY
     }
 });
+// For Debugging purposes, uncomment the following line
+// s3Client.config.logger = console;
 
 const uploadObject = async (path, content) => {
 
@@ -80,19 +83,20 @@ async function generateSignedReadURL(path) {
 
 async function generateSignedUploadURL(path, contentType, isPublic) {
     try {
+        const visibility = isPublic ? 'public-read' : 'authenticated-read';
         const command = new PutObjectCommand({
           Bucket: config.S3_BUCKET_NAME,
           Key: path,
           ContentType: contentType,
-          ACL: isPublic ? 'public-read' : 'authenticated-read'
+          ACL: visibility,
         });
-
+        
         const signedUrl = await s3RequestPresigner.getSignedUrl(
-          s3Client,
-          command,
-          { expiresIn: 3600 * 24 } // Expiration time in seconds (e.g., 1 hour)
-        );
-    
+            s3Client,
+            command,
+            { expiresIn: 3600 * 24 } // Expiration time in seconds (e.g., 1 hour)
+            );
+            
         return signedUrl;
       } catch (err) {
         console.error('Error generating signed URL:', err);
