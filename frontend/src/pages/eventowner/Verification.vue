@@ -136,10 +136,36 @@ export default {
         });
     },
     submitVerficationDetails() {
-      if ((this.$refs.nicfUploader.imageUrl.length <= 0) || (this.$refs.nicbUploader.imageUrl.length <= 0) || (this.$refs.ffpUploader.imageUrl.length <= 0)) {
+      const faceImageUrl = this.$refs.ffpUploader.imageUrl;
+      const nicFrontImageUrl = this.$refs.nicfUploader.imageUrl;
+      const nicBackImageUrl = this.$refs.nicbUploader.imageUrl;
+      if ((faceImageUrl.length <= 0) || (nicFrontImageUrl.length <= 0) || (nicBackImageUrl.length <= 0)) {
         Notiflix.Report.failure("Error", "Please upload all the required images/documents")
       } else {
-        console.log(1337)
+        Notiflix.Loading.standard();
+        axios.post("/api/eventowner/verify-account", {
+          face_image: faceImageUrl,
+          nic_front: nicFrontImageUrl,
+          nic_back: nicBackImageUrl,
+          notes: this.notes
+        }).then(response => {
+          Notiflix.Loading.remove();
+          if (response.status != 200){
+            throw 'Something went wrong'
+          }
+
+          if (response.data['success']){
+            Notiflix.Report.success("Success", "Please wait until we verify your account.\n(Usually within 2 business days)");
+          } else {
+            Notiflix.Report.info("Message", response.data['msg'] ? response.data['msg'] : 'Please try again later.');
+          }
+
+          
+        }).catch(err => {
+          console.error(err);
+          Notiflix.Loading.remove();
+          Notiflix.Notify.failure("Something went wrong, please try again later.")
+        })
       }
     }
   },
