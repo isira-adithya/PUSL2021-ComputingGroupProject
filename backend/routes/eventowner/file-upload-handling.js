@@ -1,23 +1,71 @@
 import express from 'express';
 const router = express.Router();
-import { generateSignedURL } from '../../modules/s3/s3-helper.js';
+import {
+    generateSignedReadURL,
+    generateSignedUploadURL
+} from '../../modules/s3/s3-helper.js';
 import crypto from 'crypto';
+import {
+    query,
+    body,
+    validationResult
+} from 'express-validator';
 
-router.post("/upload", async (req, res) => {
-    const filename = crypto.randomBytes(20).toString('hex');
+router.post(
+    "/upload",
+    body("content_type").isString(),
+    async (req, res) => {
 
-    const signedUrl = await generateSignedURL(`eventowner/${req.session['user_id']}/files/images/${filename}`);
-    res.json({
-        success: true,
-        upload_url: signedUrl
+        // Input Validation
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            res.status(400);
+            return res.json({
+                errors: result.array()
+            });
+        }
+
+        const filename = crypto.randomBytes(20).toString('hex');
+        const contentType = req.body['content_type'];
+
+        try {
+            const signedUrl = await generateSignedUploadURL(`eventowner/${req.session['user_id']}/files/images/${filename}`, contentType);
+
+            return res.json({
+                success: true,
+                upload_url: signedUrl
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500);
+            return res.json({
+                success: false,
+                msg: "Internal Server Error"
+            })
+        }
+
     });
-});
 
-router.delete("/delete", (req, res) => {
-    res.json({
-        success: true
+router.delete(
+    "/delete",
+    body("file_path").isString(),
+    (req, res) => {
+
+        // Input Validation
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            res.status(400);
+            return res.json({
+                errors: result.array()
+            });
+        }
+
+
+        const filePath = req.body['file_path'];
+        res.json({
+            success: true
+        })
     })
-})
 
 
 export default router;
