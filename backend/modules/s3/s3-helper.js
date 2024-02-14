@@ -19,7 +19,7 @@ const s3Client = new S3Client({
 const uploadObject = async (path, content) => {
 
     const params = {
-        Bucket: config.env.s3BucketName,
+        Bucket: config.S3_BUCKET_NAME,
         Key: path,
         Body: content,
         ACL: "private",
@@ -45,7 +45,7 @@ const uploadObject = async (path, content) => {
 async function readObject(path) {
     try {
         const command = new GetObjectCommand({
-            Bucket: config.env.s3BucketName,
+            Bucket: config.S3_BUCKET_NAME,
             Key: path,
         });
         const response = await s3Client.send(command);
@@ -61,7 +61,7 @@ async function readObject(path) {
 async function generateSignedURL(path) {
     try {
         const command = new GetObjectCommand({
-          Bucket: config.env.s3BucketName,
+          Bucket: config.S3_BUCKET_NAME,
           Key: path,
         });
 
