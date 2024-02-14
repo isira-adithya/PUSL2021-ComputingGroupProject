@@ -78,12 +78,13 @@ async function generateSignedReadURL(path) {
       }
 }
 
-async function generateSignedUploadURL(path, contentType) {
+async function generateSignedUploadURL(path, contentType, isPublic) {
     try {
         const command = new PutObjectCommand({
           Bucket: config.S3_BUCKET_NAME,
           Key: path,
-          ContentType: contentType
+          ContentType: contentType,
+          ACL: isPublic ? 'public-read' : 'authenticated-read'
         });
 
         const signedUrl = await s3RequestPresigner.getSignedUrl(
