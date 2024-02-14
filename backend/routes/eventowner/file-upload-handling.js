@@ -1,10 +1,15 @@
 import express from 'express';
 const router = express.Router();
+import { generateSignedURL } from '../../modules/s3/s3-helper.js';
+import crypto from 'crypto';
 
-router.post("/upload", (req, res) => {
+router.post("/upload", async (req, res) => {
+    const filename = crypto.randomBytes(20).toString('hex');
+
+    const signedUrl = await generateSignedURL(`eventowner/${req.session['user_id']}/files/images/${filename}`);
     res.json({
         success: true,
-        url: "https://picsum.photos/seed/picsum/200/300"
+        upload_url: signedUrl
     });
 });
 
