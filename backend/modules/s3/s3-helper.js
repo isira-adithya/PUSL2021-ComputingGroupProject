@@ -57,3 +57,23 @@ async function readObject(path) {
         return;
     }
 }
+
+async function generateSignedURL(path) {
+    try {
+        const command = new GetObjectCommand({
+          Bucket: config.env.s3BucketName,
+          Key: path,
+        });
+
+        const signedUrl = await s3RequestPresigner.getSignedUrl(
+          s3Client,
+          command,
+          { expiresIn: 3600 * 24 } // Expiration time in seconds (e.g., 1 hour)
+        );
+    
+        return signedUrl;
+      } catch (err) {
+        console.error('Error generating signed URL:', err);
+        return null;
+      }
+}
