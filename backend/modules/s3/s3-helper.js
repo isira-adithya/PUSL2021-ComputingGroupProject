@@ -16,3 +16,28 @@ const s3Client = new S3Client({
     }
 });
 
+const uploadObject = async (path, content) => {
+
+    const params = {
+        Bucket: config.env.s3BucketName,
+        Key: path,
+        Body: content,
+        ACL: "private",
+        Metadata: {
+            "x-amz-meta-my-key": "idkaboutthisonetbh"
+        }
+    };
+
+    try {
+        const data = await s3Client.send(new PutObjectCommand(params));
+        console.log(
+            "[DEBUG] Successfully uploaded object: " +
+            params.Bucket +
+            "/" +
+            params.Key
+        );
+        return data;
+    } catch (err) {
+        console.log("[DEBUG] Error", err);
+    }
+};
