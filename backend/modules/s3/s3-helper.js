@@ -41,3 +41,19 @@ const uploadObject = async (path, content) => {
         console.log("[DEBUG] Error", err);
     }
 };
+
+async function readObject(path) {
+    try {
+        const command = new GetObjectCommand({
+            Bucket: config.env.s3BucketName,
+            Key: path,
+        });
+        const response = await s3Client.send(command);
+        const fileContent = response.Body.read().toString('utf-8');
+        // console.log('File content:', fileContent);
+        return fileContent;
+    } catch (err) {
+        console.error('[DEBUG] Error reading file:', err);
+        return;
+    }
+}
