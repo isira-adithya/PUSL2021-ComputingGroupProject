@@ -103,7 +103,7 @@ export default {
 
               const session = data.data['session'];
               // Checking EventOwners' verification status
-              if (session['role'] == "EVENT_OWNER" && session['is_verfied'] != false){
+              if ((session['role'] == "EVENT_OWNER") && (session['is_verified'] == false)){
                 document.location.href = "/#/eventowner/verification";
               }
             }
