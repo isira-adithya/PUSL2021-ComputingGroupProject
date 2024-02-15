@@ -17,6 +17,7 @@
         <div class="navbar-nav">
           <router-link class="nav-item nav-link" to="/">Home</router-link>
           <router-link v-if="!isLoggedIn" class="nav-item nav-link" to="/login">Login</router-link>
+          <router-link v-if="isLoggedIn" class="nav-item nav-link" to="/user/profile">Profile</router-link>
           <router-link v-if="isLoggedIn" class="nav-item nav-link" to="/logout">Logout</router-link>
         </div>
       </div>
