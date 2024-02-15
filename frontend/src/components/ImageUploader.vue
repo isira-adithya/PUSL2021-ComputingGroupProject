@@ -4,14 +4,21 @@
       label
     }}</label>
     <br />
+    <div v-if="imageUrl.length <= 0">
+      <img
+        v-if="displayImageurl"
+        :src="displayImageurl"
+        width="150px"
+        class="mt-2 img-thumbnail rounded"
+      />
+    </div>
     <img
       v-if="imageUrl"
       :src="imageUrl"
-      alt="Face Image Preview"
       width="150px"
       class="mt-2 img-thumbnail rounded"
     />
-    <div class="row">
+    <div class="row mt-2">
       <div class="col-8">
         <input
           type="file"
@@ -39,6 +46,10 @@ import axios from "axios";
 export default {
   props: {
     label: {
+      type: String,
+      required: true,
+    },
+    displayImageurl: {
       type: String,
       required: true,
     },
