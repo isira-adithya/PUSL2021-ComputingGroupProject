@@ -9,6 +9,7 @@ import authRoute from './routes/auth/index.js';
 import adminRoute from './routes/admin/index.js';
 import eventOwnerRoute from './routes/eventowner/index.js';
 import sessionRoute from './routes/session.js';
+import commonRoute from './routes/common/index.js';
 
 // Need to support application/json content
 server.use(bodyParser.json());
@@ -24,6 +25,7 @@ server.use("/auth", authRoute);
 server.use("/admin", adminRoute);
 server.use("/eventowner", eventOwnerRoute);
 server.use("/session", sessionRoute);
+server.use("/common", commonRoute);
 
 server.listen(8654, '127.0.0.1', () => {
     console.log("[+] Server started at http://127.0.0.1:8654");
