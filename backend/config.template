@@ -10,5 +10,6 @@ export default {
     S3_BUCKET_NAME: "name123",
     S3_REGION: "sgp1",
     S3_SECRET_KEY: "...",
-    S3_ACCESS_KEY: "..."
+    S3_ACCESS_KEY: "...",
+    GEOAPIFY_API_KEY: "..."
 }
