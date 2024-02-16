@@ -30,13 +30,13 @@ model EmailAddress {
 model User {
   user_id                 Int                  @id @default(autoincrement())
   user_name               String               @unique
-  first_name              String               @unique
-  last_name               String               @unique
+  first_name              String
+  last_name               String
   address                 String
-  addr_geocoordinates     String
+  addr_geocoordinates     String?
   notification_preference String
   password                String
-  profile_image           String
+  profile_image           String?
   phone_id                Int
   email_id                Int
   role                    String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
