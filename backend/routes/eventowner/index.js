@@ -81,8 +81,12 @@ router.post(
             // Creating the new verification request
             await prisma.verification.create({
                 data: {
-                    owner_id: req.session.user_id,
-                    verificarion_status: "PENDING",
+                    user: {
+                        connect: {
+                            user_id: req.session['user_id']
+                        }
+                    },
+                    verification_status: "PENDING",
                     verification_notes: req.body['notes'],
                     face_image_link: req.body['face_image'],
                     nicback_image_link: req.body['nic_front'],

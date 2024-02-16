@@ -4,14 +4,21 @@
       label
     }}</label>
     <br />
+    <div v-if="imageUrl.length <= 0">
+      <img
+        v-if="displayImageurl"
+        :src="displayImageurl"
+        width="150px"
+        class="mt-2 img-thumbnail rounded"
+      />
+    </div>
     <img
       v-if="imageUrl"
       :src="imageUrl"
-      alt="Face Image Preview"
       width="150px"
       class="mt-2 img-thumbnail rounded"
     />
-    <div class="row">
+    <div class="row mt-2">
       <div class="col-8">
         <input
           type="file"
@@ -42,6 +49,10 @@ export default {
       type: String,
       required: true,
     },
+    displayImageurl: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
@@ -52,7 +63,19 @@ export default {
   methods: {
     async getASignedUrl(contentType) {
       try {
-        const response = await axios.post("/api/eventowner/file/upload", {content_type: contentType});
+        const session = JSON.parse(localStorage.getItem("session"));
+        let apiEndpoint = "";
+        switch (session.role) {
+          case "EVENT_OWNER":
+            apiEndpoint = "/api/eventowner/file/upload";
+            break;
+          case "VISITOR":
+            apiEndpoint = "/api/visitor/file/upload";
+            break;
+          default:
+            throw "Invalid role";
+        }
+        const response = await axios.post(apiEndpoint, {content_type: contentType});
         return response.data["upload_url"];
       } catch (err) {
         console.error(err);

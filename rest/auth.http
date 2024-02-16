@@ -86,6 +86,6 @@ POST  http://www.eventhive.local/api/auth/reset-password/reset
 Content-Type: application/json
 
 {
-    "token": "895ccb1c399430eda115ff38a7f0b029ba6e210078dcbeeeec0fd1f8af1349c7",
-    "newPassword": "HelloWorld"
+    "token": "0ffeb6c4ff7d8506ea046225e86f80598d7b095c1383c30b2b7d4ee38514401e",
+    "newPassword": "SuperSecurePass123"
 }

@@ -21,8 +21,8 @@ CREATE TABLE `phonenumber` (
   `phone_id` int NOT NULL AUTO_INCREMENT,
   `number` varchar(100) NOT NULL,
   `is_verified` BOOLEAN default(false),  
-  `verified_at` TIMESTAMP NOT NULL,
-  `verification_code` varchar(24) NOT NULL,
+  `verified_at` TIMESTAMP,
+  `verification_code` varchar(24),
   PRIMARY KEY (`phone_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,8 +38,8 @@ CREATE TABLE `emailaddress` (
   `email_id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(512) NOT NULL,
   `is_verified` BOOLEAN default(false),  
-  `verified_at` TIMESTAMP NOT NULL,
-  `verification_code` varchar(24) NOT NULL,
+  `verified_at` TIMESTAMP,
+  `verification_code` varchar(24),
   PRIMARY KEY (`email_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
