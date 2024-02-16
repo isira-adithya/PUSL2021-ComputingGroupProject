@@ -30,13 +30,13 @@
             <div class="col-6">
               <div class="form-outline mb-4">
                 <label class="form-label text-black-50">Email</label>
-                <input type="email" class="form-control" v-model="email" />
+                <input disabled type="email" class="form-control" v-model="email" />
               </div>
             </div>
             <div class="col-6">
               <div class="form-outline mb-4">
                 <label class="form-label text-black-50">Phone</label>
-                <input type="text" class="form-control" v-model="phone" />
+                <input disabled type="text" class="form-control" v-model="phone" />
               </div>
             </div>
           </div>
