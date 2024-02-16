@@ -4,10 +4,20 @@
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
         <form @submit.prevent="">
-          <h3 class="mb-3">{{ role == 'EVENT_OWNER' ? 'Event Owner' : 'User'}} Profile</h3>
-          <h5 class="mb-5 text-black-50">Hello <i><span>@{{ username }}</span> 👋</i></h5>
+          <h3 class="mb-3">
+            {{ role == "EVENT_OWNER" ? "Event Owner" : "User" }} Profile
+          </h3>
+          <h5 class="mb-5 text-black-50">
+            Hello
+            <i
+              ><span>@{{ username }}</span> 👋</i
+            >
+          </h5>
 
-          <ImageUploader :label="'Profile Picture'" :displayImageurl="'https://source.boringavatars.com/beam/240/'"></ImageUploader>
+          <ImageUploader
+            :label="'Profile Picture'"
+            :displayImageurl="'https://source.boringavatars.com/beam/240/'"
+          ></ImageUploader>
 
           <!-- Firstname and Lastname -->
           <div class="row">
@@ -30,13 +40,23 @@
             <div class="col-6">
               <div class="form-outline mb-4">
                 <label class="form-label text-black-50">Email</label>
-                <input disabled type="email" class="form-control" v-model="email" />
+                <input
+                  disabled
+                  type="email"
+                  class="form-control"
+                  v-model="email"
+                />
               </div>
             </div>
             <div class="col-6">
               <div class="form-outline mb-4">
                 <label class="form-label text-black-50">Phone</label>
-                <input disabled type="text" class="form-control" v-model="phone" />
+                <input
+                  disabled
+                  type="text"
+                  class="form-control"
+                  v-model="phone"
+                />
               </div>
             </div>
           </div>
@@ -44,7 +64,31 @@
           <!-- Address input -->
           <div class="form-outline mb-4">
             <label class="form-label text-black-50">Address</label>
-            <input type="text" class="form-control" v-model="address" />
+            <input
+              type="text"
+              class="form-control"
+              @input="handleGoogleMap()"
+              v-model="address"
+            />
+          </div>
+
+          <!-- Google Maps Preview -->
+          <div class="mb-4" v-if="shouldRenderMap">
+            <GMapMap
+              :center="geoCoordinates"
+              :zoom="10" 
+              map-type-id="terrain" 
+              style="height: 32vh;"
+              :options="{
+                zoomControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: false,
+                disableDefaultUI: true
+              }"
+              />
           </div>
 
           <!-- 2 column grid layout for inline styling -->
@@ -52,7 +96,7 @@
             <div class="col">
               <!-- Checkbox -->
               <div class="form-check mt-2">
-                <label class="form-check-label" for="form2Example31">
+                <label class="form-check-label">
                   Enable Notifications?
                 </label>
 
@@ -81,24 +125,31 @@
 </template>
     
     <script>
-import axios from 'axios';
-import ImageUploader from '../../components/ImageUploader.vue';
+import axios from "axios";
+import ImageUploader from "../../components/ImageUploader.vue";
+import _ from 'lodash';
+import Notiflix from 'notiflix';
+
 export default {
   name: "UserProfileVue",
-  components: {ImageUploader},
+  components: { ImageUploader },
   mounted() {
-    axios.get("/api/auth/profile").then((response) => {
-      this.username = response.data.username;
-      this.email = response.data.email;
-      this.fname = response.data.first_name;
-      this.lname = response.data.last_name;
-      this.address = response.data.address;
-      this.phone = response.data.phone;
-      this.notification_enabled = (response.data.notification_preference == "ENABLED");
-      this.role = response.data.role;
-    }).catch((error) => {
-      console.log(error);
-    });
+    axios
+      .get("/api/auth/profile")
+      .then((response) => {
+        this.username = response.data.username;
+        this.email = response.data.email;
+        this.fname = response.data.first_name;
+        this.lname = response.data.last_name;
+        this.address = response.data.address;
+        this.phone = response.data.phone;
+        this.notification_enabled =
+          response.data.notification_preference == "ENABLED";
+        this.role = response.data.role;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   data() {
     return {
@@ -110,10 +161,44 @@ export default {
       phone: "",
       notification_enabled: false,
       role: "",
+      geoCoordinates: {
+        lat: 7.2419405,
+        lng: 80.2021768
+      },
+      shouldRenderMap: false
     };
   },
-  methods() {
-    return;
+  methods: {
+    handleGoogleMap: _.debounce(function () { 
+      this.shouldRenderMap = true;
+
+      // const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${this.address}`;
+      const apiUrl = `/api/common/geoapify/geocode?address=${this.address}`;
+      axios
+        .get(
+          apiUrl
+        )
+        .then((response) => {
+          if (response.data['success']){
+            const features = response.data['data']['data']['features'];
+            const formattedName = features[0]['properties']['formatted'];
+            const coordinates = features[0]['geometry']['coordinates'];
+            console.log(`Name: `, formattedName);
+            console.log(`Coordinates: `, coordinates);
+            this.geoCoordinates = {
+              lat: coordinates[1],
+              lng: coordinates[0]
+            };
+          }
+          else{
+            Notiflix.Notify.failure('Address not found');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          Notiflix.Notify.failure('Address not found');
+        }); 
+    }, 1000),
   },
 };
 </script>
