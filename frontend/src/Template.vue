@@ -30,6 +30,9 @@
                 <li class="nav-item mx-2">
                   <a class="nav-link text-white " href="contact_us">Contact Us</a>
                 </li>
+                <li class="nav-item mx-2">
+                  <router-link v-if="isLoggedIn" to="/user/profile" class="nav-link text-white">Profile</router-link>
+                </li>
               </ul>    
               <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
                 <router-link  v-if="!isLoggedIn" class="text-white text-decoration-none px-3 py-1 button-color rounded-1" to="/login">LOG IN</router-link>
