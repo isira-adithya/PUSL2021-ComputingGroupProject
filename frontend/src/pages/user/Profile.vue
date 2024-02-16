@@ -81,11 +81,25 @@
 </template>
     
     <script>
+import axios from 'axios';
 import ImageUploader from '../../components/ImageUploader.vue';
 export default {
   name: "UserProfileVue",
   components: {ImageUploader},
-  mounted() {},
+  mounted() {
+    axios.get("/api/auth/profile").then((response) => {
+      this.username = response.data.username;
+      this.email = response.data.email;
+      this.fname = response.data.first_name;
+      this.lname = response.data.last_name;
+      this.address = response.data.address;
+      this.phone = response.data.phone;
+      this.notification_enabled = (response.data.notification_preference == "ENABLED");
+      this.role = response.data.role;
+    }).catch((error) => {
+      console.log(error);
+    });
+  },
   data() {
     return {
       username: "isira_adithya",
