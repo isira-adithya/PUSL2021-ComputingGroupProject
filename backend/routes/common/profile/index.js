@@ -50,6 +50,12 @@ router.put("/",
         body('address').isString().isLength({ min: 1, max: 250 }),
         body('notification_preference').isString().isLength({ min: 1, max: 20 }),
         body('phone').isMobilePhone(),
+        body('profile_image').isURL({
+            host_whitelist: [
+                'pusl2024-cgp.sgp1.digitaloceanspaces.com',
+                'www.eventhive.local'
+            ]
+        }).optional(),
         async (req, res) => {
 
     // Input Validation
@@ -79,7 +85,8 @@ router.put("/",
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             address: req.body.address,
-            notification_preference: req.body.notification_preference
+            notification_preference: req.body.notification_preference,
+            profile_image: req.body.profile_image ? req.body.profile_image : null
         }
     });
 
