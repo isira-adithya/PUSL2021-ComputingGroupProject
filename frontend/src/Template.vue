@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
         <div class="container">
           <a class="navbar-brand" href="#">
-            <img src="./assets/images/event hive (1).png" alt="logo" class="custom-logo">
+            <img src="/assets/images/logo.png" alt="logo" class="custom-logo">
           </a>
           <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
           <div class="sidebar offcanvas offcanvas-start" :style="sidebarStyles" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                <img src="./assets/images/event hive (1).png" alt="logo" class="custom-logo">
+                <img src="/assets/images/logo.png" alt="logo" class="custom-logo">
               </h5>
               <button type="button" class="btn-close btn-close-white shadow-none border-0 " data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
