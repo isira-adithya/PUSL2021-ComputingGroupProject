@@ -64,7 +64,8 @@ router.put("/",
         body('profile_image').isURL({
             host_whitelist: [
                 'pusl2024-cgp.sgp1.digitaloceanspaces.com',
-                'www.eventhive.local'
+                'www.eventhive.local',
+                'source.boringavatars.com' // Random Avatar Image API
             ]
         }).optional(),
         body('address_geo_cooridinates').isObject(),
