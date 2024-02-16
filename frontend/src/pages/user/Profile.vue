@@ -17,6 +17,7 @@
           <ImageUploader
             :label="'Profile Picture'"
             :displayImageurl="'https://source.boringavatars.com/beam/240/'"
+            ref="profileImageUploader"
           ></ImageUploader>
 
           <!-- Firstname and Lastname -->
@@ -112,7 +113,7 @@
             </div>
 
             <div class="col text-end">
-              <button type="button" class="btn btn-dark" @click="submitForm">
+              <button @click="updateProfile" type="button" class="btn btn-dark">
                 Save
               </button>
             </div>
@@ -135,7 +136,7 @@ export default {
   components: { ImageUploader },
   mounted() {
     axios
-      .get("/api/auth/profile")
+      .get("/api/common/profile")
       .then((response) => {
         this.username = response.data.username;
         this.email = response.data.email;
@@ -153,7 +154,7 @@ export default {
   },
   data() {
     return {
-      username: "isira_adithya",
+      username: "",
       email: "",
       fname: "",
       lname: "",
@@ -162,8 +163,8 @@ export default {
       notification_enabled: false,
       role: "",
       geoCoordinates: {
-        lat: 7.2419405,
-        lng: 80.2021768
+        lat: 7.2442505,
+        lng: 80.24423768
       },
       shouldRenderMap: false
     };
@@ -199,6 +200,29 @@ export default {
           Notiflix.Notify.failure('Address not found');
         }); 
     }, 1000),
+
+    updateProfile() {
+      const apiUrl = "/api/common/profile";
+      const data = {
+        first_name: this.fname,
+        last_name: this.lname,
+        address: this.address,
+        phone: this.phone,
+        notification_preference: this.notification_enabled
+          ? "ENABLED"
+          : "DISABLED",
+        profile_image: this.$refs.profileImageUploader.imageUrl
+      };
+      axios
+        .put(apiUrl, data)
+        .then((response) => {
+          Notiflix.Notify.success("Profile updated successfully");
+        })
+        .catch((error) => {
+          console.log(error);
+          Notiflix.Notify.failure("Profile update failed");
+        });
+    }
   },
 };
 </script>
