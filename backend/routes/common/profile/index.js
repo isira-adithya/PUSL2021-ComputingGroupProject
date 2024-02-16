@@ -30,6 +30,15 @@ router.get("/", isLoggedIn, async (req, res) => {
         }
     });
 
+    // Converting user.addr_geocoordinates to a json object
+    if(user.addr_geocoordinates) {
+        const addr_geocoordinates = user.addr_geocoordinates.split(",");
+        user.addr_geocoordinates = {
+            lat: parseFloat(addr_geocoordinates[0]),
+            lng: parseFloat(addr_geocoordinates[1])
+        }
+    }
+
     res.json({
         username: user.user_name,
         role: user.role,
@@ -39,7 +48,9 @@ router.get("/", isLoggedIn, async (req, res) => {
         notification_preference: user.notification_preference,
         is_verified: user.is_verified,
         email: emailObj.email,
-        phone: phoneObj.number
+        phone: phoneObj.number,
+        profile_image: user.profile_image,
+        address_geo_cooridinates: user.addr_geocoordinates
     });
 });
 
@@ -56,6 +67,7 @@ router.put("/",
                 'www.eventhive.local'
             ]
         }).optional(),
+        body('address_geo_cooridinates').isObject(),
         async (req, res) => {
 
     // Input Validation
@@ -76,6 +88,15 @@ router.put("/",
         });
     }
 
+    // There should be lat and lng in address_geo_cooridinates and they should numbers
+    if(!req.body.address_geo_cooridinates.lat || !req.body.address_geo_cooridinates.lng || isNaN(req.body.address_geo_cooridinates.lat) || isNaN(req.body.address_geo_cooridinates.lng)) {
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Invalid address_geo_cooridinates"
+        });
+    }
+
     // Update User
     await prisma.user.update({
         where: {
@@ -85,14 +106,15 @@ router.put("/",
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             address: req.body.address,
+            addr_geocoordinates: `${req.body.address_geo_cooridinates.lat},${req.body.address_geo_cooridinates.lng}`,
             notification_preference: req.body.notification_preference,
-            profile_image: req.body.profile_image ? req.body.profile_image : null
+            profile_image: req.body.profile_image ? req.body.profile_image : null,
         }
     });
 
     res.json({
-        success: false,
-        msg: "Internal Server Error. Please try again later."
+        success: true,
+        msg: "Profile Updated Successfully"
     });
 })
 
