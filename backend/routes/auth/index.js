@@ -150,7 +150,9 @@ router.post(
                     notification_preference: "ENABLED",
                     is_verified: false,
                     phone_id: createdPhoneObj.phone_id,
-                    email_id: createdEmailObj.email_id
+                    email_id: createdEmailObj.email_id,
+                    addr_geocoordinates: null,
+                    profile_image: null
                 },
             });
 
