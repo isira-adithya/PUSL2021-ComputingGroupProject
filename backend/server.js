@@ -8,6 +8,7 @@ const server = express();
 import authRoute from './routes/auth/index.js';
 import adminRoute from './routes/admin/index.js';
 import eventOwnerRoute from './routes/eventowner/index.js';
+import sessionRoute from './routes/session.js';
 
 // Need to support application/json content
 server.use(bodyParser.json());
@@ -22,30 +23,7 @@ server.use(session({
 server.use("/auth", authRoute);
 server.use("/admin", adminRoute);
 server.use("/eventowner", eventOwnerRoute);
-server.get("/session", (req, res) => {
-    if (req.session.isLoggedIn){
-        res.json({
-            success: true,
-            session: {
-                user_id: req.session.user_id,
-                username: req.session.username,
-                role: req.session.role,
-                is_verified: req.session.is_verified,
-                phone_number: req.session.phone,
-                phone_number_verified: req.session.phone_number_verified,
-                email_address: req.session.email,
-                email_address_verified: req.session.email_address_verified,
-            }
-        })
-    } else {
-        res.status(401);
-        res.json({
-            success: false,
-            msg: "Unauthorized"
-        })
-    }
-    
-})
+server.use("/session", sessionRoute);
 
 server.listen(8654, '127.0.0.1', () => {
     console.log("[+] Server started at http://127.0.0.1:8654");
