@@ -33,7 +33,7 @@ model User {
   first_name              String
   last_name               String
   address                 String
-  addr_geocoordinates     String?
+  addr_geocoordinates     String?              @default("0,0") // lat, long
   notification_preference String
   password                String
   profile_image           String?
