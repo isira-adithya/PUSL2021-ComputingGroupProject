@@ -74,7 +74,7 @@
           </div>
 
           <!-- Google Maps Preview -->
-          <div class="mb-4" v-if="shouldRenderMap">
+          <div class="mb-4">
             <GMapMap
               :center="geoCoordinates"
               :zoom="10" 
@@ -147,6 +147,14 @@ export default {
         this.notification_enabled =
           response.data.notification_preference == "ENABLED";
         this.role = response.data.role;
+        this.$refs.profileImageUploader.imageUrl = response.data.profile_image ? response.data.profile_image : 'https://source.boringavatars.com/beam/240/';
+        if (response.data.address_geo_cooridinates) {
+          console.log(`Geo Coordinates: `, response.data.address_geo_cooridinates);
+          this.geoCoordinates = {
+            lat: response.data.address_geo_cooridinates.lat,
+            lng: response.data.address_geo_cooridinates.lng
+          };
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -163,15 +171,13 @@ export default {
       notification_enabled: false,
       role: "",
       geoCoordinates: {
-        lat: 7.2442505,
-        lng: 80.24423768
+        lat: 1,
+        lng: 1
       },
-      shouldRenderMap: false
     };
   },
   methods: {
     handleGoogleMap: _.debounce(function () { 
-      this.shouldRenderMap = true;
 
       // const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${this.address}`;
       const apiUrl = `/api/common/geoapify/geocode?address=${this.address}`;
@@ -211,7 +217,8 @@ export default {
         notification_preference: this.notification_enabled
           ? "ENABLED"
           : "DISABLED",
-        profile_image: this.$refs.profileImageUploader.imageUrl
+        profile_image: this.$refs.profileImageUploader.imageUrl,
+        address_geo_cooridinates: this.geoCoordinates
       };
       axios
         .put(apiUrl, data)
