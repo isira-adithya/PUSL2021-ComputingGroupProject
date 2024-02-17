@@ -46,38 +46,32 @@
       <router-view></router-view>
     </div>
 
-    <div class="mx-4">
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-2 border-top">
-        <p class="col-md-4 mb-0 text-body-secondary">
-          &copy; 2024 EventHive, Inc
-        </p>
-
-        <a
-          href="/"
-          class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
-        >
-          <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="#bootstrap" />
-          </svg>
-        </a>
-
-        <ul class="nav col-md-4 justify-content-end">
-          <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-body-secondary">Features</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-body-secondary">FAQs</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-body-secondary">About</a>
-          </li>
-        </ul>
-      </footer>
+   
+      <footer class="footer-bg-black text-left py-3">
+    <hr class="white-hr my-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-3 text-center text-md-left "> Copyright&copy; Event Hive 2024.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-r">
+          <div class="footer-icons ml-md-4 d-flex justify-content-center justify-content-md-end">
+            <a href="#" target="_blank">
+              <img src="/assets/images/linkdin_Icon.png" alt="Icon 1" style="width: 100%; max-width: 30px;" class="mr-3">
+            </a>
+            <a href="#" target="_blank">
+              <img src="/assets/images/intagram.png" alt="Icon 2" style="width: 100%; max-width: 30px;" class="mr-3">
+            </a>
+            <a href="#" target="_blank">
+              <img src="/assets/images/facbook.png" alt="Icon 3" style="width: 100%; max-width: 30px;" class="mr-3">
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </footer>
+    </div>
+  
 </template>
   
 <script>
@@ -165,7 +159,7 @@ export default {
   };
 </script>
   
-<style>
+<style scoped>
   @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 #app {
@@ -187,6 +181,16 @@ export default {
 .nav-link:hover{
     color: rgb(207, 206, 206) !important;
 }
-
+.footer-bg-black {
+    background-color: black;
+    color: white;
+}   
+.footer-icons a:hover {
+    opacity: 0.4; 
+}
+.white-hr {
+    border-top: 1px solid white;
+    width: 95%;
+}
 </style>
   
