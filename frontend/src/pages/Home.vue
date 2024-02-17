@@ -1,4 +1,5 @@
 <template>
+
       <div id="section1" class="section text-center text-white d-flex justify-content-center align-items-center">
         <div class="container">
             <div class="row">
@@ -19,7 +20,7 @@
         <div class="container">
           <div>
             <a>
-              <img src="/assets/images/event hive (1).png" alt="logo" class="custom-logo">
+              <img src="" alt="logo" class="custom-logo">
               </a>
           </div>
           <div class="custom-hr"></div>
@@ -61,7 +62,6 @@
         </div>
       </div>
        
-
       <div id="section4" class="justify-content-center align-items-center text-center" >
         <div class="container">
           <div class="row">
@@ -77,7 +77,7 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="/assets/html/event.html" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">EVENTS</a>
+                <a href="" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">EVENTS</a>
               </div>
             </div>
           </div>
@@ -100,13 +100,13 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="/assets/html/Event_Submission.html" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">PUBLISH</a>
+                <a href="" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">PUBLISH</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
 </template>
 
 <script>
@@ -118,10 +118,78 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 #app {
   font-family: 'Poppins', sans-serif;
+  
 }
+
+
+        #section1{
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url();
+          background-size: cover;
+          min-height: 100%;
+        }
+        
+        
+        #section2{
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url();
+          background-size: cover;     
+          padding: 70px !important;
+        }
+
+        #section3{
+          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url();
+          background-size: cover; 
+          background-position: center;   
+          padding: 100px !important; 
+        }
+
+        #section4{
+          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url();
+          background-size: cover; 
+          background-position: center;   
+          padding: 100px !important; 
+        }
+
+        #section5{
+          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url();
+          background-size:cover; 
+          background-position: center;   
+          padding: 100px !important; 
+        }
+
+        .custom-hr {
+          height: 2px; 
+          background-color: rgba(255,255,255); 
+          margin: 20px 0; 
+        }
+        .custom-boxes{
+          background-color: #111F4D;   
+        }
+        .font-1{
+          font-family: 'Stick No Bills', sans-serif;
+        }
+
+        .font-2{
+          font-family: 'Poppins', sans-serif;
+        }
+
+        .scroll-down {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .fa-color{
+          color:rgb(255, 255, 255);
+
+        }
+        .fa-color:hover{
+          color: rgb(207, 206, 206);
+        }
+
 </style>
