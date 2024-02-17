@@ -54,7 +54,7 @@
       </nav>
     </div>
 
-    <div class="mx-4">
+    <div >
       <router-view></router-view>
     </div>
 
