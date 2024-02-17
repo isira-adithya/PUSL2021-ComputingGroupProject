@@ -4,6 +4,7 @@
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
         <form class="container">
+          <h3 class="mb-4">Create an Event</h3>
           <div class="mb-3">
             <label class="form-label">Event Name</label>
             <input type="email" class="form-control" />
@@ -94,35 +95,42 @@
 
           <!-- Create a form to add a new ticket to the event, there should be ticket name, price, description -->
           <div v-if="ticketsNeeded">
+            <h4 class="mt-5 mb-3">Tickets</h4>
             <div class="mb-3">
               <label class="form-label">Ticket Name</label>
-              <input type="text" class="form-control" />
+              <input v-model="ticketName" type="text" class="form-control" />
             </div>
             <div class="mb-3">
               <label class="form-label">Ticket Price</label>
-              <input type="number" class="form-control" />
+              <input v-model="ticketPrice" type="number" class="form-control" />
             </div>
             <div class="mb-3">
               <label class="form-label">Ticket Description</label>
-              <textarea class="form-control" style="height: 10vh"></textarea>
+              <textarea v-model="ticketDescription" class="form-control" style="height: 10vh"></textarea>
             </div>
             <div class="mb-3">
-              <button class="btn btn-primary btn-sm float-end">Add Ticket</button>
+              <button @click="addToTickets" class="btn btn-primary btn-sm float-end">Add Ticket</button>
               <br>
             </div>
 
             <!-- Add a list view to show what tickets have been currently added, if there are no tickets show no tickets added -->
-            <div class="mb-3">
+            <div class="mb-3" v-if="tickets.length > 0">
               <h5>Tickets Added</h5>
               <ol class="list-group list-group-numbered">
                 <li
-                  class="list-group-item d-flex justify-content-between align-items-start"
+                  class="list-group-item d-flex justify-content-between align-items-start my-1"
+                  v-for="ticket in tickets"
+                  :key="ticket.id"
                 >
                   <div class="ms-2 me-auto">
-                    <div class="fw-bold">Exclusive</div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                    <div class="fw-bold">{{ ticket.name }}</div>
+                    <i>{{ ticket.details }}</i>
+                    <br>
+                    <code>Price: {{ ticket.price }}$</code>
                   </div>
-                  <span class="badge bg-dark rounded-end-pill">50$</span>
+                  <span @click="removeFromTickets(ticket.id)" class="badge btn btn-dark rounded-end-pill">
+                    <font-awesome-icon icon="fa-solid fa-trash" />
+                  </span>
                 </li>
               </ol>
             </div>
@@ -160,6 +168,18 @@ export default {
         lng: 1,
       },
       ticketsNeeded: true,
+      tickets: [
+        {
+          id: 1,
+          name: "Exclusive",
+          price: 50,
+          details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla",
+        },
+      ],
+      ticketName: "",
+      ticketPrice: 0,
+      ticketDescription: "",
+
     };
   },
   methods: {
@@ -198,6 +218,28 @@ export default {
           Notiflix.Loading.remove(1000);
         });
     }, 1000),
+
+    addToTickets() {
+      if (this.ticketPrice <= 0) {
+        Notiflix.Notify.failure("Ticket price should be higher than 0");
+        return;
+      }
+
+      const newTicket = {
+        id: this.tickets.length + 1,
+        name: this.ticketName,
+        price: this.ticketPrice,
+        details: this.ticketDescription,
+      };
+      this.tickets.push(newTicket);
+      this.ticketName = "";
+      this.ticketPrice = 0;
+      this.ticketDescription = "";
+    },
+
+    removeFromTickets(ticketId) {
+      this.tickets = this.tickets.filter((ticket) => ticket.id !== ticketId);
+    }
   },
 };
 </script>
