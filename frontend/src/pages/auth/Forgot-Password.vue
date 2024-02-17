@@ -1,8 +1,6 @@
 <template>
-<div class="mb-4 text-center">
 
-
-</div>
+<div class="background-container">
     <div class="container">
         <div class="row">
           
@@ -38,6 +36,7 @@
             </div>
         </div>
     </div>
+   </div>
 </template>
 
 <script>
@@ -97,7 +96,96 @@ export default {
 
 
 <style scoped>
+        h1 {
+            font-family: 'Stick No Bills', sans-serif;
+            font-weight: 600;
+        }
 
+.background-container {
+  background-image: url('');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #ffffff;
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  
+  
+}
+
+        p {
+            margin-bottom: 10%;
+            color: #D2D2D2;
+    
+        }
+
+        .form-control {
+
+            border-radius: 0;
+            margin-bottom: 3rem;
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0);
+            /* Adjust the alpha value for transparency */
+            border-radius: 20px;
+        }
+
+        .increased-height {
+            height: 45%;
+            /* Adjust the height as needed */
+        }
+
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            /* Adjust the alpha value for transparency */
+            box-shadow: none;
+            color: #ffffff;
+        }
+
+        .font-1 {
+            font-family: 'Stick No Bills', sans-serif;
+            margin-top: 20px;
+            font-size: 50px;
+        }
+
+        .font-2 h2 {
+            font-size: 23px;
+            font-weight: 750;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            /* Add margin-bottom as needed */
+        }
+
+        label.form-label {
+            text-align: left;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        a {
+            color: #8482FA;
+        }
+
+        .main-container {
+            background-color: rgb(12, 12, 12, 0.65);
+            /* Add a transparent overlay on top of the background image */
+            padding: 20px;
+            border-radius: 20px;
+
+        }
+
+        .main-container h1.font-1 {
+            font-family: 'Stick No Bills', sans-serif;
+            margin-top: 10%;
+            line-height: 1.5;
+            /* Adjust the line-height value as needed */
+        }
+
+        .white-bg {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.3);
+            /* Adjust the alpha value for transparency */
+        }
 
 
 
