@@ -51,7 +51,7 @@
 
           <!-- Location input -->
           <div class="form-outline mb-4">
-            <label class="form-label">Location</label>
+            <label class="form-label">Address / Location</label>
             <input
               type="text"
               class="form-control"
@@ -184,9 +184,38 @@ export default {
     submitForm() {
       // convert this.date_time to unix timestamp
       const timestamp = new Date(this.date_time).getTime() / 1000;
-      console.log(`Date/Time: ${this.date_time} | Timestamp: ${timestamp}`);
-      console.log(`Category: ${this.category}`);
-      console.log(`Geo Coordinates: `, this.geoCoordinates);
+
+      // Submit the form to the backend
+      const apiUrl = "/api/eventowner/event/create";
+      const data = {
+        name: this.event_name,
+        details: this.event_details,
+        images: this.images,
+        date_time: timestamp,
+        category: this.category,
+        location: this.location,
+        geo_coordinates: this.geoCoordinates,
+        tickets: this.tickets,
+      };
+      console.log(data);
+
+      Notiflix.Loading.standard("Creating Event...");
+      axios
+        .post(apiUrl, data)
+        .then((response) => {
+          if (response.status == 200){
+            this.$router.push("/eventowner/dashboard/events");
+          } else {
+            Notiflix.Notify.failure("Event creation failed");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          Notiflix.Notify.failure("Event creation failed");
+        }).finally(() => {
+          Notiflix.Loading.remove(1000);
+        });
+
       Notiflix.Notify.success("Event created successfully");
     },
 
