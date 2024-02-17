@@ -95,11 +95,21 @@ model Event {
   time              DateTime?
   event_description String?
   venue             String?
-  image             String?
-  ticket_prices     Int?
+  images            String? // Comma seperated URLs
+  // Example of event_category => musical, sports, educational, religious, charity, etc.
   event_category    String?
   location          String?
-  user_id           Int?
-  user              User?        @relation(fields: [user_id], references: [user_id])
+  owner_id          Int?
+  user              User?        @relation(fields: [owner_id], references: [user_id])
   Commentary        Commentary[]
+  Ticket            Ticket[]
+}
+
+model Ticket {
+  ticket_id   Int    @id @default(autoincrement())
+  price       Int
+  name        String
+  description String
+  event_id    Int
+  event       Event  @relation(fields: [event_id], references: [event_id])
 }
