@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx prisma generate",
     "prisma-format": "npx prisma format",
+    "configure-db": "npx prisma format; npx prisma generate; npx prisma migrate dev",
     "dev": "nodemon server.js"
   },
   "author": "",
@@ -15,6 +16,7 @@
     "@aws-sdk/client-s3": "^3.513.0",
     "@aws-sdk/s3-request-presigner": "^3.513.0",
     "@prisma/client": "^5.6.0",
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cookie-session": "^2.1.0",
