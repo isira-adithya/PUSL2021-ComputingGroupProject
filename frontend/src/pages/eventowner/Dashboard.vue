@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-3" style="padding: 0px;">
-        <div class="d-flex flex-column px-3 text-white bg-black">
+        <div class="d-flex flex-column px-3 text-white bg-black" style="height:100%;">
           <hr />
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
@@ -66,6 +66,7 @@ export default {
     EventsVue
   },
   mounted() {
+    this.page = this.$route.path.split("/")[3];
   },
   updated() {
     this.page = this.$route.path.split("/")[3];
