@@ -30,8 +30,11 @@
                 <li class="nav-item mx-2">
                   <router-link class="nav-link text-white " to="/contactus">Contact Us</router-link>
                 </li>
-                <li class="nav-item mx-2">
-                  <router-link v-if="isLoggedIn" to="/user/profile" class="nav-link text-white">Profile</router-link>
+                <li v-if="isLoggedIn" class="nav-item mx-2">
+                  <router-link  to="/user/profile" class="nav-link text-white">Profile</router-link>
+                </li>
+                <li v-if="isLoggedIn && (role == 'EVENT_OWNER')" class="nav-item mx-2">
+                  <router-link to="/event-owner/dashboard" class="nav-link text-white">Dashboard</router-link>
                 </li>
               </ul>    
               <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
@@ -123,6 +126,7 @@ export default {
               localStorage.setItem("session", JSON.stringify(data.data['session']));
 
               const session = data.data['session'];
+              this.role = session['role'];
               // Checking EventOwners' verification status
               if ((session['role'] == "EVENT_OWNER") && (session['is_verified'] == false)){
                 document.location.href = "/#/eventowner/verification";
@@ -149,6 +153,7 @@ export default {
   data() {
     return {
       isLoggedIn: false,
+      role: "VISITOR"
     };
   },
   setup() {
