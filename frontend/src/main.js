@@ -15,6 +15,7 @@ import ForgotPasswordVue from './pages/auth/Forgot-Password.vue';
 import PasswordResetVue from './pages/auth/Reset-Password.vue'; 
 // Components - EventOwner
 import VerificationVue from './pages/eventowner/Verification.vue';
+import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
 
@@ -42,6 +43,7 @@ const routes = [
 
     // EventOwner
     { path: '/eventowner/verification', component: VerificationVue},
+    { path: '/eventowner/dashboard', component: EventOwnerDashboardVue},
     
     // User
     { path: '/user/profile', component: UserProfileVue},
