@@ -37,7 +37,7 @@
                   <router-link  to="/user/profile" class="nav-link text-white">Profile</router-link>
                 </li>
                 <li v-if="isLoggedIn && (role == 'EVENT_OWNER')" class="nav-item mx-2">
-                  <router-link to="/eventowner/dashboard" class="nav-link text-white">Dashboard</router-link>
+                  <router-link to="/eventowner/dashboard/analytics" class="nav-link text-white">Dashboard</router-link>
                 </li>
               </ul>
               <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
