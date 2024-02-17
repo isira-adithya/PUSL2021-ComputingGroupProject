@@ -154,7 +154,6 @@ export default {
       backgroundColor: 'rgba(0, 0, 0, 1)',
       '@media only screen and (max-width: 768px)': { 
         backgroundColor: 'rgba(0, 0, 0)',
-        
       },
     };
 
@@ -184,9 +183,9 @@ export default {
     margin: 0px !important;
     padding: 0px !important;
 }
+
 .nav-link:hover{
     color: rgb(207, 206, 206) !important;
 }
-
 </style>
   
