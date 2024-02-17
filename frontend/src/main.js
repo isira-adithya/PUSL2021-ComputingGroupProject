@@ -38,6 +38,7 @@ const routes = [
     { path: '/signup', component: SignupVue},
     { path: '/forgot-password', component: ForgotPasswordVue},
     { path: '/reset-password/:token', component: PasswordResetVue},
+    { path: '/home', component: HomeVue},
 
     // EventOwner
     { path: '/eventowner/verification', component: VerificationVue},
