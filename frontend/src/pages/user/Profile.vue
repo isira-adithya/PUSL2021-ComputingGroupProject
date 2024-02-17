@@ -77,7 +77,7 @@
           <div class="mb-4">
             <GMapMap
               :center="geoCoordinates"
-              :zoom="10" 
+              :zoom="13" 
               map-type-id="terrain" 
               style="height: 32vh;"
               :options="{
@@ -187,7 +187,8 @@ export default {
         )
         .then((response) => {
           if (response.data['success']){
-            const features = response.data['data']['data']['features'];
+            console.log(response.data)
+            const features = response.data['data']['features'];
             const formattedName = features[0]['properties']['formatted'];
             const coordinates = features[0]['geometry']['coordinates'];
             console.log(`Name: `, formattedName);

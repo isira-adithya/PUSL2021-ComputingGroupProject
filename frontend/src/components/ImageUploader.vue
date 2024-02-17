@@ -84,6 +84,12 @@ export default {
     },
 
     async handleFileUpload() {
+
+      // Checking if the file input is empty
+      if (document.getElementById(this.fileInputId).files.length <= 0) {
+        return;
+      }
+
       const fileInput = document.getElementById(this.fileInputId);
       const file = fileInput.files[0];
 
