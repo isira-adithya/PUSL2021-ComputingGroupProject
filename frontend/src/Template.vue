@@ -19,22 +19,22 @@
             <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 ">
               <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                 <li class="nav-item mx-2">
-                  <a class="nav-link text-white " href="home.html">Home</a>
+                  <router-link class="nav-link text-white " to="/home">Home</router-link>
                 </li>
                 <li class="nav-item mx-2">
-                  <a class="nav-link text-white " href="events">Events</a>
+                  <router-link class="nav-link text-white " to="/events">Events</router-link>
                 </li>
                 <li class="nav-item mx-2">
-                  <a class="nav-link text-white " href="about_us.html">About Us</a>
+                  <router-link class="nav-link text-white " to="/aboutus">About Us</router-link>
                 </li>
                 <li class="nav-item mx-2">
-                  <a class="nav-link text-white " href="contact_us">Contact Us</a>
+                  <router-link class="nav-link text-white " to="/contactus">Contact Us</router-link>
                 </li>
               </ul>    
               <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
                 <router-link  v-if="!isLoggedIn" class="text-white text-decoration-none px-3 py-1 button-color rounded-1" to="/login">LOG IN</router-link>
                 <router-link  v-if="isLoggedIn" class="text-white text-decoration-none px-3 py-1 button-color rounded-1" to="/logout">LOG OUT</router-link>
-                <router-link  class="text-white text-decoration-none px-3 py-1 button-color rounded-1" to="/signup">SIGN UP</router-link>
+                <router-link  v-if="!isLoggedIn" class="text-white text-decoration-none px-3 py-1 button-color rounded-1" to="/signup">SIGN UP</router-link>
               </div>      
             </div>
           </div>
@@ -63,16 +63,16 @@
 
         <ul class="nav col-md-4 justify-content-end">
           <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
+            <router-link to="/home" class="nav-link px-2 text-body-secondary">Home</router-link>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-body-secondary">Features</a>
+            <router-link to="/features" class="nav-link px-2 text-body-secondary">Features</router-link>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-body-secondary">FAQs</a>
+            <router-link to="/faq" class="nav-link px-2 text-body-secondary">FAQs</router-link>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-body-secondary">About</a>
+            <router-link to="/about" class="nav-link px-2 text-body-secondary">About</router-link>
           </li>
         </ul>
       </footer>
@@ -154,7 +154,6 @@ export default {
       backgroundColor: 'rgba(0, 0, 0, 1)',
       '@media only screen and (max-width: 768px)': { 
         backgroundColor: 'rgba(0, 0, 0)',
-        
       },
     };
 
@@ -184,9 +183,9 @@ export default {
     margin: 0px !important;
     padding: 0px !important;
 }
+
 .nav-link:hover{
     color: rgb(207, 206, 206) !important;
 }
-
 </style>
   
