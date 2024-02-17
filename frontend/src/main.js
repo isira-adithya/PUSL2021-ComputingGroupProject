@@ -42,7 +42,7 @@ const routes = [
 
     // EventOwner
     { path: '/eventowner/verification', component: VerificationVue},
-    { path: '/eventowner/dashboard', component: EventOwnerDashboardVue},
+    { path: '/eventowner/dashboard/:page', component: EventOwnerDashboardVue},
     
     // User
     { path: '/user/profile', component: UserProfileVue},
