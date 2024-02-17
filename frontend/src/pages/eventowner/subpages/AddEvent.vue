@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-4 bg-black text-white">
+  <div class="py-4 bg-black text-white">
     <div class="row">
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
