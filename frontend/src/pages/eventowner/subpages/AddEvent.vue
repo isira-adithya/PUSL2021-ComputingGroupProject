@@ -7,11 +7,11 @@
           <h3 class="mb-4">Create an Event</h3>
           <div class="mb-3">
             <label class="form-label">Event Name</label>
-            <input type="email" class="form-control" />
+            <input v-model="event_name" type="email" class="form-control" />
           </div>
           <div class="mb-3">
             <label class="form-label">Event Description</label>
-            <textarea class="form-control" style="height: 25vh"></textarea>
+            <textarea  v-model="event_details" class="form-control" style="height: 25vh"></textarea>
             <div class="form-text text-white-50">
               You can use
               <b
@@ -160,6 +160,9 @@ export default {
   mounted() {},
   data() {
     return {
+      event_name: "",
+      event_details: "",
+      images: [],
       date_time: new Date(),
       category: "null",
       location: "",
