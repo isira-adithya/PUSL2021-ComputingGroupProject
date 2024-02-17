@@ -15,9 +15,6 @@
       };
     },
     methods: {
-      test() {
-        alert(1)
-      }
     },
   };
   </script>
