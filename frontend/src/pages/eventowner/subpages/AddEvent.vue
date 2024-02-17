@@ -19,11 +19,11 @@
             <ImageUploader ref="eventImageUpload1" :customCssLabel="'color: white;'" :label="'Image'" />
           </div>
           <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" class="form-control" />
+            <label class="form-label">Date / Time</label>
+            <VueDatePicker v-model="date_time" />
           </div>
           
-          <button type="submit" class="btn btn-light">Create</button>
+          <button @click="submitForm()" type="submit" class="btn btn-light">Create</button>
         </form>
       </div>
       <div class="col-lg-2"></div>
@@ -33,14 +33,25 @@
   
   <script>
 import ImageUploader from '../../../components/ImageUploader.vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
+
 export default {
   name: "EventOwnerAddEventVue",
-  components: {ImageUploader},
+  components: {ImageUploader, VueDatePicker},
   mounted() {},
   data() {
-    return {};
+    return {
+      date_time: new Date(),
+    };
   },
   methods: {
+    submitForm() {
+      // convert this.date_time to unix timestamp
+      const timestamp = new Date(this.date_time).getTime() / 1000;
+      console.log(`Date/Time: ${this.date_time} | Timestamp: ${timestamp}`);
+    },
   },
 };
 </script>
