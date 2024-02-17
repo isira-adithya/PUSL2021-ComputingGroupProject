@@ -1,49 +1,43 @@
 <template>
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-lg-4"></div>
-      <div class="col-lg-4">
-        <form @submit.prevent="">
-          <h3 class="mb-5">Forgot Password?</h3>
+<div class="mb-4 text-center">
 
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <label class="form-label text-black-50"
-              >Email address or Username</label
-            >
-            <input
-              type="email"
-              class="form-control"
-              v-model="email"
-            />
-          </div>
 
-          <!-- 2 column grid layout for inline styling -->
-          <div class="row mb-4">
+</div>
+    <div class="container">
+        <div class="row">
           
-            <div class="col text-end">
-              <button
-                type="button"
-                class="btn btn-dark"
-                @click="submitForm"
-              >
-                Submit
-              </button>
+            <!-- Centered Container: Info Container -->
+            <div class="col-md-6 mx-auto">
+                <div class="main-container" style="margin-top: 7%; margin-bottom: 11%;">
+                  
+                    <div class="text-center mt-4 ">
+                        <h1 class="font-1" style="margin-top: 10%;">Forgot Your <br> Password?</h1>
+                        <p style="margin-bottom: 13%; margin-top: 4%;">Enter your email to recieve a recovery email</p>
+                    </div>
+
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-md-8 text-center mb-3">
+                          <form @submit.prevent="">
+                                <div class="row mb-1">
+                                    <div class="col-md-6" style="width: 100%;">
+                                        <label for="email" class="form-label" style="margin-bottom: 6%;">Email
+                                            Address:</label>
+                                        <input type="email" class="form-control increased-height" v-model="email"
+                                            placeholder="Your Email Adress">
+                                    </div>
+                                </div>
+                            </form>
+                            <button type="button" class="btn btn-primary"
+                                style="width: 100%; border-radius: 14px; background-color: #111F4D; border: none; padding: 16px 0; font-size: 20px; margin-top: 13px;" @click="submitForm">Send
+                                Recovery Link</button>
+                            <p style="margin-top: 8%;">Remember your password? <router-link to="/login">Log-in</router-link></p>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-
-          </div>
-
-          <!-- Submit button -->
-
-          <!-- Register buttons -->
-          <div class="text-center">
-            <p>Go back to <router-link to="/signup">Login</router-link></p>
-          </div>
-        </form>
-      </div>
-      <div class="col-lg-4"></div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -99,3 +93,12 @@ export default {
   },
 };
 </script>
+
+
+
+<style scoped>
+
+
+
+
+</style>
