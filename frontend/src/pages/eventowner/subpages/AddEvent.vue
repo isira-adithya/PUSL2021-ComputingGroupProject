@@ -89,8 +89,44 @@
             />
             <label class="form-check-label" for="flexCheckDefault">
               This event contains tickets to purchase <i>(optional)</i>
-            </label> 
-          </div>  
+            </label>
+          </div>
+
+          <!-- Create a form to add a new ticket to the event, there should be ticket name, price, description -->
+          <div v-if="ticketsNeeded">
+            <div class="mb-3">
+              <label class="form-label">Ticket Name</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Ticket Price</label>
+              <input type="number" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Ticket Description</label>
+              <textarea class="form-control" style="height: 10vh"></textarea>
+            </div>
+            <div class="mb-3">
+              <button class="btn btn-primary btn-sm float-end">Add Ticket</button>
+              <br>
+            </div>
+
+            <!-- Add a list view to show what tickets have been currently added, if there are no tickets show no tickets added -->
+            <div class="mb-3">
+              <h5>Tickets Added</h5>
+              <ol class="list-group list-group-numbered">
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-start"
+                >
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold">Exclusive</div>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                  </div>
+                  <span class="badge bg-dark rounded-end-pill">50$</span>
+                </li>
+              </ol>
+            </div>
+          </div>
 
           <button @click="submitForm()" type="submit" class="btn btn-light">
             Create
@@ -123,7 +159,7 @@ export default {
         lat: 1,
         lng: 1,
       },
-      ticketsNeeded: false
+      ticketsNeeded: true,
     };
   },
   methods: {
@@ -138,17 +174,15 @@ export default {
 
     handleGoogleMap: _.debounce(function () {
       // const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${this.address}`;
-      const apiUrl = `/api/common/geoapify/geocode?address=${this.address}`;
+      const apiUrl = `/api/common/geoapify/geocode?address=${this.location}`;
+      Notiflix.Loading.standard("Loading Map...");
       axios
         .get(apiUrl)
         .then((response) => {
           if (response.data["success"]) {
-            console.log(response.data);
             const features = response.data["data"]["features"];
             const formattedName = features[0]["properties"]["formatted"];
             const coordinates = features[0]["geometry"]["coordinates"];
-            console.log(`Name: `, formattedName);
-            console.log(`Coordinates: `, coordinates);
             this.geoCoordinates = {
               lat: coordinates[1],
               lng: coordinates[0],
@@ -160,6 +194,8 @@ export default {
         .catch((error) => {
           console.log(error);
           Notiflix.Notify.failure("Address not found");
+        }).finally(() => {
+          Notiflix.Loading.remove(1000);
         });
     }, 1000),
   },
