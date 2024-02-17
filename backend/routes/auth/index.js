@@ -5,7 +5,9 @@ import {
 } from '../../modules/prisma_client/index.js';
 import crypto from 'crypto';
 import {
-    query, body, validationResult
+    query,
+    body,
+    validationResult
 } from 'express-validator';
 
 const prisma = new PrismaClient()
@@ -13,29 +15,45 @@ const router = express.Router();
 
 // 1. Signup endpoint
 router.post(
-    '/signup', 
-    body("username").notEmpty().isLength({max: 20}), 
-    body("firstname").notEmpty().isLength({max: 20}), 
-    body("lastname").notEmpty().isLength({max: 20}), 
-    body("email").notEmpty().isLength({max: 32}), 
-    body("phone").isLength({max: 32}).isMobilePhone(), 
-    body("address").notEmpty().isLength({max: 256}), 
-    body("password").notEmpty().isLength({min: 8}), 
-    body("role").notEmpty(), 
+    '/signup',
+    body("username").notEmpty().isLength({
+        max: 20
+    }),
+    body("firstname").notEmpty().isLength({
+        max: 20
+    }),
+    body("lastname").notEmpty().isLength({
+        max: 20
+    }),
+    body("email").notEmpty().isLength({
+        max: 32
+    }),
+    body("phone").isLength({
+        max: 32
+    }).isMobilePhone(),
+    body("address").notEmpty().isLength({
+        max: 256
+    }),
+    body("password").notEmpty().isLength({
+        min: 8
+    }),
+    body("role").notEmpty(),
     async (req, res) => {
         // Input Validation
         const result = validationResult(req);
         if (!result.isEmpty()) {
             res.status(400);
-            return res.json({ errors: result.array() });
+            return res.json({
+                errors: result.array()
+            });
         }
-        
+
         try {
 
             var isAccountActive = false;
 
             // Checking the role
-            if (req.body["role"]){
+            if (req.body["role"]) {
                 switch (req.body["role"]) {
                     case 'VISITOR':
                         isAccountActive = true;
@@ -50,7 +68,7 @@ router.post(
                             msg: "Not Implemented"
                         });
                         break;
-                
+
                     default:
                         return res.status(400).json({
                             msg: "Invalid role"
@@ -129,7 +147,9 @@ router.post(
                     notification_preference: "ENABLED",
                     is_verified: false,
                     phone_id: createdPhoneObj.phone_id,
-                    email_id: createdEmailObj.email_id
+                    email_id: createdEmailObj.email_id,
+                    addr_geocoordinates: null,
+                    profile_image: null
                 },
             });
 
@@ -141,19 +161,25 @@ router.post(
             res.status(500);
             res.end();
         }
-});
+    });
 
 // 2. Login endpoint
 router.post(
-    '/login', 
-    body("username").notEmpty().isLength({max: 20}), 
-    body("password").notEmpty().isLength({min: 8}), 
+    '/login',
+    body("username").notEmpty().isLength({
+        max: 20
+    }),
+    body("password").notEmpty().isLength({
+        min: 8
+    }),
     async (req, res) => {
         // Input Validation
         const result = validationResult(req);
         if (!result.isEmpty()) {
             res.status(400);
-            return res.json({ errors: result.array() });
+            return res.json({
+                errors: result.array()
+            });
         }
         try {
 
@@ -166,8 +192,7 @@ router.post(
 
             const user = await prisma.user.findFirst({
                 where: {
-                    OR: [
-                        {
+                    OR: [{
                             user_name: req.body["username"],
                         },
                         {
@@ -183,7 +208,7 @@ router.post(
                 });
             }
 
-            if (!user.is_active){
+            if (!user.is_active) {
                 return res.status(401).json({
                     msg: 'Account is under review'
                 });
@@ -229,7 +254,7 @@ router.post(
             res.status(500);
             res.end();
         }
-});
+    });
 
 // 3. Logout endpoint
 router.delete('/logout', (req, res) => {
@@ -244,14 +269,18 @@ router.delete('/logout', (req, res) => {
 
 // Password reset request
 router.post(
-    '/reset-password/request', 
-    body("username").notEmpty().isLength({max: 20}), 
+    '/reset-password/request',
+    body("username").notEmpty().isLength({
+        max: 20
+    }),
     async (req, res) => {
         // Input Validation
         const result = validationResult(req);
         if (!result.isEmpty()) {
             res.status(400);
-            return res.json({ errors: result.array() });
+            return res.json({
+                errors: result.array()
+            });
         }
         try {
             const user = await prisma.user.findUnique({
@@ -268,7 +297,9 @@ router.post(
 
             // Delete old tokens for the user
             await prisma.passwordResetToken.deleteMany({
-                where: { userId: user.id },
+                where: {
+                    userId: user.id
+                },
             });
 
             // Generate a unique token for the password reset
@@ -297,19 +328,26 @@ router.post(
             res.status(500);
             res.end();
         }
-});
+    });
 
 // Password reset using the token
 router.post(
-    '/reset-password/reset', 
-    body('token').notEmpty().isLength({min:64,max:64}),
-    body('newPassword').notEmpty().isLength({min:8}),
+    '/reset-password/reset',
+    body('token').notEmpty().isLength({
+        min: 64,
+        max: 64
+    }),
+    body('newPassword').notEmpty().isLength({
+        min: 8
+    }),
     async (req, res) => {
         // Input Validation
         const result = validationResult(req);
         if (!result.isEmpty()) {
             res.status(400);
-            return res.json({ errors: result.array() });
+            return res.json({
+                errors: result.array()
+            });
         }
         try {
 
@@ -332,9 +370,11 @@ router.post(
             const currentTimeStamp = new Date().getTime() / 1000;
             const differenceInSeconds = currentTimeStamp - tokenOwner.createdAt;
             const tokenDuration = 60 * 10;
-            if (differenceInSeconds > tokenDuration){
+            if (differenceInSeconds > tokenDuration) {
                 res.status(401)
-                return res.json({msg: 'Token expired'})
+                return res.json({
+                    msg: 'Token expired'
+                })
             }
 
             // Update the user's password
@@ -363,6 +403,6 @@ router.post(
             res.status(500);
             res.end();
         }
-});
+    });
 
 export default router;

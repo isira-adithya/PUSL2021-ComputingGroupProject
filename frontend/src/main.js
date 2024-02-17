@@ -2,6 +2,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { createApp } from 'vue';
 import axios from 'axios';
+import VueGoogleMaps from '@fawmi/vue-google-maps';
 
 // Components - General
 import TemplateVue from './Template.vue';
@@ -56,5 +57,10 @@ app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(router);
 app.use(bootstrap);
 app.use(axios);
+app.use(VueGoogleMaps, {
+    load: {
+        key: 'AIzaSyDnV2rwyXF7RyjlVqUM8OIqF8NyylUscAk'
+    }
+});
 
 app.mount("#app");
