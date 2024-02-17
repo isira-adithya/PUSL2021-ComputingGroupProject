@@ -61,7 +61,7 @@
           </div>
 
           <!-- Google Maps Preview -->
-          <div class="mb-4">
+          <div v-if="geoCoordinatesReceived" class="mb-4">
             <GMapMap
               :center="geoCoordinates"
               :zoom="13"
@@ -163,18 +163,13 @@ export default {
       date_time: new Date(),
       category: "null",
       location: "",
+      geoCoordinatesReceived: false,
       geoCoordinates: {
-        lat: 1,
-        lng: 1,
+        lat: 6.92,
+        lng: 79.85,
       },
       ticketsNeeded: true,
       tickets: [
-        {
-          id: 1,
-          name: "Exclusive",
-          price: 50,
-          details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla",
-        },
       ],
       ticketName: "",
       ticketPrice: 0,
@@ -207,6 +202,7 @@ export default {
               lat: coordinates[1],
               lng: coordinates[0],
             };
+            this.geoCoordinatesReceived = true;
           } else {
             Notiflix.Notify.failure("Address not found");
           }
