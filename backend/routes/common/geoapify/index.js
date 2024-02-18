@@ -11,6 +11,7 @@ router.get("/geocode", async (req, res) => {
             data: response.data
         })
     } catch (err) {
+        console.error(err);
         res.status(500);
         return res.json({
             success: false,
