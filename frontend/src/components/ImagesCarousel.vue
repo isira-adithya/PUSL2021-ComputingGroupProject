@@ -2,7 +2,7 @@
   <div v-if="images.length > 0">
     <div class="carousel slide" data-ride="carousel">
       <div class="carousel-inner" id="carousel-items">
-        <div v-for="(image, index) in tmpImages" :key="image">
+        <div v-for="(image, index) in images" :key="image">
           <div :class="(index == currentImageIndex) ? 'carousel-item active' : 'carousel-item'">
             <img class="d-block w-100" :src="image" alt="First slide" />
           </div>
