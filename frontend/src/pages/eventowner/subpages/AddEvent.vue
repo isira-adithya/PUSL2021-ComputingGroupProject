@@ -1,8 +1,8 @@
 <template>
   <div class="py-4 bg-black text-white">
     <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-8">
+      <div class="col-lg-2" style="padding: 0;"></div>
+      <div class="col-lg-8" style="padding: 0;">
         <form class="container">
           <h3 class="mb-4">Create an Event</h3>
           <div class="mb-3">
@@ -141,7 +141,7 @@
           </button>
         </form>
       </div>
-      <div class="col-lg-2"></div>
+      <div class="col-lg-2" style="padding: 0;"></div>
     </div>
   </div>
 </template>
