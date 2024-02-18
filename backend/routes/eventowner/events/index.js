@@ -8,6 +8,8 @@ import {
 import {
     PrismaClient
 } from '../../../modules/prisma_client/index.js';
+import { v4 as uuidv4 } from 'uuid';
+
 const prisma = new PrismaClient();
 
 router.get('/', async (req, res) => {
@@ -139,7 +141,8 @@ router.post(
                     location: req.body.location,
                     location_geocoordinates: JSON.stringify(req.body.geo_coordinates),
                     owner_id: req.session.user_id,
-                    visibility: req.body.visibility
+                    visibility: req.body.visibility,
+                    uuid: uuidv4()
                 }
             });
 
