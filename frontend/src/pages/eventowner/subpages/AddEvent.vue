@@ -20,12 +20,17 @@
               to add styles and other various elements to your event description
             </div>
           </div>
+
+          <!-- Image Uploader -->
           <div class="mb-3">
             <ImageUploader
-              ref="eventImageUpload1"
+              ref="eventImageUploader"
               :customCssLabel="'color: white;'"
               :label="'Images'"
+              :hideDeleteButton="true"
+              :hideImage="true"
             />
+            <ImagesCarouselVue style="width: 150px;" :images="images" :auto-slide-show="true" :slide-show-interval="1000" />
           </div>
           <div class="mb-3">
             <label class="form-label">Date / Time</label>
@@ -124,7 +129,7 @@
                 >
                   <div class="ms-2 me-auto">
                     <div class="fw-bold">{{ ticket.name }}</div>
-                    <i>{{ ticket.details }}</i>
+                    <i>{{ ticket.description }}</i>
                     <br>
                     <code>Price: {{ ticket.price }}$</code>
                   </div>
@@ -150,14 +155,27 @@
 import axios from "axios";
 import _ from "lodash";
 import ImageUploader from "../../../components/ImageUploader.vue";
+import ImagesCarouselVue from '../../../components/ImagesCarousel.vue';
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import Notiflix from "notiflix";
 
 export default {
   name: "EventOwnerAddEventVue",
-  components: { ImageUploader, VueDatePicker },
-  mounted() {},
+  components: { ImageUploader, VueDatePicker, ImagesCarouselVue },
+  mounted() {
+    // watch imageuploader component
+    setInterval(() => {
+      try {
+        if (this.$refs.eventImageUploader.imageUrl != ""){
+        this.images.push(this.$refs.eventImageUploader.imageUrl);
+        this.$refs.eventImageUploader.reset();
+        }
+      } catch (error) {
+        // ignore
+      }
+    }, 1000);
+  },
   data() {
     return {
       event_name: "",
@@ -171,7 +189,7 @@ export default {
         lat: 6.92,
         lng: 79.85,
       },
-      ticketsNeeded: true,
+      ticketsNeeded: false,
       tickets: [
       ],
       ticketName: "",
@@ -190,17 +208,13 @@ export default {
       const data = {
         name: this.event_name,
         details: this.event_details,
-        // images: this.images, // (TODO: Implement multiple image uploads later)
-        images: [
-          this.$refs.eventImageUpload1.imageUrl,
-        ],
+        images: this.images,
         date_time: timestamp,
         category: this.category,
         location: this.location,
         geo_coordinates: this.geoCoordinates,
         tickets: this.tickets,
       };
-      console.log(data);
 
       Notiflix.Loading.standard("Creating Event...");
       axios
@@ -208,6 +222,7 @@ export default {
         .then((response) => {
           if (response.status == 200){
             this.$router.push("/eventowner/dashboard/events");
+            Notiflix.Notify.success("Event created successfully");
           } else {
             Notiflix.Notify.failure("Event creation failed");
           }
@@ -218,8 +233,6 @@ export default {
         }).finally(() => {
           Notiflix.Loading.remove(1000);
         });
-
-      Notiflix.Notify.success("Event created successfully");
     },
 
     handleGoogleMap: _.debounce(function () {
@@ -260,7 +273,7 @@ export default {
         id: this.tickets.length + 1,
         name: this.ticketName,
         price: this.ticketPrice,
-        details: this.ticketDescription,
+        description: this.ticketDescription,
       };
       this.tickets.push(newTicket);
       this.ticketName = "";
