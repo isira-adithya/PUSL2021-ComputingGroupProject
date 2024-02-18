@@ -89,20 +89,20 @@ model Commentary {
 }
 
 model Event {
-  event_id          Int          @id @default(autoincrement())
-  event_name        String?
-  date              DateTime?
-  time              DateTime?
-  event_description String?
-  venue             String?
-  images            String? // Comma seperated URLs
-  // Example of event_category => musical, sports, educational, religious, charity, etc.
-  event_category    String?
-  location          String?
-  owner_id          Int?
-  user              User?        @relation(fields: [owner_id], references: [user_id])
-  Commentary        Commentary[]
-  Ticket            Ticket[]
+  event_id                Int          @id @default(autoincrement())
+  name                    String?
+  date_time               DateTime?
+  description             String?
+  venue                   String?
+  images                  String? // Comma seperated URLs
+  // Example of category => musical, sports, educational, religious, charity, etc.
+  category                String?
+  location                String?
+  location_geocoordinates String?      @default("0,0") // lat, long
+  owner_id                Int?
+  user                    User?        @relation(fields: [owner_id], references: [user_id])
+  Commentary              Commentary[]
+  Ticket                  Ticket[]
 }
 
 model Ticket {
