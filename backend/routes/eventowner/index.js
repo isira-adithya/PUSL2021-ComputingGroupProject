@@ -11,6 +11,7 @@ import {
 // Routes
 import MobileVerificationRouter from './mobile-pin.js';
 import FileUploadHandler from './file-upload-handling.js';
+import EventsHandler from './events/index.js';
 
 const prisma = new PrismaClient()
 const router = express.Router();
@@ -127,8 +128,9 @@ router.get("/verification-status", async (req, res) => {
     
 })
 
-// Mobile PIN Verification routes
+// routes
 router.use("/mobile-verification", MobileVerificationRouter);
 router.use("/file", FileUploadHandler);
+router.use("/events", EventsHandler);
 
 export default router;

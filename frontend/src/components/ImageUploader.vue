@@ -13,7 +13,7 @@
       />
     </div>
     <img
-      v-if="imageUrl"
+      v-if="imageUrl && !hideImage"
       :src="imageUrl"
       width="150px"
       class="mt-2 img-thumbnail rounded"
@@ -30,7 +30,7 @@
       </div>
       <button
         class="btn btn-danger btn-sm col-1"
-        v-if="imageUrl"
+        v-if="imageUrl && !hideDeleteButton"
         @click="deleteNicFront"
       >
         <font-awesome-icon icon="fa-solid fa-trash" />
@@ -55,6 +55,14 @@ export default {
     },
     customCssLabel: {
       type: String,
+      required: false,
+    },
+    hideDeleteButton: {
+      type: Boolean,
+      required: false,
+    },
+    hideImage: {
+      type: Boolean,
       required: false,
     },
   },
@@ -163,6 +171,12 @@ export default {
           fileInput.value = null;
         });
     },
+
+    reset() {
+      this.imageUrl = "";
+      document.getElementById(this.fileInputId).files = null;
+      document.getElementById(this.fileInputId).value = null;
+    }
   },
 };
 </script>

@@ -1,17 +1,17 @@
 <template>
-  <div class="container py-4 bg-black text-white">
+  <div class="py-4 bg-black text-white">
     <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-8">
-        <form class="container">
+      <div class="col-lg-2" style="padding: 0;"></div>
+      <div class="col-lg-8" style="padding: 0;">
+        <form>
           <h3 class="mb-4">Create an Event</h3>
           <div class="mb-3">
             <label class="form-label">Event Name</label>
-            <input type="email" class="form-control" />
+            <input v-model="event_name" type="email" class="form-control" />
           </div>
           <div class="mb-3">
             <label class="form-label">Event Description</label>
-            <textarea class="form-control" style="height: 25vh"></textarea>
+            <textarea  v-model="event_details" class="form-control" style="height: 25vh"></textarea>
             <div class="form-text text-white-50">
               You can use
               <b
@@ -20,12 +20,17 @@
               to add styles and other various elements to your event description
             </div>
           </div>
+
+          <!-- Image Uploader -->
           <div class="mb-3">
             <ImageUploader
-              ref="eventImageUpload1"
+              ref="eventImageUploader"
               :customCssLabel="'color: white;'"
               :label="'Images'"
+              :hideDeleteButton="true"
+              :hideImage="true"
             />
+            <ImagesCarouselVue style="width: 150px;" :images="images" :auto-slide-show="true" :slide-show-interval="1000" />
           </div>
           <div class="mb-3">
             <label class="form-label">Date / Time</label>
@@ -51,7 +56,7 @@
 
           <!-- Location input -->
           <div class="form-outline mb-4">
-            <label class="form-label">Location</label>
+            <label class="form-label">Address / Location</label>
             <input
               type="text"
               class="form-control"
@@ -61,7 +66,7 @@
           </div>
 
           <!-- Google Maps Preview -->
-          <div class="mb-4">
+          <div v-if="geoCoordinatesReceived" class="mb-4">
             <GMapMap
               :center="geoCoordinates"
               :zoom="13"
@@ -124,7 +129,7 @@
                 >
                   <div class="ms-2 me-auto">
                     <div class="fw-bold">{{ ticket.name }}</div>
-                    <i>{{ ticket.details }}</i>
+                    <i>{{ ticket.description }}</i>
                     <br>
                     <code>Price: {{ ticket.price }}$</code>
                   </div>
@@ -141,7 +146,7 @@
           </button>
         </form>
       </div>
-      <div class="col-lg-2"></div>
+      <div class="col-lg-2" style="padding: 0;"></div>
     </div>
   </div>
 </template>
@@ -150,31 +155,42 @@
 import axios from "axios";
 import _ from "lodash";
 import ImageUploader from "../../../components/ImageUploader.vue";
+import ImagesCarouselVue from '../../../components/ImagesCarousel.vue';
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import Notiflix from "notiflix";
 
 export default {
   name: "EventOwnerAddEventVue",
-  components: { ImageUploader, VueDatePicker },
-  mounted() {},
+  components: { ImageUploader, VueDatePicker, ImagesCarouselVue },
+  mounted() {
+    // watch imageuploader component
+    setInterval(() => {
+      try {
+        if (this.$refs.eventImageUploader.imageUrl != ""){
+        this.images.push(this.$refs.eventImageUploader.imageUrl);
+        this.$refs.eventImageUploader.reset();
+        }
+      } catch (error) {
+        // ignore
+      }
+    }, 1000);
+  },
   data() {
     return {
+      event_name: "",
+      event_details: "",
+      images: [],
       date_time: new Date(),
       category: "null",
       location: "",
+      geoCoordinatesReceived: false,
       geoCoordinates: {
-        lat: 1,
-        lng: 1,
+        lat: 6.92,
+        lng: 79.85,
       },
-      ticketsNeeded: true,
+      ticketsNeeded: false,
       tickets: [
-        {
-          id: 1,
-          name: "Exclusive",
-          price: 50,
-          details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla",
-        },
       ],
       ticketName: "",
       ticketPrice: 0,
@@ -186,10 +202,37 @@ export default {
     submitForm() {
       // convert this.date_time to unix timestamp
       const timestamp = new Date(this.date_time).getTime() / 1000;
-      console.log(`Date/Time: ${this.date_time} | Timestamp: ${timestamp}`);
-      console.log(`Category: ${this.category}`);
-      console.log(`Geo Coordinates: `, this.geoCoordinates);
-      Notiflix.Notify.success("Event created successfully");
+
+      // Submit the form to the backend
+      const apiUrl = "/api/eventowner/events/";
+      const data = {
+        name: this.event_name,
+        details: this.event_details,
+        images: this.images,
+        date_time: timestamp,
+        category: this.category,
+        location: this.location,
+        geo_coordinates: this.geoCoordinates,
+        tickets: this.tickets,
+      };
+
+      Notiflix.Loading.standard("Creating Event...");
+      axios
+        .post(apiUrl, data)
+        .then((response) => {
+          if (response.status == 200){
+            this.$router.push("/eventowner/dashboard/events");
+            Notiflix.Notify.success("Event created successfully");
+          } else {
+            Notiflix.Notify.failure("Event creation failed");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          Notiflix.Notify.failure("Event creation failed");
+        }).finally(() => {
+          Notiflix.Loading.remove(1000);
+        });
     },
 
     handleGoogleMap: _.debounce(function () {
@@ -207,6 +250,7 @@ export default {
               lat: coordinates[1],
               lng: coordinates[0],
             };
+            this.geoCoordinatesReceived = true;
           } else {
             Notiflix.Notify.failure("Address not found");
           }
@@ -229,7 +273,7 @@ export default {
         id: this.tickets.length + 1,
         name: this.ticketName,
         price: this.ticketPrice,
-        details: this.ticketDescription,
+        description: this.ticketDescription,
       };
       this.tickets.push(newTicket);
       this.ticketName = "";
