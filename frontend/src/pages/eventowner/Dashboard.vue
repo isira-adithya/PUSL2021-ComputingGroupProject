@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="row" style="width: 100%;">
-      <div class="col-2" style="padding: 0px;">
+      <div class="col-lg-2 col-4" style="padding: 0px;">
         <div class="d-flex flex-column px-3 text-white bg-black" style="height:100%;">
           <h5>Event Owner - Dashboard</h5>
           <hr />
-          <ul class="nav px-4 nav-pills flex-column mb-auto">
+          <ul class="nav px-lg-4 nav-pills flex-column mb-auto">
             <li class="nav-item">
               <router-link
                 :to="'/eventowner/dashboard/analytics'"
