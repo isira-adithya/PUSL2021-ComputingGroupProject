@@ -31,6 +31,19 @@ router.post(
     body("date_time").isNumeric(),
     body("category").isLength({
         max: 255
+    }).custom(value => {
+        if (value != "sports" && value != "musical" && value != "others" && value != "charity" && value != "religious" && value != "educational") {
+            throw new Error("Invalid category");
+        }
+        return true;
+    }),
+    body("visibility").isLength({
+        max: 255
+    }).custom(value => {
+        if (value != "public" && value != "private" && value != "unlisted") {
+            throw new Error("Invalid category");
+        }
+        return true;
     }),
     body("location").isLength({
         max: 255
