@@ -36,7 +36,9 @@ router.post(
         max: 255
     }),
     body("geo_coordinates").isObject(),
-    body("tickets").isArray(),
+    body("tickets").isArray().optional({
+        nullable: true
+    }),
     async (req, res) => {
 
         // Input Validation
@@ -51,23 +53,25 @@ router.post(
 
         // Validate tickets objects
         const tickets = req.body.tickets;
-        const validTickets = tickets.every(ticket => {
-            return ticket.hasOwnProperty('id') && ticket.hasOwnProperty('name') && ticket.hasOwnProperty('price') && ticket.hasOwnProperty('description');
-        });
-        if (!validTickets) {
-            return res.status(400).json({
-                message: "Invalid tickets object"
+        if (tickets != null && tickets.length > 0) {
+            const validTickets = tickets.every(ticket => {
+                return ticket.hasOwnProperty('id') && ticket.hasOwnProperty('name') && ticket.hasOwnProperty('price') && ticket.hasOwnProperty('description');
             });
-        }
-
-        // Checking ticket price
-        tickets.forEach(ticket => {
-            if (ticket.price < 0) {
+            if (!validTickets) {
                 return res.status(400).json({
-                    message: "Invalid ticket price"
+                    message: "Invalid tickets object"
                 });
             }
-        });
+
+            // Checking ticket price
+            tickets.forEach(ticket => {
+                if (ticket.price < 0) {
+                    return res.status(400).json({
+                        message: "Invalid ticket price"
+                    });
+                }
+            });
+        }
 
         // Validate images array
         const images = req.body.images;
@@ -125,16 +129,20 @@ router.post(
                 }
             });
 
-            // Adding event_id of tickets and removing id
-            tickets.forEach(ticket => {
-                delete ticket.id;
-                ticket.event_id = eventObj.event_id;
-            });
 
-            // Add tickets to the database
-            await prisma.ticket.createMany({
-                data: tickets
-            });
+            if (tickets != null && tickets.length > 0) {
+                // Adding event_id of tickets and removing id
+                tickets.forEach(ticket => {
+                    delete ticket.id;
+                    ticket.event_id = eventObj.event_id;
+                });
+
+                // Add tickets to the database
+                await prisma.ticket.createMany({
+                    data: tickets
+                });
+            }
+
 
             return res.json({
                 success: true,
