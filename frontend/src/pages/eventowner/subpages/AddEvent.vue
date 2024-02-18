@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-2" style="padding: 0;"></div>
       <div class="col-lg-8" style="padding: 0;">
-        <form class="container">
+        <form>
           <h3 class="mb-4">Create an Event</h3>
           <div class="mb-3">
             <label class="form-label">Event Name</label>
@@ -186,11 +186,14 @@ export default {
       const timestamp = new Date(this.date_time).getTime() / 1000;
 
       // Submit the form to the backend
-      const apiUrl = "/api/eventowner/event/create";
+      const apiUrl = "/api/eventowner/events/";
       const data = {
         name: this.event_name,
         details: this.event_details,
-        images: this.images,
+        // images: this.images, // (TODO: Implement multiple image uploads later)
+        images: [
+          this.$refs.eventImageUpload1.imageUrl,
+        ],
         date_time: timestamp,
         category: this.category,
         location: this.location,
