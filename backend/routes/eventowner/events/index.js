@@ -138,7 +138,8 @@ router.post(
                     category: req.body.category,
                     location: req.body.location,
                     location_geocoordinates: JSON.stringify(req.body.geo_coordinates),
-                    owner_id: req.session.user_id
+                    owner_id: req.session.user_id,
+                    visibility: req.body.visibility
                 }
             });
 
