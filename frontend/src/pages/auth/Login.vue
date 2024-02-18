@@ -1,75 +1,43 @@
 <template>
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-lg-4"></div>
-      <div class="col-lg-4">
-        <form @submit.prevent="">
-          <h3 class="mb-5">Login</h3>
+  <div class="BGimg">
+        <div class="container">
+            <div class="col-md-4 mx-auto text-center">
+               
+                <h1 class="mb-4 font-1">Login</h1><br>
+                <br>
 
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <label class="form-label text-black-50"
-              >Email address or Username</label
-            >
-            <input
-              type="email"
-              class="form-control"
-              v-model="email"
-            />
-          </div>
+                <form @submit.prevent="">
+                    <div class="row justify-content-around">
+                        <div class="mb-3">
+                            <label for="fName" class="form-label">Username / E-mail Address :</label>
+                            <input type="text" class="form-control"  v-model="email">
+                        </div>
 
-          <!-- Password input -->
-          <div class="form-outline mb-4">
-            <label class="form-label text-black-50">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              v-model="password"
-            />
-          </div>
+                       
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password :</label>
+                            <input type="text" class="form-control" v-model="password">
+                        </div>
 
-          <!-- 2 column grid layout for inline styling -->
-          <div class="row mb-4">
-            <div class="col">
-              <!-- Checkbox -->
-              <div class="form-check mt-2">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="form2Example31"
-                  checked
-                  v-model="shouldRemember"
-                />
-                <label class="form-check-label" for="form2Example31">
-                  Remember me
-                </label>
-              </div>
+                      
+                    </div>
+                    <br>
+
+                    <button type="submit" class="btn btn-primary" @click="submitForm"
+                        style="width: 90%; border-radius: 10px; background-color: #111F4D; border: none; padding: 12px 0;">Login
+                        </button>
+                    <br>
+                    <br>
+
+                </form>
+                <router-link to="/forgot-password">Forgot Password?</router-link>
+                <p class="mb-4 ">Don't Have An Account? <router-link to="/signup"><span style="color: rgb(31, 81, 255);">Register</span></router-link></p>
             </div>
+        </div>
 
-            <div class="col text-end">
-              <button
-                type="button"
-                class="btn btn-dark"
-                @click="submitForm"
-              >
-                Sign in
-              </button>
-            </div>
-          </div>
 
-          <!-- Submit button -->
 
-          <!-- Register buttons -->
-          <div class="text-center">
-            <router-link to="/forgot-password">Forgot password?</router-link>
-            <p>Not a member? <router-link to="/signup">Sign up</router-link></p>
-          </div>
-        </form>
-      </div>
-      <div class="col-lg-4"></div>
     </div>
-  </div>
 </template>
 
 <script>
