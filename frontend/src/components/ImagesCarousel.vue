@@ -32,10 +32,9 @@ export default {
   components: {},
   mounted() {
     setInterval(() => {
-      if (this.autoSlideShow) {
+      if (this.autoSlideShow && this.images.length > 0) {
         this.currentImageIndex =
           (this.currentImageIndex + 1) % this.images.length;
-          console.log(this.currentImageIndex)
       }
     }, this.slideShowInterval);
   },
