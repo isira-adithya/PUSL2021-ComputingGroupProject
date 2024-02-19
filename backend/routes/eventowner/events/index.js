@@ -34,7 +34,7 @@ router.post(
     body("category").isLength({
         max: 255
     }).custom(value => {
-        if (value != "sports" && value != "musical" && value != "others" && value != "charity" && value != "religious" && value != "educational") {
+        if (value != "sports" && value != "musical" && value != "other" && value != "charity" && value != "religious" && value != "educational") {
             throw new Error("Invalid category");
         }
         return true;
