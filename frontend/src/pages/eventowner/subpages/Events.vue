@@ -3,6 +3,7 @@
     <div v-if="events.length > 0">
       <div v-for="event in events" :key="event.id" class="card" style="width: 18rem">
         <img src="https://isiraadithya.com/test.jpg" class="card-img-top" />
+        
         <div class="card-body">
           <h5 class="card-title">{{ event['name'] }}</h5>
           <p class="card-text">
@@ -12,11 +13,12 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Category: <i><b>{{ event['category'].charAt(0).toUpperCase() + event['category'].slice(1) }}</b></i></li>
           <li class="list-group-item">Location: <i><b>{{ event['location'] }}</b></i></li>
-          <li class="list-group-item">{{ new Date(event['date_time']).getDate() }}</li>
+          <li class="list-group-item">Date: <b>{{ new Date(event['date_time']).toDateString() }}</b></li>
+          <li class="list-group-item">Time: <b>{{ new Date(event['date_time']).toLocaleTimeString() }}</b></li>
         </ul>
         <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <router-link :to="'/events/' + event.uuid" class="btn btn-primary mx-3">Open</router-link>
+          <router-link :to="'/eventowner/dashboard/events/' + event.uuid" class="btn btn-primary mx-3">Edit Event</router-link>
         </div>
       </div>
     </div>
