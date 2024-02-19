@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row" style="width: 100%;">
+    <div class="row" style="width: 100%; margin-left: 0px;">
       <div class="col-lg-2 col-4" style="padding: 0px;">
         <div class="d-flex flex-column px-3 text-white bg-black" style="height:100%;">
           <h5>Event Owner - Dashboard</h5>

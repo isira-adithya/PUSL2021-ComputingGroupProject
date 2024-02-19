@@ -141,6 +141,22 @@
             </div>
           </div>
 
+          <div class="mb-5">
+            <label class="form-label">Visibility</label>
+            <select
+              v-model="visibility"
+              class="form-select"
+              aria-label="Event Category"
+            >
+              <option selected value="public">Public</option>
+              <option value="unlisted">Unlisted</option>
+              <option value="private">Private</option>
+            </select>
+            <small v-if="visibility=='public'" class="text-white-50"><i>Anyone can see your event.</i></small>
+            <small v-if="visibility=='unlisted'" class="text-white-50"><i>Anyone with the shared link to this event can access this event.</i></small>
+            <small v-if="visibility=='private'" class="text-white-50"><i>No one can see your event, except you.</i></small>
+          </div>
+
           <button @click="submitForm()" type="submit" class="btn btn-light">
             Create
           </button>
@@ -195,7 +211,7 @@ export default {
       ticketName: "",
       ticketPrice: 0,
       ticketDescription: "",
-
+      visibility: "public"
     };
   },
   methods: {
@@ -214,6 +230,7 @@ export default {
         location: this.location,
         geo_coordinates: this.geoCoordinates,
         tickets: this.tickets,
+        visibility: this.visibility
       };
 
       Notiflix.Loading.standard("Creating Event...");
