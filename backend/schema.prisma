@@ -61,7 +61,7 @@ model PasswordResetToken {
 
 model Notification {
   notification_id     Int     @id @default(autoincrement())
-  content             String?
+  content             String? @db.VarChar(512)
   notification_status String?
   user_id             Int?
   user                User?   @relation(fields: [user_id], references: [user_id])
@@ -82,24 +82,36 @@ model Commentary {
   commentary_id Int     @id @default(autoincrement())
   user_id       Int?
   event_id      Int?
-  comment       String?
+  comment       String? @db.VarChar(512)
   rating        String?
   user          User?   @relation(fields: [user_id], references: [user_id])
   event         Event?  @relation(fields: [event_id], references: [event_id])
 }
 
 model Event {
-  event_id          Int          @id @default(autoincrement())
-  event_name        String?
-  date              DateTime?
-  time              DateTime?
-  event_description String?
-  venue             String?
-  image             String?
-  ticket_prices     Int?
-  event_category    String?
-  location          String?
-  user_id           Int?
-  user              User?        @relation(fields: [user_id], references: [user_id])
-  Commentary        Commentary[]
+  event_id                Int          @id @default(autoincrement())
+  name                    String?
+  date_time               DateTime?
+  description             String?      @db.VarChar(8096)
+  venue                   String?
+  images                  String?      @db.VarChar(2048) // Comma seperated URLs
+  // Example of category => musical, sports, educational, religious, charity, etc.
+  category                String?
+  location                String?
+  location_geocoordinates String?      @default("0,0") // lat, long
+  visibility              String       @default("private")
+  uuid                    String       @unique
+  owner_id                Int?
+  user                    User?        @relation(fields: [owner_id], references: [user_id])
+  Commentary              Commentary[]
+  Ticket                  Ticket[]
+}
+
+model Ticket {
+  ticket_id   Int    @id @default(autoincrement())
+  price       Int
+  name        String
+  description String @db.VarChar(512)
+  event_id    Int
+  event       Event  @relation(fields: [event_id], references: [event_id])
 }

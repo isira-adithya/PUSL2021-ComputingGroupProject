@@ -181,18 +181,16 @@ export default {
 
       // const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${this.address}`;
       const apiUrl = `/api/common/geoapify/geocode?address=${this.address}`;
+      Notiflix.Loading.standard('Loading Map...');
       axios
         .get(
           apiUrl
         )
         .then((response) => {
           if (response.data['success']){
-            console.log(response.data)
             const features = response.data['data']['features'];
             const formattedName = features[0]['properties']['formatted'];
             const coordinates = features[0]['geometry']['coordinates'];
-            console.log(`Name: `, formattedName);
-            console.log(`Coordinates: `, coordinates);
             this.geoCoordinates = {
               lat: coordinates[1],
               lng: coordinates[0]
@@ -205,7 +203,9 @@ export default {
         .catch((error) => {
           console.log(error);
           Notiflix.Notify.failure('Address not found');
-        }); 
+        }).finally(() => {
+          Notiflix.Loading.remove(1000);
+        });
     }, 1000),
 
     updateProfile() {

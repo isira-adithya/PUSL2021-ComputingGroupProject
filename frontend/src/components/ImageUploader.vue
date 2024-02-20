@@ -1,8 +1,8 @@
 <template>
   <div class="mb-3">
-    <label :for="fileInputId" class="form-label text-black-50">{{
-      label
-    }}</label>
+    <label :for="fileInputId" class="form-label text-black-50"
+      ><span :style="customCssLabel">{{ label }}</span></label
+    >
     <br />
     <div v-if="imageUrl.length <= 0">
       <img
@@ -13,7 +13,7 @@
       />
     </div>
     <img
-      v-if="imageUrl"
+      v-if="imageUrl && !hideImage"
       :src="imageUrl"
       width="150px"
       class="mt-2 img-thumbnail rounded"
@@ -30,7 +30,7 @@
       </div>
       <button
         class="btn btn-danger btn-sm col-1"
-        v-if="imageUrl"
+        v-if="imageUrl && !hideDeleteButton"
         @click="deleteNicFront"
       >
         <font-awesome-icon icon="fa-solid fa-trash" />
@@ -51,7 +51,19 @@ export default {
     },
     displayImageurl: {
       type: String,
-      required: true,
+      required: false,
+    },
+    customCssLabel: {
+      type: String,
+      required: false,
+    },
+    hideDeleteButton: {
+      type: Boolean,
+      required: false,
+    },
+    hideImage: {
+      type: Boolean,
+      required: false,
     },
   },
   data() {
@@ -75,7 +87,9 @@ export default {
           default:
             throw "Invalid role";
         }
-        const response = await axios.post(apiEndpoint, {content_type: contentType});
+        const response = await axios.post(apiEndpoint, {
+          content_type: contentType,
+        });
         return response.data["upload_url"];
       } catch (err) {
         console.error(err);
@@ -84,7 +98,6 @@ export default {
     },
 
     async handleFileUpload() {
-
       // Checking if the file input is empty
       if (document.getElementById(this.fileInputId).files.length <= 0) {
         return;
@@ -98,18 +111,17 @@ export default {
       const signedUploadUrl = await this.getASignedUrl(file.type);
 
       if (signedUploadUrl != null) {
-        
         axios
           .put(signedUploadUrl, file, {
             headers: {
-              'x-amz-acl': 'public-read',
-              'Content-Type': file.type
-            }
+              "x-amz-acl": "public-read",
+              "Content-Type": file.type,
+            },
           })
           .then((res) => {
             Notiflix.Loading.remove();
-            if (res.status != 200){
-              throw 'S3 bucket did not respond correctly.'
+            if (res.status != 200) {
+              throw "S3 bucket did not respond correctly.";
             }
             Notiflix.Notify.success("Image uploaded!");
             this.imageUrl = signedUploadUrl.split("?")[0];
@@ -159,6 +171,12 @@ export default {
           fileInput.value = null;
         });
     },
+
+    reset() {
+      this.imageUrl = "";
+      document.getElementById(this.fileInputId).files = null;
+      document.getElementById(this.fileInputId).value = null;
+    }
   },
 };
 </script>
