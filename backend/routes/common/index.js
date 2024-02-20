@@ -8,10 +8,14 @@ import geoapifyRouter from "./geoapify/index.js";
 // Profile API
 import profileRouter from "./profile/index.js";
 
+// Event API
+import eventsRouter from "./events/index.js";
+
 // These endpoints can be accessed by both eventowners and users
 router.use(isLoggedIn);
 router.use("/geoapify", geoapifyRouter);
 router.use("/profile", profileRouter);
+router.use("/events", eventsRouter);
 
 
 
