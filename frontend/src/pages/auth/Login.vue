@@ -1,9 +1,8 @@
 <template>
 <div class="background-container">
-  <div class="BGimg">
     <div class="container">
       <div class="col-md-4 mx-auto text-center">
-        <div class="main-container" style="margin-top: 7%; margin-bottom: 11%;">
+        <div class="main-container">
         <h1 class="mb-4 font-1">Login</h1>
         <br />
 
@@ -65,7 +64,6 @@
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -129,6 +127,7 @@ h1 {
   background-color: #000000;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 p {
