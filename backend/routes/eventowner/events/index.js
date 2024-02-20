@@ -8,6 +8,8 @@ import {
 import {
     PrismaClient
 } from '../../../modules/prisma_client/index.js';
+import { v4 as uuidv4 } from 'uuid';
+
 const prisma = new PrismaClient();
 
 router.get('/', async (req, res) => {
@@ -31,6 +33,19 @@ router.post(
     body("date_time").isNumeric(),
     body("category").isLength({
         max: 255
+    }).custom(value => {
+        if (value != "sports" && value != "musical" && value != "other" && value != "charity" && value != "religious" && value != "educational") {
+            throw new Error("Invalid category");
+        }
+        return true;
+    }),
+    body("visibility").isLength({
+        max: 255
+    }).custom(value => {
+        if (value != "public" && value != "private" && value != "unlisted") {
+            throw new Error("Invalid category");
+        }
+        return true;
     }),
     body("location").isLength({
         max: 255
@@ -125,7 +140,9 @@ router.post(
                     category: req.body.category,
                     location: req.body.location,
                     location_geocoordinates: JSON.stringify(req.body.geo_coordinates),
-                    owner_id: req.session.user_id
+                    owner_id: req.session.user_id,
+                    visibility: req.body.visibility,
+                    uuid: uuidv4()
                 }
             });
 

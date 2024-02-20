@@ -18,6 +18,9 @@ import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
 
+//component -About_Us
+import AboutUsVue from './pages/AboutUs.vue';
+
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
@@ -46,6 +49,9 @@ const routes = [
     
     // User
     { path: '/user/profile', component: UserProfileVue},
+
+    // About Us Page
+    {path: '/about-us',component: AboutUsVue}
 ];
 
 const router = createRouter({

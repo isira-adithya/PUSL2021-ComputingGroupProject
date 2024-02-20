@@ -28,7 +28,7 @@
                   <router-link class="nav-link text-white " to="/events">Events</router-link>
                 </li>
                 <li class="nav-item mx-2">
-                  <router-link class="nav-link text-white " to="/aboutus">About Us</router-link>
+                  <router-link class="nav-link text-white " to="/about-us">About Us</router-link>
                 </li>
                 <li class="nav-item mx-2">
                   <router-link class="nav-link text-white " to="/contactus">Contact Us</router-link>

@@ -99,6 +99,8 @@ model Event {
   category                String?
   location                String?
   location_geocoordinates String?      @default("0,0") // lat, long
+  visibility              String       @default("private")
+  uuid                    String       @unique
   owner_id                Int?
   user                    User?        @relation(fields: [owner_id], references: [user_id])
   Commentary              Commentary[]
