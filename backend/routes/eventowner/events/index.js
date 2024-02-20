@@ -275,7 +275,7 @@ router.put(
 
         // Validate images array
         const images = req.body.images;
-        const validImages = images.every(image => {
+        let validImages = images.every(image => {
             return typeof image === 'string';
         });
 
@@ -283,18 +283,14 @@ router.put(
             try {
                 const urlObj = new URL(image);
                 if (urlObj.hostname != 'pusl2024-cgp.sgp1.digitaloceanspaces.com') {
-                    return res.status(400).json({
-                        message: "Invalid image url"
-                    });
+                    validImages = false;
                 }
             } catch (e) {
-                return res.status(400).json({
-                    message: "Invalid image url"
-                });
+                validImages = false;
             }
         });
 
-        if (!validImages) {
+        if (validImages) {
             return res.status(400).json({
                 message: "Invalid images array"
             });
@@ -332,11 +328,7 @@ router.put(
                 }
             });
 
-
-            if (tickets != null && tickets.length > 0) {
-                // Adding event_id of tickets and removing id
-                console.log(tickets);
-            }
+            // TODO: Handle Tickets
 
 
             return res.json({
