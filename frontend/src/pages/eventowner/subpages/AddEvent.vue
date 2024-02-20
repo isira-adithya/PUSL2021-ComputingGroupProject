@@ -1,5 +1,5 @@
 <template>
-  <div class="py-4 bg-black text-white">
+  <div class="py-4">
     <div class="row">
       <div class="col-lg-2" style="padding: 0;"></div>
       <div class="col-lg-8" style="padding: 0;">
@@ -12,7 +12,7 @@
           <div class="mb-3">
             <label class="form-label">Event Description</label>
             <textarea  v-model="event_details" class="form-control" style="height: 25vh"></textarea>
-            <div class="form-text text-white-50">
+            <div class="form-text text-black-50">
               You can use
               <b
                 ><i><a href="https://www.markdownguide.org/">markdown</a></i></b
@@ -25,12 +25,12 @@
           <div class="mb-3">
             <ImageUploader
               ref="eventImageUploader"
-              :customCssLabel="'color: white;'"
+              :customCssLabel="'color: black;'"
               :label="'Images'"
               :hideDeleteButton="true"
               :hideImage="true"
             />
-            <ImagesCarouselVue style="width: 150px;" :images="images" :auto-slide-show="true" :slide-show-interval="1000" />
+            <ImagesCarouselVue style="width: 150px;" :images="images" :auto-slide-show="true" :slide-show-interval="3000" />
           </div>
           <div class="mb-3">
             <label class="form-label">Date / Time</label>
@@ -157,7 +157,7 @@
             <small v-if="visibility=='private'" class="text-white-50"><i>No one can see your event, except you.</i></small>
           </div>
 
-          <button @click="submitForm()" type="submit" class="btn btn-light">
+          <button @click="submitForm()" type="submit" class="btn btn-primary">
             Create
           </button>
         </form>
