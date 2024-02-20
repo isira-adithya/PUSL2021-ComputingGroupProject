@@ -36,6 +36,7 @@
 import axios from "axios";
 import Notiflix from "notiflix";
 import ImagesCarouselVue from '../../../components/ImagesCarousel.vue';
+
 export default {
   name: "EventOwnerEventsVue",
   components: {ImagesCarouselVue},
