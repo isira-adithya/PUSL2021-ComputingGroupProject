@@ -18,6 +18,10 @@ router.get('/', async (req, res) => {
             owner_id: req.session.user_id
         }
     });
+    events.forEach(event => {
+        event.images = event.images.split(',');
+        event.location_geocoordinates = JSON.parse(event.location_geocoordinates);
+    });
     res.json(events);
 });
 
