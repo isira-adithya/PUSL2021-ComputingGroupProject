@@ -1,21 +1,25 @@
 <template>
-  <div class="container mt-5">
+<div class="background-container">
+  <div class="container">
     <div class="row">
       <div class="col-lg-3"></div>
       <div class="col-lg-6">
+         <div class="main-container" style="margin-top: 7%; margin-bottom: 11%;">
         <form @submit.prevent="">
-          <h3 class="mb-5">Signup</h3>
+          <h1 class="mb-5">Sign-up</h1>
 
           <!-- Role Input -->
           <div class="form-outline mb-2">
-            <label class="form-label text-black-50" for="form2Example1">Role</label><br>
+            
+            <label class="form-label text-white-60" for="form2Example1">Role</label><br>
             <button @click="role = 'VISITOR'" :class="(role == 'VISITOR') ? 'btn btn-success btn-sm me-2' : 'btn btn-sm me-2'">Visitor</button>
             <button @click="role = 'EVENT_OWNER'" :class="(role == 'EVENT_OWNER') ? 'btn btn-success btn-sm ms-2' : 'btn btn-sm ms-2'">Event Owner</button>
+            
           </div>
-
+          <br>
           <!-- Email input -->
           <div class="form-outline mb-2">
-            <label class="form-label text-black-50" for="form2Example1">Email address</label>
+            <label class="form-label text-white-60" for="form2Example1">Email address</label>
             <input
               type="email"
               class="form-control"
@@ -25,7 +29,7 @@
 
           <!-- Username input -->
           <div class="form-outline mb-2">
-            <label class="form-label text-black-50" for="form2Example1">Username</label>
+            <label class="form-label text-white-60" for="form2Example1">Username</label>
             <input
               type="text"
               class="form-control"
@@ -37,7 +41,7 @@
             <div class="col">
               <!-- Firstname input -->
               <div class="form-outline mb-2">
-                <label class="form-label text-black-50" for="form2Example1">First Name</label>
+                <label class="form-label text-white-60" for="form2Example1">First Name</label>
                 <input
                   type="text"
                   class="form-control"
@@ -48,7 +52,7 @@
             <div class="col">
               <!-- Lastname input -->
               <div class="form-outline mb-2">
-                <label class="form-label text-black-50" for="form2Example1">Last Name</label>
+                <label class="form-label text-white-60" for="form2Example1">Last Name</label>
                 <input
                   type="text"
                   class="form-control"
@@ -60,7 +64,7 @@
 
           <!-- Address input -->
           <div class="form-outline mb-2">
-            <label class="form-label text-black-50" for="form2Example1">Address</label>
+            <label class="form-label text-white-60" for="form2Example1">Address</label>
             <input
               type="text"
               class="form-control"
@@ -70,7 +74,7 @@
 
           <!-- Phone number input -->
           <div class="form-outline mb-2">
-            <label class="form-label text-black-50" for="form2Example1">Phone Number</label>
+            <label class="form-label text-white-60" for="form2Example1">Phone Number</label>
             <input
               type="text"
               class="form-control"
@@ -83,7 +87,7 @@
             <div class="col">
               <!-- Password input -->
               <div class="form-outline mb-2">
-                <label class="form-label text-black-50" for="form2Example1">Password</label>
+                <label class="form-label text-white-60" for="form2Example1">Password</label>
                 <input
                   type="password"
                   class="form-control"
@@ -94,7 +98,7 @@
             <div class="col">
               <!-- RepeatPassword input -->
               <div class="form-outline mb-2">
-                <label class="form-label text-black-50" for="form2Example1">Repeat Password</label>
+                <label class="form-label text-white-60" for="form2Example1">Repeat Password</label>
                 <input
                   type="password"
                   class="form-control"
@@ -108,13 +112,21 @@
 
           <!-- Submit button -->
           <div class="col mb-4 mt-2">
-              <button
-                type="button"
-                class="btn btn-dark"
-                @click="submitForm"
-              >
-                Create Account
-              </button>
+               <button
+            type="submit"
+            class="btn btn-primary"
+            @click="submitForm"
+            style="
+              width: 30%;
+              border-radius: 10px;
+              background-color: #111f4d;
+              border: none;
+              padding: 12px 0;
+              
+            "
+          >
+            Create Account
+          </button>
           </div>
 
           <!-- Register buttons -->
@@ -124,8 +136,10 @@
         </form>
       </div>
       <div class="col-lg-3"></div>
+      </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -195,3 +209,95 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+h1 {
+  font-family: "Stick No Bills", sans-serif;
+  font-weight: 500;
+  text-align: center;
+}
+
+.background-container {
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #ffffff;
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin-bottom: 5%;
+  color: #e8dede;
+}
+
+.form-control {
+  border-radius: 0;
+  margin: 0%;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0);
+  /* Adjust the alpha value for transparency */
+  border-radius: 10px;
+}
+
+.increased-height {
+  height: 45%;
+  /* Adjust the height as needed */
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  /* Adjust the alpha value for transparency */
+  box-shadow: none;
+  color: #ffffff;
+}
+
+.font-1 {
+  font-family: "Stick No Bills", sans-serif;
+  margin-top: 20px;
+  font-size: 50px;
+}
+
+.font-2 h2 {
+  font-size: 23px;
+  font-weight: 750;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  /* Add margin-bottom as needed */
+}
+
+label.form-label {
+  text-align: left;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+a {
+  color: #8482fa;
+}
+
+.main-container {
+  background-color: rgb(12, 12, 12, 0.65);
+  /* Add a transparent overlay on top of the background image */
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.main-container h1.font-1 {
+  font-family: "Stick No Bills", sans-serif;
+  margin-top: 10%;
+  line-height: 1.5;
+  /* Adjust the line-height value as needed */
+}
+
+.white-bg {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.3);
+  /* Adjust the alpha value for transparency */
+}
+.form-check {
+text-align: left;
+}
+</style>
