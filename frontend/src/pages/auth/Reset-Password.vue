@@ -5,12 +5,12 @@
       <div class="col-lg-4"></div>
       <div class="col-lg-4">
         <form @submit.prevent="">
-          <h3 class="mb-5" style="margin-top: 30%;">Reset Your Password</h3>
+          <h2 class="mb-5" style="margin-top: 30%;"><center>Reset Your Password</center></h2>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
             <label class="form-label"
-              >New Password</label
+              >New Password:</label
             >
             <input
               type="password"
@@ -23,7 +23,7 @@
           <!-- Repeat Password input -->
           <div class="form-outline mb-4">
             <label class="form-label"
-              >Repeat Password</label
+              >Repeat Password:</label
             >
             <input
               type="password"
@@ -37,7 +37,7 @@
           <div class="row mb-4">
           
             <div class="col text-end">
-              <button
+              <button style="margin-bottom: 15%;"
                 type="button"
                 class="btn btn-dark"
                 @click="submitForm"
