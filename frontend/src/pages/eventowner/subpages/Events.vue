@@ -2,7 +2,7 @@
   <div class="bg-black" style="width: 100%; height: 100%">
     <div v-if="events.length > 0">
       <div class="row">
-        <div v-for="event in events" :key="event.id" class="col-xl-3 col-lg-4 col-md-10 col-sm-10 m-2">
+        <div v-for="event in events" :key="event.id" class="col-xl-4 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-2">
           <div class="card">
             <ImagesCarouselVue class="card-img-top rounded border" v-if="event.images != null" :images="event.images" :auto-slide-show="true" :slide-show-interval="1000" />
             <div class="card-body">

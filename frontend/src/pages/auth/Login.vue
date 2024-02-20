@@ -20,7 +20,7 @@
               <input name="password" type="password" class="form-control" v-model="password" />
             </div>
 
-            <div class="form-check mt-2" >
+            <div class="form-check mb-3 mt-2 ms-4" >
                 <input
                   class="form-check-input"
                   type="checkbox"
