@@ -45,9 +45,6 @@ export default {
       .get("/api/eventowner/events")
       .then((response) => {
         this.events = response.data;
-        this.events[1] = this.events[0]; 
-        this.events[2] = this.events[0]; 
-        this.events[3] = this.events[0]; 
       })
       .catch((err) => {
         console.log(err);
