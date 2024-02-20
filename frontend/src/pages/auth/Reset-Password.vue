@@ -1,32 +1,35 @@
 <template>
-  <div class="container mt-5">
+  <div style="background-color: black; color: white;">
+  <div class="container" >
     <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-lg-4">
         <form @submit.prevent="">
-          <h3 class="mb-5">Reset Your Password</h3>
+          <h2 class="mb-5" style="margin-top: 30%;"><center>Reset Your Password</center></h2>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <label class="form-label text-black-50"
-              >New Password</label
+            <label class="form-label"
+              >New Password:</label
             >
             <input
               type="password"
               class="form-control"
               v-model="password"
+              style="color: black;" 
             />
           </div>
 
           <!-- Repeat Password input -->
           <div class="form-outline mb-4">
-            <label class="form-label text-black-50"
-              >Repeat Password</label
+            <label class="form-label"
+              >Repeat Password:</label
             >
             <input
               type="password"
               class="form-control"
               v-model="repeat_password"
+              style="color: black;" 
             />
           </div>
 
@@ -34,7 +37,7 @@
           <div class="row mb-4">
           
             <div class="col text-end">
-              <button
+              <button style="margin-bottom: 15%;"
                 type="button"
                 class="btn btn-dark"
                 @click="submitForm"
@@ -49,7 +52,9 @@
       <div class="col-lg-4"></div>
     </div>
   </div>
+</div>
 </template>
+
 
 <script>
 import axios from "axios";
