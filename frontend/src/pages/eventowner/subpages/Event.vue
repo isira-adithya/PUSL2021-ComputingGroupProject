@@ -173,6 +173,7 @@ import Notiflix from 'notiflix';
 import ImageUploader from '../../../components/ImageUploader.vue';
 import ImagesCarouselVue from '../../../components/ImagesCarousel.vue';
 import VueDatePicker from "@vuepic/vue-datepicker";
+import _ from "lodash";
 
   export default {
     name: "EventOwnerEventVue",
@@ -217,20 +218,44 @@ import VueDatePicker from "@vuepic/vue-datepicker";
         Notiflix.Loading.dots("Updating Event...");
         let tmpObj = this.event;
         tmpObj.date_time = new Date(tmpObj.date_time).getTime() / 1000;
-        delete tmpObj.location_geocoordinates;
         tmpObj.geo_coordinates = this.event.location_geocoordinates;
         axios.put("/api/eventowner/events/" + this.event_uuid, this.event).then(res => {
           Notiflix.Notify.success("Event updated successfully");
-          setTimeout(() => {
-            this.$router.push("/eventowner/dashboard/events");
-          }, 3000);
         }).catch(err => {
           console.log(err);
           Notiflix.Notify.failure("Failed to update event");
         }).finally(() => {
           Notiflix.Loading.remove();
         });
-      }
+      },
+
+      handleGoogleMap: _.debounce(function () {
+      // const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${this.address}`;
+      const apiUrl = `/api/common/geoapify/geocode?address=${this.event.location}`;
+      Notiflix.Loading.standard("Loading Map...");
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          if (response.data["success"]) {
+            const features = response.data["data"]["features"];
+            const formattedName = features[0]["properties"]["formatted"];
+            const coordinates = features[0]["geometry"]["coordinates"];
+            this.event.location_geocoordinates = {
+              lat: coordinates[1],
+              lng: coordinates[0],
+            };
+            this.geoCoordinatesReceived = true;
+          } else {
+            Notiflix.Notify.failure("Address not found");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          Notiflix.Notify.failure("Address not found");
+        }).finally(() => {
+          Notiflix.Loading.remove(1000);
+        });
+    }, 1000),
     },
   };
   </script>
