@@ -18,8 +18,9 @@ import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
 
-//component -About_Us
-import AboutUsVue from './pages/AboutUs.vue';
+//component - Public
+import AboutUsVue from './pages/public/AboutUs.vue';
+import EventsVue from './pages/public/Events.vue';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -51,8 +52,9 @@ const routes = [
     // User
     { path: '/user/profile', component: UserProfileVue},
 
-    // About Us Page
-    {path: '/about-us',component: AboutUsVue}
+    // Public pages
+    {path: '/about-us', component: AboutUsVue},
+    {path: '/events', component: EventsVue}
 ];
 
 const router = createRouter({
