@@ -21,6 +21,7 @@ router.get('/', async (req, res) => {
     events.forEach(event => {
         event.images = event.images.split(',');
         event.location_geocoordinates = JSON.parse(event.location_geocoordinates);
+        delete event.owner_id;
     });
     res.json(events);
 });
