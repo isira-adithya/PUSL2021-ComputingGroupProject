@@ -1,9 +1,8 @@
 <template>
 <div class="background-container">
-  <div class="BGimg">
     <div class="container">
       <div class="col-md-4 mx-auto text-center">
-        <div class="main-container" style="margin-top: 7%; margin-bottom: 11%;">
+        <div class="main-container">
         <h1 class="mb-4 font-1">Login</h1>
         <br />
 
@@ -13,15 +12,15 @@
               <label for="fName" class="form-label"
                 >Username / E-mail Address :</label
               >
-              <input type="text" class="form-control" v-model="email" />
+              <input name="user" type="text" class="form-control" v-model="email" />
             </div>
 
             <div class="mb-3">
               <label for="password" class="form-label">Password :</label>
-              <input type="text" class="form-control" v-model="password" />
+              <input name="password" type="password" class="form-control" v-model="password" />
             </div>
 
-            <div class="form-check mt-2" >
+            <div class="form-check mb-3 mt-2 ms-4" >
                 <input
                   class="form-check-input"
                   type="checkbox"
@@ -65,7 +64,6 @@
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -129,6 +127,7 @@ h1 {
   background-color: #000000;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 p {
