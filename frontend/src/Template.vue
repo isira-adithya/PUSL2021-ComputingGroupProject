@@ -31,7 +31,7 @@
                   <router-link class="nav-link text-white " to="/about-us">About Us</router-link>
                 </li>
                 <li class="nav-item mx-2">
-                  <router-link class="nav-link text-white " to="/contactus">Contact Us</router-link>
+                  <router-link class="nav-link text-white " to="/contact-us">Contact Us</router-link>
                 </li>
                 <li v-if="isLoggedIn" class="nav-item mx-2">
                   <router-link  to="/user/profile" class="nav-link text-white">Profile</router-link>

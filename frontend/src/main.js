@@ -12,6 +12,7 @@ import LogoutVue from './pages/auth/Logout.vue';
 import SignupVue from './pages/auth/Signup.vue'; 
 import ForgotPasswordVue from './pages/auth/Forgot-Password.vue'; 
 import PasswordResetVue from './pages/auth/Reset-Password.vue'; 
+import ContactUsVue from './pages/auth/Contact-us.vue'; 
 // Components - EventOwner
 import VerificationVue from './pages/eventowner/Verification.vue';
 import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
@@ -43,6 +44,7 @@ const routes = [
     { path: '/forgot-password', component: ForgotPasswordVue},
     { path: '/reset-password/:token', component: PasswordResetVue},
     { path: '/home', component: HomeVue},
+    { path: '/contact-us', component: ContactUsVue},
 
     // EventOwner
     { path: '/eventowner/verification', component: VerificationVue},
