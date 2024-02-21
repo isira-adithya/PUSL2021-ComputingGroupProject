@@ -1,6 +1,152 @@
 <template>
-<h1>example</h1>
+    <div class=" bodysd">
+<div class="mb-4 text-center"><br>
+            <h1 class="font-1" style="margin-bottom: 7%;">Contact Us</h1>
+        </div>
+  <div>
+    <div class="container">
+        
 
+      <div class="row">
+        <!-- Left Part: Form -->
+        <div class="col-md-6 mx-auto text-left">
 
-    
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" class="form-control white-bg no-border increased-height" id="name">
+                    </div>
+            
+                    <div class="col-md-6">
+                        <label for="phoneNumber" class="form-label">Phone number:</label>
+                        <input type="text" class="form-control white-bg no-border increased-height" id="phoneNumber">
+                    </div>
+            
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="text" class="form-control white-bg no-border increased-height" id="email">
+                    </div>
+            
+                    <div class="col-md-6">
+                        <label for="subject" class="form-label">Subject:</label>
+                        <input type="text" class="form-control white-bg no-border increased-height" id="subject">
+                    </div>
+                </div>
+            
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message:</label>
+                    <textarea class="form-control white-bg no-border" id="message" rows="5"></textarea>
+                </div>
+            
+                <button type="submit" class="btn btn-primary" style="width: 77%; border-radius: 13px; background-color: #111F4D; border: none; padding: 12px 0; font-size: 21px; margin-top: 13px;">Submit</button>
+            
+            </form>
+        </div>
+
+        <!-- Right Part: Info Container -->
+        <div class="col-md-5">
+          <div class="main-container" style="margin-left: 20px; margin-top: 20px;">
+            <div class="text-left mt-4 font-2">
+              <h2>Contact Info</h2>
+            </div>
+
+         <div class="row justify-content-left mt-4">
+              <div class="col-md-8 text-left mb-3">
+                <p>
+                    2091 Fieldcrest Road, Colombo, Sri Lanka <br>
+                    
+                    Call Us : (+94) ( 011) 2324167 <br>
+                    
+                    Fax : (+94) ( 011) 2324167 <br>
+                    
+                    E - mail  : info@demo.com</p>
+              </div> 
+              <a href="#" target="_blank" class="btn btn-primary" style="width: 34%; border-radius: 13px; background-color: #111F4D; border: none;">Maps</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </template>
+
+  
+
+<style scoped>
+    h1 {
+        font-family: 'Stick No Bills', sans-serif;
+        font-weight: 600;
+      
+    }
+
+    .bodysd {
+    
+    background-repeat: no-repeat;
+    background-size: cover; /* Add this line to set the background size to cover */
+    background-attachment: fixed;
+    color: #ffffff;
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+    .form-control {
+        border: none;
+        border-radius: 0;
+        margin-bottom: 3rem;     
+        color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha value for transparency */
+        border-radius: 8px;
+    }
+
+    .increased-height {
+        height: 50px; /* Adjust the height as needed */
+     }
+
+    .form-control:focus {
+        background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha value for transparency */
+        box-shadow: none;
+        color: #ffffff;
+    }
+
+    .font-1 {
+        font-family: 'Stick No Bills', sans-serif;
+        
+    }
+
+    .font-2 h2 {    
+    font-size: 23px;
+    font-weight: 750;
+    margin-top: 20px;
+    margin-bottom: 40px; /* Add margin-bottom as needed */
+}
+         
+         
+         
+
+    label.form-label {
+        text-align: left;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    a {
+        color: #ffffff;
+    }
+
+    .main-container {
+        background-color: rgba(0, 0, 0, 0.5); /* Add a transparent overlay on top of the background image */
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .white-bg {
+        color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.3); /* Adjust the alpha value for transparency */
+    }
+
+</style>
