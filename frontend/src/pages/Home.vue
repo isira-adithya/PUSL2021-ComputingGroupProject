@@ -1,6 +1,6 @@
 <template>
 
-      <div id="section1" class="section text-center text-white d-flex justify-content-center align-items-center">
+      <div id="section1" :style="[section1, section]" class=" text-center text-white d-flex justify-content-center align-items-center">
         <div class="container">
             <div class="row">
               <h1 class="font-1 display-1">WELCOME TO EVENT HIVE</h1>
@@ -16,11 +16,11 @@
         </div>
       </div>
     
-      <div id="section2" class="justify-content-center align-items-center text-center text-white d-flex"> 
+      <div id="section2" :style="[section2, section]" class=" justify-content-center align-items-center text-center text-white d-flex"> 
         <div class="container">
           <div>
             <a>
-              <img src="" alt="logo" class="custom-logo">
+              <img src="/assets/images/logo.png" alt="logo" class="custom-logo">
               </a>
           </div>
           <div class="custom-hr"></div>
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div id="section3" class="justify-content-center align-items-center text-center">
+      <div id="section3" :style="[section3, section]" class="section justify-content-center align-items-center text-center">
         <div class="container">
           <div class="row">
             <div class="col-md-6 d-flex justify-content-center align-items-center text-center">
@@ -62,7 +62,7 @@
         </div>
       </div>
        
-      <div id="section4" class="justify-content-center align-items-center text-center" >
+      <div id="section4" :style="[section4, section]" class="section justify-content-center align-items-center text-center" >
         <div class="container">
           <div class="row">
             <div class=" d-flex ">
@@ -77,14 +77,14 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">EVENTS</a>
+                <a href="" class="text-white text-decoration-none px-3 py-1 custom-boxes rounded-1">EVENTS</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div id="section5" class="justify-content-center align-items-center text-center" >
+      <div id="section5" :style="[section5, section]" class="section justify-content-center align-items-center text-center" >
         <div class="container">
           <div class="row">
             <div class=" d-flex ">
@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">PUBLISH</a>
+                <a href="" class="text-white text-decoration-none px-3 py-1 custom-boxes rounded-1">PUBLISH</a>
               </div>
             </div>
           </div>
@@ -110,56 +110,76 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'HomeVue',
   components: {
     
-  }
-}
+  },
+  data() {
+    return {
+      imagePath1: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
+      imagePath2: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
+      imagePath3: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
+      imagePath4: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
+      imagePath5: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
+    };
+  },
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath1})`, // Dynamically set the URL   
+        height: '100vh',
+      };
+    },
+    
+    section2(){
+      return{
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath2})`,
+        padding: '70px !important', 
+      };
+    },
+
+    section3(){
+      return{
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath2})`,
+        padding: '100px !important', 
+      };
+    },
+
+    section4(){
+      return{
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath2})`,
+        padding: '100px !important', 
+      };
+    },
+
+    section5(){
+      return{
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath2})`,
+        padding: '100px !important', 
+      };
+    },
+
+  },
+};
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+
 #app {
   font-family: 'Poppins', sans-serif;
-  
+
 }
-
-
-        #section1{
-          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url();
-          background-size: cover;
-          min-height: 100%;
-        }
-        
-        
-        #section2{
-          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url();
-          background-size: cover;     
-          padding: 70px !important;
-        }
-
-        #section3{
-          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url();
-          background-size: cover; 
-          background-position: center;   
-          padding: 100px !important; 
-        }
-
-        #section4{
-          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url();
-          background-size: cover; 
-          background-position: center;   
-          padding: 100px !important; 
-        }
-
-        #section5{
-          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url();
-          background-size:cover; 
-          background-position: center;   
-          padding: 100px !important; 
-        }
 
         .custom-hr {
           height: 2px; 
