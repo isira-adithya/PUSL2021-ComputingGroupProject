@@ -120,10 +120,10 @@ export default {
   data() {
     return {
       imagePath1: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
-      imagePath2: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
-      imagePath3: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
-      imagePath4: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
-      imagePath5: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
+      imagePath2: process.env.BASE_URL + 'assets/images/home-images/header-bg1.png', 
+      imagePath3: process.env.BASE_URL + 'assets/images/home-images/eventspic1.jpeg', 
+      imagePath4: process.env.BASE_URL + 'assets/images/home-images/eventspic2.jpeg', 
+      imagePath5: process.env.BASE_URL + 'assets/images/home-images/lanterns.jpg', 
     };
   },
   computed: {
@@ -149,21 +149,21 @@ export default {
 
     section3(){
       return{
-        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath2})`,
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath3})`,
         padding: '100px !important', 
       };
     },
 
     section4(){
       return{
-        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath2})`,
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath4})`,
         padding: '100px !important', 
       };
     },
 
     section5(){
       return{
-        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath2})`,
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath5})`,
         padding: '100px !important', 
       };
     },
