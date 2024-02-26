@@ -77,7 +77,7 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="" class="text-white text-decoration-none px-3 py-1 custom-boxes rounded-1">EVENTS</a>
+                <a href="" class="button-color text-white text-decoration-none px-3 py-1 custom-boxes rounded-1">EVENTS</a>
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="" class="text-white text-decoration-none px-3 py-1 custom-boxes rounded-1">PUBLISH</a>
+                <a href="" class="button-color text-white text-decoration-none px-3 py-1 custom-boxes rounded-1">PUBLISH</a>
               </div>
             </div>
           </div>
@@ -176,7 +176,7 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Stick+No+Bills:wght@700&display=swap');
 
 #app {
   font-family: 'Poppins', sans-serif;
@@ -188,8 +188,12 @@ export default {
           background-color: rgba(255,255,255); 
           margin: 20px 0; 
         }
-        .custom-boxes{
-          background-color: #111F4D;   
+        .button-color {
+          background-color: #111F4D;
+        }
+        .button-color:hover{
+          background-color: #020923 !important;
+          
         }
         .font-1{
           font-family: 'Stick No Bills', sans-serif;
