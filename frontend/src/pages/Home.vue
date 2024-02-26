@@ -41,21 +41,21 @@
                 <h1 class="font-1 text-white display-5 mb-4">Events We Support</h1>
               </div>
             </div>
-            <div class="col-md-6 text-white  justify-content-center align-items-center">
-              <div class="custom-boxes custom-box-width-1 mb-5 text-center">
-                <p class="font-2 p-1">Concerts</p>
+            <div class=" col-md-6 text-white  ">
+              <div class=" custom-boxes col-md-4 ms-md-auto m-5 text-start">
+                <p class="font-2 ">Concerts</p>
               </div>
-              <div class="custom-boxes custom-box-width-2 mb-5 text-center">
-                <p class="font-2 p-1">Charity Events</p>
+              <div class="  custom-boxes col-md-6 ms-md-auto m-5 text-start">
+                <p class="font-2 ">Charity Events</p>
               </div>
-              <div class="custom-boxes custom-box-width-3 mb-5 text-center">
-                <p class="font-2 p-1">Sports Events</p>
+              <div class="  custom-boxes col-md-8 ms-auto m-5 text-start">
+                <p class="font-2 ">Sports Events</p>
               </div>
-              <div class="custom-boxes custom-box-width-4 mb-5 text-center">
-                <p class="font-2 p-1">Cultural Events</p>
+              <div class="  custom-boxes col-md-6 ms-md-auto m-5 text-start">
+                <p class="font-2 ">Cultural Events</p>
               </div>
-              <div class="custom-boxes custom-box-width-5  text-center">
-                <p class="font-2 p-1">Carnivals</p>
+              <div class="  custom-boxes col-md-4 ms-md-auto m-5 text-start">
+                <p class="font-2 ">Carnivals</p>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="" class="button-color text-white text-decoration-none px-3 py-1 custom-boxes rounded-1">EVENTS</a>
+                <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">EVENTS</a>
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="" class="button-color text-white text-decoration-none px-3 py-1 custom-boxes rounded-1">PUBLISH</a>
+                <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">PUBLISH</a>
               </div>
             </div>
           </div>
@@ -201,6 +201,7 @@ export default {
 
         .font-2{
           font-family: 'Poppins', sans-serif;
+          margin: 5px;
         }
 
         .scroll-down {
@@ -218,4 +219,8 @@ export default {
           color: rgb(207, 206, 206);
         }
 
+        .custom-boxes{
+          border: rgb(207, 206, 206) solid 2px;
+          backdrop-filter: blur(8px);
+        }
 </style>
