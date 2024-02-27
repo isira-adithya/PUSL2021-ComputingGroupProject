@@ -2,9 +2,10 @@
 <div class="background-container">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4"></div>
+        
       <div class="col-md-4 mx-auto text-center">
         <div class="main-container">
+          <div class="col-lg-4"></div>
         <h1 class="mb-4 font-1">Login</h1>
         <br />
 
