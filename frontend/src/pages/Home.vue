@@ -1,6 +1,6 @@
 <template>
 
-      <div id="section1" class="section text-center text-white d-flex justify-content-center align-items-center">
+      <div id="section1" :style="[section1, section]" class=" text-center text-white d-flex justify-content-center align-items-center">
         <div class="container">
             <div class="row">
               <h1 class="font-1 display-1">WELCOME TO EVENT HIVE</h1>
@@ -16,11 +16,11 @@
         </div>
       </div>
     
-      <div id="section2" class="justify-content-center align-items-center text-center text-white d-flex"> 
+      <div id="section2" :style="[section2, section]" class=" justify-content-center align-items-center text-center text-white d-flex"> 
         <div class="container">
           <div>
             <a>
-              <img src="" alt="logo" class="custom-logo">
+              <img src="/assets/images/logo.png" alt="logo" class="custom-logo">
               </a>
           </div>
           <div class="custom-hr"></div>
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div id="section3" class="justify-content-center align-items-center text-center">
+      <div id="section3" :style="[section3, section]" class="section justify-content-center align-items-center text-center">
         <div class="container">
           <div class="row">
             <div class="col-md-6 d-flex justify-content-center align-items-center text-center">
@@ -41,28 +41,28 @@
                 <h1 class="font-1 text-white display-5 mb-4">Events We Support</h1>
               </div>
             </div>
-            <div class="col-md-6 text-white  justify-content-center align-items-center">
-              <div class="custom-boxes custom-box-width-1 mb-5 text-center">
-                <p class="font-2 p-1">Concerts</p>
+            <div class=" col-md-6 text-white  ">
+              <div class=" custom-boxes col-md-4 ms-md-auto m-5 text-start">
+                <p class="font-2 ">Concerts</p>
               </div>
-              <div class="custom-boxes custom-box-width-2 mb-5 text-center">
-                <p class="font-2 p-1">Charity Events</p>
+              <div class="  custom-boxes col-md-6 ms-md-auto m-5 text-start">
+                <p class="font-2 ">Charity Events</p>
               </div>
-              <div class="custom-boxes custom-box-width-3 mb-5 text-center">
-                <p class="font-2 p-1">Sports Events</p>
+              <div class="  custom-boxes col-md-8 ms-auto m-5 text-start">
+                <p class="font-2 ">Sports Events</p>
               </div>
-              <div class="custom-boxes custom-box-width-4 mb-5 text-center">
-                <p class="font-2 p-1">Cultural Events</p>
+              <div class="  custom-boxes col-md-6 ms-md-auto m-5 text-start">
+                <p class="font-2 ">Cultural Events</p>
               </div>
-              <div class="custom-boxes custom-box-width-5  text-center">
-                <p class="font-2 p-1">Carnivals</p>
+              <div class="  custom-boxes col-md-4 ms-md-auto m-5 text-start">
+                <p class="font-2 ">Carnivals</p>
               </div>
             </div>
           </div>
         </div>
       </div>
        
-      <div id="section4" class="justify-content-center align-items-center text-center" >
+      <div id="section4" :style="[section4, section]" class="section justify-content-center align-items-center text-center" >
         <div class="container">
           <div class="row">
             <div class=" d-flex ">
@@ -77,14 +77,14 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">EVENTS</a>
+                <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">EVENTS</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div id="section5" class="justify-content-center align-items-center text-center" >
+      <div id="section5" :style="[section5, section]" class="section justify-content-center align-items-center text-center" >
         <div class="container">
           <div class="row">
             <div class=" d-flex ">
@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <a href="" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">PUBLISH</a>
+                <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">PUBLISH</a>
               </div>
             </div>
           </div>
@@ -110,64 +110,90 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'HomeVue',
   components: {
     
-  }
-}
+  },
+  data() {
+    return {
+      imagePath1: process.env.BASE_URL + 'assets/images/home-images/home-pageBG.jpg', 
+      imagePath2: process.env.BASE_URL + 'assets/images/home-images/header-bg1.png', 
+      imagePath3: process.env.BASE_URL + 'assets/images/home-images/eventspic1.jpeg', 
+      imagePath4: process.env.BASE_URL + 'assets/images/home-images/eventspic2.jpeg', 
+      imagePath5: process.env.BASE_URL + 'assets/images/home-images/lanterns.jpg', 
+    };
+  },
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath1})`, // Dynamically set the URL   
+        height: '100vh',
+      };
+    },
+    
+    section2(){
+      return{
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath2})`,
+        padding: '70px !important', 
+      };
+    },
+
+    section3(){
+      return{
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath3})`,
+        padding: '100px !important', 
+      };
+    },
+
+    section4(){
+      return{
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath4})`,
+        padding: '100px !important', 
+      };
+    },
+
+    section5(){
+      return{
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath5})`,
+        padding: '100px !important', 
+      };
+    },
+
+    
+
+  },
+};
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Stick+No+Bills:wght@700&display=swap');
 
 #app {
   font-family: 'Poppins', sans-serif;
-  
+
 }
-
-
-        #section1{
-          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url();
-          background-size: cover;
-          min-height: 100%;
-        }
-        
-        
-        #section2{
-          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url();
-          background-size: cover;     
-          padding: 70px !important;
-        }
-
-        #section3{
-          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url();
-          background-size: cover; 
-          background-position: center;   
-          padding: 100px !important; 
-        }
-
-        #section4{
-          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url();
-          background-size: cover; 
-          background-position: center;   
-          padding: 100px !important; 
-        }
-
-        #section5{
-          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url();
-          background-size:cover; 
-          background-position: center;   
-          padding: 100px !important; 
-        }
 
         .custom-hr {
           height: 2px; 
           background-color: rgba(255,255,255); 
           margin: 20px 0; 
         }
-        .custom-boxes{
-          background-color: #111F4D;   
+        .button-color {
+          background-color: #111F4D;
+        }
+        .button-color:hover{
+          background-color: #020923 !important;
+          
         }
         .font-1{
           font-family: 'Stick No Bills', sans-serif;
@@ -175,6 +201,7 @@ export default {
 
         .font-2{
           font-family: 'Poppins', sans-serif;
+          margin: 5px;
         }
 
         .scroll-down {
@@ -192,4 +219,8 @@ export default {
           color: rgb(207, 206, 206);
         }
 
+        .custom-boxes{
+          border: rgb(207, 206, 206) solid 2px;
+          backdrop-filter: blur(8px);
+        }
 </style>
