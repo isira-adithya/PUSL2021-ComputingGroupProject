@@ -14,7 +14,7 @@
             <form>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="name" class="form-label">Name:</label>
+                        <label for="name" class="form-label">Names:</label>
                         <input type="text" class="form-control white-bg no-border increased-height" v-model="name">
                     </div>
             
