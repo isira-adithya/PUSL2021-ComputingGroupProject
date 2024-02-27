@@ -220,7 +220,7 @@ export default {
         }
 
         .custom-boxes{
-          border: rgb(207, 206, 206) solid 2px;
-          backdrop-filter: blur(8px);
+          background-color: rgba(17, 31, 77, 0.6); 
+          padding: 2px;
         }
 </style>
