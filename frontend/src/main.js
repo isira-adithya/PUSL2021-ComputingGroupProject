@@ -12,14 +12,16 @@ import LogoutVue from './pages/auth/Logout.vue';
 import SignupVue from './pages/auth/Signup.vue'; 
 import ForgotPasswordVue from './pages/auth/Forgot-Password.vue'; 
 import PasswordResetVue from './pages/auth/Reset-Password.vue'; 
+import ContactUsVue from './pages/auth/Contact-us.vue'; 
 // Components - EventOwner
 import VerificationVue from './pages/eventowner/Verification.vue';
 import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
 
-//component -About_Us
-import AboutUsVue from './pages/AboutUs.vue';
+//component - Public
+import AboutUsVue from './pages/public/AboutUs.vue';
+import EventsVue from './pages/public/Events.vue';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -42,16 +44,19 @@ const routes = [
     { path: '/forgot-password', component: ForgotPasswordVue},
     { path: '/reset-password/:token', component: PasswordResetVue},
     { path: '/home', component: HomeVue},
+    { path: '/contact-us', component: ContactUsVue},
 
     // EventOwner
     { path: '/eventowner/verification', component: VerificationVue},
     { path: '/eventowner/dashboard/:page', component: EventOwnerDashboardVue},
+    { path: '/eventowner/dashboard/event/:uuid', component: EventOwnerDashboardVue},
     
     // User
     { path: '/user/profile', component: UserProfileVue},
 
-    // About Us Page
-    {path: '/about-us',component: AboutUsVue}
+    // Public pages
+    {path: '/about-us', component: AboutUsVue},
+    {path: '/events', component: EventsVue}
 ];
 
 const router = createRouter({

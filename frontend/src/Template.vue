@@ -31,7 +31,7 @@
                   <router-link class="nav-link text-white " to="/about-us">About Us</router-link>
                 </li>
                 <li class="nav-item mx-2">
-                  <router-link class="nav-link text-white " to="/contactus">Contact Us</router-link>
+                  <router-link class="nav-link text-white " to="/contact-us">Contact Us</router-link>
                 </li>
                 <li v-if="isLoggedIn" class="nav-item mx-2">
                   <router-link  to="/user/profile" class="nav-link text-white">Profile</router-link>
@@ -40,12 +40,12 @@
                   <router-link to="/eventowner/dashboard/analytics" class="nav-link text-white">Dashboard</router-link>
                 </li>
               </ul>
-              <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                <router-link v-if="!isLoggedIn" class="text-white text-decoration-none px-3 py-1 button-color rounded-1"
+              <div class=" d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+                <router-link v-if="!isLoggedIn" class="fw-bold text-white text-decoration-none px-3 py-1 button-color rounded-1"
                   to="/login">LOG IN</router-link>
-                <router-link v-if="isLoggedIn" class="text-white text-decoration-none px-3 py-1 button-color rounded-1"
+                <router-link v-if="isLoggedIn" class="fw-bold text-white text-decoration-none px-3 py-1 button-color rounded-1"
                   to="/logout">LOG OUT</router-link>
-                <router-link v-if="!isLoggedIn" class="text-white text-decoration-none px-3 py-1 button-color rounded-1"
+                <router-link v-if="!isLoggedIn" class="fw-bold text-white text-decoration-none px-3 py-1 button-color rounded-1"
                   to="/signup">SIGN UP</router-link>
               </div>
             </div>
@@ -185,6 +185,10 @@ export default {
 
 .button-color {
   background-color: #111F4D;
+}
+.button-color:hover{
+  background-color: #020923 !important;
+  
 }
 
 .custom-logo {
