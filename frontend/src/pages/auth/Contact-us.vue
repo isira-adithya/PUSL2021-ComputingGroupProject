@@ -1,6 +1,6 @@
 <template>
-    <div class=" bodysd">
-<div class="mb-4 text-center"><br>
+    <div id="section1" :style="[section1, section]"  class=" bodysd">
+<div class="mb-4 text-center"><br><br>
             <h1 class="font-1" style="margin-bottom: 7%;">Contact Us</h1>
         </div>
   <div>
@@ -14,7 +14,7 @@
             <form>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="name" class="form-label">Names:</label>
+                        <label for="name" class="form-label">Name:</label>
                         <input type="text" class="form-control white-bg no-border increased-height" v-model="name">
                     </div>
             
@@ -39,7 +39,7 @@
                     <textarea class="form-control white-bg no-border" v-model="message" rows="5"></textarea>
                 </div>
             
-                <button type="submit" class="btn btn-primary" @click="submitForm" style="width: 77%; border-radius: 13px; background-color: #111F4D; border: none; padding: 12px 0; font-size: 21px; margin-top: 13px;">Submit</button>
+                <button type="submit" class="btn btn-primary" @click="submitForm" style="width: 77%; border-radius: 13px; background-color: #111F4D; border: none; padding: 12px 0; font-size: 21px; margin-top: 13px; margin-bottom: 13%;">Submit</button>
                
             </form>
         </div>
@@ -90,9 +90,31 @@ export default {
       email: "",
       subject: "",
       message: "",
+      imagePath1: process.env.BASE_URL + 'assets/images/contactUsBG1.png',
       
     };
   },
+
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
+  },
+
+
   methods: {
     submitForm() {
       if (this.subject.length < 1){
