@@ -48,13 +48,13 @@ jobs:
       - name: Modifying the config.js
         uses: DamianReeves/write-file-action@v1.0
         with:
-          path: /backend/config.js
+          path: ./backend/config.js
           contents: ${{ steps.sub.outputs.result }}
           write-mode: overwrite
       - name: Modifying the .env
         uses: DamianReeves/write-file-action@v1.0
         with:
-          path: /backend/.env
+          path: ./backend/.env
           contents: ${{ secrets.ENV_FILE }}
           write-mode: overwrite
       - name: Pushing to Digital Ocean Server
