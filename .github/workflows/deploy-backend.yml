@@ -1,4 +1,4 @@
-name: Deploy to Production
+name: Deploy to Production (Backend)
 
 on:
   workflow_dispatch:
@@ -32,19 +32,19 @@ jobs:
         id: sub
         with:
           _input-file: ./backend/config.template
-          PRODHOST: ${{ secrets.HOST }}
-          SQLSH: ${{ secrets.SQL_SERVER_HOST }}
-          SQLSP: ${{ secrets.SQL_SERVER_PORT }}
-          SQLSU: ${{ secrets.SQL_SERVER_USER }}
-          SQLSPWD: ${{ secrets.SQL_SERVER_PASSWORD }}
-          SQLSDB: ${{ secrets.SQL_SERVER_DB }}
-          EXPRESS_SESSION_SECRETS_ARR: ${{ secrets.EXPRESS_SESSION_SECRETS }}
-          S3EURL: ${{ secrets.S3_ENDPOINT }}
-          S3BN: ${{ secrets.S3_BUCKET_NAME }}
-          S3R: ${{ secrets.S3_REGION }}
-          S3SK: ${{ secrets.S3_SECRET_KEY }}
-          S3AK: ${{ secrets.S3_ACCESS_KEY }}
-          GEOAPIK: ${{ secrets.GEOAPIFY_API_KEY }}
+          PRODHOST: ${{ secrets.PRODHOST }}
+          SQLSH: ${{ secrets.SQLSH }}
+          SQLSP: ${{ secrets.SQLSP }}
+          SQLSU: ${{ secrets.SQLSU }}
+          SQLSPWD: ${{ secrets.SQLSPWD }}
+          SQLSDB: ${{ secrets.SQLSDB }}
+          EXPRESS_SESSION_SECRETS_ARR: ${{ secrets.EXPRESS_SESSION_SECRETS_ARR }}
+          S3EURL: ${{ secrets.S3EURL }}
+          S3BN: ${{ secrets.S3BN }}
+          S3R: ${{ secrets.S3R }}
+          S3SK: ${{ secrets.S3SK }}
+          S3AK: ${{ secrets.S3AK }}
+          GEOAPIK: ${{ secrets.GEOAPIK }}
       - name: Modifying the config.js
         uses: DamianReeves/write-file-action@v1.0
         with:
