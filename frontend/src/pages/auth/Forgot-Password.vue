@@ -1,5 +1,5 @@
 <template>
-  <div class="background-container">
+  <div id="section1" :style="[section1, section]" class="background-container">
     <div class="container">
       <div class="row">
 
@@ -49,8 +49,30 @@ export default {
   data() {
     return {
       email: "",
+      imagePath1: process.env.BASE_URL + 'assets/images/forgotpasswordBg1.png',
     };
   },
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
+  },
+  
+
+
   methods: {
     submitForm() {
       if (this.email.length <= 0) {
