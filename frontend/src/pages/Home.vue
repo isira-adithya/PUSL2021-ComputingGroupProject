@@ -1,5 +1,4 @@
 <template>
-
       <div id="section1" :style="[section1, section]" class=" text-center text-white d-flex justify-content-center align-items-center">
         <div class="container">
             <div class="row">
@@ -21,7 +20,7 @@
           <div>
             <a>
               <img src="/assets/images/logo.png" alt="logo" class="custom-logo">
-              </a>
+            </a>
           </div>
           <div class="custom-hr"></div>
           <div>
@@ -136,7 +135,7 @@ export default {
     section1() {
       return {
         background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath1})`, // Dynamically set the URL   
-        height: '100vh',
+        height: '90vh',
       };
     },
     
@@ -175,13 +174,13 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Stick+No+Bills:wght@700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Stick+No+Bills:wght@700&display=swap');
 
-#app {
-  font-family: 'Poppins', sans-serif;
+  #app {
+    font-family: 'Poppins', sans-serif;
 
-}
+  }
 
         .custom-hr {
           height: 2px; 
