@@ -27,10 +27,10 @@ CREATE TABLE `User` (
     `first_name` VARCHAR(191) NOT NULL,
     `last_name` VARCHAR(191) NOT NULL,
     `address` VARCHAR(191) NOT NULL,
-    `addr_geocoordinates` VARCHAR(191) NOT NULL,
+    `addr_geocoordinates` VARCHAR(191) NULL DEFAULT '0,0',
     `notification_preference` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
-    `profile_image` VARCHAR(191) NOT NULL,
+    `profile_image` VARCHAR(191) NULL,
     `phone_id` INTEGER NOT NULL,
     `email_id` INTEGER NOT NULL,
     `role` VARCHAR(191) NOT NULL DEFAULT 'VISITOR',
@@ -38,8 +38,6 @@ CREATE TABLE `User` (
     `is_verified` BOOLEAN NOT NULL DEFAULT false,
 
     UNIQUE INDEX `User_user_name_key`(`user_name`),
-    UNIQUE INDEX `User_first_name_key`(`first_name`),
-    UNIQUE INDEX `User_last_name_key`(`last_name`),
     PRIMARY KEY (`user_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -58,7 +56,7 @@ CREATE TABLE `PasswordResetToken` (
 -- CreateTable
 CREATE TABLE `Notification` (
     `notification_id` INTEGER NOT NULL AUTO_INCREMENT,
-    `content` VARCHAR(191) NULL,
+    `content` VARCHAR(512) NULL,
     `notification_status` VARCHAR(191) NULL,
     `user_id` INTEGER NULL,
 
@@ -83,7 +81,7 @@ CREATE TABLE `Commentary` (
     `commentary_id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER NULL,
     `event_id` INTEGER NULL,
-    `comment` VARCHAR(191) NULL,
+    `comment` VARCHAR(512) NULL,
     `rating` VARCHAR(191) NULL,
 
     PRIMARY KEY (`commentary_id`)
@@ -92,18 +90,31 @@ CREATE TABLE `Commentary` (
 -- CreateTable
 CREATE TABLE `Event` (
     `event_id` INTEGER NOT NULL AUTO_INCREMENT,
-    `event_name` VARCHAR(191) NULL,
-    `date` DATETIME(3) NULL,
-    `time` DATETIME(3) NULL,
-    `event_description` VARCHAR(191) NULL,
+    `name` VARCHAR(191) NULL,
+    `date_time` DATETIME(3) NULL,
+    `description` VARCHAR(8096) NULL,
     `venue` VARCHAR(191) NULL,
-    `image` VARCHAR(191) NULL,
-    `ticket_prices` INTEGER NULL,
-    `event_category` VARCHAR(191) NULL,
+    `images` VARCHAR(2048) NULL,
+    `category` VARCHAR(191) NULL,
     `location` VARCHAR(191) NULL,
-    `user_id` INTEGER NULL,
+    `location_geocoordinates` VARCHAR(191) NULL DEFAULT '0,0',
+    `visibility` VARCHAR(191) NOT NULL DEFAULT 'private',
+    `uuid` VARCHAR(191) NOT NULL,
+    `owner_id` INTEGER NULL,
 
+    UNIQUE INDEX `Event_uuid_key`(`uuid`),
     PRIMARY KEY (`event_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Ticket` (
+    `ticket_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `price` INTEGER NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(512) NOT NULL,
+    `event_id` INTEGER NOT NULL,
+
+    PRIMARY KEY (`ticket_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
@@ -128,4 +139,7 @@ ALTER TABLE `Commentary` ADD CONSTRAINT `Commentary_user_id_fkey` FOREIGN KEY (`
 ALTER TABLE `Commentary` ADD CONSTRAINT `Commentary_event_id_fkey` FOREIGN KEY (`event_id`) REFERENCES `Event`(`event_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Event` ADD CONSTRAINT `Event_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `Event` ADD CONSTRAINT `Event_owner_id_fkey` FOREIGN KEY (`owner_id`) REFERENCES `User`(`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Ticket` ADD CONSTRAINT `Ticket_event_id_fkey` FOREIGN KEY (`event_id`) REFERENCES `Event`(`event_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
