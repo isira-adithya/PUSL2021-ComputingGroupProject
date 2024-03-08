@@ -45,6 +45,9 @@ jobs:
           S3SK: ${{ secrets.S3SK }}
           S3AK: ${{ secrets.S3AK }}
           GEOAPIK: ${{ secrets.GEOAPIK }}
+          NTFYUSERID: ${{ secrets.NTFYUSERID }}
+          NTFYAPIKEY: ${{ secrets.NTFYAPIKEY }}
+          NTFYSENDERID: ${{ secrets.NTFYSENDERID }}
       - name: Modifying the config.js
         uses: DamianReeves/write-file-action@v1.0
         with:
