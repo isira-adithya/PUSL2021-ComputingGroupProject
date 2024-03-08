@@ -6,7 +6,7 @@
         <div class="col-lg-2" style="padding: 0;"></div>
         <div class="col-lg-8" style="padding: 0;">
           <form>
-            <h3 class="mb-4  font-1">Create Event</h3>
+            <h3 class="mb-4  font-2" ><center>Create Event</center></h3>
             <div class="mb-3">
               <label class="form-label text-white ">Event Name</label>
               <input v-model="event_name" type="email" class="form-control" />
@@ -22,7 +22,7 @@
             </div>
 
             <!-- Image Uploader -->
-            <div class="mb-3 form-control text-white">
+            <div class="mb-3 form-control">
               <ImageUploader
                 ref="eventImageUploader"
                 :customCssLabel="'color: black;'"
@@ -198,7 +198,7 @@ export default {
   },
   data() {
     return {
-      imagePath1: process.env.BASE_URL + 'assets/images/forgotpasswordBg1.png',
+      imagePath1: process.env.BASE_URL + 'assets/images/evensubmissionBg7.png',
       event_name: "",
       event_details: "",
       images: [],
@@ -344,5 +344,13 @@ export default {
       color: #ffffff;
         
     }
+    .font-2 {
+  font-family: 'Stick No Bills', sans-serif;
+  margin-top: 25px;
+  font-size: 45px;
+  color: #ffffff;
+}
+  
+
 
 </style>
