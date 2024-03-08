@@ -15,7 +15,7 @@
         </div>
       </div>
     
-      <div id="section2" :style="[section2, section]" class=" justify-content-center align-items-center text-center text-white d-flex"> 
+      <div id="section2" :style="[section2, section]" class="section justify-content-center align-items-center text-center text-white d-flex"> 
         <div class="container">
           <div>
             <a>
@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class=" col-md-6 text-white  ">
-              <div class=" custom-boxes col-md-4 ms-md-auto m-5 text-start">
+              <div class="  custom-boxes col-md-4 ms-md-auto m-5 text-start">
                 <p class="font-2 ">Concerts</p>
               </div>
               <div class="  custom-boxes col-md-6 ms-md-auto m-5 text-start">
@@ -71,11 +71,11 @@
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
               <div class="">
-                <p class="font-2 p-1">Bored? or need to get info on an event you are looking forwards to? Check out the events listed at  our website by clicking the button below</p>
+                <p class="font-2 ">Bored? or need to get info on an event you are looking forwards to? Check out the events listed at  our website by clicking the button below</p>
               </div>
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
-              <div class="">
+              <div class="pt-3">
                 <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">EVENTS</a>
               </div>
             </div>
@@ -98,7 +98,7 @@
               </div>
             </div>
             <div class="col-md-12 text-white  justify-content-center align-items-center">
-              <div class="">
+              <div class="pt-3">
                 <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">PUBLISH</a>
               </div>
             </div>
@@ -129,7 +129,8 @@ export default {
     section(){
       return{
         backgroundSize: 'cover', 
-        backgroundPosition: 'center', 
+        backgroundPosition: 'center',
+       
       };
     },
     section1() {
@@ -142,28 +143,28 @@ export default {
     section2(){
       return{
         background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath2})`,
-        padding: '70px !important', 
+         
       };
     },
 
     section3(){
       return{
         background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath3})`,
-        padding: '100px !important', 
+        
       };
     },
 
     section4(){
       return{
         background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath4})`,
-        padding: '100px !important', 
+        
       };
     },
 
     section5(){
       return{
         background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath5})`,
-        padding: '100px !important', 
+        
       };
     },
 
@@ -222,4 +223,28 @@ export default {
           background-color: rgba(17, 31, 77, 0.6); 
           padding: 2px;
         }
+
+        .section{
+          background-Size: cover; 
+          background-position: center;
+          padding: 100px !important;
+        }
+
+        @media screen and (max-width: 768px) { 
+          .font-2{
+            margin:0px;
+          }
+          .custom-logo {
+            max-width: 100px; 
+          }
+
+          .section{
+            padding: 30px !important;
+          }
+
+          #section3 .custom-boxes {
+            margin: 10px !important; 
+            text-align: center !important;
+        }
+      }
 </style>

@@ -221,5 +221,7 @@ export default {
   margin-left: 2%;
   margin-right: 2%;
   
-}</style>
+}
+
+</style>
   
