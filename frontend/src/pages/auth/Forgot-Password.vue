@@ -20,7 +20,7 @@
                       <label for="email" class="form-label" style="margin-bottom: 6%;">Email
                         Address:</label>
                       <input type="email" class="form-control increased-height" v-model="email"
-                        placeholder="Your Email Adress">
+                        placeholder="Your Email Address" >
                     </div>
                   </div>
                 </form>
@@ -208,4 +208,8 @@ a {
   background-color: rgba(255, 255, 255, 0.3);
   /* Adjust the alpha value for transparency */
 }
+.form-control::placeholder {             
+color: #939b8d;
+}
+
 </style>
