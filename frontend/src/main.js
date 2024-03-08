@@ -22,6 +22,7 @@ import UserProfileVue from './pages/user/Profile.vue';
 //component - Public
 import AboutUsVue from './pages/public/AboutUs.vue';
 import EventsVue from './pages/public/Events.vue';
+import EventVue from './pages/public/Event.vue';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -56,7 +57,8 @@ const routes = [
 
     // Public pages
     {path: '/about-us', component: AboutUsVue},
-    {path: '/events', component: EventsVue}
+    {path: '/events', component: EventsVue},
+    {path: '/events/:uuid', component: EventVue}
 ];
 
 const router = createRouter({
