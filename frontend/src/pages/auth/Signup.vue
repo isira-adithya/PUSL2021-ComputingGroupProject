@@ -1,5 +1,5 @@
 <template>
-<div class="background-container">
+<div id="section1" :style="[section1, section]" class="background-container">
   <div class="container">
     <div class="row">
       <div class="col-lg-3"></div>
@@ -161,6 +161,7 @@ export default {
       repeat_password: "",
       role: "VISITOR", 
       shouldRemember: "",
+      imagePath1: process.env.BASE_URL + 'assets/images/EventsPic6.jpeg',
     };
   },
   methods: {
@@ -206,6 +207,24 @@ export default {
           
         });
     },
+  },
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
   },
 };
 </script>

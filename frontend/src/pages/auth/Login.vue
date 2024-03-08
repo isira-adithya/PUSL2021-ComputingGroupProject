@@ -1,9 +1,9 @@
 <template>
-<div class="background-container">
+<div id="section1" :style="[section1, section]" class="background-container">
     <div class="container">
-      <div class="col-md-4 mx-auto text-center">
+      <div class="col-md-4 mx-auto text-center"><br><br><br><br><br>
         <div class="main-container">
-        <h1 class="mb-4 font-1">Login</h1>
+        <h1 class="mb-4 font-1" >Login</h1>
         <br />
 
         <form @submit.prevent="">
@@ -50,15 +50,14 @@
           >
             Login
           </button>
-          <br />
-          <br />
+          <br/>
+          <br/>
         </form>
         <router-link to="/forgot-password">Forgot Password?</router-link>
         <p class="mb-4">
           Don't Have An Account?
           <router-link to="/signup"
-            ><span style="color: rgb(31, 81, 255)">Register</span></router-link
-          >
+            ><span style="color: rgb(31, 81, 255)">Register</span></router-link>
         </p>
       </div>
       </div>
@@ -78,6 +77,7 @@ export default {
       email: "",
       password: "",
       shouldRemember: "",
+      imagePath1: process.env.BASE_URL + 'assets/images/LoginBack.png',
     };
   },
   methods: {
@@ -109,6 +109,25 @@ export default {
         });
     },
   },
+
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
+  },
 };
 </script>
 
@@ -127,7 +146,7 @@ h1 {
   background-color: #000000;
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100vh;
 }
 
 p {
