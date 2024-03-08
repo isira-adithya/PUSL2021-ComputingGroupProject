@@ -5,7 +5,6 @@
         <div class="main-container">
         <h1 class="mb-4 font-1" >Login</h1>
         <br />
-
         <form @submit.prevent="">
           <div class="row justify-content-around">
             <div class="mb-3">
@@ -63,6 +62,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
