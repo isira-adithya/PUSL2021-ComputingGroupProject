@@ -1,7 +1,13 @@
 import config from "../../config.js";
+import axios from "axios";
 
 async function sendSms(to, message, contactFname = null, contactLname = null, contactEmail = null, contactAddress = null, contactGroup = null, type = null) {
-    console.log(`Sending ${msg} to ${to}`);
+    console.log(`Sending ${message} to ${to}`);
+
+    // In dev mode, API key is empty is if it is empty, sms should not be sent.
+    if (config.NOTIFYLK_APIKEY.length() <= 0){
+        return "Message Sent";
+    }
 
     // Loading userId, APIkey and SenderID from config.js
     const url = 'https://app.notify.lk/api/v1/send';
@@ -21,7 +27,11 @@ async function sendSms(to, message, contactFname = null, contactLname = null, co
 
     try {
         const response = await axios.get(url, { params });
-        return response.data;
+        if (response.status == 200){
+            return response.data
+        } else {
+            throw 'Internal Error - Notify API'
+        }
     } catch (error) {
         console.error(error);
         throw error;
