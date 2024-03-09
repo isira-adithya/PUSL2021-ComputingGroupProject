@@ -1,6 +1,6 @@
 <template>
     <div class="body2" id="section1" :style="[section1, section]">
-    <div class="container">zbr
+    <div class="container">
         <center><h2 class="mb-5 text-white font-2">
             About Us </h2></center>
       <div id="about-us-container" class="row align-items-center">
@@ -33,7 +33,7 @@
           { name: 'Nesith Perera', image: '/assets/images/dev-team/nesith.jpg' },
           { name: 'Savija Ranasinghe', image: '/assets/images/dev-team/savija.jpg' }
         ],
-        imagePath1: process.env.BASE_URL + 'assets/images/editProfile.png'
+        imagePath1: process.env.BASE_URL + 'assets/images/aboutUs.png'
       };
     },
     computed: {
@@ -65,7 +65,7 @@
   }
   
   #about-us-container {
-    min-height: 94vh;
+    min-height: 90vh;
   }
   
   #team-info {
@@ -104,12 +104,13 @@
   }
   .font-2 {
   font-family: 'Stick No Bills', sans-serif;
-  margin-top: 2%; /* Adjusted margin */
-  margin-bottom: 3%; /* Optional: Adjusted margin bottom */
   font-size: 43px;
   color: #ffffff;
 }
-
+.container {
+  padding-top: 3%; /* Adjusted top padding */
+  
+}
   
 
   
