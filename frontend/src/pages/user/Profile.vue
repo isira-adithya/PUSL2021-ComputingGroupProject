@@ -7,8 +7,8 @@
         <form @submit.prevent="">
           <center><h3 class="mb-5 text-white font-2">
             {{ role == "EVENT_OWNER" ? "Event Owner" : "User" }} Profile
-          </h3></center> <br><br><br>
-          <h5 class="mb-3 text-white-50">
+          </h3></center> <br><br>
+          <h5 class="mb-3 text-white-50" >
             Hello
             <i
               ><span>@{{ username }}</span> 👋</i
@@ -19,6 +19,7 @@
             :label="'Profile Picture'"
             :displayImageurl="'https://source.boringavatars.com/beam/240/'"
             ref="profileImageUploader"
+            :customCssLabel="'color: white;'"
           ></ImageUploader>
 
           <!-- Firstname and Lastname -->
@@ -47,6 +48,8 @@
                   type="email"
                   class="form-control"
                   v-model="email"
+                  style="color: white;  
+                  background-color: rgba(255, 255, 255, 0.2);"
                   
                 />
               </div>
@@ -59,6 +62,9 @@
                   type="text"
                   class="form-control"
                   v-model="phone"
+                  style="color: white;  
+                  background-color: rgba(255, 255, 255, 0.2);"
+                  
                   
                 />
               </div>
@@ -73,6 +79,7 @@
               class="form-control"
               @input="handleGoogleMap()"
               v-model="address"
+              
             />
           </div>
 
@@ -166,7 +173,7 @@ export default {
   },
   data() {
     return {
-      imagePath1: process.env.BASE_URL + 'assets/images/evensubmissionBg7.png',
+      imagePath1: process.env.BASE_URL + 'assets/images/editProfile.png',
       username: "",
       email: "",
       fname: "",
@@ -249,7 +256,7 @@ export default {
     },
     section1() {
       return {
-        background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(${this.imagePath1})`, // Dynamically set the URL   
+        background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)), url(${this.imagePath1})`, // Dynamically set the URL   
        
       };
     },
@@ -277,7 +284,7 @@ export default {
     }
     .font-2 {
   font-family: 'Stick No Bills', sans-serif;
-  margin-top: 10%;
+  margin-top: 8%;
   font-size: 40px;
   color: #ffffff;
 }
