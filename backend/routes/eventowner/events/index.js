@@ -344,4 +344,37 @@ router.put(
         }
 })
 
+router.delete('/:uuid', async (req, res) => {
+    const event = await prisma.event.findFirst({
+        where: {
+            uuid: req.params.uuid,
+            owner_id: req.session.user_id
+        }
+    });
+
+    if (event == null) {
+        return res.status(404).json({
+            message: "Event not found"
+        });
+    }
+
+    try {
+        await prisma.event.delete({
+            where: {
+                uuid: req.params.uuid
+            }
+        });
+
+        return res.json({
+            success: true,
+            msg: "Event deleted successfully"
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({
+            message: "Internal server error"
+        });
+    }
+});
+
 export default router;
