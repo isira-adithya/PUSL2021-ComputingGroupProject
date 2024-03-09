@@ -7,7 +7,7 @@
         <div id="team-info" class="col-md-6 order-md-1 order-2">
           <div class="d-flex flex-column justify-content-center h-100">
             <h1 class="text-center mb-4">The Event Hive Team</h1>
-            <p class="text-center"><b>Welcome To Event Hive, Where Unforgettable Events Around The Island Are Displayed. We Curate Exceptional Experiences, Blending Innovation with Tradition. Join Us for Extraordinary Events That Leave Learning Memories.</b></p>
+            <p class="text-center">"Welcome to our vibrant social hub! We're your ultimate destination for all things events, connecting enthusiasts, organizers, and vendors alike. Dive into a world where every moment is an opportunity to discover, share, and participate in the latest happenings. Whether you're planning, attending, or simply exploring, our platform is your go-to companion for navigating the dynamic landscape of events. Join us and let's create unforgettable experiences together!"</p>
           </div>
         </div>
         <div id="team-members" class="row justify-content-center col-md-6 order-md-2 order-1">
@@ -45,7 +45,7 @@
     },
     section1() {
       return {
-        background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)), url(${this.imagePath1})`, // Dynamically set the URL   
+        background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)), url(${this.imagePath1})`, // Dynamically set the URL   
        
       };
     },
@@ -69,7 +69,7 @@
   }
   
   #team-info {
-    padding: 60px 60px; /* Adjusted padding */
+    padding: 60px 40px; /* Adjusted padding */
     box-sizing: border-box;
   }
   
