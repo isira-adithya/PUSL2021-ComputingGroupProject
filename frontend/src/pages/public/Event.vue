@@ -73,12 +73,35 @@
               </li>
             </ul>
 
-
             <p class="card-text mt-5">
               {{ event["description"] }}
             </p>
 
-            
+            <!-- Comment Section in bootstrap -->
+            <div class="card mt-5">
+              <div class="card-header">Comments</div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-1">
+                      <img
+                        src="https://via.placeholder.com/150"
+                        class="rounded-circle"
+                        alt="..."
+                        style="width: 100%"
+                      />
+                    </div>
+                    <div class="col-11">
+                      <h5 class="card-title">@username</h5>
+                      <p class="card-text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Quos, amet.
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
