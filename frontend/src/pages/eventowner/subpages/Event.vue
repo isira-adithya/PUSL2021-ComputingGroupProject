@@ -1,50 +1,49 @@
 <template>
-    <div class="container mt-5" v-if="event != null">
+  <div id="section1" :style="[section1, section]">
+    <div class="container" v-if="event != null">
       <div class="row">
       <div class="col-lg-2" style="padding: 0;"></div>
       <div class="col-lg-8" style="padding: 0;">
         <form>
-          <h3 class="mb-4">Edit Event</h3>
+          <h3 class="mb-4 text-white font-2"> <center>Edit Event</center></h3>
           <div class="mb-3">
-            <label class="form-label">Event Name</label>
+            <label class="form-label text-white">Event Name</label>
             <input v-model="event.name" type="email" class="form-control" />
           </div>
           <div class="mb-3">
-            <label class="form-label">Event Description</label>
+            <label class="form-label text-white">Event Description</label>
             <textarea  v-model="event.description" class="form-control" style="height: 25vh"></textarea>
-            <div class="form-text text-black-50">
+            <div class="form-text text-white-50 ">
               You can use
-              <b
-                ><i><a href="https://www.markdownguide.org/">markdown</a></i></b
-              >
+              <b ><i><a href="https://www.markdownguide.org/">markdown</a></i></b>
               to add styles and other various elements to your event description
             </div>
           </div>
 
           <!-- Image Uploader -->
-          <div class="mb-3">
-            <ImageUploader
-              ref="eventImageUploader"
-              :customCssLabel="'color: black;'"
-              :label="'Images'"
-              :hideDeleteButton="true"
-              :hideImage="true"
-            />
+          <div class="mb-3 text-white">
+          <ImageUploader
+            ref="eventImageUploader"
+            :customCssLabel="'color: white;'" 
+           :label="'Images'"
+            :hideDeleteButton="true"
+            :hideImage="true"
+           />
             <ImagesCarouselVue style="width: 150px;" v-if="event.images.length > 0" :images="event.images" :auto-slide-show="true" :slide-show-interval="3000" />
           </div>
           <div class="mb-3">
-            <label class="form-label">Date / Time</label>
+            <label class="form-label text-white">Date / Time</label>
             <VueDatePicker v-model="event.date_time" />
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Event Category</label>
+            <label class="form-label text-white">Event Category</label>
             <select
               v-model="event.category"
               class="form-select"
               aria-label="Event Category"
             >
-              <option selected value="null">Select a category</option>
+              <option selected value="null text-white">Select a category</option>
               <option value="musical">Musical</option>
               <option value="sports">Sports</option>
               <option value="educational">Educational</option>
@@ -56,7 +55,7 @@
 
           <!-- Location input -->
           <div class="form-outline mb-4">
-            <label class="form-label">Address / Location</label>
+            <label class="form-label text-white">Address / Location</label>
             <input
               type="text"
               class="form-control"
@@ -93,28 +92,28 @@
               id="flexCheckDefault"
               v-model="ticketsNeeded"
             />
-            <label class="form-check-label" for="flexCheckDefault">
+            <label class="form-check-label text-white" for="flexCheckDefault">
               This event contains tickets to purchase <i>(optional)</i>
             </label>
           </div>
 
           <!-- Create a form to add a new ticket to the event, there should be ticket name, price, description -->
           <div v-if="ticketsNeeded">
-            <h4 class="mt-5 mb-3">Tickets</h4>
+            <h4 class="mt-5 mb-3 text-white">Tickets</h4>
             <div class="mb-3">
-              <label class="form-label">Ticket Name</label>
+              <label class="form-label text-white">Ticket Name</label>
               <input v-model="ticketName" type="text" class="form-control" />
             </div>
             <div class="mb-3">
-              <label class="form-label">Ticket Price</label>
+              <label class="form-label text-white">Ticket Price</label>
               <input v-model="ticketPrice" type="number" class="form-control" />
             </div>
             <div class="mb-3">
-              <label class="form-label">Ticket Description</label>
+              <label class="form-label text-white">Ticket Description</label>
               <textarea v-model="ticketDescription" class="form-control" style="height: 10vh"></textarea>
             </div>
             <div class="mb-3">
-              <button @click="addToTickets" class="btn btn-primary btn-sm float-end">Add Ticket</button>
+              <button @click="addToTickets" class="btn btn-primary btn-sm float-end text-white">Add Ticket</button>
               <br>
             </div>
 
@@ -142,7 +141,7 @@
           </div>
 
           <div class="mb-5">
-            <label class="form-label">Visibility</label>
+            <label class="form-label text-white">Visibility</label>
             <select
               v-model="event.visibility"
               class="form-select"
@@ -165,6 +164,7 @@
       <div class="col-lg-2" style="padding: 0;"></div>
     </div>
     </div>
+  </div>
   </template>
   
   <script>
@@ -202,6 +202,7 @@ import _ from "lodash";
     },
     data() {
       return {
+        imagePath1: process.env.BASE_URL + 'assets/images/editEvents.png',
         event_uuid: "",
         event: null,
         geoCoordinatesReceived: false,
@@ -213,6 +214,24 @@ import _ from "lodash";
         ticketName: "",
       };
     },
+    computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
+  },
     methods: {
       submitForm() {
         Notiflix.Loading.dots("Updating Event...");
@@ -259,3 +278,26 @@ import _ from "lodash";
     },
   };
   </script>
+
+<style scoped>
+.form-control {
+        border: none;
+        border-radius: 0;
+        margin-bottom: 3rem;     
+        color: #eae7e7c6;
+        background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha value for transparency */
+        border-radius: 8px;
+    }
+
+    .font-1 {
+      color: #ffffff;
+        
+    }
+    .font-2 {
+  font-family: 'Stick No Bills', sans-serif;
+  margin-top: 30px;
+  font-size: 45px;
+  color: #ffffff;
+}
+  
+</style>
