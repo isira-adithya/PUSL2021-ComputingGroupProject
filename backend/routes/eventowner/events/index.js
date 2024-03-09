@@ -131,7 +131,7 @@ router.post(
         images.every(image => {
             try {
                 const urlObj = new URL(image);
-                if (urlObj.hostname != 'pusl2024-cgp.sgp1.digitaloceanspaces.com') {
+                if (urlObj.hostname != 'eventhive.sgp1.digitaloceanspaces.com') {
                     return res.status(400).json({
                         message: "Invalid image url"
                     });
@@ -281,9 +281,11 @@ router.put(
         });
 
         images.every(image => {
+            console.log(image)
             try {
                 const urlObj = new URL(image);
-                if (urlObj.hostname != 'pusl2024-cgp.sgp1.digitaloceanspaces.com') {
+                console.log(urlObj.hostname)
+                if (urlObj.hostname != 'eventhive.sgp1.digitaloceanspaces.com') {
                     validImages = false;
                 }
             } catch (e) {
@@ -291,7 +293,7 @@ router.put(
             }
         });
 
-        if (validImages) {
+        if (!validImages) {
             return res.status(400).json({
                 message: "Invalid images array"
             });
@@ -343,5 +345,45 @@ router.put(
             });
         }
 })
+
+router.delete('/:uuid', async (req, res) => {
+    const event = await prisma.event.findFirst({
+        where: {
+            uuid: req.params.uuid,
+            owner_id: req.session.user_id
+        }
+    });
+
+    if (event == null) {
+        return res.status(404).json({
+            message: "Event not found"
+        });
+    }
+
+    try {
+        // Delete tickets associated with the events first
+        await prisma.ticket.deleteMany({
+            where: {
+                event_id: event.event_id
+            }
+        });
+        
+        await prisma.event.delete({
+            where: {
+                uuid: req.params.uuid
+            }
+        });
+
+        return res.json({
+            success: true,
+            msg: "Event deleted successfully"
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({
+            message: "Internal server error"
+        });
+    }
+});
 
 export default router;

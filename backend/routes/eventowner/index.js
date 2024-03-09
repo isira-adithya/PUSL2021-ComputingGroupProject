@@ -43,15 +43,15 @@ router.post(
     "/verify-account",
     body("face_image").notEmpty().isURL({
         protocols: ["https"],
-        host_whitelist: ["pusl2024-cgp.sgp1.digitaloceanspaces.com"]
+        host_whitelist: ["eventhive.sgp1.digitaloceanspaces.com"]
     }),
     body("nic_front").notEmpty().isURL({
         protocols: ["https"],
-        host_whitelist: ["pusl2024-cgp.sgp1.digitaloceanspaces.com"] // TODO: Change this to our own S3 bucket later
+        host_whitelist: ["eventhive.sgp1.digitaloceanspaces.com"] // TODO: Change this to our own S3 bucket later
     }),
     body("nic_back").notEmpty().isURL({
         protocols: ["https"],
-        host_whitelist: ["pusl2024-cgp.sgp1.digitaloceanspaces.com"] // TODO: Change this to our own S3 bucket later
+        host_whitelist: ["eventhive.sgp1.digitaloceanspaces.com"] // TODO: Change this to our own S3 bucket later
     }),
     body("notes").isLength({
         max: 1024
