@@ -157,7 +157,10 @@
           </div>
 
           <button @click="submitForm()" type="submit" class="btn btn-primary">
-            Create
+            Update
+          </button>
+          <button @click="deleteEvent()" type="submit" class="btn ms-3 btn-danger">
+            Delete
           </button>
         </form>
       </div>
@@ -246,6 +249,32 @@ import _ from "lodash";
         }).finally(() => {
           Notiflix.Loading.remove();
         });
+      },
+
+      deleteEvent(){
+        Notiflix.Confirm.show(
+          'Delete Event',
+          'Are you sure you want to delete this event?',
+          'Yes',
+          'No',
+          () => {
+            Notiflix.Loading.dots("Deleting Event...");
+            axios.delete("/api/eventowner/events/" + this.event_uuid).then(res => {
+              Notiflix.Notify.success("Event deleted successfully");
+              setTimeout(() => {
+                this.$router.push("/eventowner/dashboard/events");
+              }, 3000);
+            }).catch(err => {
+              console.log(err);
+              Notiflix.Notify.failure("Failed to delete event");
+            }).finally(() => {
+              Notiflix.Loading.remove();
+            });
+          },
+          () => {
+            // No callback
+          }
+        );
       },
 
       handleGoogleMap: _.debounce(function () {
