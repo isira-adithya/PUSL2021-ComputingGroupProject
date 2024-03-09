@@ -1,13 +1,14 @@
 <template>
-  <div class="container mt-5">
+  <div id="section1" :style="[section1, section]">
+  <div class="container mt">
     <div class="row">
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
         <form @submit.prevent="">
-          <h3 class="mb-3">
+          <center><h3 class="mb-5 text-white font-2">
             {{ role == "EVENT_OWNER" ? "Event Owner" : "User" }} Profile
-          </h3>
-          <h5 class="mb-5 text-black-50">
+          </h3></center> <br><br>
+          <h5 class="mb-3 text-white-50" >
             Hello
             <i
               ><span>@{{ username }}</span> 👋</i
@@ -18,19 +19,20 @@
             :label="'Profile Picture'"
             :displayImageurl="'https://source.boringavatars.com/beam/240/'"
             ref="profileImageUploader"
+            :customCssLabel="'color: white;'"
           ></ImageUploader>
 
           <!-- Firstname and Lastname -->
           <div class="row">
             <div class="col-6">
               <div class="form-outline mb-4">
-                <label class="form-label text-black-50">First Name</label>
+                <label class="form-label text-white">First Name</label>
                 <input type="text" class="form-control" v-model="fname" />
               </div>
             </div>
             <div class="col-6">
               <div class="form-outline mb-4">
-                <label class="form-label text-black-50">Last Name</label>
+                <label class="form-label text-white">Last Name</label>
                 <input type="text" class="form-control" v-model="lname" />
               </div>
             </div>
@@ -40,23 +42,30 @@
           <div class="row">
             <div class="col-6">
               <div class="form-outline mb-4">
-                <label class="form-label text-black-50">Email</label>
+                <label class="form-label text-white">Email</label>
                 <input
                   disabled
                   type="email"
                   class="form-control"
                   v-model="email"
+                  style="color: white;  
+                  background-color: rgba(255, 255, 255, 0.2);"
+                  
                 />
               </div>
             </div>
             <div class="col-6">
               <div class="form-outline mb-4">
-                <label class="form-label text-black-50">Phone</label>
+                <label class="form-label text-white">Phone</label>
                 <input
                   disabled
                   type="text"
                   class="form-control"
                   v-model="phone"
+                  style="color: white;  
+                  background-color: rgba(255, 255, 255, 0.2);"
+                  
+                  
                 />
               </div>
             </div>
@@ -64,12 +73,13 @@
 
           <!-- Address input -->
           <div class="form-outline mb-4">
-            <label class="form-label text-black-50">Address</label>
+            <label class="form-label text-white">Address</label>
             <input
               type="text"
               class="form-control"
               @input="handleGoogleMap()"
               v-model="address"
+              
             />
           </div>
 
@@ -96,7 +106,7 @@
           <div class="row mb-4">
             <div class="col">
               <!-- Checkbox -->
-              <div class="form-check mt-2">
+              <div class="form-check mt-2 text-white">
                 <label class="form-check-label">
                   Enable Notifications?
                 </label>
@@ -123,6 +133,7 @@
       <div class="col-lg-2"></div>
     </div>
   </div>
+</div>
 </template>
     
     <script>
@@ -162,6 +173,7 @@ export default {
   },
   data() {
     return {
+      imagePath1: process.env.BASE_URL + 'assets/images/editProfile.png',
       username: "",
       email: "",
       fname: "",
@@ -174,7 +186,10 @@ export default {
         lat: 1,
         lng: 1
       },
+      
     };
+    
+    
   },
   methods: {
     handleGoogleMap: _.debounce(function () { 
@@ -232,6 +247,49 @@ export default {
         });
     }
   },
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
+  },
 };
 </script>
+
+<style scoped>
+.form-control {
+        border: none;
+        border-radius: 0;
+        margin-bottom: 3rem;     
+        color: #ffffffc4;
+        background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha value for transparency */
+        border-radius: 8px;
+    }
+
+    .font-1 {
+      color: #ffffff;
+        
+    }
+    .font-2 {
+  font-family: 'Stick No Bills', sans-serif;
+  margin-top: 8%;
+  font-size: 40px;
+  color: #ffffff;
+}
+  
+
+
+</style>
       
