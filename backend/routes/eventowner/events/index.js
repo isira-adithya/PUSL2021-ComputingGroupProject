@@ -131,7 +131,7 @@ router.post(
         images.every(image => {
             try {
                 const urlObj = new URL(image);
-                if (urlObj.hostname != 'pusl2024-cgp.sgp1.digitaloceanspaces.com') {
+                if (urlObj.hostname != 'eventhive.sgp1.digitaloceanspaces.com') {
                     return res.status(400).json({
                         message: "Invalid image url"
                     });
@@ -283,7 +283,7 @@ router.put(
         images.every(image => {
             try {
                 const urlObj = new URL(image);
-                if (urlObj.hostname != 'pusl2024-cgp.sgp1.digitaloceanspaces.com') {
+                if (urlObj.hostname != 'eventhive.sgp1.digitaloceanspaces.com') {
                     validImages = false;
                 }
             } catch (e) {
