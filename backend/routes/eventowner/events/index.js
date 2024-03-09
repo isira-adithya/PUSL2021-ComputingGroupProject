@@ -281,8 +281,10 @@ router.put(
         });
 
         images.every(image => {
+            console.log(image)
             try {
                 const urlObj = new URL(image);
+                console.log(urlObj.hostname)
                 if (urlObj.hostname != 'eventhive.sgp1.digitaloceanspaces.com') {
                     validImages = false;
                 }
@@ -291,7 +293,7 @@ router.put(
             }
         });
 
-        if (validImages) {
+        if (!validImages) {
             return res.status(400).json({
                 message: "Invalid images array"
             });
@@ -359,6 +361,13 @@ router.delete('/:uuid', async (req, res) => {
     }
 
     try {
+        // Delete tickets associated with the events first
+        await prisma.ticket.deleteMany({
+            where: {
+                event_id: event.event_id
+            }
+        });
+        
         await prisma.event.delete({
             where: {
                 uuid: req.params.uuid
