@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-lg-3"></div>
       <div class="col-lg-6">
-        
+        <h2 class="font-2"><center>Verification</center></h2>
         <h3 class="mb-5 text-white" style="margin-top: 12%;">Step 01: Mobile Verification</h3>
         <div v-if="!isPhoneNumberVerified" class="alert alert-dark" role="alert">
           <p>
@@ -118,7 +118,7 @@ export default {
       pinCode: "",
       session: null,
       verification_status: "N/A",
-      imagePath1: process.env.BASE_URL + 'assets/images/editProfile.png',
+      imagePath1: process.env.BASE_URL + 'assets/images/Verification.png',
     };
     
   },
@@ -218,4 +218,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .font-2 {
+  font-family: 'Stick No Bills', sans-serif;
+  margin-top: 9%;
+  font-size: 43px;
+  color: #ffffff;
+}
+</style>
     
