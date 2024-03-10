@@ -284,7 +284,7 @@ export default {
     }
     .font-2 {
   font-family: 'Stick No Bills', sans-serif;
-  margin-top: 8%;
+  margin-top: 7%;
   font-size: 40px;
   color: #ffffff;
 }
