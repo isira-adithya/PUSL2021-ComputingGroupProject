@@ -49,10 +49,7 @@
        
       };
     },
-    
-
-    
-
+  
   },
   };
   </script>
@@ -65,7 +62,7 @@
   }
   
   #about-us-container {
-    min-height: 90vh;
+    min-height: 85vh;
   }
   
   #team-info {
