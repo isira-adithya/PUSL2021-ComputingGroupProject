@@ -113,7 +113,7 @@
               <textarea v-model="ticketDescription" class="form-control" style="height: 10vh"></textarea>
             </div>
             <div class="mb-3">
-              <button @click="addToTickets" class="btn btn-primary btn-sm float-end text-white">Add Ticket</button>
+              <button @click="addToTickets()" class="btn btn-primary btn-sm float-end text-white">Add Ticket</button>
               <br>
             </div>
 
@@ -315,7 +315,31 @@ import _ from "lodash";
         }).finally(() => {
           Notiflix.Loading.remove(1000);
         });
-    }, 1000),
+      }, 1000),
+
+      addToTickets() {
+        if (this.ticketPrice <= 0) {
+          Notiflix.Notify.failure("Ticket price should be higher than 0");
+          return;
+        }
+
+        const newTicket = {
+          id: this.event.tickets.length + 1,
+          name: this.ticketName,
+          price: this.ticketPrice,
+          description: this.ticketDescription,
+        };
+        this.event.tickets.push(newTicket);
+        this.ticketName = "";
+        this.ticketPrice = 0;
+        this.ticketDescription = "";
+      },
+
+      removeFromTickets(ticketId) {
+        this.event.tickets = this.event.tickets.filter((ticket) => ticket.id !== ticketId);
+      }
+
+
     },
   };
   </script>
