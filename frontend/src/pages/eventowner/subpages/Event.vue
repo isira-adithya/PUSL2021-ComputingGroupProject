@@ -184,6 +184,18 @@ import _ from "lodash";
     mounted() {
       this.event_uuid = this.$route.params.uuid;
 
+      // Image Uploader Watchdog
+      setInterval(() => {
+        try {
+          if (this.$refs.eventImageUploader.imageUrl != ""){
+          this.event.images.push(this.$refs.eventImageUploader.imageUrl);
+          this.$refs.eventImageUploader.reset();
+          }
+        } catch (error) {
+          // ignore
+        }
+      }, 1000);
+
       Notiflix.Loading.dots("Loading Event...");
       axios.get("/api/eventowner/events/" + this.event_uuid).then(res => {
         this.event = res.data;
