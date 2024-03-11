@@ -43,6 +43,14 @@ router.get("/:uuid", async (req, res) => {
     event.location_geocoordinates = JSON.parse(event.location_geocoordinates);
     delete event.owner_id;
 
+    // Send tickets associated with the event
+    const tickets = await prisma.ticket.findMany({
+        where: {
+            event_id: event.id
+        }
+    });
+    event.tickets = tickets;
+
     // TODO: Remove expired events
     res.json(event);
 });

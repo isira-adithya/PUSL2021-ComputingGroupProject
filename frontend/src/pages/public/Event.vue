@@ -36,6 +36,30 @@
               />
             </div>
 
+            <div v-if="event.tickets.length > 0">
+              <h5 class="mt-4 mb-2">Tickets:</h5>
+              <div class="row">
+                <div
+                  v-for="ticket in event.tickets"
+                  :key="ticket.id"
+                  class="col-4"
+                >
+                  <div class="alert alert-primary mt-2">
+                    <div>
+                      <h5><i>{{ ticket.name }}</i></h5>
+                      <p class="mt-3">
+                        <b>Price:</b> {{ ticket.price }} €
+                      </p>
+                      <p>
+                        <b>Description:</b><br>
+                        <code>{{ ticket.description }}</code>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 Category:
@@ -73,8 +97,9 @@
               </li>
             </ul>
 
-            <p class="card-text mt-5">
-              {{ event["description"] }}
+            <p class="alert alert-warning mt-4">
+              <b>Description:</b><br />
+              <code>{{ event["description"] }}</code>
             </p>
 
             <!-- Comment Section in bootstrap -->
