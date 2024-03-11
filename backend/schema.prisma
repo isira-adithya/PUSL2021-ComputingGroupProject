@@ -122,9 +122,9 @@ model Ticket {
 model Comment {
   comment_id Int    @id @default(autoincrement())
   user_id    Int
-  event_id   Int
+  event_id   String
   comment    String @db.VarChar(512)
   stars      Int    @default(0)
   user       User   @relation(fields: [user_id], references: [user_id])
-  event      Event  @relation(fields: [event_id], references: [event_id])
+  event      Event  @relation(fields: [event_id], references: [uuid])
 }
