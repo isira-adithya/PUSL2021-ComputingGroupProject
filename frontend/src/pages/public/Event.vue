@@ -204,7 +204,7 @@ export default {
       }).then((response) => {
         Notiflix.Notify.success("Comment added successfully!");
       }).catch((error) => {
-        Notiflix.Notify.failure("Something went wrong!");
+        Notiflix.Notify.failure("You have to login to add a comment!");
         console.log(error);
       }).finally(() => {
         Notiflix.Loading.remove();
