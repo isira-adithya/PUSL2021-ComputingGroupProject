@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Stick+No+Bills:wght@700&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body, html {  
+          height: 100%;
+        }
+
+        #section1{
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(/assets/images/home-pageBG.jpg);
+          background-size: cover;
+          min-height: 100%;
+        }
+        
+        
+        #section2{
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(/assets/images/header-bg\ 1.png);
+          background-size: cover;     
+          padding: 70px !important;
+        }
+
+        #section3{
+          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url(/assets/images/EventsPic1.jpeg);
+          background-size: cover; 
+          background-position: center;   
+          padding: 100px !important; 
+        }
+
+        #section4{
+          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url(/assets/images/Events\ Pic2.jpeg);
+          background-size: cover; 
+          background-position: center;   
+          padding: 100px !important; 
+        }
+
+        #section5{
+          background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),url(/assets/images/lanterns.jpg);
+          background-size:cover; 
+          background-position: center;   
+          padding: 100px !important; 
+        }
+
+        .custom-hr {
+          height: 2px; 
+          background-color: rgba(255,255,255); 
+          margin: 20px 0; 
+        }
+        .custom-boxes{
+          background-color: #111F4D;   
+        }
+        .font-1{
+          font-family: 'Stick No Bills', sans-serif;
+        }
+
+        .font-2{
+          font-family: 'Poppins', sans-serif;
+        }
+
+        .scroll-down {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .fa-color{
+          color:rgb(255, 255, 255);
+
+        }
+        .fa-color:hover{
+          color: rgb(207, 206, 206);
+        }
+
+
+        @media(max-width: 767px) {
+          #section2, #section3, #section4, #section5 {
+            /* Adjust the height for smaller screens */
+            padding: 120px 15px !important;
+          }
+        }
+
+
+      </style>
+    </head>
+    <body>
+    
+
+      <div id="section1" class="section text-center text-white d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row">
+              <h1 class="font-1 display-1">WELCOME TO EVENT HIVE</h1>
+            </div>
+            <div class="row">
+              <p class="font-2 h3">ADMIN PANEL</p>
+            </div>
+        </div>
+        <div class="arrow-container text-center">
+            <a href="#section2" class="scroll-down">
+              <i class="fas fa-chevron-down fa-color"></i>
+            </a>
+        </div>
+      </div>
+
+      <div id="section2" class="justify-content-center align-items-center text-center text-white d-flex"> 
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="custom-card">
+                        <img src="" alt="Product Image" class="img-fluid mb-3 card-img" style="height: 191px;width: 191px;">
+                        <div style="font-size: 1rem;"></div>                                    
+                        <div class="mt-2" style="color: #18781e;"></div>
+                        <a href="" class="card-button">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
