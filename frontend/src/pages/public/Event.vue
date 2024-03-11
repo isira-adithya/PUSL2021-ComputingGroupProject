@@ -42,9 +42,9 @@
                 <div
                   v-for="ticket in event.tickets"
                   :key="ticket.id"
-                  class="col-4"
+                  class="col-6"
                 >
-                  <div class="alert alert-primary mt-2">
+                  <div class="alert alert-primary mt-2" style="font-size: smaller;">
                     <div>
                       <h5><i>{{ ticket.name }}</i></h5>
                       <p class="mt-3">
@@ -60,8 +60,12 @@
               </div>
             </div>
 
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
+            <p class="alert alert-warning mt-4">
+              <b>Description:</b><br />
+              <code>{{ event["description"] }}</code>
+
+              <ul class="list-group list-group-flush mt-4">
+              <li class="list-group-item bg-transparent">
                 Category:
                 <i
                   ><b>{{
@@ -70,7 +74,7 @@
                   }}</b></i
                 >
               </li>
-              <li class="list-group-item">
+              <li class="list-group-item bg-transparent">
                 Location:
                 <i
                   ><b>{{
@@ -79,7 +83,7 @@
                   }}</b></i
                 >
               </li>
-              <li class="list-group-item">
+              <li class="list-group-item bg-transparent">
                 Date:
                 <i
                   ><b>
@@ -87,7 +91,7 @@
                   </b></i
                 >
               </li>
-              <li class="list-group-item">
+              <li class="list-group-item bg-transparent">
                 Time:
                 <i
                   ><b>
@@ -96,15 +100,11 @@
                 >
               </li>
             </ul>
-
-            <p class="alert alert-warning mt-4">
-              <b>Description:</b><br />
-              <code>{{ event["description"] }}</code>
             </p>
 
             <!-- Comment Section in bootstrap -->
-            <div class="card mt-5">
-              <div class="card-header">Comments</div>
+            <div class="mt-5">
+              <div class="card-header"><h5>Comments</h5></div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <div class="row">
@@ -117,10 +117,12 @@
                       />
                     </div>
                     <div class="col-11">
-                      <h5 class="card-title">@username</h5>
-                      <p class="card-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quos, amet.
+                      <b class="card-title text-sm">@username</b>
+                      <p class="card-text text-sm">
+                        <i>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          Quos, amet.
+                        </i>
                       </p>
                     </div>
                   </div>
