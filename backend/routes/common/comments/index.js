@@ -18,15 +18,16 @@ router.post('/new', isLoggedIn, async (req, res) => {
     try {
         const newComment = await prisma.comment.create({
             data: {
-                event_uuid,
-                user_id,
-                comment
+                event_id: event_uuid,
+                user_id: user_id,
+                comment: comment
             }
         });
         res.status(200).json(newComment);
     } catch (error) {
         res.status(500).json({
-            error: error.message
+            success: false,
+            msg: "Something went wrong"
         });
     }
 });
