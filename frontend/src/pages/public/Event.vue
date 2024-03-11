@@ -102,6 +102,26 @@
             </ul>
             </p>
 
+            <!-- Add Comment form -->
+            <div class="mt-5">
+              <div class="card-header"><h5>Add Comment</h5></div>
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea
+                      class="form-control"
+                      id="comment"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                  <button @click="addComment()" class="btn btn-primary btn-sm mt-2">
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+
             <!-- Comment Section in bootstrap -->
             <div class="mt-5">
               <div class="card-header"><h5>Comments</h5></div>
@@ -175,6 +195,21 @@ export default {
       },
     };
   },
-  methods: {},
+  methods: {
+    addComment() {
+      Notiflix.Loading.standard();
+      axios.post(`/api/common/comments/new`, {
+        comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        event_uuid: this.uuid,
+      }).then((response) => {
+        Notiflix.Notify.success("Comment added successfully!");
+      }).catch((error) => {
+        Notiflix.Notify.failure("Something went wrong!");
+        console.log(error);
+      }).finally(() => {
+        Notiflix.Loading.remove();
+      });
+    },
+  },
 };
 </script>
