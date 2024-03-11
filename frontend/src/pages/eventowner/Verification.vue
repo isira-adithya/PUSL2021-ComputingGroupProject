@@ -1,9 +1,11 @@
 <template>
-  <div class="container mt-5">
+  <div id="section1" :style="[section1, section]">
+  <div class="container">
     <div class="row">
       <div class="col-lg-3"></div>
       <div class="col-lg-6">
-        <h3 class="mb-5">Step 01: Mobile Verification</h3>
+        <h2 class="font-2"><center>Verification</center></h2>
+        <h3 class="mb-5 text-white" style="margin-top: 12%;">Step 01: Mobile Verification</h3>
         <div v-if="!isPhoneNumberVerified" class="alert alert-dark" role="alert">
           <p>
             <small
@@ -46,7 +48,7 @@
           <p><small>Your Mobile Number is already verified.</small></p>
         </div>
 
-        <h4 class="mb-4 mt-5">Step 02: Documents & Images Uploads</h4>
+        <h4 class="mb-4 mt-5 text-white">Step 02: Documents & Images Uploads</h4>
         <div class="alert alert-danger" v-if="verification_status == 'REJECTED'">
           <small>
             <p>Your previous verification attempt was failed.</p>
@@ -83,6 +85,7 @@
       <div class="col-lg-3"></div>
     </div>
   </div>
+</div>
 </template>
   
   <script>
@@ -114,8 +117,28 @@ export default {
       notes: "",
       pinCode: "",
       session: null,
-      verification_status: "N/A"
+      verification_status: "N/A",
+      imagePath1: process.env.BASE_URL + 'assets/images/Verification.png',
     };
+    
+  },
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
   },
   methods: {
     requestPIN() {
@@ -195,4 +218,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .font-2 {
+  font-family: 'Stick No Bills', sans-serif;
+  margin-top: 9%;
+  font-size: 43px;
+  color: #ffffff;
+}
+</style>
     
