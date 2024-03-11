@@ -32,7 +32,7 @@ router.get("/:uuid", async (req, res) => {
     });
     
     if (event == null){
-        res.json(400);
+        res.status(400);
         return res.json({
             success: false,
             msg: "Invalid UUID"
