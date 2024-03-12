@@ -123,7 +123,7 @@
             </div>
 
             <div class="col text-end">
-              <button @click="updateProfile" type="button" class="btn btn-dark">
+              <button @click="updateProfile" type="button" class="btn btn-light">
                 Save
               </button>
             </div>
