@@ -190,17 +190,17 @@ export default {
         Notiflix.Loading.remove();
       });
 
-      // Check if the user is logged
-      if (localStorage.getItem("isLoggedIn")) {
-        if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
-          this.isLoggedIn = true;
-          this.user = JSON.parse(localStorage.getItem("session"));
-        } else {
-          this.isLoggedIn = false;
-        }
+    // Check if the user is logged
+    if (localStorage.getItem("isLoggedIn")) {
+      if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
+        this.isLoggedIn = true;
+        this.user = JSON.parse(localStorage.getItem("session"));
       } else {
         this.isLoggedIn = false;
       }
+    } else {
+      this.isLoggedIn = false;
+    }
   },
   data() {
     return {
@@ -218,17 +218,67 @@ export default {
   methods: {
     addComment() {
       Notiflix.Loading.standard();
-      axios.post(`/api/common/comments/new`, {
-        comment: this.comment,
-        event_uuid: this.uuid,
-      }).then((response) => {
-        Notiflix.Notify.success("Comment added successfully!");
-      }).catch((error) => {
-        Notiflix.Notify.failure("You have to login to add a comment!");
-        console.log(error);
-      }).finally(() => {
-        Notiflix.Loading.remove();
-      });
+      axios
+        .post(`/api/common/comments/new`, {
+          comment: this.comment,
+          event_uuid: this.uuid,
+        })
+        .then((response) => {
+          Notiflix.Notify.success("Comment added successfully!");
+
+          // Refresh the page
+          axios
+            .get(`/api/common/events/${this.uuid}`)
+            .then((response) => {
+              this.event = response.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          Notiflix.Notify.failure("You have to login to add a comment!");
+          console.log(error);
+        })
+        .finally(() => {
+          Notiflix.Loading.remove();
+        });
+    },
+
+    deleteComment(comment_id) {
+      // Ask for confirmation using Notiflix.Confirm
+      Notiflix.Confirm.show(
+        "Delete Comment",
+        "Are you sure you want to delete this comment?",
+        "Yes",
+        "No",
+        () => {
+          Notiflix.Loading.standard();
+          axios
+            .delete(`/api/common/comments/${comment_id}`)
+            .then((response) => {
+              Notiflix.Notify.success("Comment deleted successfully!");
+
+              // Refresh the page
+              axios
+                .get(`/api/common/events/${this.uuid}`)
+                .then((response) => {
+                  this.event = response.data;
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            })
+            .catch((error) => {
+              Notiflix.Notify.failure("You have to login to delete a comment!");
+              console.log(error);
+            })
+            .finally(() => {
+              Notiflix.Loading.remove();
+            });
+        },
+        function () {}
+      );
     },
   },
 };
