@@ -25,7 +25,7 @@
             <div class="mb-3 form-control">
               <ImageUploader
                 ref="eventImageUploader"
-                :customCssLabel="'color: black;'"
+                :customCssLabel="'color: white;'"
                 :label="'Images'"
                 :hideDeleteButton="true"
                 :hideImage="true"
