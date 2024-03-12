@@ -77,17 +77,6 @@ CREATE TABLE `Verification` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Commentary` (
-    `commentary_id` INTEGER NOT NULL AUTO_INCREMENT,
-    `user_id` INTEGER NULL,
-    `event_id` INTEGER NULL,
-    `comment` VARCHAR(512) NULL,
-    `rating` VARCHAR(191) NULL,
-
-    PRIMARY KEY (`commentary_id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `Event` (
     `event_id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NULL,
@@ -117,6 +106,17 @@ CREATE TABLE `Ticket` (
     PRIMARY KEY (`ticket_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `Comment` (
+    `comment_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `user_id` INTEGER NOT NULL,
+    `event_id` VARCHAR(191) NOT NULL,
+    `comment` VARCHAR(512) NOT NULL,
+    `stars` INTEGER NOT NULL DEFAULT 0,
+
+    PRIMARY KEY (`comment_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `User` ADD CONSTRAINT `User_phone_id_fkey` FOREIGN KEY (`phone_id`) REFERENCES `PhoneNumber`(`phone_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -133,13 +133,13 @@ ALTER TABLE `Notification` ADD CONSTRAINT `Notification_user_id_fkey` FOREIGN KE
 ALTER TABLE `Verification` ADD CONSTRAINT `Verification_owner_id_fkey` FOREIGN KEY (`owner_id`) REFERENCES `User`(`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Commentary` ADD CONSTRAINT `Commentary_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `Commentary` ADD CONSTRAINT `Commentary_event_id_fkey` FOREIGN KEY (`event_id`) REFERENCES `Event`(`event_id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE `Event` ADD CONSTRAINT `Event_owner_id_fkey` FOREIGN KEY (`owner_id`) REFERENCES `User`(`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Ticket` ADD CONSTRAINT `Ticket_event_id_fkey` FOREIGN KEY (`event_id`) REFERENCES `Event`(`event_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Comment` ADD CONSTRAINT `Comment_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Comment` ADD CONSTRAINT `Comment_event_id_fkey` FOREIGN KEY (`event_id`) REFERENCES `Event`(`uuid`) ON DELETE RESTRICT ON UPDATE CASCADE;

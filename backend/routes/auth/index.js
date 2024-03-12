@@ -9,6 +9,7 @@ import {
     body,
     validationResult
 } from 'express-validator';
+import { sendEmail } from '../../modules/emails/mailgun.js';
 
 const prisma = new PrismaClient()
 const router = express.Router();
@@ -283,10 +284,16 @@ router.post(
             });
         }
         try {
-            const user = await prisma.user.findUnique({
+            let emailAddress = await prisma.emailAddress.findFirst({
                 where: {
-                    user_name: req.body['username']
-                },
+                    email: req.body['username']
+                }
+            });
+
+            let user = await prisma.user.findFirst({
+                where: {
+                    email_id: emailAddress.email_id
+                }
             });
 
             if (!user) {
@@ -319,10 +326,20 @@ router.post(
 
             // TODO:
             // Send the token to the user (e.g., via email)
+            const link = `https://www.eventhive.live/#/reset-password/${token}`;
+            const result = await sendEmail([emailAddress.email], "Password Reset - EventHive", `Visit ${link} to reset your password.`, `Visit <a href="${link}">here</a> to reset your password.<br><i>Use the following link if the above link doesn't work.</i><br><pre><code>${link}</code></pre>`)
 
-            res.status(200).json({
-                msg: 'Password reset token generated successfully'
-            });
+            if (result){
+                res.status(200).json({
+                    msg: 'Password reset token generated successfully'
+                });
+            } else {
+                res.status(500);
+                res.json({
+                    success: false,
+                    msg: 'Failed to send the email, please try again later.'
+                });
+            }
         } catch (error) {
             console.error(error);
             res.status(500);

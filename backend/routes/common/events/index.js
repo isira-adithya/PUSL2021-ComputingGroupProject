@@ -32,7 +32,7 @@ router.get("/:uuid", async (req, res) => {
     });
     
     if (event == null){
-        res.json(400);
+        res.status(400);
         return res.json({
             success: false,
             msg: "Invalid UUID"
@@ -42,6 +42,32 @@ router.get("/:uuid", async (req, res) => {
     event.images = event.images.split(',');
     event.location_geocoordinates = JSON.parse(event.location_geocoordinates);
     delete event.owner_id;
+
+    // Send tickets associated with the event
+    const tickets = await prisma.ticket.findMany({
+        where: {
+            event_id: event.id
+        }
+    });
+    event.tickets = tickets;
+
+    // Send comments associated with the event
+    const comments = await prisma.comment.findMany({
+        where: {
+            event_id: event.id
+        }
+    });
+    // For each comment, get the username by comment.user_id
+    for (let i = 0; i < comments.length; i++) {
+        const user = await prisma.user.findFirst({
+            where: {
+                user_id: comments[i].user_id
+            }
+        });
+        comments[i].username = user.first_name + " " + user.last_name;
+        comments[i].user_profile_image = user.profile_image ? user.profile_image : 'https://source.boringavatars.com/beam/240/';
+    }
+    event.comments = comments;
 
     // TODO: Remove expired events
     res.json(event);

@@ -43,7 +43,7 @@ router.post(
                 });
             }
             
-            sendSms(phoneNumber.number, `Please use the code ${pinCode} to verify your https://eventhive.live account.`);
+            await sendSms(phoneNumber.number, `Please use the code ${pinCode} to verify your https://eventhive.live account.`);
 
             return res.json({
                 success: true,
