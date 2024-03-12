@@ -326,7 +326,7 @@ router.post(
 
             // TODO:
             // Send the token to the user (e.g., via email)
-            const link = `http://www.eventhive.local/#/reset-password/${token}`;
+            const link = `https://www.eventhive.live/#/reset-password/${token}`;
             const result = await sendEmail([emailAddress.email], "Password Reset - EventHive", `Visit ${link} to reset your password.`, `Visit <a href="${link}">here</a> to reset your password.<br><i>Use the following link if the above link doesn't work.</i><br><pre><code>${link}</code></pre>`)
 
             if (result){
