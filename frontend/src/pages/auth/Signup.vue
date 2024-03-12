@@ -176,6 +176,12 @@ export default {
         return;
       }
 
+      // Check if the phone number is valid and Sri lankan
+      if (this.phone.length != 12 || !this.phone.startsWith("+94")){
+        Notiflix.Report.failure("Invalid phone number", "Phone number should be Sri Lankan, and should start with +94", "OK");
+        return;
+      }
+
       var data = {
           username: this.username,
           firstname: this.first_name,
