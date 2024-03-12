@@ -131,7 +131,7 @@ router.post(
         images.every(image => {
             try {
                 const urlObj = new URL(image);
-                if (urlObj.hostname != 'pusl2024-cgp.sgp1.digitaloceanspaces.com') {
+                if (urlObj.hostname != 'eventhive.sgp1.digitaloceanspaces.com') {
                     return res.status(400).json({
                         message: "Invalid image url"
                     });
@@ -256,7 +256,7 @@ router.put(
         const tickets = req.body.tickets;
         if (tickets != null && tickets.length > 0) {
             const validTickets = tickets.every(ticket => {
-                return ticket.hasOwnProperty('ticket_id') && ticket.hasOwnProperty('name') && ticket.hasOwnProperty('price') && ticket.hasOwnProperty('description');
+                return ticket.hasOwnProperty('id') && ticket.hasOwnProperty('name') && ticket.hasOwnProperty('price') && ticket.hasOwnProperty('description');
             });
             if (!validTickets) {
                 return res.status(400).json({
@@ -281,9 +281,11 @@ router.put(
         });
 
         images.every(image => {
+            console.log(image)
             try {
                 const urlObj = new URL(image);
-                if (urlObj.hostname != 'pusl2024-cgp.sgp1.digitaloceanspaces.com') {
+                console.log(urlObj.hostname)
+                if (urlObj.hostname != 'eventhive.sgp1.digitaloceanspaces.com') {
                     validImages = false;
                 }
             } catch (e) {
@@ -291,7 +293,7 @@ router.put(
             }
         });
 
-        if (validImages) {
+        if (!validImages) {
             return res.status(400).json({
                 message: "Invalid images array"
             });
@@ -329,7 +331,26 @@ router.put(
                 }
             });
 
-            // TODO: Handle Tickets
+            // Delete tickets related to this event
+            await prisma.ticket.deleteMany({
+                where: {
+                    event_id: eventObj.event_id
+                }
+            });
+            // Add tickets to the database
+            if (tickets != null && tickets.length > 0) {
+                // Adding event_id of tickets and removing id
+                tickets.forEach(ticket => {
+                    delete ticket.id;
+                    ticket.event_id = eventObj.event_id;
+                });
+
+                // Add tickets to the database
+                await prisma.ticket.createMany({
+                    data: tickets
+                });
+            }
+
 
 
             return res.json({
@@ -343,5 +364,45 @@ router.put(
             });
         }
 })
+
+router.delete('/:uuid', async (req, res) => {
+    const event = await prisma.event.findFirst({
+        where: {
+            uuid: req.params.uuid,
+            owner_id: req.session.user_id
+        }
+    });
+
+    if (event == null) {
+        return res.status(404).json({
+            message: "Event not found"
+        });
+    }
+
+    try {
+        // Delete tickets associated with the events first
+        await prisma.ticket.deleteMany({
+            where: {
+                event_id: event.event_id
+            }
+        });
+        
+        await prisma.event.delete({
+            where: {
+                uuid: req.params.uuid
+            }
+        });
+
+        return res.json({
+            success: true,
+            msg: "Event deleted successfully"
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({
+            message: "Internal server error"
+        });
+    }
+});
 
 export default router;

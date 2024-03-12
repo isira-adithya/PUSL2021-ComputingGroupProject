@@ -113,7 +113,7 @@
               <textarea v-model="ticketDescription" class="form-control" style="height: 10vh"></textarea>
             </div>
             <div class="mb-3">
-              <button @click="addToTickets" class="btn btn-primary btn-sm float-end text-white">Add Ticket</button>
+              <button @click="addToTickets()" class="btn btn-primary btn-sm float-end text-white">Add Ticket</button>
               <br>
             </div>
 
@@ -157,7 +157,10 @@
           </div>
 
           <button @click="submitForm()" type="submit" class="btn btn-primary">
-            Create
+            Update
+          </button>
+          <button @click="deleteEvent()" type="submit" class="btn ms-3 btn-danger">
+            Delete
           </button>
         </form>
       </div>
@@ -180,6 +183,18 @@ import _ from "lodash";
     components: {ImageUploader, ImagesCarouselVue, VueDatePicker},
     mounted() {
       this.event_uuid = this.$route.params.uuid;
+
+      // Image Uploader Watchdog
+      setInterval(() => {
+        try {
+          if (this.$refs.eventImageUploader.imageUrl != ""){
+          this.event.images.push(this.$refs.eventImageUploader.imageUrl);
+          this.$refs.eventImageUploader.reset();
+          }
+        } catch (error) {
+          // ignore
+        }
+      }, 1000);
 
       Notiflix.Loading.dots("Loading Event...");
       axios.get("/api/eventowner/events/" + this.event_uuid).then(res => {
@@ -248,6 +263,32 @@ import _ from "lodash";
         });
       },
 
+      deleteEvent(){
+        Notiflix.Confirm.show(
+          'Delete Event',
+          'Are you sure you want to delete this event?',
+          'Yes',
+          'No',
+          () => {
+            Notiflix.Loading.dots("Deleting Event...");
+            axios.delete("/api/eventowner/events/" + this.event_uuid).then(res => {
+              Notiflix.Notify.success("Event deleted successfully");
+              setTimeout(() => {
+                this.$router.push("/eventowner/dashboard/events");
+              }, 3000);
+            }).catch(err => {
+              console.log(err);
+              Notiflix.Notify.failure("Failed to delete event");
+            }).finally(() => {
+              Notiflix.Loading.remove();
+            });
+          },
+          () => {
+            // No callback
+          }
+        );
+      },
+
       handleGoogleMap: _.debounce(function () {
       // const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${this.address}`;
       const apiUrl = `/api/common/geoapify/geocode?address=${this.event.location}`;
@@ -274,7 +315,31 @@ import _ from "lodash";
         }).finally(() => {
           Notiflix.Loading.remove(1000);
         });
-    }, 1000),
+      }, 1000),
+
+      addToTickets() {
+        if (this.ticketPrice <= 0) {
+          Notiflix.Notify.failure("Ticket price should be higher than 0");
+          return;
+        }
+
+        const newTicket = {
+          id: this.event.tickets.length + 1,
+          name: this.ticketName,
+          price: this.ticketPrice,
+          description: this.ticketDescription,
+        };
+        this.event.tickets.push(newTicket);
+        this.ticketName = "";
+        this.ticketPrice = 0;
+        this.ticketDescription = "";
+      },
+
+      removeFromTickets(ticketId) {
+        this.event.tickets = this.event.tickets.filter((ticket) => ticket.id !== ticketId);
+      }
+
+
     },
   };
   </script>

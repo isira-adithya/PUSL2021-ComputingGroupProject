@@ -32,7 +32,7 @@ router.get("/:uuid", async (req, res) => {
     });
     
     if (event == null){
-        res.json(400);
+        res.status(400);
         return res.json({
             success: false,
             msg: "Invalid UUID"
@@ -42,6 +42,14 @@ router.get("/:uuid", async (req, res) => {
     event.images = event.images.split(',');
     event.location_geocoordinates = JSON.parse(event.location_geocoordinates);
     delete event.owner_id;
+
+    // Send tickets associated with the event
+    const tickets = await prisma.ticket.findMany({
+        where: {
+            event_id: event.id
+        }
+    });
+    event.tickets = tickets;
 
     // TODO: Remove expired events
     res.json(event);

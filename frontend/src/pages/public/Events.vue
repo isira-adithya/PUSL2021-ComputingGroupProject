@@ -18,7 +18,6 @@
               </ul>
               <div class="card-body">
                 <router-link :to="'/events/' + event.uuid" class="btn btn-primary mx-3 my-1">Open</router-link>
-                <router-link :to="'/eventowner/dashboard/event/' + event.uuid" class="btn btn-primary mx-3 my-1">Edit Event</router-link>
               </div>
             </div>
             </div>

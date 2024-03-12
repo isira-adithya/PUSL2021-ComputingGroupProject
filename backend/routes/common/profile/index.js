@@ -63,7 +63,7 @@ router.put("/",
         body('phone').isMobilePhone(),
         body('profile_image').isURL({
             host_whitelist: [
-                'pusl2024-cgp.sgp1.digitaloceanspaces.com',
+                'eventhive.sgp1.digitaloceanspaces.com',
                 'www.eventhive.local',
                 'source.boringavatars.com' // Random Avatar Image API
             ]
