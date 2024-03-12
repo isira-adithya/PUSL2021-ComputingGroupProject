@@ -12,8 +12,8 @@
           <div class="form-outline mb-2">
             
             <label class="form-label text-white-60" for="form2Example1">Role</label><br>
-            <button @click="role = 'VISITOR'" :class="(role == 'VISITOR') ? 'btn btn-success btn-sm me-2' : 'btn btn-sm me-2'">Visitor</button>
-            <button @click="role = 'EVENT_OWNER'" :class="(role == 'EVENT_OWNER') ? 'btn btn-success btn-sm ms-2' : 'btn btn-sm ms-2'">Event Owner</button>
+            <button @click="role = 'VISITOR'" :class="(role == 'VISITOR') ? 'btn btn-success btn-sm me-2' : 'btn text-white btn-outline-success btn-sm me-2'">Visitor</button>
+            <button @click="role = 'EVENT_OWNER'" :class="(role == 'EVENT_OWNER') ? 'btn btn-success btn-sm ms-2' : 'btn text-white btn-outline-success btn-sm ms-2'">Event Owner</button>
             
           </div>
           <br>
