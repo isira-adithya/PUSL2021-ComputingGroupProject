@@ -1,11 +1,13 @@
 <template>
+  <div id="section1" :style="[section1, section]" class="background-container">
   <div v-if="event != null">
     <div class="row">
       <div class="col-2"></div>
       <div class="col-8">
-        <div class="card">
-          <div class="card-body">
-            <h3 class="card-title">{{ event["name"] }}</h3>
+        <div class="card" style="margin-top: 6%;">
+          <div class="card-body text-black">
+            <center><h5 style="margin-top: 10px;">Event Name:</h5>
+            <h4 class="card-title">{{ event["name"] }}</h4></center>
 
             <div>
               <ImagesCarouselVue
@@ -15,54 +17,12 @@
                 :auto-slide-show="true"
                 :slide-show-interval="1000"
               />
-            </div>
+            
 
-            <h5 class="mt-4">Location:</h5>
-            <div class="mb-4">
-              <GMapMap
-                :center="geoCoordinates"
-                :zoom="13"
-                map-type-id="terrain"
-                style="height: 32vh"
-                :options="{
-                  zoomControl: false,
-                  mapTypeControl: false,
-                  scaleControl: false,
-                  streetViewControl: false,
-                  rotateControl: false,
-                  fullscreenControl: false,
-                  disableDefaultUI: true,
-                }"
-              />
-            </div>
 
-            <div v-if="event.tickets.length > 0">
-              <h5 class="mt-4 mb-2">Tickets:</h5>
-              <div class="row">
-                <div
-                  v-for="ticket in event.tickets"
-                  :key="ticket.id"
-                  class="col-6"
-                >
-                  <div class="alert alert-primary mt-2" style="font-size: smaller;">
-                    <div>
-                      <h5><i>{{ ticket.name }}</i></h5>
-                      <p class="mt-3">
-                        <b>Price:</b> {{ ticket.price }} €
-                      </p>
-                      <p>
-                        <b>Description:</b><br>
-                        <code>{{ ticket.description }}</code>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <p class="alert alert-warning mt-4">
-              <b>Description:</b><br />
-              <code>{{ event["description"] }}</code>
+              
 
               <ul class="list-group list-group-flush mt-4">
               <li class="list-group-item bg-transparent">
@@ -99,8 +59,55 @@
                   </b></i
                 >
               </li>
+              
+              <br><br>
+              <b>Description:</b><br />
+              <code>{{ event["description"] }}</code>
             </ul>
             </p>
+            </div>
+            <div v-if="event.tickets.length > 0">
+              <h5 class="mt-4 mb-2">Tickets:</h5>
+              <div class="row">
+                <div
+                  v-for="ticket in event.tickets"
+                  :key="ticket.id"
+                  class="col-6"
+                >
+                  <div class="alert alert-primary mt-2" style="font-size: smaller;">
+                    <div>
+                      <h5><i>{{ ticket.name }}</i></h5>
+                      <p class="mt-3">
+                        <b>Price:</b> {{ ticket.price }} €
+                      </p>
+                      <p>
+                        <b>Description:</b><br>
+                        <code>{{ ticket.description }}</code>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h5 class="mt-4">Location:</h5>
+            <div class="mb-4">
+              <GMapMap
+                :center="geoCoordinates"
+                :zoom="13"
+                map-type-id="terrain"
+                style="height: 32vh"
+                :options="{
+                  zoomControl: false,
+                  mapTypeControl: false,
+                  scaleControl: false,
+                  streetViewControl: false,
+                  rotateControl: false,
+                  fullscreenControl: false,
+                  disableDefaultUI: true,
+                }"
+              />
+            </div>
 
             <!-- Comment Section in bootstrap -->
             <div class="mt-5">
@@ -135,6 +142,7 @@
       <div class="col-2"></div>
     </div>
   </div>
+</div>
 </template>
   
   <script>
@@ -167,13 +175,33 @@ export default {
   },
   data() {
     return {
+    imagePath1: process.env.BASE_URL + 'assets/images/events.png',
       event: null,
       uuid: null,
       geoCoordinates: {
         lat: 1,
         lng: 1,
+       
       },
     };
+  },
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
   },
   methods: {},
 };
