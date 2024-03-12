@@ -283,11 +283,24 @@ router.post(
             });
         }
         try {
-            const user = await prisma.user.findUnique({
+            let user = await prisma.user.findUnique({
                 where: {
                     user_name: req.body['username']
                 },
             });
+
+            if (!user) {
+                let emailAddress = await prisma.emailAddress.findFirst({
+                    where: {
+                        email: req.body['username']
+                    }
+                });
+                user = await prisma.user.findFirst({
+                    where: {
+                        email_id: emailAddress.email_id
+                    }
+                });
+            }
 
             if (!user) {
                 return res.status(404).json({
