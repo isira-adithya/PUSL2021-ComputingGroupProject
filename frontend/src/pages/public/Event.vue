@@ -103,7 +103,7 @@
             </p>
 
             <!-- Add Comment form -->
-            <div class="mt-5">
+            <div class="mt-5" v-if="isLoggedIn">
               <div class="card-header"><h5>Add Comment</h5></div>
               <div class="card-body">
                 <form>
@@ -113,6 +113,7 @@
                       class="form-control"
                       id="comment"
                       rows="3"
+                      v-model="comment"
                     ></textarea>
                   </div>
                   <button @click="addComment()" class="btn btn-primary btn-sm mt-2">
@@ -125,26 +126,30 @@
             <!-- Comment Section in bootstrap -->
             <div class="mt-5">
               <div class="card-header"><h5>Comments</h5></div>
-              <ul class="list-group list-group-flush">
+              <ul class="list-group list-group-flush" v-if="event.comments.length > 0">
                 <li class="list-group-item">
-                  <div class="row">
+                  <div class="row" v-for="comment in event.comments" :key="comment.id">
                     <div class="col-1">
                       <img
-                        src="https://via.placeholder.com/150"
+                        :src="comment.user_profile_image"
                         class="rounded-circle"
                         alt="..."
                         style="width: 100%"
                       />
                     </div>
                     <div class="col-11">
-                      <b class="card-title text-sm">@username</b>
+                      <b class="card-title text-sm">{{ comment.username }}</b>
                       <p class="card-text text-sm">
                         <i>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          Quos, amet.
+                          {{ comment.comment }}
                         </i>
                       </p>
+                      <!-- Delete comment button -->
+                      <span class="btn btn-danger btn-sm" @click="deleteComment(comment.comment_id)" style="font-size: smaller;" v-if="isLoggedIn && (user != null) && (comment.user_id == user.user_id)">
+                        Delete
+                      </span>
                     </div>
+                    
                   </div>
                 </li>
               </ul>
@@ -184,6 +189,18 @@ export default {
       .finally(() => {
         Notiflix.Loading.remove();
       });
+
+      // Check if the user is logged
+      if (localStorage.getItem("isLoggedIn")) {
+        if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
+          this.isLoggedIn = true;
+          this.user = JSON.parse(localStorage.getItem("session"));
+        } else {
+          this.isLoggedIn = false;
+        }
+      } else {
+        this.isLoggedIn = false;
+      }
   },
   data() {
     return {
@@ -193,13 +210,16 @@ export default {
         lat: 1,
         lng: 1,
       },
+      isLoggedIn: false,
+      user: null,
+      comment: "",
     };
   },
   methods: {
     addComment() {
       Notiflix.Loading.standard();
       axios.post(`/api/common/comments/new`, {
-        comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        comment: this.comment,
         event_uuid: this.uuid,
       }).then((response) => {
         Notiflix.Notify.success("Comment added successfully!");
