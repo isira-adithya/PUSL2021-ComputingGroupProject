@@ -25,33 +25,43 @@
 </head>
 
 <body>
-
-    <!-- Event Table -->
     <div class="container mt-5">
-        <table class="table table-bordered text-center text-white">
-            <thead class="">
-                <tr>
-                    <th scope="col">Ticket ID</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Operations</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="align-middle">1</td>
-                    <td class="align-middle">Sanuth Karunagoda</td>
-                    <td class="align-middle">Example@gmail.com</td>
-                    <td class="align-middle">2024-01-21</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary">View Event</button>
-                        <button class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <!-- Repeat similar rows for other events -->
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col" style="margin-bottom: 10px;">
+                <h3 class="text-white mb-2">Filter by ticket read status</h3><br><br>
+                <button class="btn btn-primary mb-3">New Tickets</button>
+                <button class="btn btn-primary mb-3">Already Viewed Ticket</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!-- Event Table -->
+                <table class="table table-bordered text-center text-white">
+                    <thead class="">
+                        <tr>
+                            <th scope="col">Ticket ID</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="align-middle">1</td>
+                            <td class="align-middle">Sanuth Karunagoda</td>
+                            <td class="align-middle">Example@gmail.com</td>
+                            <td class="align-middle">2024-01-21</td>
+                            <td class="align-middle">
+                                <button class="btn btn-primary">View Event</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <!-- Repeat similar rows for other events -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <!-- Include Bootstrap JS (at the end of the body) -->
