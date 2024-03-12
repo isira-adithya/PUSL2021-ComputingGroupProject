@@ -48,6 +48,7 @@ jobs:
           NTFYUSERID: ${{ secrets.NTFYUSERID }}
           NTFYAPIKEY: ${{ secrets.NTFYAPIKEY }}
           NTFYSENDERID: ${{ secrets.NTFYSENDERID }}
+          MGUNKEY: ${{ secrets.MGUNKEY }}
       - name: Modifying the config.js
         uses: DamianReeves/write-file-action@v1.0
         with:
