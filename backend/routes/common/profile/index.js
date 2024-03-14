@@ -7,6 +7,7 @@ import {
     body,
     validationResult
 } from 'express-validator';
+import {sendEmail} from "../../../modules/emails/mailgun.js";
 const prisma = new PrismaClient()
 const router = express.Router();
 
@@ -154,7 +155,9 @@ router.post("/send-verification-email", async (req, res) => {
         });
 
         const link = `https://eventhive.live/#/verify-email/${verificationToken}`;
-        console.log(link)
+
+        await sendEmail([emailAddress.email], "Email Verification", `Click on the link to verify your email: ${link}`, `Click on the link to verify your email: <a href="${link}">${link}</a>`);
+        
         res.json({
             success: true,
             msg: "Verification Email Sent Successfully"
