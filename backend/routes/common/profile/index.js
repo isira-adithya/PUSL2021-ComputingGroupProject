@@ -173,18 +173,20 @@ router.post("/send-verification-email", async (req, res) => {
 });
 
 router.post("/verify-email", async (req, res) => { 
-    const user = await prisma.user.findFirst({
-        where: {
-            user_id: req.session.user_id
-        }
-    });
-
     const emailAddress = await prisma.emailAddress.findFirst
     ({
         where: {
-            email_id: user.email_id
+            verification_code: req.body.verification_code
         }
     });
+
+    if (emailAddress == null){
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Invalid Verification Code"
+        });
+    }
 
     if (emailAddress.is_verified) {
         res.status(400);
@@ -194,18 +196,10 @@ router.post("/verify-email", async (req, res) => {
         });
     }
 
-    if (emailAddress.verification_code !== req.body.verification_code) {
-        res.status(400);
-        return res.json({
-            success: false,
-            msg: "Invalid Verification Code"
-        });
-    }
-
     // Update Email Address
     await prisma.emailAddress.update({
         where: {
-            email_id: user.email_id
+            email_id: emailAddress.email_id
         },
         data: {
             is_verified: true
