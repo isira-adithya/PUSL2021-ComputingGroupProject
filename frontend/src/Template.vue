@@ -231,13 +231,13 @@ export default {
         axios
           .post("/api/common/profile/send-verification-email")
           .then((response) => {
+            this.isVerficationEmailSent = true;
             Notiflix.Report.info(
               "Email Verification",
               "Please check your email inbox and click on the verification link to verify your email address.",
               "OK",
               () => {
                 Notiflix.Loading.standard("Verifying email address...");
-                this.isVerficationEmailSent = true;
                 const bc = new BroadcastChannel("email_verification_channel");
                 bc.onmessage = (event) => {
                   if (event.data === "email_verified") {

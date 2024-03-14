@@ -29,15 +29,18 @@
         this.token = this.$route.params['token'];
         if (this.token != null){
             Notiflix.Loading.dots('Verifying Email...');
-            axios.post("/api/auth/verify-email", {
-                token: this.token
+            axios.post("/api/common/profile/verify-email", {
+                verification_code: this.token
             }).then((response) => {
                 Notiflix.Loading.remove();
-                Notiflix.Notify.success('Email Verified');
+                Notiflix.Report.success(
+                    'Email Verified',
+                    'Your email has been verified successfully\nFeel free to close this window.',
+                    'OK'
+                );
                 // Close the tab after 2 seconds
-                setTimeout(() => {
-                    window.close();
-                }, 2000);
+                const bc = new BroadcastChannel("email_verification_channel");
+                bc.postMessage("email_verified");
             }).catch((error) => {
                 Notiflix.Loading.remove();
             });
