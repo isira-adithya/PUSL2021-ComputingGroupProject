@@ -76,6 +76,7 @@ model Verification {
   nicback_image_link  String?
   nicfront_image_link String?
   owner_id            Int?
+  admin_messages       String?
   user                User?   @relation(fields: [owner_id], references: [user_id])
 }
 
