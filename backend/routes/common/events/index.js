@@ -15,7 +15,9 @@ router.get("/", async (req, res) => {
 
     const whereClause = {
         visibility: 'public',
-        ...(location && { location: location }),
+        ...(location && { location: {
+            contains: location,
+        } }),
         ...(eventType && { category: eventType }),
         ...(startDate && { date_time: { gte: startDateTime } }),
         ...(endDate && { date_time: { lte: endDateTime } }),
