@@ -246,6 +246,7 @@ router.post(
             req.session.phone_number_verified = phoneObj.is_verified;
             req.session.email = emailObj.email;
             req.session.email_address_verified = emailObj.is_verified;
+            req.session.last_updated = Date.now();
 
             res.status(200).json({
                 msg: 'Login successful'
@@ -421,5 +422,46 @@ router.post(
             res.end();
         }
     });
+
+// Email Verification
+router.post("/verify-email", async (req, res) => { 
+    const emailAddress = await prisma.emailAddress.findFirst
+    ({
+        where: {
+            verification_code: req.body.verification_code
+        }
+    });
+
+    if (emailAddress == null){
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Invalid Verification Code"
+        });
+    }
+
+    if (emailAddress.is_verified) {
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Email is already verified"
+        });
+    }
+
+    // Update Email Address
+    await prisma.emailAddress.update({
+        where: {
+            email_id: emailAddress.email_id
+        },
+        data: {
+            is_verified: true
+        }
+    });
+
+    res.json({
+        success: true,
+        msg: "Email Verified Successfully"
+    });
+});
 
 export default router;

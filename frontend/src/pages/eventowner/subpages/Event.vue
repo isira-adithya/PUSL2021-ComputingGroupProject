@@ -255,6 +255,10 @@ import _ from "lodash";
         tmpObj.geo_coordinates = this.event.location_geocoordinates;
         axios.put("/api/eventowner/events/" + this.event_uuid, this.event).then(res => {
           Notiflix.Notify.success("Event updated successfully");
+          // Refresh page using Vue Router
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
         }).catch(err => {
           console.log(err);
           Notiflix.Notify.failure("Failed to update event");
@@ -298,7 +302,6 @@ import _ from "lodash";
         .then((response) => {
           if (response.data["success"]) {
             const features = response.data["data"]["features"];
-            const formattedName = features[0]["properties"]["formatted"];
             const coordinates = features[0]["geometry"]["coordinates"];
             this.event.location_geocoordinates = {
               lat: coordinates[1],

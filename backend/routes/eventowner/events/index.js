@@ -256,7 +256,7 @@ router.put(
         const tickets = req.body.tickets;
         if (tickets != null && tickets.length > 0) {
             const validTickets = tickets.every(ticket => {
-                return ticket.hasOwnProperty('id') && ticket.hasOwnProperty('name') && ticket.hasOwnProperty('price') && ticket.hasOwnProperty('description');
+                return ticket.hasOwnProperty('ticket_id') && ticket.hasOwnProperty('name') && ticket.hasOwnProperty('price') && ticket.hasOwnProperty('description');
             });
             if (!validTickets) {
                 return res.status(400).json({
@@ -341,7 +341,7 @@ router.put(
             if (tickets != null && tickets.length > 0) {
                 // Adding event_id of tickets and removing id
                 tickets.forEach(ticket => {
-                    delete ticket.id;
+                    delete ticket.ticket_id;
                     ticket.event_id = eventObj.event_id;
                 });
 
