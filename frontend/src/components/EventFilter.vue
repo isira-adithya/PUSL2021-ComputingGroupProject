@@ -18,19 +18,6 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <ul class="list-group">
-          <li v-for="item in items" :key="item.id" class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <h5 class="mb-1">{{ item.name }}</h5>
-              <p class="mb-0">{{ item.location }} - {{ item.eventType }} - {{ item.date }}</p>
-            </div>
-            <button class="btn btn-sm btn-primary">Details</button>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -46,22 +33,22 @@ export default {
         startDate: '',
         endDate: ''
       },
-      items: []
+      url_query: ''
     }
   },
   mounted() {
-    this.fetchEvents();
+    this.buildQuery();
   },
   watch: {
     filters: {
       handler() {
-        this.fetchEvents();
+        this.buildQuery();
       },
       deep: true
     }
   },
   methods: {
-    fetchEvents() {
+    buildQuery() {
       const { location, eventType, startDate, endDate } = this.filters;
       const query = new URLSearchParams({
         ...(location && { location }),
@@ -70,13 +57,8 @@ export default {
         ...(endDate && { endDate }),
       }).toString();
 
-      axios.get(`/api/common/events?${query}`)
-        .then(response => {
-          this.items = response.data;
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      this.url_query = query;
+      return query;
     }
   }
 }
