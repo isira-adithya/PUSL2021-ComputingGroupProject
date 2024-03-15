@@ -211,16 +211,12 @@ export default {
             }
           })
           .catch((err) => {
-            // console.error(err);
-            localStorage.setItem("isLoggedIn", JSON.stringify(false));
+            console.error(err);
             if (!document.location.href.includes("/login")) {
-              document.location.href = "/#/login";
               Notiflix.Report.failure(
                 "You've been logged out",
                 "Please sign-in again."
               );
-            } else {
-              console.log("yellow");
             }
           });
       }
