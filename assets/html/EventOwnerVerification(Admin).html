@@ -25,6 +25,9 @@
       color: #ffffff;
       background-color: rgba(255, 255, 255, 0.2);
       border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+      padding-left: 40px; /* adjust the padding to accommodate the image */
     }
 
     .increased-height {
@@ -74,7 +77,7 @@
 <body>
   <br><br>
   <div class="mb-4 text-center">
-    <h3 class="font-1">Ticket ID-2</h3><br>
+    <h3 class="font-1">Event Owner Details</h3><br>
   </div>
   <div>
     <div class="container">
@@ -92,24 +95,20 @@
                 <input type="text" class="form-control white-bg no-border increased-height" id="email">
               </div>
               <div class="col-md-6">
-                <label for="date" class="form-label">Date / Time:</label>
-                <input type="text" class="form-control white-bg no-border increased-height" id="date">
-                <!-- Add image box for Date / Time -->
-                <img src="" alt="Date Image" class="img-fluid mt-2">
+                <label for="date" class="form-label">ID Card Front</label>
+                <input type="text" class="form-control white-bg no-border increased-height" id="date" style="background-image: url('image1.jpg');">
               </div>
               <div class="col-md-6">
-                <label for="subject" class="form-label">Status:</label>
-                <input type="text" class="form-control white-bg no-border increased-height" id="subject">
-                <!-- Add image box for Status -->
-                <img src="image2.jpg" alt="Status Image" class="img-fluid mt-2">
+                <label for="subject" class="form-label">ID Card Back</label>
+                <input type="text" class="form-control white-bg no-border increased-height" id="subject" style="background-image: url('image2.jpg');">
               </div>
             </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">Title:</label>
-              <textarea class="form-control white-bg no-border" id="message" rows="1"></textarea>
+            <div class="col-md-6">
+              <label for="date" class="form-label">Selfie</label>
+              <input type="text" class="form-control white-bg no-border increased-height" id="date" style="background-image: url('image1.jpg');">
             </div>
             <div class="mb-3">
-              <label for="message" class="form-label">Ticket Content / Subject:</label>
+              <label for="message" class="form-label">Notes</label>
               <textarea class="form-control white-bg no-border" id="message" rows="5"></textarea>
             </div>
             <button type="button" class="btn btn-primary">Verify</button>
