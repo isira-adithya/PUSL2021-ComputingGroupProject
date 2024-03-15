@@ -7,7 +7,15 @@
       </div>
       <div class="col">
         <label for="eventType" class="form-label">Event Type:</label>
-        <input id="eventType" v-model="filters.eventType" class="form-control" placeholder="Event Type">
+        <select id="eventType" v-model="filters.eventType" class="form-select">
+          <option value="">Select Event Type</option>
+          <option value="Musical">Musical</option>
+          <option value="Sports">Sports</option>
+          <option value="Educational">Educational</option>
+          <option value="Religious">Religious</option>
+          <option value="Charity">Charity</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
       <div class="col">
         <label class="form-label">Date Range:</label>
@@ -22,7 +30,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   data() {
