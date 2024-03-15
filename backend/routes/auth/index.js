@@ -246,6 +246,7 @@ router.post(
             req.session.phone_number_verified = phoneObj.is_verified;
             req.session.email = emailObj.email;
             req.session.email_address_verified = emailObj.is_verified;
+            req.session.last_updated = Date.now();
 
             res.status(200).json({
                 msg: 'Login successful'
