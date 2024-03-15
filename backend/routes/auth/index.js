@@ -422,4 +422,45 @@ router.post(
         }
     });
 
+// Email Verification
+router.post("/verify-email", async (req, res) => { 
+    const emailAddress = await prisma.emailAddress.findFirst
+    ({
+        where: {
+            verification_code: req.body.verification_code
+        }
+    });
+
+    if (emailAddress == null){
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Invalid Verification Code"
+        });
+    }
+
+    if (emailAddress.is_verified) {
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Email is already verified"
+        });
+    }
+
+    // Update Email Address
+    await prisma.emailAddress.update({
+        where: {
+            email_id: emailAddress.email_id
+        },
+        data: {
+            is_verified: true
+        }
+    });
+
+    res.json({
+        success: true,
+        msg: "Email Verified Successfully"
+    });
+});
+
 export default router;
