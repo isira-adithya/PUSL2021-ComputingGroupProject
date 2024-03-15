@@ -1,5 +1,8 @@
 <template>
     <div v-if="events != null">
+        <div class="column m-2">
+        <EventFilterVue></EventFilterVue>
+        </div>
         <div class="row">
           <div v-for="event in events" :key="event.id" class="col-xl-4 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-2">
             <div class="card">
@@ -29,10 +32,11 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
 import ImagesCarouselVue from '../../components/ImagesCarousel.vue';
+import EventFilterVue from '../../components/EventFilter.vue'
 
   export default {
     name: "PublicEventsVue",
-    components: {ImagesCarouselVue},
+    components: {ImagesCarouselVue,EventFilterVue},
     mounted() {
       Notiflix.Loading.dots('Loading...');
         axios.get('/api/common/events').then(response => {
