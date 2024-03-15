@@ -16,12 +16,10 @@ router.get("/", async (req, res) => {
     const whereClause = {
         visibility: 'public',
         ...(location && { location: location }),
-        ...(eventType && { category: eventType }), // Assuming 'eventType' maps to the 'category' field in the database
+        ...(eventType && { category: eventType }),
         ...(startDate && { date_time: { gte: startDateTime } }),
         ...(endDate && { date_time: { lte: endDateTime } }),
     };
-
-    console.log(whereClause)
 
     const events = await prisma.event.findMany({
         where: whereClause,
