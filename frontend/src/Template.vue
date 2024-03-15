@@ -197,7 +197,10 @@ export default {
               this.role = session["role"];
 
               // Checking if the email is verified
-              if (!session.email_address_verified && !this.isVerficationEmailSent){
+              if (
+                !session.email_address_verified &&
+                !this.isVerficationEmailSent
+              ) {
                 return this.verifyEmailAddress();
               }
 
@@ -224,6 +227,15 @@ export default {
 
     verifyEmailAddress() {
       if (!this.session.email_address_verified) {
+        const bc = new BroadcastChannel("email_verification_channel");
+        bc.onmessage = (event) => {
+          if (event.data === "email_verified") {
+            Notiflix.Notify.success("Email verified successfully");
+            bc.close();
+            Notiflix.Loading.remove();
+            this.checkAuth();
+          }
+        };
         axios
           .post("/api/common/profile/send-verification-email")
           .then((response) => {
@@ -234,15 +246,6 @@ export default {
               "OK",
               () => {
                 Notiflix.Loading.standard("Verifying email address...");
-                const bc = new BroadcastChannel("email_verification_channel");
-                bc.onmessage = (event) => {
-                  if (event.data === "email_verified") {
-                    Notiflix.Notify.success("Email verified successfully");
-                    bc.close();
-                    Notiflix.Loading.remove();
-                    this.checkAuth();
-                  }
-                };
               }
             );
           })
@@ -263,7 +266,7 @@ export default {
       isLoggedIn: false,
       role: "VISITOR",
       session: null,
-      isVerficationEmailSent: false
+      isVerficationEmailSent: false,
     };
   },
   setup() {
