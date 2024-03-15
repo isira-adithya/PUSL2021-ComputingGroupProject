@@ -106,9 +106,7 @@
       </nav>
     </div>
 
-    <div>
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
 
     <footer class="footer-bg-black text-left py-3">
       <hr class="white-hr my-4" />
