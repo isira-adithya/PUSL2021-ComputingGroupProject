@@ -7,19 +7,32 @@ const prisma = new PrismaClient();
 const router = express.Router();
 
 router.get("/", async (req, res) => {
+    const { location, eventType, startDate, endDate } = req.query;
+
+    // convert startDate and endDate to timestamp
+    const startDateTime = new Date(startDate);
+    const endDateTime = new Date(endDate);
+
+    const whereClause = {
+        visibility: 'public',
+        ...(location && { location: location }),
+        ...(eventType && { category: eventType }), // Assuming 'eventType' maps to the 'category' field in the database
+        ...(startDate && { date_time: { gte: startDateTime } }),
+        ...(endDate && { date_time: { lte: endDateTime } }),
+    };
+
+    console.log(whereClause)
+
     const events = await prisma.event.findMany({
-        where: {
-            visibility: 'public'
-        }
+        where: whereClause,
     });
-    
+
     events.forEach(event => {
         event.images = event.images.split(',');
         event.location_geocoordinates = JSON.parse(event.location_geocoordinates);
         delete event.owner_id;
     });
 
-    // TODO: Remove expired events
     res.json(events);
 });
 
