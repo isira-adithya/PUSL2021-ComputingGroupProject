@@ -29,7 +29,7 @@
         this.token = this.$route.params['token'];
         if (this.token != null){
             Notiflix.Loading.dots('Verifying Email...');
-            axios.post("/api/common/profile/verify-email", {
+            axios.post("/api/auth/verify-email", {
                 verification_code: this.token
             }).then((response) => {
                 Notiflix.Loading.remove();
