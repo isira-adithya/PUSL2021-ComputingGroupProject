@@ -33,35 +33,19 @@
           background-color: #020923 !important;
           
         }
-        .custom-card-img {
-            width: 100%;
-        }
-
-        .card-img {
-            height: 191px;
-            width: 191px;
-        }
-
-        .card-text {
-            font-size: 1rem;
-        }
-
-        .card-button {
-            color: #18781e;
-        }
-
         .custom-card {
-            margin-bottom: 15px;
+          width: 250px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 20px;
+            border: solid 2px  ;
         }
 
-        .custom-hr {
-          height: 2px; 
-          background-color: rgba(255,255,255); 
-          margin: 20px 0; 
+        .custom-card img {
+            max-width: 200px;
+            height: 300px;
         }
-        .custom-boxes{
-          background-color: #111F4D;   
-        }
+
         .font-1{
           font-family: 'Stick No Bills', sans-serif;
         }
@@ -113,46 +97,42 @@
       </div>
 
       <div id="section2" class="d-flex"> 
-        <div class="container">
-            <div class="row">
-              <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="card custom-card border border-dark">
-                    <img src="" alt="Product Image" class="card-img-top img-fluid mb-3 card-img">
-                    <div class="card-body">
-                        <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">manage users</a>
-                    </div>
-                </div>
-            </div>
-
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                  <div class="card custom-card border border-dark">
-                      <img src="" alt="Product Image" class="card-img-top img-fluid mb-3 card-img">
-                      <div class="card-body">
-                          <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">manage events</a>
-                      </div>
-                  </div>
+        <div class="container w-100">
+          <div class="row justify-content-center ">
+            <!-- First Card: Manage Users -->
+            <div class="col-sm-3 custom-card card text-center m-3">
+              <img src="user-icon.png" class="card-img-top mx-auto d-block" alt="User Icon">
+              <div class="card-body">
+                <a href="/assets/html/Event_Submission.html" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">Manage Users</a>
               </div>
-
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="card custom-card border border-dark">
-                        <img src="" alt="Product Image" class="card-img-top img-fluid mb-3 card-img">
-                        <div class="card-body">
-                            <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">manage tickets</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="card custom-card border border-dark">
-                        <img src="" alt="Product Image" class="card-img-top img-fluid mb-3 card-img">
-                        <div class="card-body">
-                            <a href="" class="button-color text-white text-decoration-none px-3 py-1  rounded-1">approve events</a>
-                        </div>
-                    </div>
-                </div>
             </div>
+        
+            <!-- Second Card: Manage Events -->
+            <div class="col-sm-3 custom-card card text-center m-3 ">
+              <img src="calendar-icon.png" class="card-img-top mx-auto d-block" alt="Calendar Icon">
+              <div class="card-body">
+                <a href="/assets/html/Event_Submission.html" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">Manage Events</a>
+              </div>
+            </div>
+        
+            <!-- Third Card: Manage Tickets -->
+            <div class="col-sm-3 custom-card card text-center m-3 ">
+              <img src="ticket-icon.png" class="card-img-top mx-auto d-block" alt="Ticket Icon">
+              <div class="card-body">
+                <a href="/assets/html/Event_Submission.html" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">Manage Tickets</a>
+              </div>
+            </div>
+        
+            <!-- Fourth Card: Approve Events -->
+            <div class="col-sm-3 custom-card card text-center m-3 ">
+              <img src="clipboard-icon.png" class="card-img-top mx-auto d-block" alt="Clipboard Icon">
+              <div class="card-body">
+                <a href="/assets/html/Event_Submission.html" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">Aprove Events</a>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+    </div>
       
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
