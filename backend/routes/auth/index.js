@@ -9,6 +9,7 @@ import {
     body,
     validationResult
 } from 'express-validator';
+import { sendEmail } from '../../modules/emails/mailgun.js';
 
 const prisma = new PrismaClient()
 const router = express.Router();
@@ -245,6 +246,7 @@ router.post(
             req.session.phone_number_verified = phoneObj.is_verified;
             req.session.email = emailObj.email;
             req.session.email_address_verified = emailObj.is_verified;
+            req.session.last_updated = Date.now();
 
             res.status(200).json({
                 msg: 'Login successful'
@@ -283,10 +285,16 @@ router.post(
             });
         }
         try {
-            const user = await prisma.user.findUnique({
+            let emailAddress = await prisma.emailAddress.findFirst({
                 where: {
-                    user_name: req.body['username']
-                },
+                    email: req.body['username']
+                }
+            });
+
+            let user = await prisma.user.findFirst({
+                where: {
+                    email_id: emailAddress.email_id
+                }
             });
 
             if (!user) {
@@ -319,10 +327,20 @@ router.post(
 
             // TODO:
             // Send the token to the user (e.g., via email)
+            const link = `https://www.eventhive.live/#/reset-password/${token}`;
+            const result = await sendEmail([emailAddress.email], "Password Reset - EventHive", `Visit ${link} to reset your password.`, `Visit <a href="${link}">here</a> to reset your password.<br><i>Use the following link if the above link doesn't work.</i><br><pre><code>${link}</code></pre>`)
 
-            res.status(200).json({
-                msg: 'Password reset token generated successfully'
-            });
+            if (result){
+                res.status(200).json({
+                    msg: 'Password reset token generated successfully'
+                });
+            } else {
+                res.status(500);
+                res.json({
+                    success: false,
+                    msg: 'Failed to send the email, please try again later.'
+                });
+            }
         } catch (error) {
             console.error(error);
             res.status(500);
@@ -404,5 +422,46 @@ router.post(
             res.end();
         }
     });
+
+// Email Verification
+router.post("/verify-email", async (req, res) => { 
+    const emailAddress = await prisma.emailAddress.findFirst
+    ({
+        where: {
+            verification_code: req.body.verification_code
+        }
+    });
+
+    if (emailAddress == null){
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Invalid Verification Code"
+        });
+    }
+
+    if (emailAddress.is_verified) {
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Email is already verified"
+        });
+    }
+
+    // Update Email Address
+    await prisma.emailAddress.update({
+        where: {
+            email_id: emailAddress.email_id
+        },
+        data: {
+            is_verified: true
+        }
+    });
+
+    res.json({
+        success: true,
+        msg: "Email Verified Successfully"
+    });
+});
 
 export default router;

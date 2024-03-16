@@ -45,11 +45,11 @@ model User {
   is_verified             Boolean              @default(false)
   PasswordResetToken      PasswordResetToken[]
   Notification            Notification[]
-  Commentary              Commentary[]
   Event                   Event[]
   Verification            Verification[]
   phone                   PhoneNumber          @relation(fields: [phone_id], references: [phone_id])
   email_address           EmailAddress         @relation(fields: [email_id], references: [email_id])
+  Comment                 Comment[]
 }
 
 model PasswordResetToken {
@@ -76,17 +76,8 @@ model Verification {
   nicback_image_link  String?
   nicfront_image_link String?
   owner_id            Int?
+  admin_messages       String?
   user                User?   @relation(fields: [owner_id], references: [user_id])
-}
-
-model Commentary {
-  commentary_id Int     @id @default(autoincrement())
-  user_id       Int?
-  event_id      Int?
-  comment       String? @db.VarChar(512)
-  rating        String?
-  user          User?   @relation(fields: [user_id], references: [user_id])
-  event         Event?  @relation(fields: [event_id], references: [event_id])
 }
 
 model Event {
@@ -104,8 +95,8 @@ model Event {
   uuid                    String       @unique
   owner_id                Int?
   user                    User?        @relation(fields: [owner_id], references: [user_id])
-  Commentary              Commentary[]
   Ticket                  Ticket[]
+  Comment                 Comment[]
 }
 
 model Ticket {
@@ -115,4 +106,14 @@ model Ticket {
   description String @db.VarChar(512)
   event_id    Int
   event       Event  @relation(fields: [event_id], references: [event_id])
+}
+
+model Comment {
+  comment_id Int    @id @default(autoincrement())
+  user_id    Int
+  event_id   String
+  comment    String @db.VarChar(512)
+  stars      Int    @default(0)
+  user       User   @relation(fields: [user_id], references: [user_id])
+  event      Event  @relation(fields: [event_id], references: [uuid])
 }

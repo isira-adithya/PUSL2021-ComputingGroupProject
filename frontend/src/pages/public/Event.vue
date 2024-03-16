@@ -65,73 +65,34 @@
               <code>{{ event["description"] }}</code>
             </ul>
             </p>
-            </div>
-            <div v-if="event.tickets.length > 0">
-              <h5 class="mt-4 mb-2">Tickets:</h5>
-              <div class="row">
-                <div
-                  v-for="ticket in event.tickets"
-                  :key="ticket.id"
-                  class="col-6"
-                >
-                  <div class="alert alert-primary mt-2" style="font-size: smaller;">
-                    <div>
-                      <h5><i>{{ ticket.name }}</i></h5>
-                      <p class="mt-3">
-                        <b>Price:</b> {{ ticket.price }} €
-                      </p>
-                      <p>
-                        <b>Description:</b><br>
-                        <code>{{ ticket.description }}</code>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <h5 class="mt-4">Location:</h5>
-            <div class="mb-4">
-              <GMapMap
-                :center="geoCoordinates"
-                :zoom="13"
-                map-type-id="terrain"
-                style="height: 32vh"
-                :options="{
-                  zoomControl: false,
-                  mapTypeControl: false,
-                  scaleControl: false,
-                  streetViewControl: false,
-                  rotateControl: false,
-                  fullscreenControl: false,
-                  disableDefaultUI: true,
-                }"
-              />
-            </div>
 
             <!-- Comment Section in bootstrap -->
             <div class="mt-5">
               <div class="card-header"><h5>Comments</h5></div>
-              <ul class="list-group list-group-flush">
+              <ul class="list-group list-group-flush" v-if="event.comments.length > 0">
                 <li class="list-group-item">
-                  <div class="row">
+                  <div class="row" v-for="comment in event.comments" :key="comment.id">
                     <div class="col-1">
                       <img
-                        src="https://via.placeholder.com/150"
+                        :src="comment.user_profile_image"
                         class="rounded-circle"
                         alt="..."
                         style="width: 100%"
                       />
                     </div>
                     <div class="col-11">
-                      <b class="card-title text-sm">@username</b>
+                      <b class="card-title text-sm">{{ comment.username }}</b>
                       <p class="card-text text-sm">
                         <i>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          Quos, amet.
+                          {{ comment.comment }}
                         </i>
                       </p>
+                      <!-- Delete comment button -->
+                      <span class="btn btn-danger btn-sm" @click="deleteComment(comment.comment_id)" style="font-size: smaller;" v-if="isLoggedIn && (user != null) && (comment.user_id == user.user_id)">
+                        Delete
+                      </span>
                     </div>
+                    
                   </div>
                 </li>
               </ul>
@@ -142,6 +103,7 @@
       <div class="col-2"></div>
     </div>
   </div>
+</div>
 </div>
 </template>
   
@@ -172,6 +134,18 @@ export default {
       .finally(() => {
         Notiflix.Loading.remove();
       });
+
+    // Check if the user is logged
+    if (localStorage.getItem("isLoggedIn")) {
+      if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
+        this.isLoggedIn = true;
+        this.user = JSON.parse(localStorage.getItem("session"));
+      } else {
+        this.isLoggedIn = false;
+      }
+    } else {
+      this.isLoggedIn = false;
+    }
   },
   data() {
     return {
@@ -183,6 +157,9 @@ export default {
         lng: 1,
        
       },
+      isLoggedIn: false,
+      user: null,
+      comment: "",
     };
   },
   computed: {
