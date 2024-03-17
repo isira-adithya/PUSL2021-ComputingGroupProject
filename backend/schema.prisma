@@ -44,6 +44,7 @@ model User {
   is_active                      Boolean              @default(false)
   is_verified                    Boolean              @default(false)
   is_email_notifications_enabled Boolean              @default(false)
+  last_notification_check        DateTime?            @default(now())
   PasswordResetToken             PasswordResetToken[]
   Notification                   Notification[]
   Event                          Event[]
@@ -94,7 +95,6 @@ model Event {
   location_geocoordinates String?   @default("0,0") // lat, long
   visibility              String    @default("private")
   uuid                    String    @unique
-  notifications_sent      Boolean   @default(false)
   owner_id                Int?
   user                    User?     @relation(fields: [owner_id], references: [user_id])
   Ticket                  Ticket[]
