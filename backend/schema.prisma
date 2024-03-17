@@ -64,6 +64,7 @@ model PasswordResetToken {
 
 model Notification {
   notification_id     Int     @id @default(autoincrement())
+  title               String? @db.VarChar(512)
   content             String? @db.VarChar(4096)
   notification_status String? // PENDING, READ, UNREAD, DELETED
   user_id             Int?
