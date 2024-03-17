@@ -1,7 +1,7 @@
 <template>
     <div class="bgbody">
       <div class="mb-4 text-center">
-        <h3 class="font-1">Ticket ID-{{ formData.id }}</h3><br>
+        <h1 class="font-1">Ticket ID-{{ formData.id }}</h1><br>
       </div>
       <div>
         <div class="container">
@@ -35,9 +35,11 @@
                   <label for="ticketContent" class="form-label">Ticket Content / Subject:</label>
                   <textarea v-model="formData.content" class="form-control white-bg no-border" id="ticketContent" rows="5"></textarea>
                 </div>
-                <button type="button" @click="markAsRead" class="btn btn-primary">Mark As Read</button>
-                <button type="button" @click="deleteTicket" class="btn btn-danger">Delete</button>
-                <button @click="goBack" class="btn btn-secondary">Go Back</button>
+                <div class="mb-3">
+                  <button type="button" @click="markAsRead" class="btn btn-primary mr-2" style="margin-right: 5px;">Mark As Read</button>
+                  <button type="button" @click="deleteTicket" class="btn btn-danger mr-2" style="margin-right: 5px;">Delete</button>
+                  <button @click="goBack" class="btn btn-secondary" style="margin-right: 5px;">Go Back</button>
+                </div>
               </form>
               <br>
             </div>
@@ -47,6 +49,7 @@
     </div>
   </template>
   
+  
   <script>
   import axios from 'axios';
   
@@ -55,7 +58,7 @@
       return {
         formData: {
           id: null,
-          name: '',
+          name: 'dtgrfds',
           email: '',
           date: '',
           status: '',
