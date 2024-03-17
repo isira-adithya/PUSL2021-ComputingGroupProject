@@ -29,27 +29,28 @@ model EmailAddress {
 }
 
 model User {
-  user_id                 Int                  @id @default(autoincrement())
-  user_name               String               @unique
-  first_name              String
-  last_name               String
-  address                 String
-  addr_geocoordinates     String?              @default("0,0") // lat, long
-  notification_preference String
-  password                String
-  profile_image           String?
-  phone_id                Int
-  email_id                Int
-  role                    String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
-  is_active               Boolean              @default(false)
-  is_verified             Boolean              @default(false)
-  PasswordResetToken      PasswordResetToken[]
-  Notification            Notification[]
-  Event                   Event[]
-  Verification            Verification[]
-  phone                   PhoneNumber          @relation(fields: [phone_id], references: [phone_id])
-  email_address           EmailAddress         @relation(fields: [email_id], references: [email_id])
-  Comment                 Comment[]
+  user_id                        Int                  @id @default(autoincrement())
+  user_name                      String               @unique
+  first_name                     String
+  last_name                      String
+  address                        String
+  addr_geocoordinates            String?              @default("0,0") // lat, long
+  notification_preference        String
+  password                       String
+  profile_image                  String?
+  phone_id                       Int
+  email_id                       Int
+  role                           String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
+  is_active                      Boolean              @default(false)
+  is_verified                    Boolean              @default(false)
+  is_email_notifications_enabled Boolean              @default(false)
+  PasswordResetToken             PasswordResetToken[]
+  Notification                   Notification[]
+  Event                          Event[]
+  Verification                   Verification[]
+  phone                          PhoneNumber          @relation(fields: [phone_id], references: [phone_id])
+  email_address                  EmailAddress         @relation(fields: [email_id], references: [email_id])
+  Comment                        Comment[]
 }
 
 model PasswordResetToken {
@@ -76,25 +77,25 @@ model Verification {
   nicback_image_link  String?
   nicfront_image_link String?
   owner_id            Int?
-  admin_messages       String?
+  admin_messages      String?
   user                User?   @relation(fields: [owner_id], references: [user_id])
 }
 
 model Event {
-  event_id                Int          @id @default(autoincrement())
+  event_id                Int       @id @default(autoincrement())
   name                    String?
   date_time               DateTime?
-  description             String?      @db.VarChar(8096)
+  description             String?   @db.VarChar(8096)
   venue                   String?
-  images                  String?      @db.VarChar(2048) // Comma seperated URLs
+  images                  String?   @db.VarChar(2048) // Comma seperated URLs
   // Example of category => musical, sports, educational, religious, charity, etc.
   category                String?
   location                String?
-  location_geocoordinates String?      @default("0,0") // lat, long
-  visibility              String       @default("private")
-  uuid                    String       @unique
+  location_geocoordinates String?   @default("0,0") // lat, long
+  visibility              String    @default("private")
+  uuid                    String    @unique
   owner_id                Int?
-  user                    User?        @relation(fields: [owner_id], references: [user_id])
+  user                    User?     @relation(fields: [owner_id], references: [user_id])
   Ticket                  Ticket[]
   Comment                 Comment[]
 }
