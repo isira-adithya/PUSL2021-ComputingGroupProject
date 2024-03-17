@@ -174,7 +174,7 @@ async function sendNotifications(){
     }
 }
 
-// Write a infinite loop to run the cronjob, it should run every 30 seconds
+// Write a infinite loop to run the cronjob, it should run every 5 minutes
 async function main() {
     while (true) {
         console.log("[CRON] Running the cronjob at: " + new Date().toISOString());
@@ -183,7 +183,7 @@ async function main() {
         console.log("[CRON] Sending PENDING notifications");
         await sendNotifications();
         console.log("[CRON] Cronjob finished at: " + new Date().toISOString() + "\n");
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 360000));
     }
 }
 
