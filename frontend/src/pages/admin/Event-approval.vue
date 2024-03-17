@@ -77,14 +77,13 @@ export default {
 <style scoped>
 body {
     background-color: black;
-    /* Set background color to black */
     color: white;
-    /* Set text color to white */
+
 }
 
 .table-bordered th,
 .table-bordered td {
     border-width: 3px;
-    /* Set inner border width to 2px */
+
 }
 </style>

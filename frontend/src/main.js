@@ -27,6 +27,8 @@ import EventVue from './pages/public/Event.vue';
 
 //admin
 import EventApproval from './pages/admin/Event-approval.vue';
+import TicketList from './pages/admin/TicketList.vue'
+
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -66,7 +68,10 @@ const routes = [
     {path: '/events/:uuid', component: EventVue},
 
     //admin pages
-    {path: '/admin/event-approval', component: EventApproval}
+    {path: '/admin/event-approval', component: EventApproval},
+    {path: '/admin/Tickets', component: TicketList},
+
+    
 ];
 
 const router = createRouter({
