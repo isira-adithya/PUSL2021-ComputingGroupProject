@@ -1,7 +1,8 @@
 import {
     PrismaClient
 } from '../modules/prisma_client/index.js';
-import {sendEmail} from '../modules/email/mailgun.js';
+import {sendEmail} from '../modules/emails/mailgun.js';
+import md5 from 'md5';
 
 const prisma = new PrismaClient();
 
@@ -21,6 +22,38 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     return R * c; // Distance in meters
 }
 
+async function addToNotificationQueue(user_id, title, content) {
+
+    // Get the MD5 hash of the content
+    const hash = md5(content);
+
+    // Check if there are any SENT notifications in the last 3 days
+    const notifications = await prisma.notification.findMany({
+        where: {
+            user_id: user_id,
+            notification_status: "SENT",
+            content_hash: hash,
+            sent_at: {
+                gte: new Date(new Date().getTime() - (3 * 24 * 60 * 60 * 1000))
+            },
+        }
+    });
+
+    console.log(`[DEBUG] Found ${notifications.length} notifications in the last 3 days`)
+
+    if (notifications.length <= 0) {
+        await prisma.notification.create({
+            data: {
+                notification_status: "PENDING",
+                title: title,
+                content: content,
+                content_hash: hash,
+                user_id: user_id
+            }
+        });
+    }
+}
+
 async function notifyAboutNearByEvents() {
     // Get all the users who have enabled email notifications and have not been notified in the last 30 minutes
     // Also, update the last_notification_check field to the current time
@@ -34,8 +67,7 @@ async function notifyAboutNearByEvents() {
     });
 
     if (users.length > 0) {
-
-        users.forEach(async user => {
+        for (const user of users) {
             // Get all the events that are ongoing or upcoming
             const events = await prisma.event.findMany({
                 where: {
@@ -64,7 +96,6 @@ async function notifyAboutNearByEvents() {
 
                 if (distance <= 10000) {
                     // Preparing the notification
-                    console.log(`Preparing the notification for event: ${event.name} to user: ${user.user_name}`);
                     let eventDetails = `Event: <a href="https://eventhive.live/#/events/${event.uuid}">${event.name}</a> is scheduled for ${event.date_time}<br>`;
                     if ((notification_content.length + eventDetails.length) < 4096) {
                         notification_content += eventDetails;
@@ -78,15 +109,9 @@ async function notifyAboutNearByEvents() {
 
             // Send the notification to the user
             if (notification_content.length > 0) {
-                await prisma.notification.create({
-                    data: {
-                        notification_status: "PENDING",
-                        content: notification_content,
-                        user_id: user.user_id
-                    }
-                });
+                await addToNotificationQueue(user.user_id, "Nearby Events - EventHive", notification_content);
             }
-        });
+        }
     }
 
     // Update the last_notification_check field to the current time
@@ -110,38 +135,56 @@ async function sendNotifications(){
         }
     });
 
-    // Mark them as UNREAD
-    // await prisma.notification.updateMany({
-    //     where: {
-    //         notification_status: "PENDING"
-    //     },
-    //     data: {
-    //         notification_status: "UNREAD"
-    //     }
-    // });
-
     // Send the notifications
-    notificationsToSend.forEach( async (notification)  => {
-        console.log(`Sending the notification to user: ${notification.user_id}`);
+    for (const notification of notificationsToSend) {
+        console.log(`[DEBUG] Sending the notification to user_id: ${notification.user_id}`);
         // Send the notification
-        // SendEmail(notification.user_id, notification.content);
         const emailAddress = await prisma.emailAddress.findFirst({
             where: {
-                user_id: notification.user_id
+                User: {
+                    some: {
+                        user_id: notification.user_id
+                    }
+                }
             }
         });
-        sendEmail([emailAddress.email], notification.title, notification.content, notification.content);
-    });
+        console.log(`[DEBUG] Sent Email To Email address: ${emailAddress.email}`);
+        const isSent = await sendEmail([emailAddress.email], notification.title, notification.content, notification.content);
+        if (isSent){
+            await prisma.notification.update({
+                where: {
+                    notification_id: notification.notification_id,
+                },
+                data: {
+                    notification_status: "SENT",
+                    sent_at: new Date()
+                }
+            });
+        } else {
+            await prisma.notification.update({
+                where: {
+                    notification_id: notification.notification_id
+                },
+                data: {
+                    notification_status: "FAILED"
+                }
+            });
+        }
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
 }
 
 // Write a infinite loop to run the cronjob, it should run every 30 seconds
-(async () => {
+async function main() {
     while (true) {
-        console.log("Running the cronjob");
-        console.log("Notifying about nearby events");
+        console.log("[CRON] Running the cronjob at: " + new Date().toISOString());
+        console.log("[CRON] Notifying about nearby events");
         await notifyAboutNearByEvents();
-        console.log("Sending PENDING notifications");
+        console.log("[CRON] Sending PENDING notifications");
         await sendNotifications();
-        await new Promise(resolve => setTimeout(resolve, 30000));
+        console.log("[CRON] Cronjob finished at: " + new Date().toISOString() + "\n");
+        await new Promise(resolve => setTimeout(resolve, 1000));
     }
-})();
+}
+
+await main();
