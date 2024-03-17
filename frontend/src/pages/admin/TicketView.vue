@@ -1,7 +1,7 @@
 <template>
     <div class="bgbody">
       <div class="mb-4 text-center">
-        <h3 class="font-1">Ticket ID-2</h3><br>
+        <h3 class="font-1">Ticket ID-{{ formData.id }}</h3><br>
       </div>
       <div>
         <div class="container">
@@ -48,10 +48,13 @@
   </template>
   
   <script>
+  import axios from 'axios';
+  
   export default {
     data() {
       return {
         formData: {
+          id: null,
           name: '',
           email: '',
           date: '',
@@ -61,15 +64,49 @@
         }
       }
     },
+    mounted() {
+      // Fetch ticket data from the backend when the component is mounted
+      this.fetchTicketData();
+    },
     methods: {
+      fetchTicketData() {
+        axios.get('/api/tickets/') // Replace '/api/tickets/' with your actual API endpoint
+          .then(response => {
+            this.formData = response.data;
+          })
+          .catch(error => {
+            console.error("Error fetching ticket data:", error);
+          });
+      },
       markAsRead() {
         // Implement your logic to mark the ticket as read
+        console.log("Marking ticket as read...");
       },
       deleteTicket() {
-        // Implement your logic to delete the ticket
+        // Send a DELETE request to your backend API to delete the ticket
+        axios.delete('/api/tickets/' + this.formData.id) // Replace '/api/tickets/' with your actual API endpoint
+          .then(response => {
+            console.log("Ticket deleted successfully");
+            // Optionally, you can also reset the form data here
+            this.formData = {
+              id: null,
+              name: '',
+              email: '',
+              date: '',
+              status: '',
+              title: '',
+              content: ''
+            };
+          })
+          .catch(error => {
+            console.error("Error deleting ticket:", error);
+          });
       },
       goBack() {
         // Implement your logic to navigate back
+        console.log("Navigating back...");
+        // For now, let's just go to the previous page
+        window.history.back();
       }
     }
   }
@@ -106,7 +143,6 @@
   
   .font-1 {
     font-family: 'Stick No Bills', sans-serif;
-    
   }
   
   .font-2 h2 {
