@@ -11,12 +11,14 @@
               {{ event['description'].toString().length > 150 ? event['description'].toString().substring(0, 150) + "..." : event['description'] }}
             </p>
           </div>
+          
           <ul class="list-group list-group-flush ">
             <li class="list-group-item">Category: <i><b>{{ event['category'].charAt(0).toUpperCase() + event['category'].slice(1) }}</b></i></li>
             <li class="list-group-item">Location: <i><b>{{ event['location'] }}</b></i></li>
             <li class="list-group-item">Date: <b>{{ new Date(event['date_time']).toDateString() }}</b></li>
             <li class="list-group-item">Time: <b>{{ new Date(event['date_time']).toLocaleTimeString() }}</b></li>
           </ul>
+
           <div class="card-body d-flex justify-content-between">
             <router-link :to="'/events/' + event.uuid" class="btn btn-primary button-color ">Open</router-link>
             <router-link :to="'/eventowner/dashboard/event/' + event.uuid" class="btn btn-primary button-color ">Edit Event</router-link>
@@ -79,6 +81,16 @@ export default {
     .custom-card img {
       max-width: 200px;
       height: 300px;
+    }
+
+    .list-group{
+      border: none;
+    }
+
+    .list-group-item{
+      background-color: #1a1a1a;
+      color: #ffffff;
+      border: none;
     }
 
 </style>
