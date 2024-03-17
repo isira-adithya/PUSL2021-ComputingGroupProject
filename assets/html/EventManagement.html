@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENT HIVE</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+    
+</head>
+<style>
+    body {
+        background-color: black;
+        /* Set background color to black */
+        color: white;
+        /* Set text color to white */
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border-width: 3px;
+        /* Set inner border width to 2px */
+    }
+</style>
+<body>
+
+    <!-- Event Table -->
+    <div class="container mt-5">
+        <table class="table table-bordered text-center text-white">
+            <thead class="">
+                <tr>
+                    <th scope="col">Event Name</th>
+                    <th scope="col">Event Type</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Date / Time</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="align-middle">sanuth@gmail.com </td>
+                    <td class="align-middle">Sana</td>
+                    <td class="align-middle">Karunagoda</td>
+                    <td class="align-middle">Sri Lanka</td>
+                    <td class="align-middle">
+                        <button class="btn btn-primary">View Ticket</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="align-middle">hash@gmail.com </td>
+                    <td class="align-middle">Hash</td>
+                    <td class="align-middle">Ruwanpura</td>
+                    <td class="align-middle">Sri Lanka</td>
+                    <td class="align-middle">
+                        <button class="btn btn-primary">View Ticket</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="align-middle">nasintha@gmail.com </td>
+                    <td class="align-middle">Nasith</td>
+                    <td class="align-middle">Perera</td>
+                    <td class="align-middle">Sri Lanka</td>
+                    <td class="align-middle">
+                        <button class="btn btn-primary">View Ticket</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <!-- Repeat similar rows for other events -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include Bootstrap JS (at the end of the body) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

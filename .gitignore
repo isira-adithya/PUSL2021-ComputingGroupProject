@@ -3,3 +3,4 @@ backend/logs/
 backend/config.js
 backend/modules/prisma_client/
 backend/.env
+assets/database/valid.data.sql

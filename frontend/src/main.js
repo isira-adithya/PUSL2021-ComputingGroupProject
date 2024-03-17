@@ -12,6 +12,7 @@ import LogoutVue from './pages/auth/Logout.vue';
 import SignupVue from './pages/auth/Signup.vue'; 
 import ForgotPasswordVue from './pages/auth/Forgot-Password.vue'; 
 import PasswordResetVue from './pages/auth/Reset-Password.vue'; 
+import VerifyEmailVue from './pages/auth/Verify-Email.vue';
 import ContactUsVue from './pages/auth/Contact-us.vue'; 
 // Components - EventOwner
 import VerificationVue from './pages/eventowner/Verification.vue';
@@ -22,6 +23,10 @@ import UserProfileVue from './pages/user/Profile.vue';
 //component - Public
 import AboutUsVue from './pages/public/AboutUs.vue';
 import EventsVue from './pages/public/Events.vue';
+import EventVue from './pages/public/Event.vue';
+
+//admin
+import EventApproval from './pages/admin/Event-approval.vue';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -43,6 +48,7 @@ const routes = [
     { path: '/signup', component: SignupVue},
     { path: '/forgot-password', component: ForgotPasswordVue},
     { path: '/reset-password/:token', component: PasswordResetVue},
+    { path: '/verify-email/:token', component: VerifyEmailVue},
     { path: '/home', component: HomeVue},
     { path: '/contact-us', component: ContactUsVue},
 
@@ -56,7 +62,11 @@ const routes = [
 
     // Public pages
     {path: '/about-us', component: AboutUsVue},
-    {path: '/events', component: EventsVue}
+    {path: '/events', component: EventsVue},
+    {path: '/events/:uuid', component: EventVue},
+
+    //admin pages
+    {path: '/admin/event-approval', component: EventApproval}
 ];
 
 const router = createRouter({

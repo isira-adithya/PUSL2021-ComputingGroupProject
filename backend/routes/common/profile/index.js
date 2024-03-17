@@ -7,6 +7,7 @@ import {
     body,
     validationResult
 } from 'express-validator';
+import {sendEmail} from "../../../modules/emails/mailgun.js";
 const prisma = new PrismaClient()
 const router = express.Router();
 
@@ -63,7 +64,7 @@ router.put("/",
         body('phone').isMobilePhone(),
         body('profile_image').isURL({
             host_whitelist: [
-                'pusl2024-cgp.sgp1.digitaloceanspaces.com',
+                'eventhive.sgp1.digitaloceanspaces.com',
                 'www.eventhive.local',
                 'source.boringavatars.com' // Random Avatar Image API
             ]
@@ -118,5 +119,57 @@ router.put("/",
         msg: "Profile Updated Successfully"
     });
 })
+
+router.post("/send-verification-email", async (req, res) => {
+    const user = await prisma.user.findFirst({
+        where: {
+            user_id: req.session.user_id
+        }
+    });
+
+    const emailAddress = await prisma.emailAddress.findFirst
+    ({
+        where: {
+            email_id: user.email_id
+        }
+    });
+
+    if (emailAddress.is_verified) {
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Email is already verified"
+        });
+    }
+
+    // Send Verification Email
+    const verificationToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    try {
+        await prisma.emailAddress.update({
+            where: {
+                email_id: user.email_id
+            },
+            data: {
+                verification_code: verificationToken
+            }
+        });
+
+        const link = `https://eventhive.live/#/verify-email/${verificationToken}`;
+
+        await sendEmail([emailAddress.email], "Email Verification", `Click on the link to verify your email: ${link}`, `Click on the link to verify your email: <a href="${link}">${link}</a>`);
+        
+        res.json({
+            success: true,
+            msg: "Verification Email Sent Successfully"
+        });
+    } catch (error) {
+        res.status(500);
+        return res.json({
+            success: false,
+            msg: "Error while updating verification code"
+        });
+    }
+
+});
 
 export default router;
