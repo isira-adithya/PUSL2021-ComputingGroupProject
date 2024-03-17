@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { filter } from "lodash";
 import Notiflix from "notiflix";
 
 export default {
