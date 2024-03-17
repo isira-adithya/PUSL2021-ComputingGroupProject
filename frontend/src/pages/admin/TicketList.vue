@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col">
           <!-- Event Table -->
-          <table class="table table-bordered text-center text-white">
+          <table v-if="filteredEvents.length > 0" class="table table-bordered text-center text-white">
             <thead class="">
               <tr>
                 <th scope="col">Ticket ID</th>
@@ -39,6 +39,7 @@
               </tr>
             </tbody>
           </table>
+          <p v-else class="text-white" style="font-size: 150%;">No Old Tickets To View</p>
         </div>
       </div>
     </div>
@@ -50,7 +51,7 @@ export default {
   data() {
     return {
       events: [
-        { id: 1, fullName: 'Sanuth Karunagoda', email: 'example@gmail.com', createdAt: '2024-01-21' },
+        { id: 1, fullName: 'Sanuth Karunagoda', email: 'example@gmail.com', createdAt: '2024-01-21', viewed: false },
         // Add more Ticket data as needed
       ],
       filterStatus: 'all' // Default status filter
@@ -61,7 +62,12 @@ export default {
       if (this.filterStatus === 'new') {
         return this.events.filter(event => !event.viewed);
       } else if (this.filterStatus === 'viewed') {
-        return this.events.filter(event => event.viewed);
+        const viewedEvents = this.events.filter(event => event.viewed);
+        if (viewedEvents.length === 0) {
+          // Display a message if there are no viewed events
+          console.log("No past tickets to view");
+        }
+        return viewedEvents;
       } else {
         return this.events; // No filter applied
       }
@@ -85,14 +91,14 @@ export default {
 
 <style scoped>
 .bgbody {
-  background-color: rgba(0, 0, 0, 0.921);
+  background-color: rgba(0, 0, 0, 0.95);
   color: white;
   height: 100vh;
 }
 
 .table-bordered th,
 .table-bordered td {
-  border-width: 3px;
+  border-width: 4px;
 }
 
 /* Add margin to the buttons */
@@ -103,5 +109,7 @@ export default {
 h1{
   margin-bottom: 5%;
   margin-top: 5%;
+  font-family: 'Stick No Bills', sans-serif;
+  
 }
 </style>
