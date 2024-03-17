@@ -25,6 +25,9 @@ import AboutUsVue from './pages/public/AboutUs.vue';
 import EventsVue from './pages/public/Events.vue';
 import EventVue from './pages/public/Event.vue';
 
+//admin
+import EventApproval from './pages/admin/Event-approval.vue';
+
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
@@ -60,7 +63,10 @@ const routes = [
     // Public pages
     {path: '/about-us', component: AboutUsVue},
     {path: '/events', component: EventsVue},
-    {path: '/events/:uuid', component: EventVue}
+    {path: '/events/:uuid', component: EventVue},
+
+    //admin pages
+    {path: '/admin/event-approval', component: EventApproval}
 ];
 
 const router = createRouter({
