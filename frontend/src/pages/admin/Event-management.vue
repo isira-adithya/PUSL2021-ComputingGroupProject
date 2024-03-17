@@ -1,5 +1,8 @@
 <template>
-  <div class="container mt-5">
+<div class="bgbody">
+  <div class="container">
+    <div class="row">
+        <div class="col">
     <table class="table table-bordered text-center text-white">
       <thead class="">
         <tr>
@@ -23,7 +26,10 @@
         </tr>
       </tbody>
     </table>
+        </div>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -68,16 +74,27 @@ export default {
 </script>
 
 <style scoped>
-body {
-  background-color: black;
-  /* Set background color to black */
+.bgbody {
+  background-color: rgba(0, 0, 0, 0.95);
   color: white;
-  /* Set text color to white */
+  height: 100vh;
 }
 
 .table-bordered th,
 .table-bordered td {
-  border-width: 3px;
-  /* Set inner border width to 2px */
+  border-width: 4px;
+  
+}
+
+/* Add margin to the buttons */
+.mb-3 {
+  margin-left: 4px;
+}
+
+h1{
+  margin-bottom: 5%;
+  margin-top: 5%;
+  font-family: 'Stick No Bills', sans-serif;
+  
 }
 </style>
