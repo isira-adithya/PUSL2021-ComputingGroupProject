@@ -6,6 +6,7 @@ import VueGoogleMaps from '@fawmi/vue-google-maps';
 // Components - General
 import TemplateVue from './Template.vue';
 import HomeVue from './pages/Home.vue';
+
 // Components - Auth
 import LoginVue from './pages/auth/Login.vue'; 
 import LogoutVue from './pages/auth/Logout.vue'; 
@@ -14,9 +15,11 @@ import ForgotPasswordVue from './pages/auth/Forgot-Password.vue';
 import PasswordResetVue from './pages/auth/Reset-Password.vue'; 
 import VerifyEmailVue from './pages/auth/Verify-Email.vue';
 import ContactUsVue from './pages/auth/Contact-us.vue'; 
+
 // Components - EventOwner
 import VerificationVue from './pages/eventowner/Verification.vue';
 import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
+
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
 
@@ -28,7 +31,7 @@ import EventVue from './pages/public/Event.vue';
 //admin
 import EventApproval from './pages/admin/Event-approval.vue';
 import TicketList from './pages/admin/TicketList.vue'
-
+import TicketView from './pages/admin/TicketView.vue'
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -69,7 +72,8 @@ const routes = [
 
     //admin pages
     {path: '/admin/event-approval', component: EventApproval},
-    {path: '/admin/Tickets', component: TicketList},
+    {path: '/admin/tickets', component: TicketList},
+    {path: '/admin/ticket-view', component: TicketView},
 
     
 ];
