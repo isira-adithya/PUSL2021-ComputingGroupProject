@@ -94,6 +94,7 @@ model Event {
   location_geocoordinates String?   @default("0,0") // lat, long
   visibility              String    @default("private")
   uuid                    String    @unique
+  notifications_sent      Boolean   @default(false)
   owner_id                Int?
   user                    User?     @relation(fields: [owner_id], references: [user_id])
   Ticket                  Ticket[]
