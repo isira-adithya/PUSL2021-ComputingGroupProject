@@ -63,12 +63,15 @@ model PasswordResetToken {
 }
 
 model Notification {
-  notification_id     Int     @id @default(autoincrement())
-  title               String? @db.VarChar(512)
-  content             String? @db.VarChar(4096)
-  notification_status String? // PENDING, READ, UNREAD, DELETED
+  notification_id     Int       @id @default(autoincrement())
+  title               String?   @db.VarChar(512)
+  content             String?   @db.VarChar(4096)
+  notification_status String? // PENDING, SENT, FAILED
+  created_at          DateTime? @default(now())
+  sent_at             DateTime?
+  content_hash        String?   @db.VarChar(512)
   user_id             Int?
-  user                User?   @relation(fields: [user_id], references: [user_id])
+  user                User?     @relation(fields: [user_id], references: [user_id])
 }
 
 model Verification {
