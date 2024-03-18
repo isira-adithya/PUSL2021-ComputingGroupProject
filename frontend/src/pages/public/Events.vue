@@ -3,8 +3,8 @@
     <div class="column m-2">
       <EventFilterVue :url_query="''" @eventFilterChanged="handleEventFilterChanged" ref="eventFilter"></EventFilterVue>
     </div>
-    
-    <div class="row">
+    <InteractiveMapVue v-if="isInteractiveMapMode" :events="events"></InteractiveMapVue>
+    <div class="row" v-if="!isInteractiveMapMode">
       <div
         v-for="event in events"
         :key="event.id"
@@ -70,10 +70,11 @@ import axios from "axios";
 import Notiflix from "notiflix";
 import ImagesCarouselVue from "../../components/ImagesCarousel.vue";
 import EventFilterVue from "../../components/EventFilter.vue";
+import InteractiveMapVue from "@/components/InteractiveMap.vue";
 
 export default {
   name: "PublicEventsVue",
-  components: { ImagesCarouselVue, EventFilterVue },
+  components: { ImagesCarouselVue, EventFilterVue, InteractiveMapVue },
   props: {
     url_query: String,
   },
