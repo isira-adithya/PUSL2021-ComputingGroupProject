@@ -12,7 +12,7 @@
         v-if="isInteractiveMapMode"
         :events="events"
       ></InteractiveMapVue>
-      <div class="row" v-if="!isInteractiveMapMode">
+      <div class="row text-center" v-if="!isInteractiveMapMode">
         <div
           v-for="event in events"
           :key="event.id"
@@ -73,7 +73,7 @@
     </div>
     <div v-else class="text-center mt-4 mb-4">
       <h3>No events found</h3>
-      
+
     </div>
   </div>
 </template>
