@@ -52,7 +52,7 @@
       <div class="col-4 text-center">
         <button
           class="btn btn-dark mt-4"
-          @click="isInteractiveMapMode = !isInteractiveMapMode"
+          @click="toggleInteractiveMapMode"
         >
           {{ isInteractiveMapMode ? "Hide" : "Show" }} Interactive Map
         </button>
@@ -85,6 +85,7 @@ export default {
     filters: {
       handler(e) {
         this.buildQuery();
+        this.emitChanges();
       },
       deep: true,
     },
@@ -139,6 +140,17 @@ export default {
         );
       }
     },
+    toggleInteractiveMapMode() {
+      this.isInteractiveMapMode = !this.isInteractiveMapMode;
+      this.emitChanges();
+    },
+    emitChanges(){
+      this.$emit('eventFilterChanged', {
+        isInteractiveMapMode: this.isInteractiveMapMode,
+        url_query: this.url_query,
+        filters: this.filters
+      });
+    }
   },
 };
 </script>
