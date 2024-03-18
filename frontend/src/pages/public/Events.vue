@@ -1,8 +1,9 @@
 <template>
   <div v-if="events != null">
     <div class="column m-2">
-      <EventFilterVue :url_query="''" ref="eventFilter"></EventFilterVue>
+      <EventFilterVue :url_query="''" @eventFilterChanged="handleEventFilterChanged" ref="eventFilter"></EventFilterVue>
     </div>
+    
     <div class="row">
       <div
         v-for="event in events"
@@ -78,14 +79,12 @@ export default {
   },
   mounted() {
     this.refreshEvents();
-    window.setInterval(() => {
-      this.updateFilter();
-    }, 1000);
   },
   data() {
     return {
       events: null,
       prev_filter_query: "",
+      isInteractiveMapMode: false,
     };
   },
   methods: {
@@ -111,6 +110,11 @@ export default {
         .finally(() => {
           Notiflix.Loading.remove();
         });
+    },
+
+    handleEventFilterChanged(data) {
+      this.updateFilter();
+      this.isInteractiveMapMode = data.isInteractiveMapMode;
     },
   },
 };
