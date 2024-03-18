@@ -36,6 +36,8 @@ CREATE TABLE `User` (
     `role` VARCHAR(191) NOT NULL DEFAULT 'VISITOR',
     `is_active` BOOLEAN NOT NULL DEFAULT false,
     `is_verified` BOOLEAN NOT NULL DEFAULT false,
+    `is_email_notifications_enabled` BOOLEAN NOT NULL DEFAULT false,
+    `last_notification_check` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     UNIQUE INDEX `User_user_name_key`(`user_name`),
     PRIMARY KEY (`user_id`)
@@ -56,8 +58,12 @@ CREATE TABLE `PasswordResetToken` (
 -- CreateTable
 CREATE TABLE `Notification` (
     `notification_id` INTEGER NOT NULL AUTO_INCREMENT,
-    `content` VARCHAR(512) NULL,
+    `title` VARCHAR(512) NULL,
+    `content` VARCHAR(4096) NULL,
     `notification_status` VARCHAR(191) NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `sent_at` DATETIME(3) NULL,
+    `content_hash` VARCHAR(512) NULL,
     `user_id` INTEGER NULL,
 
     PRIMARY KEY (`notification_id`)
@@ -72,6 +78,7 @@ CREATE TABLE `Verification` (
     `nicback_image_link` VARCHAR(191) NULL,
     `nicfront_image_link` VARCHAR(191) NULL,
     `owner_id` INTEGER NULL,
+    `admin_messages` VARCHAR(191) NULL,
 
     PRIMARY KEY (`verification_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
