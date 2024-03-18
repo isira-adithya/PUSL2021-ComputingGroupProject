@@ -24,6 +24,7 @@ import UserProfileVue from './pages/user/Profile.vue';
 import AboutUsVue from './pages/public/AboutUs.vue';
 import EventsVue from './pages/public/Events.vue';
 import EventVue from './pages/public/Event.vue';
+import MapVue from './pages/public/Map.vue';
 
 //admin
 import EventApproval from './pages/admin/Event-approval.vue';
@@ -64,6 +65,7 @@ const routes = [
     {path: '/about-us', component: AboutUsVue},
     {path: '/events', component: EventsVue},
     {path: '/events/:uuid', component: EventVue},
+    {path: '/map', component: MapVue},
 
     //admin pages
     {path: '/admin/event-approval', component: EventApproval}
