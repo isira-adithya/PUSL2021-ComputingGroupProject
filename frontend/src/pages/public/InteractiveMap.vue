@@ -48,15 +48,21 @@
 import { GoogleMap, CustomMarker } from "vue3-google-map";
 
 export default {
-  name: "MapVue",
+  name: "InteractiveMapVue",
   components: {
     GoogleMap,
     CustomMarker,
   },
+  props: {
+    events: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       mapCenter: { lat: 37.7749, lng: -122.4194 },
-      events: [
+      events_backup: [
         {
           id: 1,
           name: "Musical Show",
