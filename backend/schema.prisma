@@ -83,6 +83,7 @@ model Verification {
   owner_id            Int?
   admin_messages      String?
   user                User?   @relation(fields: [owner_id], references: [user_id])
+  created_at          DateTime? @default(now())
 }
 
 model Event {
