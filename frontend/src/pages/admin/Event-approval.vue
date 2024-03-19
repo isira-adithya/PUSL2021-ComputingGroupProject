@@ -2,25 +2,26 @@
     <div>
         <!-- Event Table -->
         <div class="container mt-5">
+            <h4>Event Owner Verifications</h4>
             <table class="table table-bordered text-center text-white">
                 <thead class="">
                     <tr>
-                        <th scope="col">Event Name</th>
-                        <th scope="col">Event Description</th>
-                        <th scope="col">Venue</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone Number</th>
                         <th scope="col">Date</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(event, index) in events" :key="index">
-                        <td class="align-middle">{{ event.name }}</td>
-                        <td class="align-middle">{{ event.description }}</td>
-                        <td class="align-middle">{{ event.venue }}</td>
-                        <td class="align-middle">{{ event.date }}</td>
+                    <tr v-for="(verification, index) in verifications" :key="index">
+                        <td class="align-middle">{{ verification.user.user_name }}</td>
+                        <td class="align-middle">{{ verification.user.email.email }}</td>
+                        <td class="align-middle">{{ verification.user.phoneNumber.number }}</td>
+                        <td class="align-middle">{{ verification.date }}</td>
                         <td class="align-middle">
-                            <button class="btn btn-primary" @click="viewEvent(event)">View Event</button>
-                            <button class="btn btn-danger" @click="deleteEvent(event)">Delete</button>
+                            <button class="btn btn-primary" @click="viewVerification(verification)">View Event</button>
+                            <button class="btn btn-danger" @click="deleteVerification(verification)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -35,31 +36,31 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            events: []
+            verifications: []
         };
     },
     mounted() {
-        this.fetchEvents();
+        this.fetchVerifications();
     },
     methods: {
-        fetchEvents() {
-            axios.get('/api/events') // Replace '/api/events' with your backend endpoint
+        fetchVerifications() {
+            axios.get('/api/admin/verifications') // Replace '/api/events' with your backend endpoint
                 .then(response => {
-                    this.events = response.data;
+                    this.verifications = response.data;
                 })
                 .catch(error => {
                     console.error('Error fetching events:', error);
                 });
         },
-        viewEvent(event) {
+        viewVerification(event) {
             // Implement view event functionality
             console.log('View event:', event);
         },
-        deleteEvent(event) {
+        deleteVerification(event) {
             // Implement delete event functionality
-            const index = this.events.indexOf(event);
+            const index = this.verifications.indexOf(event);
             if (index !== -1) {
-                this.events.splice(index, 1);
+                this.verifications.splice(index, 1);
                 // Send a request to delete the event from the backend as well
                 axios.delete(`/api/events/${event.id}`) // Replace '/api/events/${event.id}' with your backend endpoint
                     .then(() => {
