@@ -1,44 +1,56 @@
 <template>
-<div class="bgbody">
-  <div class="container">
-    <div class="row">
+  <div class="bgbody">
+    <div class="container">
+      <div class="row">
         <div class="col">
-    <table class="table table-bordered text-center text-white">
-      <thead class="">
-        <tr>
-          <th scope="col">Event Name</th>
-          <th scope="col">Event Type</th>
-          <th scope="col">Location</th>
-          <th scope="col">Date / Time</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(event, index) in events" :key="index">
-          <td class="align-middle">{{ event.eventName }}</td>
-          <td class="align-middle">{{ event.eventType }}</td>
-          <td class="align-middle">{{ event.location }}</td>
-          <td class="align-middle">{{ event.dateTime }}</td>
-          <td class="align-middle">
-            <button class="btn btn-primary" @click="viewTicket(event)">View Ticket</button>
-            <button class="btn btn-danger" @click="deleteEvent(event)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <div class="table-responsive">
+            <table class="table table-bordered text-center text-white">
+              <thead>
+                <tr>
+                  <th scope="col">Event Name</th>
+                  <th scope="col">Event Type</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Date / Time</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(event, index) in events" :key="index">
+                  <td class="align-middle">{{ event.eventName }}</td>
+                  <td class="align-middle">{{ event.eventType }}</td>
+                  <td class="align-middle">{{ event.location }}</td>
+                  <td class="align-middle">{{ event.dateTime }}</td>
+                  <td class="align-middle">
+                    <button
+                      class="btn btn-primary mr-md-3 mb-2 mb-md-0"
+                      @click="viewTicket(event)"
+                    >
+                      View Ticket
+                    </button>
+                    <button
+                      class="btn btn-danger ml-md-3 mb-2 mb-md-0"
+                      @click="deleteEvent(event)"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
     return {
-      events: []
+      events: [],
     };
   },
   mounted() {
@@ -47,20 +59,21 @@ export default {
   methods: {
     fetchEvents() {
       // Replace this URL with your backend API endpoint to fetch events
-      const apiUrl = 'https://your-backend-api.com/events';
+      const apiUrl = "https://your-backend-api.com/events";
 
       // Fetch events from the backend using Axios
-      axios.get(apiUrl)
-        .then(response => {
+      axios
+        .get(apiUrl)
+        .then((response) => {
           this.events = response.data; // Update the events array with data from the backend
         })
-        .catch(error => {
-          console.error('Error fetching events:', error);
+        .catch((error) => {
+          console.error("Error fetching events:", error);
         });
     },
     viewTicket(event) {
       // Add logic to view the ticket of an event
-      console.log('Viewing ticket of:', event);
+      console.log("Viewing ticket of:", event);
     },
     deleteEvent(event) {
       // Add logic to delete an event
@@ -68,8 +81,8 @@ export default {
       if (index !== -1) {
         this.events.splice(index, 1);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -77,24 +90,30 @@ export default {
 .bgbody {
   background-color: rgba(0, 0, 0, 0.95);
   color: white;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+h1 {
+  font-family: "Stick No Bills", sans-serif;
 }
 
 .table-bordered th,
 .table-bordered td {
   border-width: 4px;
-  
 }
 
 /* Add margin to the buttons */
-.mb-3 {
-  margin-left: 4px;
+.btn {
+  margin-bottom: 10px;
 }
 
-h1{
-  margin-bottom: 5%;
-  margin-top: 5%;
-  font-family: 'Stick No Bills', sans-serif;
-  
+@media (min-width: 768px) {
+  .btn {
+    margin-bottom: 0;
+  }
+}
+.btn + .btn {
+  margin-left: 10px;
 }
 </style>
