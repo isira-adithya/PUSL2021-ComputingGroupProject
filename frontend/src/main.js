@@ -76,6 +76,23 @@ const router = createRouter({
     routes,
 });
 
+// Router guard for admin routes
+router.beforeEach((to, from, next) => {
+    if (to.path.includes('/admin')) {
+        try {
+            const session = JSON.parse(localStorage.getItem('session'));
+            if (session.role == 'ADMIN') {
+                next();
+            }
+        } catch (error) {
+            next('/login');
+        }
+        next('/login');
+    } else {
+        next();
+    }
+});
+
 const app = createApp(TemplateVue);
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(router);
