@@ -2,8 +2,8 @@
     <div>
         <!-- Event Table -->
         <div class="container mt-5">
-            <h4>Event Owner Verifications</h4>
-            <table class="table table-bordered text-center text-white">
+            <h4>Pending Event Owner Verifications</h4>
+            <table v-if="verifications && verifications.length > 0" class="table table-bordered text-center text-white">
                 <thead class="">
                     <tr>
                         <th scope="col">Username</th>
@@ -18,20 +18,24 @@
                         <td class="align-middle">{{ verification.user.user_name }}</td>
                         <td class="align-middle">{{ verification.user.email.email }}</td>
                         <td class="align-middle">{{ verification.user.phoneNumber.number }}</td>
-                        <td class="align-middle">{{ verification.date }}</td>
+                        <td class="align-middle">{{ verification.created_at }}</td>
                         <td class="align-middle">
-                            <button class="btn btn-primary" @click="viewVerification(verification)">View Event</button>
-                            <button class="btn btn-danger" @click="deleteVerification(verification)">Delete</button>
+                            <button class="btn btn-primary me-2" @click="approveVerification(verification)">Approve</button>
+                            <button class="btn btn-danger ms-2" @click="rejectVerification(verification)">Reject</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <div v-else>
+                <p>No pending verifications</p>
+            </div>  
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Notiflix from 'notiflix';
 
 export default {
     data() {
@@ -52,24 +56,32 @@ export default {
                     console.error('Error fetching events:', error);
                 });
         },
-        viewVerification(event) {
+        approveVerification(verification) {
+            console.log(verification)
             // Implement view event functionality
-            console.log('View event:', event);
+            Notiflix.Loading.arrows();
+            axios.post(`/api/admin/verifications/${verification.verification_id}`, {
+                verification_status: 'VERIFIED'
+            }).then(response => {
+                this.verifications = this.verifications.filter(v => v.id !== verification.verification_id);
+            }).catch(error => {
+                console.error('Error approving verification:', error);
+            }).finally(() => {
+                Notiflix.Loading.remove();
+            });
         },
-        deleteVerification(event) {
+        rejectVerification(verification) {
             // Implement delete event functionality
-            const index = this.verifications.indexOf(event);
-            if (index !== -1) {
-                this.verifications.splice(index, 1);
-                // Send a request to delete the event from the backend as well
-                axios.delete(`/api/events/${event.id}`) // Replace '/api/events/${event.id}' with your backend endpoint
-                    .then(() => {
-                        console.log('Event deleted successfully from the backend.');
-                    })
-                    .catch(error => {
-                        console.error('Error deleting event from the backend:', error);
-                    });
-            }
+            Notiflix.Loading.arrows();
+            axios.post(`/api/admin/verifications/${verification.verification_id}`, {
+                verification_status: 'REJECTED'
+            }).then(response => {
+                this.verifications = this.verifications.filter(v => v.id !== verification.verification_id);
+            }).catch(error => {
+                console.error('Error approving verification:', error);
+            }).finally(() => {
+                Notiflix.Loading.remove();
+            });
         }
     }
 };
