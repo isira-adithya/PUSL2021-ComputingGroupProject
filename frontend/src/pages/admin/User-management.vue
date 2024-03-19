@@ -1,10 +1,13 @@
 <template>
-  <div class="container mt-5">
-    <button class="btn btn-primary" @click="addUserOrAdmin">Add New User / Administrator</button>
+<div class="bgbody">
+  <div class="container">
+    <button class="btn btn-primary mb-3" @click="addUserOrAdmin">Add New User / Administrator</button>
      <span style="margin-right: 10px;"></span>
-    <button class="btn btn-primary" @click="seeAllAdministrators">See All Administrators</button>
+    <button class="btn btn-primary mb-3" @click="seeAllAdministrators">See All Administrators</button>
     <br>
     <br>
+    <div class="row">
+        <div class="col">
     <table class="table table-bordered text-center text-white">
       <thead class="">
         <tr>
@@ -29,15 +32,18 @@
       </tbody>
     </table>
   </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
     return {
-      users: []
+      users: [],
     };
   },
   mounted() {
@@ -46,15 +52,16 @@ export default {
   methods: {
     fetchUsers() {
       // Replace this URL with your backend API endpoint to fetch users
-      const apiUrl = 'https://your-backend-api.com/users';
+      const apiUrl = "https://your-backend-api.com/users";
 
       // Fetch users from the backend using Axios
-      axios.get(apiUrl)
-        .then(response => {
+      axios
+        .get(apiUrl)
+        .then((response) => {
           this.users = response.data; // Update the users array with data from the backend
         })
-        .catch(error => {
-          console.error('Error fetching users:', error);
+        .catch((error) => {
+          console.error("Error fetching users:", error);
         });
     },
     addUserOrAdmin() {
@@ -65,7 +72,7 @@ export default {
     },
     viewTicket(user) {
       // Add logic to view the ticket of a user
-      console.log('Viewing ticket of:', user);
+      console.log("Viewing ticket of:", user);
     },
     deleteUser(user) {
       // Add logic to delete a user
@@ -73,22 +80,31 @@ export default {
       if (index !== -1) {
         this.users.splice(index, 1);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-body {
-  background-color: black;
-  /* Set background color to black */
+.bgbody {
+  background-color: rgba(0, 0, 0, 0.95);
   color: white;
-  /* Set text color to white */
+  height: 100vh;
 }
 
 .table-bordered th,
 .table-bordered td {
-  border-width: 3px;
-  /* Set inner border width to 2px */
+  border-width: 4px;
+}
+
+/* Add margin to the buttons */
+.mb-3 {
+  margin-left: 4px;
+}
+
+h1 {
+  margin-bottom: 5%;
+  margin-top: 5%;
+  font-family: "Stick No Bills", sans-serif;
 }
 </style>
