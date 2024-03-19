@@ -2,7 +2,7 @@
 <div class="bg-black vh-100">
   <div v-if="events.length > 0">
     <div class="row w-100">
-      <div v-for="event in events" :key="event.id" class="col-xl-3 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-1">
+      <div v-for="event in events" :key="event.id" class="col-xl-4 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-2">
         <div class="card custom-card">
           <ImagesCarouselVue class="card-img-top rounded border" v-if="event.images != null" :images="event.images" :auto-slide-show="true" :slide-show-interval="1000" />
           <div class="card-body">
@@ -19,18 +19,18 @@
             <li class="list-group-item">Time: <b>{{ new Date(event['date_time']).toLocaleTimeString() }}</b></li>
           </ul>
 
-          <div class="card-body d-flex justify-content-between">
-            <router-link :to="'/events/' + event.uuid" class="btn btn-primary button-color ">Open</router-link>
-            <router-link :to="'/eventowner/dashboard/event/' + event.uuid" class="btn btn-primary button-color ">Edit Event</router-link>
+          <div class="button-container">
+            <router-link :to="'/events/' + event.uuid" class="btn btn-primary custom-button">Open</router-link>
+            <router-link :to="'/eventowner/dashboard/event/' + event.uuid" class="btn btn-primary custom-button">Edit Event</router-link>
           </div>
         </div>
       </div>
     </div>
   </div>
-    <div v-else>
-      <h1 class="text-white text-center">No Events Found</h1>
-    </div>
+  <div v-else>
+    <h1 class="text-white text-center">No Events Found</h1>
   </div>
+</div>
 </template>
   
   <script>
@@ -77,7 +77,25 @@ export default {
       color: #ffffff;
       padding: 20px;
       border: solid 2px #111F4D;
-    }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+  }
+
+  .card-body {
+    flex: 1;
+  }
+
+  .custom-button {
+    width: 100%;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+  
     .custom-card img {
       max-width: 200px;
       height: 300px;
@@ -91,6 +109,14 @@ export default {
       background-color: #1a1a1a;
       color: #ffffff;
       border: none;
+    }
+
+    .card-body {
+      flex: 1;
+    }
+
+    .btn {
+      width: 100%; /* Ensure buttons take up full width */
     }
 
 </style>
