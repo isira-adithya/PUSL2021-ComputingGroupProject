@@ -4,6 +4,8 @@ import {
 } from '../../modules/prisma_client/index.js';
 import {checkEmailStatus} from '../../modules/emails/mailgun.js';
 import {checkSmsStatus} from '../../modules/sms/sendSms.js'
+import axios from 'axios';
+import config from '../../config.js';
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -76,5 +78,28 @@ router.get("/sms", async (req, res) => {
     }
 });
 
+router.get("/s3", async (req, res) => {
+    try {
+        // Check S3 status
+        const origin = config.S3_ENDPOINT.replace('https://', '');
+        const bucketName = config.S3_BUCKET_NAME;
+        const url = `https://${bucketName}.${origin}/status/test.txt`
+        const response = await axios.get(url);
+        if (response.status === 200 && response.data === 'IT_WORKS'){
+            return res.json({
+                status: "SUCCESS",
+                message: "S3 service is running"
+            });
+        } else {
+            throw 'S3 Service Error';   
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status: "ERROR",
+            message: "S3 service not available"
+        });
+    }
+});
 
 export default router;
