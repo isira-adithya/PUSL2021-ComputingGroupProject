@@ -41,7 +41,6 @@ router.get("/db", async (req, res) => {
 router.get("/email", async (req, res) => {
     try {
         const result = await checkEmailStatus();
-        console.log(result);
         if (result){
             return res.json({
                 status: "SUCCESS",
