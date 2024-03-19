@@ -29,27 +29,29 @@ model EmailAddress {
 }
 
 model User {
-  user_id                 Int                  @id @default(autoincrement())
-  user_name               String               @unique
-  first_name              String
-  last_name               String
-  address                 String
-  addr_geocoordinates     String?              @default("0,0") // lat, long
-  notification_preference String
-  password                String
-  profile_image           String?
-  phone_id                Int
-  email_id                Int
-  role                    String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
-  is_active               Boolean              @default(false)
-  is_verified             Boolean              @default(false)
-  PasswordResetToken      PasswordResetToken[]
-  Notification            Notification[]
-  Event                   Event[]
-  Verification            Verification[]
-  phone                   PhoneNumber          @relation(fields: [phone_id], references: [phone_id])
-  email_address           EmailAddress         @relation(fields: [email_id], references: [email_id])
-  Comment                 Comment[]
+  user_id                        Int                  @id @default(autoincrement())
+  user_name                      String               @unique
+  first_name                     String
+  last_name                      String
+  address                        String
+  addr_geocoordinates            String?              @default("0,0") // lat, long
+  notification_preference        String
+  password                       String
+  profile_image                  String?
+  phone_id                       Int
+  email_id                       Int
+  role                           String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
+  is_active                      Boolean              @default(false)
+  is_verified                    Boolean              @default(false)
+  is_email_notifications_enabled Boolean              @default(false)
+  last_notification_check        DateTime?            @default(now())
+  PasswordResetToken             PasswordResetToken[]
+  Notification                   Notification[]
+  Event                          Event[]
+  Verification                   Verification[]
+  phone                          PhoneNumber          @relation(fields: [phone_id], references: [phone_id])
+  email_address                  EmailAddress         @relation(fields: [email_id], references: [email_id])
+  Comment                        Comment[]
 }
 
 model PasswordResetToken {
@@ -61,11 +63,15 @@ model PasswordResetToken {
 }
 
 model Notification {
-  notification_id     Int     @id @default(autoincrement())
-  content             String? @db.VarChar(512)
-  notification_status String?
+  notification_id     Int       @id @default(autoincrement())
+  title               String?   @db.VarChar(512)
+  content             String?   @db.VarChar(4096)
+  notification_status String? // PENDING, SENT, FAILED
+  created_at          DateTime? @default(now())
+  sent_at             DateTime?
+  content_hash        String?   @db.VarChar(512)
   user_id             Int?
-  user                User?   @relation(fields: [user_id], references: [user_id])
+  user                User?     @relation(fields: [user_id], references: [user_id])
 }
 
 model Verification {
