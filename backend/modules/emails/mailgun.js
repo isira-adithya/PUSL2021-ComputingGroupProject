@@ -26,6 +26,21 @@ async function sendEmail(to, subject, text, html) {
     }
 }
 
+async function checkEmailStatus(){
+    try {
+        const mgResponse = await mg.domains.list();
+        if (mgResponse.length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch(e) {
+        console.log(e)
+        return false;
+    }
+}
+
 export {
-    sendEmail
+    sendEmail,
+    checkEmailStatus
 };
