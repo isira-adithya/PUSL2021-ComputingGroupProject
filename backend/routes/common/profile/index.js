@@ -60,7 +60,7 @@ router.put("/",
         body('first_name').isString().isLength({ min: 1, max: 100 }),
         body('last_name').isString().isLength({ min: 1, max: 100 }),
         body('address').isString().isLength({ min: 1, max: 250 }),
-        body('notification_preference').isString().isLength({ min: 1, max: 20 }).custom((value, {req}) => {
+        body('notification_preference').isString().custom((value) => {
             // Allowed Values EMAILS, SMS, PUSH, ALL, NONE
             if (value !== "EMAILS" && value !== "SMS" && value !== "PUSH" && value !== "ALL" && value !== "NONE") {
                 throw new Error('Invalid notification_preference');
@@ -84,15 +84,6 @@ router.put("/",
         res.status(400);
         return res.json({
             errors: result.array()
-        });
-    }
-
-    // Checking notification_preference, it should be ENABLED OR DISBALED
-    if(req.body.notification_preference !== "ENABLED" && req.body.notification_preference !== "DISABLED") {
-        res.status(400);
-        return res.json({
-            success: false,
-            msg: "Invalid notification_preference"
         });
     }
 
