@@ -2,7 +2,7 @@
 <div class="bg-black vh-100">
   <div v-if="events.length > 0">
     <div class="row w-100">
-      <div v-for="event in events" :key="event.id" class="col-xl-4 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-2">
+      <div v-for="event in events" :key="event.id" class="col-xl-4 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-3">
         <div class="card custom-card">
           <ImagesCarouselVue class="card-img-top rounded border" v-if="event.images != null" :images="event.images" :auto-slide-show="true" :slide-show-interval="1000" />
           <div class="card-body">
@@ -12,7 +12,7 @@
             </p>
           </div>
           
-          <ul class="list-group list-group-flush ">
+          <ul class="list-group list-group-flush mb-3 ">
             <li class="list-group-item">Category: <i><b>{{ event['category'].charAt(0).toUpperCase() + event['category'].slice(1) }}</b></i></li>
             <li class="list-group-item">Location: <i><b>{{ event['location'] }}</b></i></li>
             <li class="list-group-item">Date: <b>{{ new Date(event['date_time']).toDateString() }}</b></li>
@@ -72,30 +72,31 @@ export default {
       background-color: #020923 !important;
     }
     .custom-card {
-      width: 250px;
+      width: 300px;
       background-color: #1a1a1a;
       color: #ffffff;
       padding: 20px;
       border: solid 2px #111F4D;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
       height: 100%;
-  }
+    }
 
-  .card-body {
-    flex: 1;
-  }
+    .card-body {
+      flex: 1;
+    }
 
-  .custom-button {
-    width: 100%;
-  }
+    .custom-button {
+      width: 100%; 
+    }
 
-  .button-container {
-    display: flex;
-    justify-content: center;
-  }
-  
+    .button-container {
+      display: flex;
+      justify-content: center;
+      
+    }
+    
     .custom-card img {
       max-width: 200px;
       height: 300px;
