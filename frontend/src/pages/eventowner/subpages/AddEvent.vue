@@ -30,7 +30,7 @@
                 :hideDeleteButton="true"
                 :hideImage="true"
               />
-              <ImagesCarouselVue style="width: 150px;" :images="images" :auto-slide-show="true" :slide-show-interval="3000" />
+              <ImagesManagementCarousel style="width: 150px;" :images="images" :auto-slide-show="true" :slide-show-interval="5000" />
             </div>
             <div class="mb-3 form-control">
               <label class="form-label text-white">Date / Time</label>
@@ -173,14 +173,14 @@
 import axios from "axios";
 import _ from "lodash";
 import ImageUploader from "../../../components/ImageUploader.vue";
-import ImagesCarouselVue from '../../../components/ImagesCarousel.vue';
+import ImagesManagementCarousel from "@/components/ImagesManagementCarousel.vue";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import Notiflix from "notiflix";
 
 export default {
   name: "EventOwnerAddEventVue",
-  components: { ImageUploader, VueDatePicker, ImagesCarouselVue },
+  components: { ImageUploader, VueDatePicker, ImagesManagementCarousel },
   
 
   mounted() {
