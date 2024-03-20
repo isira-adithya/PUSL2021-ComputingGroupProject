@@ -60,7 +60,13 @@ router.put("/",
         body('first_name').isString().isLength({ min: 1, max: 100 }),
         body('last_name').isString().isLength({ min: 1, max: 100 }),
         body('address').isString().isLength({ min: 1, max: 250 }),
-        body('notification_preference').isString().isLength({ min: 1, max: 20 }),
+        body('notification_preference').isString().isLength({ min: 1, max: 20 }).custom((value, {req}) => {
+            // Allowed Values EMAILS, SMS, PUSH, ALL, NONE
+            if (value !== "EMAILS" && value !== "SMS" && value !== "PUSH" && value !== "ALL" && value !== "NONE") {
+                throw new Error('Invalid notification_preference');
+            }
+            return true;
+        }),
         body('phone').isMobilePhone(),
         body('profile_image').isURL({
             host_whitelist: [
