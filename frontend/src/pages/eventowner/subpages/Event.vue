@@ -29,7 +29,7 @@
             :hideDeleteButton="true"
             :hideImage="true"
            />
-            <ImagesCarouselVue style="width: 150px;" v-if="event.images.length > 0" :images="event.images" :auto-slide-show="true" :slide-show-interval="3000" />
+            <ImagesCarouselVue style="width: 150px;" v-if="event.images.length > 0" :images="event.images" :auto-slide-show="true" :slide-show-interval="5000" />
           </div>
           <div class="mb-3">
             <label class="form-label text-white">Date / Time</label>

@@ -13,7 +13,7 @@
                 v-if="event.images.length > 0"
                 :images="event.images"
                 :auto-slide-show="true"
-                :slide-show-interval="1000"
+                :slide-show-interval="5000"
               />
             </div>
 

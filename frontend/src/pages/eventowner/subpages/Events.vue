@@ -7,7 +7,7 @@
       </div>
       <div v-for="event in events" :key="event.id" class="col-xl-4 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-3">
         <div class="card custom-card d-flex justify-content-center">
-          <ImagesCarouselVue class="card-img-top rounded border" v-if="event.images != null" :images="event.images" :auto-slide-show="true" :slide-show-interval="1000" />
+          <ImagesCarouselVue class="card-img-top rounded border" v-if="event.images != null" :images="event.images" :auto-slide-show="true" :slide-show-interval="5000" />
           <div class="card-body d-flex text-center">
             <div>
               <h5 class="card-title">{{ event['name'] }}</h5>
