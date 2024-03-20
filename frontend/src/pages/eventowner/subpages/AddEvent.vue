@@ -30,7 +30,7 @@
                 :hideDeleteButton="true"
                 :hideImage="true"
               />
-              <ImagesManagementCarousel style="width: 150px;" :images="images" :auto-slide-show="true" :slide-show-interval="5000" />
+              <ImagesManagementCarousel @deleteImage="deleteImage" style="width: 50%;" :images="images" :auto-slide-show="true" :slide-show-interval="5000" />
             </div>
             <div class="mb-3 form-control">
               <label class="form-label text-white">Date / Time</label>
@@ -221,6 +221,23 @@ export default {
     };
   },
   methods: {
+
+    deleteImage(url) {
+      Notiflix.Confirm.show(
+        "Delete Image",
+        "Are you sure you want to delete this image?",
+        "Yes",
+        "No",
+        function () {
+          this.images = this.images.filter((image) => image !== url);
+          Notiflix.Notify.success("Image deleted successfully");
+        }.bind(this),
+        function () {
+          Notiflix.Notify.failure("Image deletion cancelled");
+        }
+      );
+    },
+
     submitForm() {
       // convert this.date_time to unix timestamp
       const timestamp = new Date(this.date_time).getTime() / 1000;
