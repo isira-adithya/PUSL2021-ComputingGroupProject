@@ -28,6 +28,8 @@ import InteractiveMapVue from './components/InteractiveMap.vue';
 
 // Components - Admin
 import EventOwnerApproval from './pages/admin/EventOwnerApproval.vue';
+import UserManagement from './pages/admin/User-management.vue';
+import EventManagement from './pages/admin/Event-management.vue';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -68,7 +70,9 @@ const routes = [
     {path: '/map', component: InteractiveMapVue},
 
     //admin pages
-    {path: '/admin/eventowner-approval', component: EventOwnerApproval}
+    {path: '/admin/eventowner-approval', component: EventOwnerApproval},
+    {path: '/admin/user-management', component: UserManagement},
+    {path: '/admin/event-management', component: EventManagement}
 ];
 
 const router = createRouter({
