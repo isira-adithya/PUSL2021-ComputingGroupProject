@@ -1,15 +1,20 @@
-<template>
-<div class="bg-black vh-100">
-  <div v-if="events.length > 0">
-    <div class="row w-100">
+<template >
+<div class="bg-black ">
+  <div v-if="events.length > 0" class="d-flex ">
+    <div class="row w-100 flex-wrap justify-content-center text-center ">
+      <div class="title-box m-5">
+        <h1 class="font-1 text-white" >Events</h1>
+      </div>
       <div v-for="event in events" :key="event.id" class="col-xl-4 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-3">
-        <div class="card custom-card">
+        <div class="card custom-card d-flex justify-content-center">
           <ImagesCarouselVue class="card-img-top rounded border" v-if="event.images != null" :images="event.images" :auto-slide-show="true" :slide-show-interval="1000" />
-          <div class="card-body">
-            <h5 class="card-title">{{ event['name'] }}</h5>
-            <p class="card-text">
-              {{ event['description'].toString().length > 150 ? event['description'].toString().substring(0, 150) + "..." : event['description'] }}
-            </p>
+          <div class="card-body d-flex text-center">
+            <div>
+              <h5 class="card-title">{{ event['name'] }}</h5>
+              <p class="card-text">
+                {{ event['description'].toString().length > 150 ? event['description'].toString().substring(0, 150) + "..." : event['description'] }}
+              </p>
+            </div>
           </div>
           
           <ul class="list-group list-group-flush mb-3 ">
@@ -19,9 +24,9 @@
             <li class="list-group-item">Time: <b>{{ new Date(event['date_time']).toLocaleTimeString() }}</b></li>
           </ul>
 
-          <div class="button-container">
-            <router-link :to="'/events/' + event.uuid" class="btn btn-primary custom-button">Open</router-link>
-            <router-link :to="'/eventowner/dashboard/event/' + event.uuid" class="btn btn-primary custom-button">Edit Event</router-link>
+          <div class="button-container d-flex justify-content-center ">
+            <router-link :to="'/events/' + event.uuid" class="btn btn-primary custom-button m-1">Open</router-link>
+            <router-link :to="'/eventowner/dashboard/event/' + event.uuid" class="btn btn-primary custom-button m-1">Edit Event</router-link>
           </div>
         </div>
       </div>
@@ -65,45 +70,25 @@ export default {
 </script>
 <style scoped>
 
-    .button-color {
-      background-color: #111F4D;
+    .bg-black{
+      height: 75.9vh;
     }
-    .button-color:hover {
-      background-color: #020923 !important;
-    }
+
     .custom-card {
       width: 300px;
       background-color: #1a1a1a;
       color: #ffffff;
       padding: 20px;
-      border: solid 2px #111F4D;
-      display: flex;
+      border: solid 2px #111f4d;
       flex-direction: column;
-      justify-content: center;
       height: 100%;
+      margin: 0 auto; 
     }
 
-    .card-body {
-      flex: 1;
-    }
-
-    .custom-button {
-      width: 100%; 
-    }
-
-    .button-container {
-      display: flex;
-      justify-content: center;
-      
-    }
     
     .custom-card img {
       max-width: 200px;
       height: 300px;
-    }
-
-    .list-group{
-      border: none;
     }
 
     .list-group-item{
@@ -116,8 +101,24 @@ export default {
       flex: 1;
     }
 
-    .btn {
-      width: 100%; /* Ensure buttons take up full width */
+    .custom-button {
+      background-color: #111F4D;
+      border: none;
+      width: 100%; 
+    }
+
+    .custom-button:hover {
+      background-color: #020923 !important;
+    }
+
+    .font-1 {
+      font-family: "Stick No Bills", sans-serif;
+    }
+
+    @media (max-width: 1500px) {
+      .bg-black {
+        height: auto !important; 
+      }
     }
 
 </style>
