@@ -27,6 +27,8 @@ import EventVue from './pages/public/Event.vue';
 
 //admin
 import EventApproval from './pages/admin/Event-approval.vue';
+import UserManagement from './pages/admin/User-management.vue';
+import EventManagement from './pages/admin/Event-management.vue';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -66,7 +68,9 @@ const routes = [
     {path: '/events/:uuid', component: EventVue},
 
     //admin pages
-    {path: '/admin/event-approval', component: EventApproval}
+    {path: '/admin/event-approval', component: EventApproval},
+    {path: '/admin/user-management', component: UserManagement},
+    {path: '/admin/event-management', component: EventManagement}
 ];
 
 const router = createRouter({
