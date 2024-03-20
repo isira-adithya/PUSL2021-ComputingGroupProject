@@ -1,25 +1,15 @@
 <template>
   <div v-if="images.length > 0">
-    <div class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner" id="carousel-items">
-        <div v-for="(image, index) in images" :key="image">
-          <div
-            :class="
-              index == currentImageIndex
-                ? 'carousel-item active'
-                : 'carousel-item'
-            "
-          >
-            <img class="d-block w-100" :src="image" alt="First slide" />
-            <button
-              class="btn btn-danger btn-sm col-1"
-              v-if="imageUrl && !hideDeleteButton"
-              @click="deleteNicFront"
-            >
-              <font-awesome-icon icon="fa-solid fa-trash" />
-            </button>
-          </div>
-        </div>
+    <div class="row" id="carousel-items">
+      <div v-for="image in images" :key="image" class="col">
+        <img class="d-block w-100" :src="image" alt="First slide" />
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          @click="$emit('deleteImage', image)"
+        >
+          <font-awesome-icon icon="fa-solid fa-trash" />
+        </button>
       </div>
     </div>
   </div>
@@ -56,6 +46,29 @@ export default {
       currentImageIndex: 0,
     };
   },
-  methods: {},
+  methods: {
+    deleteImage(url) {
+      this.$emit("delete-image", url);
+    },
+  },
 };
 </script>
+
+<!-- Embed the following method in the code when using this component -->
+<!-- 
+  deleteImage(url) {
+  Notiflix.Confirm.show(
+    "Delete Image",
+    "Are you sure you want to delete this image?",
+    "Yes",
+    "No",
+    function () {
+      this.images = this.images.filter((image) => image !== url);
+      Notiflix.Notify.success("Image deleted successfully");
+    }.bind(this),
+    function () {
+      Notiflix.Notify.failure("Image deletion cancelled");
+    }
+  );
+}, 
+-->
