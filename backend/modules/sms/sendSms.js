@@ -47,4 +47,26 @@ async function sendSms(to, message, contactFname = null, contactLname = null, co
     }
 }
 
-export {sendSms};
+async function checkSmsStatus(){
+    try {
+        const response = await axios.get(`https://app.notify.lk/api/v1/status?user_id=${config.NOTIFYLK_USERID}&api_key=${config.NOTIFYLK_APIKEY}`);
+        if (response.status == 200){
+            const apiData = response.data;
+            if (apiData['data']['active']){
+                if (apiData['data']['acc_balance'] <= 0){
+                    throw 'SMS Service is deactivated due to insufficient balance';
+                }
+            } else {
+                throw 'SMS Service is deactivated';
+            }
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+export {sendSms, checkSmsStatus};
