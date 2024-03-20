@@ -1,5 +1,5 @@
 <template >
-<div class="bg-black ">
+<div class="bg-black " :style="[background]">
   <div v-if="events.length > 0" class="d-flex ">
     <div class="row w-100 flex-wrap justify-content-center text-center ">
       <div class="title-box m-5">
@@ -39,9 +39,9 @@
 </template>
   
   <script>
-import axios from "axios";
-import Notiflix from "notiflix";
-import ImagesCarouselVue from '../../../components/ImagesCarousel.vue';
+    import axios from "axios";
+    import Notiflix from "notiflix";
+    import ImagesCarouselVue from '../../../components/ImagesCarousel.vue';
 
 export default {
   name: "EventOwnerEventsVue",
@@ -63,11 +63,26 @@ export default {
   data() {
     return {
       events: [],
+
+      imagePath1:
+        process.env.BASE_URL + "assets/images/home-images/home-pageBG.jpg",
     };
   },
+    
   methods: {},
+
+  computed:{
+  background() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${this.imagePath1})`, // Dynamically set the URL
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      };
+    },
+  }
 };
 </script>
+
 <style scoped>
 
     .bg-black{
