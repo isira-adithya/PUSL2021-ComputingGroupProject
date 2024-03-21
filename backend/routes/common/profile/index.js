@@ -55,40 +55,37 @@ router.get("/", isLoggedIn, async (req, res) => {
     });
 });
 
-router.put("/",
-    isLoggedIn,
-    body('first_name').isString().isLength({ min: 1, max: 100 }),
-    body('last_name').isString().isLength({ min: 1, max: 100 }),
-    body('address').isString().isLength({ min: 1, max: 250 }),
-    body('notification_preference').isString().isLength({ min: 1, max: 20 }),
-    body('phone').isMobilePhone(),
-    body('profile_image').isURL({
-        host_whitelist: [
-            'eventhive.sgp1.digitaloceanspaces.com',
-            'www.eventhive.local',
-            'source.boringavatars.com' // Random Avatar Image API
-        ]
-    }).optional(),
-    body('address_geo_cooridinates').isObject(),
-    async (req, res) => {
+router.put("/", 
+        isLoggedIn, 
+        body('first_name').isString().isLength({ min: 1, max: 100 }),
+        body('last_name').isString().isLength({ min: 1, max: 100 }),
+        body('address').isString().isLength({ min: 1, max: 250 }),
+        body('notification_preference').isString().custom((value) => {
+            // Allowed Values EMAILS, SMS, PUSH, ALL, NONE
+            if (value !== "EMAILS" && value !== "SMS" && value !== "PUSH" && value !== "ALL" && value !== "NONE") {
+                throw new Error('Invalid notification_preference');
+            }
+            return true;
+        }),
+        body('phone').isMobilePhone(),
+        body('profile_image').isURL({
+            host_whitelist: [
+                'eventhive.sgp1.digitaloceanspaces.com',
+                'www.eventhive.local',
+                'source.boringavatars.com' // Random Avatar Image API
+            ]
+        }).optional(),
+        body('address_geo_cooridinates').isObject(),
+        async (req, res) => {
 
-        // Input Validation
-        const result = validationResult(req);
-        if (!result.isEmpty()) {
-            res.status(400);
-            return res.json({
-                errors: result.array()
-            });
-        }
-
-        // Checking notification_preference, it should be ENABLED OR DISBALED
-        if (req.body.notification_preference !== "ENABLED" && req.body.notification_preference !== "DISABLED") {
-            res.status(400);
-            return res.json({
-                success: false,
-                msg: "Invalid notification_preference"
-            });
-        }
+    // Input Validation
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+        res.status(400);
+        return res.json({
+            errors: result.array()
+        });
+    }
 
         // There should be lat and lng in address_geo_cooridinates and they should numbers
         if (!req.body.address_geo_cooridinates.lat || !req.body.address_geo_cooridinates.lng || isNaN(req.body.address_geo_cooridinates.lat) || isNaN(req.body.address_geo_cooridinates.lng)) {
