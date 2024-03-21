@@ -258,11 +258,11 @@ router.put(
             const validTickets = tickets.every(ticket => {
                 return ticket.hasOwnProperty('id') && ticket.hasOwnProperty('name') && ticket.hasOwnProperty('price') && ticket.hasOwnProperty('description');
             });
-            if (!validTickets) {
-                return res.status(400).json({
-                    message: "Invalid tickets object"
-                });
-            }
+            // if (!validTickets) {
+            //     return res.status(400).json({
+            //         message: "Invalid tickets object"
+            //     });
+            // }
 
             // Checking ticket price
             tickets.forEach(ticket => {
