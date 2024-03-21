@@ -40,8 +40,8 @@
           process.env.BASE_URL + "./assets/images/admin-home/adbg.jpeg",
 
         cards: [
-          { title: 'Manage Users', icon: 'user-icon.png', link: '/assets/html/Event_Submission.html', alt: 'User Icon' },
-          { title: 'Manage Events', icon: 'calendar-icon.png', link: '/assets/html/Event_Submission.html', alt: 'Calendar Icon' },
+          { title: 'Manage Users', icon: './assets/images/admin-home/mo.jpg', link: '/assets/html/Event_Submission.html', alt: 'User Icon' },
+          { title: 'Manage Events', icon: './assets/images/admin-home/mp.jpg', link: '/assets/html/Event_Submission.html', alt: 'Calendar Icon' },
           { title: 'Manage Tickets', icon: 'ticket-icon.png', link: '/assets/html/Event_Submission.html', alt: 'Ticket Icon' },
           { title: 'Approve Events', icon: 'clipboard-icon.png', link: '/assets/html/Event_Submission.html', alt: 'Clipboard Icon' }
         ]
