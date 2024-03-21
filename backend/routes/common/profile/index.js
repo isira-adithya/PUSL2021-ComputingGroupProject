@@ -87,15 +87,6 @@ router.put("/",
         });
     }
 
-    // Checking notification_preference, it should be ENABLED OR DISBALED
-    if(req.body.notification_preference !== "ENABLED" && req.body.notification_preference !== "DISABLED") {
-        res.status(400);
-        return res.json({
-            success: false,
-            msg: "Invalid notification_preference"
-        });
-    }
-
         // There should be lat and lng in address_geo_cooridinates and they should numbers
         if (!req.body.address_geo_cooridinates.lat || !req.body.address_geo_cooridinates.lng || isNaN(req.body.address_geo_cooridinates.lat) || isNaN(req.body.address_geo_cooridinates.lng)) {
             res.status(400);
