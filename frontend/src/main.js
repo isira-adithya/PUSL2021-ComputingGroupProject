@@ -27,11 +27,16 @@ import UserProfileVue from './pages/user/Profile.vue';
 import AboutUsVue from './pages/public/AboutUs.vue';
 import EventsVue from './pages/public/Events.vue';
 import EventVue from './pages/public/Event.vue';
+import InteractiveMapVue from './components/InteractiveMap.vue';
 
 //admin
 import EventApproval from './pages/admin/Event-approval.vue';
 import TicketList from './pages/admin/TicketList.vue'
 import TicketView from './pages/admin/TicketView.vue'
+// Components - Admin
+import EventOwnerApproval from './pages/admin/EventOwnerApproval.vue';
+import UserManagement from './pages/admin/User-management.vue';
+import EventManagement from './pages/admin/Event-management.vue';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -69,6 +74,7 @@ const routes = [
     {path: '/about-us', component: AboutUsVue},
     {path: '/events', component: EventsVue},
     {path: '/events/:uuid', component: EventVue},
+    {path: '/map', component: InteractiveMapVue},
 
     //admin pages
     {path: '/admin/event-approval', component: EventApproval},
@@ -76,11 +82,31 @@ const routes = [
     {path: '/admin/ticket-view', component: TicketView},
 
     
+    {path: '/admin/eventowner-approval', component: EventOwnerApproval},
+    {path: '/admin/user-management', component: UserManagement},
+    {path: '/admin/event-management', component: EventManagement}
 ];
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes,
+});
+
+// Router guard for admin routes
+router.beforeEach((to, from, next) => {
+    if (to.path.includes('/admin')) {
+        try {
+            const session = JSON.parse(localStorage.getItem('session'));
+            if (session.role == 'ADMIN') {
+                next();
+            }
+        } catch (error) {
+            next('/login');
+        }
+        next('/login');
+    } else {
+        next();
+    }
 });
 
 const app = createApp(TemplateVue);

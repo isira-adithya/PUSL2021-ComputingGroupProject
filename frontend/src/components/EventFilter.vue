@@ -1,7 +1,7 @@
 <template>
-  <div class="container mt-4">
+  <div class="mt-4">
     <div class="row mb-3">
-      <div class="col">
+      <div class="col-3">
         <label for="location" class="form-label">Location:</label>
         <input
           id="location"
@@ -11,7 +11,7 @@
           @keyup="filters.geoCoordinates = ''"
         />
       </div>
-      <div class="col">
+      <div class="col-3">
         <label for="eventType" class="form-label">Event Type:</label>
         <select id="eventType" v-model="filters.eventType" class="form-select">
           <option value="">Select Event Type</option>
@@ -23,7 +23,7 @@
           <option value="Other">Other</option>
         </select>
       </div>
-      <div class="col">
+      <div class="col-6">
         <label class="form-label">Date Range:</label>
         <div class="input-group">
           <input
@@ -41,9 +41,20 @@
           />
         </div>
       </div>
-      <div class="col">
-        <button class="btn btn-primary" @click="findNearMe">
+    </div>
+    <div class="row mb-3">
+      <div class="col-4 text-center">
+        <button class="btn btn-primary mt-4" @click="findNearMe">
           Find Events Near Me
+        </button>
+      </div>
+      <div class="col-4"></div>
+      <div class="col-4 text-center">
+        <button
+          class="btn btn-dark mt-4"
+          @click="toggleInteractiveMapMode"
+        >
+          {{ isInteractiveMapMode ? "Hide" : "Show" }} Interactive Map
         </button>
       </div>
     </div>
@@ -64,6 +75,7 @@ export default {
         geoCoordinates: "",
       },
       url_query: "",
+      isInteractiveMapMode: false,
     };
   },
   mounted() {
@@ -73,6 +85,7 @@ export default {
     filters: {
       handler(e) {
         this.buildQuery();
+        this.emitChanges();
       },
       deep: true,
     },
@@ -127,6 +140,17 @@ export default {
         );
       }
     },
+    toggleInteractiveMapMode() {
+      this.isInteractiveMapMode = !this.isInteractiveMapMode;
+      this.emitChanges();
+    },
+    emitChanges(){
+      this.$emit('eventFilterChanged', {
+        isInteractiveMapMode: this.isInteractiveMapMode,
+        url_query: this.url_query,
+        filters: this.filters
+      });
+    }
   },
 };
 </script>
