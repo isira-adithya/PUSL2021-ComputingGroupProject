@@ -80,8 +80,7 @@ const routes = [
     {path: '/admin/event-approval', component: EventApproval},
     {path: '/admin/tickets', component: TicketList},
     {path: '/admin/ticket-view', component: TicketView},
-
-    
+   
     {path: '/admin/eventowner-approval', component: EventOwnerApproval},
     {path: '/admin/user-management', component: UserManagement},
     {path: '/admin/event-management', component: EventManagement}
