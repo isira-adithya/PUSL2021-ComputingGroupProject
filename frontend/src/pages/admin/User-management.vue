@@ -14,19 +14,19 @@
           <th scope="col">E-mail</th>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
-          <th scope="col">Country</th>
+          <th scope="col">Address</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(user, index) in users" :key="index">
           <td class="align-middle">{{ user.email }}</td>
-          <td class="align-middle">{{ user.firstName }}</td>
-          <td class="align-middle">{{ user.lastName }}</td>
-          <td class="align-middle">{{ user.country }}</td>
+          <td class="align-middle">{{ user.first_name }}</td>
+          <td class="align-middle">{{ user.last_name }}</td>
+          <td class="align-middle">{{ user.address }}</td>
           <td class="align-middle">
-            <button class="btn btn-primary" @click="viewTicket(user)">View Ticket</button>
-            <button class="btn btn-danger" @click="deleteUser(user)">Delete</button>
+            <button class="btn btn-primary me-2" @click="viewTicket(user)">View User</button>
+            <button class="btn btn-danger ms-2" @click="deleteUser(user)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -52,7 +52,7 @@ export default {
   methods: {
     fetchUsers() {
       // Replace this URL with your backend API endpoint to fetch users
-      const apiUrl = "https://your-backend-api.com/users";
+      const apiUrl = "/api/admin/users";
 
       // Fetch users from the backend using Axios
       axios
