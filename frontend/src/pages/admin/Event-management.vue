@@ -16,10 +16,10 @@
               </thead>
               <tbody>
                 <tr v-for="(event, index) in events" :key="index">
-                  <td class="align-middle">{{ event.eventName }}</td>
-                  <td class="align-middle">{{ event.eventType }}</td>
+                  <td class="align-middle">{{ event.name }}</td>
+                  <td class="align-middle">{{ event.category }}</td>
                   <td class="align-middle">{{ event.location }}</td>
-                  <td class="align-middle">{{ event.dateTime }}</td>
+                  <td class="align-middle">{{ event.date_time }}</td>
                   <td class="align-middle">
                     <button
                       class="btn btn-primary mr-md-3 mb-2 mb-md-0"
@@ -46,6 +46,7 @@
 
 <script>
 import axios from "axios";
+import Notiflix from "notiflix";
 
 export default {
   data() {
@@ -59,9 +60,10 @@ export default {
   methods: {
     fetchEvents() {
       // Replace this URL with your backend API endpoint to fetch events
-      const apiUrl = "https://your-backend-api.com/events";
+      const apiUrl = "/api/admin/events";
 
       // Fetch events from the backend using Axios
+      Notiflix.Loading.arrows();
       axios
         .get(apiUrl)
         .then((response) => {
@@ -69,18 +71,57 @@ export default {
         })
         .catch((error) => {
           console.error("Error fetching events:", error);
+        })
+        .finally(() => {
+          Notiflix.Loading.remove();
         });
     },
     viewTicket(event) {
-      // Add logic to view the ticket of an event
-      console.log("Viewing ticket of:", event);
+      this.$router.push(`/eventowner/dashboard/event/${event.uuid}`);
     },
     deleteEvent(event) {
       // Add logic to delete an event
-      const index = this.events.indexOf(event);
-      if (index !== -1) {
-        this.events.splice(index, 1);
-      }
+      // You can use the event.uuid to identify the event to delete
+
+      Notiflix.Confirm.show(
+        "Delete Event",
+        "Are you sure you want to delete this event?",
+        "Yes",
+        "No",
+        () => {
+          Notiflix.Loading.arrows();
+          axios
+            .delete(`/api/eventowner/events/${event.uuid}`)
+            .then((response) => {
+              Notiflix.Report.success(
+                "Success",
+                "Event deleted successfully",
+                "OK",
+                () => {
+                  this.fetchEvents(); // Fetch events again to update the list
+                }
+              );
+            })
+            .catch((error) => {
+              console.error("Error deleting event:", error);
+              Notiflix.Report.failure(
+                "Error",
+                "An error occurred while deleting the event",
+                "OK"
+              );
+            })
+            .finally(() => {
+              Notiflix.Loading.remove();
+            });
+          const index = this.events.indexOf(event);
+          if (index !== -1) {
+            this.events.splice(index, 1);
+          }
+        },
+        () => {
+          // Do nothing if the user clicks "No"
+        }
+      );
     },
   },
 };

@@ -20,7 +20,7 @@ const router = express.Router();
 // Using middleware to check authentication and authorization of /admin
 const checkAuth = (req, res, next) => {
     if (req.session.isLoggedIn) {
-        if (req.session.role == "EVENT_OWNER") {
+        if (req.session.role == "EVENT_OWNER" || req.session.role == "ADMIN") {
             next();
         } else {
             console.log(req.session)
