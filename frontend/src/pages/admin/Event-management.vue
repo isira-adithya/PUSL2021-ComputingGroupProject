@@ -16,10 +16,10 @@
               </thead>
               <tbody>
                 <tr v-for="(event, index) in events" :key="index">
-                  <td class="align-middle">{{ event.eventName }}</td>
-                  <td class="align-middle">{{ event.eventType }}</td>
+                  <td class="align-middle">{{ event.name }}</td>
+                  <td class="align-middle">{{ event.category }}</td>
                   <td class="align-middle">{{ event.location }}</td>
-                  <td class="align-middle">{{ event.dateTime }}</td>
+                  <td class="align-middle">{{ event.date_time }}</td>
                   <td class="align-middle">
                     <button
                       class="btn btn-primary mr-md-3 mb-2 mb-md-0"
@@ -59,7 +59,7 @@ export default {
   methods: {
     fetchEvents() {
       // Replace this URL with your backend API endpoint to fetch events
-      const apiUrl = "https://your-backend-api.com/events";
+      const apiUrl = "/api/admin/events";
 
       // Fetch events from the backend using Axios
       axios
@@ -72,8 +72,7 @@ export default {
         });
     },
     viewTicket(event) {
-      // Add logic to view the ticket of an event
-      console.log("Viewing ticket of:", event);
+      this.$router.push(`/eventowner/dashboard/event/${event.uuid}`);
     },
     deleteEvent(event) {
       // Add logic to delete an event
