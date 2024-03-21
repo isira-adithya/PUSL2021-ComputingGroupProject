@@ -89,10 +89,13 @@
             color: #ffffff;
             padding: 20px;
             border: solid 2px #111F4D;
+            height: 400px;
         }
 
         .custom-card img {
-            max-width: 200px;
+            
+            border-radius: 5px;
+            max-width: 250px;
             height: 300px;
         }
 
