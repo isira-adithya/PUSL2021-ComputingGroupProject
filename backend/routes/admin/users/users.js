@@ -11,12 +11,12 @@ router.get('/', async (req, res) => {
     const users = await prisma.user.findMany();
     for (let i = 0; i < users.length; i++) {
         users[i].password = "";
-        const emailAddress = await prisma.emailAddress.findMany({
+        const emailAddress = await prisma.emailAddress.findFirst({
             where: {
                 email_id: users[i].email_id
             }
         });
-        const phoneNumber = await prisma.phoneNumber.findMany({
+        const phoneNumber = await prisma.phoneNumber.findFirst({
             where: {
                 phone_id: users[i].phone_id
             }
