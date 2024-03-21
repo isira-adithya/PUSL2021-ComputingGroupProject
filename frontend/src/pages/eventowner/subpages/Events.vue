@@ -7,7 +7,7 @@
       </div>
       <div v-for="event in events" :key="event.id" class="col-xl-4 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-3">
         <div class="card custom-card d-flex justify-content-center">
-          <ImagesCarouselVue class="card-img-top rounded border" v-if="event.images != null" :images="event.images" :auto-slide-show="true" :slide-show-interval="5000" />
+          <ImagesCarouselVue class="card-img-top rounded border" v-if="event.images != null" :images="event.images" :auto-slide-show="true" :slide-show-interval="1000" />
           <div class="card-body d-flex text-center">
             <div>
               <h5 class="card-title">{{ event['name'] }}</h5>
@@ -88,52 +88,47 @@ export default {
     .bg-black{
       height: 75.9vh;
     }
-
-    .custom-card {
-      width: 300px;
-      background-color: #1a1a1a;
-      color: #ffffff;
-      padding: 20px;
-      border: solid 2px #111f4d;
-      flex-direction: column;
-      height: 100%;
-      margin: 0 auto; 
-    }
-
-    
-    .custom-card img {
-      max-width: 200px;
-      height: 300px;
-    }
-
-    .list-group-item{
-      background-color: #1a1a1a;
-      color: #ffffff;
-      border: none;
-    }
-
-    .card-body {
-      flex: 1;
-    }
-
-    .custom-button {
-      background-color: #111F4D;
-      border: none;
-      width: 100%; 
-    }
-
-    .custom-button:hover {
-      background-color: #020923 !important;
-    }
-
-    .font-1 {
-      font-family: "Stick No Bills", sans-serif;
-    }
-
-    @media (max-width: 1500px) {
-      .bg-black {
-        height: auto !important; 
+  
+      .custom-card {
+        width: 300px;
+        background-color: #1a1a1a;
+        color: #ffffff;
+        padding: 20px;
+        border: solid 2px #111f4d;
+        flex-direction: column;
+        height: 100%;
+        margin: 0 auto; 
       }
-    }
-
-</style>
+  
+      
+      .custom-card img {
+        max-width: 200px;
+        height: 300px;
+      }
+  
+      .list-group-item{
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border: none;
+      }
+  
+      .card-body {
+        flex: 1;
+      }
+  
+      .custom-button {
+        background-color: #111F4D;
+        border: none;
+        width: 100%; 
+      }
+  
+      .custom-button:hover {
+        background-color: #020923 !important;
+      }
+  
+      .font-1 {
+        font-family: "Stick No Bills", sans-serif;
+      }
+  
+  
+  </style>

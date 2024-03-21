@@ -7,7 +7,7 @@ import {
     body,
     validationResult
 } from 'express-validator';
-import {sendEmail} from "../../../modules/emails/mailgun.js";
+import { sendEmail } from "../../../modules/emails/mailgun.js";
 const prisma = new PrismaClient()
 const router = express.Router();
 
@@ -32,7 +32,7 @@ router.get("/", isLoggedIn, async (req, res) => {
     });
 
     // Converting user.addr_geocoordinates to a json object
-    if(user.addr_geocoordinates) {
+    if (user.addr_geocoordinates) {
         const addr_geocoordinates = user.addr_geocoordinates.split(",");
         user.addr_geocoordinates = {
             lat: parseFloat(addr_geocoordinates[0]),
@@ -87,35 +87,44 @@ router.put("/",
         });
     }
 
-    // There should be lat and lng in address_geo_cooridinates and they should numbers
-    if(!req.body.address_geo_cooridinates.lat || !req.body.address_geo_cooridinates.lng || isNaN(req.body.address_geo_cooridinates.lat) || isNaN(req.body.address_geo_cooridinates.lng)) {
+    // Checking notification_preference, it should be ENABLED OR DISBALED
+    if(req.body.notification_preference !== "ENABLED" && req.body.notification_preference !== "DISABLED") {
         res.status(400);
         return res.json({
             success: false,
-            msg: "Invalid address_geo_cooridinates"
+            msg: "Invalid notification_preference"
         });
     }
 
-    // Update User
-    await prisma.user.update({
-        where: {
-            user_id: req.session.user_id
-        },
-        data: {
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            address: req.body.address,
-            addr_geocoordinates: `${req.body.address_geo_cooridinates.lat},${req.body.address_geo_cooridinates.lng}`,
-            notification_preference: req.body.notification_preference,
-            profile_image: req.body.profile_image ? req.body.profile_image : null,
+        // There should be lat and lng in address_geo_cooridinates and they should numbers
+        if (!req.body.address_geo_cooridinates.lat || !req.body.address_geo_cooridinates.lng || isNaN(req.body.address_geo_cooridinates.lat) || isNaN(req.body.address_geo_cooridinates.lng)) {
+            res.status(400);
+            return res.json({
+                success: false,
+                msg: "Invalid address_geo_cooridinates"
+            });
         }
-    });
 
-    res.json({
-        success: true,
-        msg: "Profile Updated Successfully"
-    });
-})
+        // Update User
+        await prisma.user.update({
+            where: {
+                user_id: req.session.user_id
+            },
+            data: {
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                address: req.body.address,
+                addr_geocoordinates: `${req.body.address_geo_cooridinates.lat},${req.body.address_geo_cooridinates.lng}`,
+                notification_preference: req.body.notification_preference,
+                profile_image: req.body.profile_image ? req.body.profile_image : null,
+            }
+        });
+
+        res.json({
+            success: true,
+            msg: "Profile Updated Successfully"
+        });
+    })
 
 router.post("/send-verification-email", async (req, res) => {
     const user = await prisma.user.findFirst({
@@ -125,11 +134,11 @@ router.post("/send-verification-email", async (req, res) => {
     });
 
     const emailAddress = await prisma.emailAddress.findFirst
-    ({
-        where: {
-            email_id: user.email_id
-        }
-    });
+        ({
+            where: {
+                email_id: user.email_id
+            }
+        });
 
     if (emailAddress.is_verified) {
         res.status(400);
@@ -154,7 +163,7 @@ router.post("/send-verification-email", async (req, res) => {
         const link = `https://eventhive.live/#/verify-email/${verificationToken}`;
 
         await sendEmail([emailAddress.email], "Email Verification", `Click on the link to verify your email: ${link}`, `Click on the link to verify your email: <a href="${link}">${link}</a>`);
-        
+
         res.json({
             success: true,
             msg: "Verification Email Sent Successfully"
@@ -167,6 +176,93 @@ router.post("/send-verification-email", async (req, res) => {
         });
     }
 
+});
+
+
+router.delete("/", async (req, res) => {
+
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                user_id: req.session.user_id
+            }
+        });
+
+        const emailAddress = await prisma.emailAddress.findUnique({
+            where: {
+                email_id: user.email_id
+            }
+        });
+
+        const phoneNumber = await prisma.phoneNumber.findUnique({
+            where: {
+                phone_id: user.phone_id
+            }
+        });
+
+        const events = await prisma.event.findMany({
+            where: {
+                owner_id: req.session.user_id
+            }
+        });
+
+        const comments = await prisma.comment.findMany({
+            where: {
+                user_id: req.session.user_id
+            }
+        });
+
+        // Deletion - Comments, Events, User, Email and Phone Number
+
+        // Deleting Comments
+        if (comments.length > 0) {
+            await prisma.comment.deleteMany({
+                where: {
+                    user_id: req.session.user_id
+                }
+            });
+        }
+
+        // Deleting Events
+        if (events.length > 0) {
+            await prisma.event.deleteMany({
+                where: {
+                    owner_id: req.session.user_id
+                }
+            });
+        }
+
+        // Deleting Email
+        await prisma.emailAddress.delete({
+            where: {
+                email_id: emailAddress.email_id
+            }
+        });
+
+        // Deleting Phone Number
+        await prisma.phoneNumber.delete({
+            where: {
+                phone_id: phoneNumber.phone_id
+            }
+        });
+
+        // Deleting User
+        await prisma.user.delete({
+            where: {
+                user_id: req.session.user_id
+            }
+        });
+
+        res.json({
+            success: true,
+            msg: "User Deleted Successfully"
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            msg: "Error while deleting user"
+        });
+    }
 });
 
 export default router;
