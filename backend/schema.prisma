@@ -35,7 +35,7 @@ model User {
   last_name                      String
   address                        String
   addr_geocoordinates            String?              @default("0,0") // lat, long
-  notification_preference        String
+  notification_preference        String               @default("NONE") // EMAILS, SMS, PUSH, ALL, NONE
   password                       String
   profile_image                  String?
   phone_id                       Int
@@ -43,7 +43,6 @@ model User {
   role                           String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
   is_active                      Boolean              @default(false)
   is_verified                    Boolean              @default(false)
-  is_email_notifications_enabled Boolean              @default(false)
   last_notification_check        DateTime?            @default(now())
   PasswordResetToken             PasswordResetToken[]
   Notification                   Notification[]
@@ -84,6 +83,7 @@ model Verification {
   owner_id            Int?
   admin_messages      String?
   user                User?   @relation(fields: [owner_id], references: [user_id])
+  created_at          DateTime? @default(now())
 }
 
 model Event {

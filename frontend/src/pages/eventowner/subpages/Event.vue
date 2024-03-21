@@ -8,7 +8,7 @@
           <h3 class="mb-4 text-white font-2"> <center>Edit Event</center></h3>
           <div class="mb-3">
             <label class="form-label text-white">Event Name</label>
-            <input v-model="event.name" type="email" class="form-control" />
+            <input v-model="event.name" type="text" class="form-control" />
           </div>
           <div class="mb-3">
             <label class="form-label text-white">Event Description</label>

@@ -59,7 +59,7 @@ async function notifyAboutNearByEvents() {
     // Also, update the last_notification_check field to the current time
     const users = await prisma.user.findMany({
         where: {
-            is_email_notifications_enabled: true,
+            notification_preference: "EMAILS",
             last_notification_check: {
                 lt: new Date(new Date().getTime() - (30 * 1000))
             }
@@ -117,7 +117,7 @@ async function notifyAboutNearByEvents() {
     // Update the last_notification_check field to the current time
     await prisma.user.updateMany({
         where: {
-            is_email_notifications_enabled: true,
+            notification_preference: "EMAILS",
             last_notification_check: {
                 lt: new Date(new Date().getTime() - (30 * 1000))
             }

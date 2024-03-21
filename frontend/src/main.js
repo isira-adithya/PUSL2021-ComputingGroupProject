@@ -24,9 +24,10 @@ import UserProfileVue from './pages/user/Profile.vue';
 import AboutUsVue from './pages/public/AboutUs.vue';
 import EventsVue from './pages/public/Events.vue';
 import EventVue from './pages/public/Event.vue';
+import InteractiveMapVue from './components/InteractiveMap.vue';
 
-//admin
-import EventApproval from './pages/admin/Event-approval.vue';
+// Components - Admin
+import EventOwnerApproval from './pages/admin/EventOwnerApproval.vue';
 import UserManagement from './pages/admin/User-management.vue';
 import EventManagement from './pages/admin/Event-management.vue';
 
@@ -66,9 +67,10 @@ const routes = [
     {path: '/about-us', component: AboutUsVue},
     {path: '/events', component: EventsVue},
     {path: '/events/:uuid', component: EventVue},
+    {path: '/map', component: InteractiveMapVue},
 
     //admin pages
-    {path: '/admin/event-approval', component: EventApproval},
+    {path: '/admin/eventowner-approval', component: EventOwnerApproval},
     {path: '/admin/user-management', component: UserManagement},
     {path: '/admin/event-management', component: EventManagement}
 ];
@@ -76,6 +78,23 @@ const routes = [
 const router = createRouter({
     history: createWebHashHistory(),
     routes,
+});
+
+// Router guard for admin routes
+router.beforeEach((to, from, next) => {
+    if (to.path.includes('/admin')) {
+        try {
+            const session = JSON.parse(localStorage.getItem('session'));
+            if (session.role == 'ADMIN') {
+                next();
+            }
+        } catch (error) {
+            next('/login');
+        }
+        next('/login');
+    } else {
+        next();
+    }
 });
 
 const app = createApp(TemplateVue);
