@@ -1,11 +1,12 @@
 <template>
+  <div style="background-color: black;" id="section1" :style="[section1, section]">
   <div v-if="event != null">
     <div class="row">
       <div class="col-2"></div>
-      <div class="col-8">
+      <div class="col-8" style="margin-top: 3%;">
         <div class="card">
           <div class="card-body">
-            <h3 class="card-title">{{ event["name"] }}</h3>
+            <h2 class="card-title"><center>{{ event["name"] }}</center></h2>
 
             <div>
               <ImagesCarouselVue
@@ -15,54 +16,10 @@
                 :auto-slide-show="true"
                 :slide-show-interval="1000"
               />
-            </div>
-
-            <h5 class="mt-4">Location:</h5>
-            <div class="mb-4">
-              <GMapMap
-                :center="geoCoordinates"
-                :zoom="13"
-                map-type-id="terrain"
-                style="height: 32vh"
-                :options="{
-                  zoomControl: false,
-                  mapTypeControl: false,
-                  scaleControl: false,
-                  streetViewControl: false,
-                  rotateControl: false,
-                  fullscreenControl: false,
-                  disableDefaultUI: true,
-                }"
-              />
-            </div>
-
-            <div v-if="event.tickets.length > 0">
-              <h5 class="mt-4 mb-2">Tickets:</h5>
-              <div class="row">
-                <div
-                  v-for="ticket in event.tickets"
-                  :key="ticket.id"
-                  class="col-6"
-                >
-                  <div class="alert alert-primary mt-2" style="font-size: smaller;">
-                    <div>
-                      <h5><i>{{ ticket.name }}</i></h5>
-                      <p class="mt-3">
-                        <b>Price:</b> {{ ticket.price }} €
-                      </p>
-                      <p>
-                        <b>Description:</b><br>
-                        <code>{{ ticket.description }}</code>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <p class="alert alert-warning mt-4">
+            
+              <p class="alert alert-warning mt-4">
               <b>Description:</b><br />
-              <code>{{ event["description"] }}</code>
+              <code style="color:black;">{{ event["description"] }}</code>
 
               <ul class="list-group list-group-flush mt-4">
               <li class="list-group-item bg-transparent">
@@ -101,6 +58,51 @@
               </li>
             </ul>
             </p>
+          </div>
+
+            <div v-if="event.tickets.length > 0">
+              <h4 class="mt-4 mb-2-">Tickets:</h4>
+              <div class="row">
+                <div
+                  v-for="ticket in event.tickets"
+                  :key="ticket.id"
+                  class="col-6"
+                >
+                  <div class="alert alert-dark mt-2" style="font-size: smaller;">
+                    <div>
+                      <h5><i>{{ ticket.name }}</i></h5>
+                      <p class="mt-3">
+                        <b>Price:</b> {{ ticket.price }} €
+                      </p>
+                      <p>
+                        <b>Description:</b><br>
+                        <code>{{ ticket.description }}</code>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+<h4 class="mt-4">Location:</h4>
+<div class="mb-4">
+  <GMapMap
+    :center="geoCoordinates"
+    :zoom="13"
+    map-type-id="terrain"
+    style="height: 32vh"
+    :options="{
+      zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+      disableDefaultUI: true,
+    }"
+  />
+</div>
 
             <!-- Add Comment form -->
             <div class="mt-5" v-if="isLoggedIn">
@@ -170,6 +172,7 @@ import ImagesCarouselVue from "../../components/ImagesCarousel.vue";
 export default {
   name: "PublicEventsVue",
   components: { ImagesCarouselVue },
+
   mounted() {
     this.uuid = this.$route.params.uuid;
 
@@ -213,8 +216,29 @@ export default {
       isLoggedIn: false,
       user: null,
       comment: "",
+      imagePath1: process.env.BASE_URL + 'assets/images/event2.png',
     };
   },
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
+  },
+
+
   methods: {
     addComment() {
       Notiflix.Loading.standard();
@@ -283,3 +307,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+
+
+</style>
