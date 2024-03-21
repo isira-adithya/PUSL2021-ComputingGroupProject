@@ -37,6 +37,18 @@ router.get('/:id', async (req, res) => {
             user_id: parseInt(id)
         }
     });
+    const emailAddress = await prisma.emailAddress.findFirst({
+        where: {
+            email_id: user.email_id
+        }
+    });
+    const phoneNumber = await prisma.phoneNumber.findFirst({
+        where: {
+            phone_id: user.phone_id
+        }
+    });
+    user.email = emailAddress;
+    user.phone = phoneNumber;
     res.json(user);
 });
 
