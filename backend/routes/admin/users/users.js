@@ -9,6 +9,21 @@ const router = express.Router();
 // Get all users
 router.get('/', async (req, res) => {
     const users = await prisma.user.findMany();
+    for (let i = 0; i < users.length; i++) {
+        users[i].password = "";
+        const emailAddress = await prisma.emailAddress.findMany({
+            where: {
+                email_id: users[i].email_id
+            }
+        });
+        const phoneNumber = await prisma.phoneNumber.findMany({
+            where: {
+                phone_id: users[i].phone_id
+            }
+        });
+        users[i].email = emailAddress;
+        users[i].phone = phoneNumber;
+    }
     res.json(users);
 });
 
