@@ -341,8 +341,10 @@ router.put(
             if (tickets != null && tickets.length > 0) {
                 // Adding event_id of tickets and removing id
                 tickets.forEach(ticket => {
-                    ticket.ticket_id = ticket.id;
-                    delete ticket.id;
+                    if (ticket.id != null){
+                        ticket.ticket_id = ticket.id;
+                        delete ticket.id;
+                    }
                     ticket.event_id = eventObj.event_id;
                 });
 
