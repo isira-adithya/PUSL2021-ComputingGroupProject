@@ -24,7 +24,7 @@
               v-if="event.images != null"
               :images="event.images"
               :auto-slide-show="true"
-              :slide-show-interval="1000"
+              :slide-show-interval="5000"
             />
             <div class="card-body">
               <h5 class="card-title">{{ event["name"] }}</h5>
