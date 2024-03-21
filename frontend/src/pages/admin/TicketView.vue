@@ -58,7 +58,7 @@
       return {
         formData: {
           id: null,
-          name: 'dtgrfds',
+          name: '',
           email: '',
           date: '',
           status: '',
