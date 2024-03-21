@@ -28,16 +28,12 @@ import AboutUsVue from './pages/public/AboutUs.vue';
 import EventsVue from './pages/public/Events.vue';
 import EventVue from './pages/public/Event.vue';
 import InteractiveMapVue from './components/InteractiveMap.vue';
-import InteractiveMapVue from './components/InteractiveMap.vue';
+
 
 // Components - Admin
 import EventOwnerApproval from './pages/admin/EventOwnerApproval.vue';
 import TicketList from './pages/admin/TicketList.vue'
 import TicketView from './pages/admin/TicketView.vue'
-// Components - Admin
-import EventOwnerApproval from './pages/admin/EventOwnerApproval.vue';
-import UserManagement from './pages/admin/User-management.vue';
-import EventManagement from './pages/admin/Event-management.vue';
 import UserManagement from './pages/admin/User-management.vue';
 import EventManagement from './pages/admin/Event-management.vue';
 
@@ -81,7 +77,6 @@ const routes = [
     {path: '/map', component: InteractiveMapVue},
 
     //admin pages
-    {path: '/admin/event-approval', component: EventApproval},
     {path: '/admin/tickets', component: TicketList},
     {path: '/admin/ticket-view', component: TicketView},
    
