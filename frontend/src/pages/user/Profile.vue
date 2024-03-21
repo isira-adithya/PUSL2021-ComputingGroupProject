@@ -134,6 +134,7 @@
                   Save
                 </button>
               </div>
+
             </div>
           </form>
         </div>
@@ -238,8 +239,8 @@ export default {
         address: this.address,
         phone: this.phone,
         notification_preference: this.notification_enabled
-          ? "ENABLED"
-          : "DISABLED",
+          ? "EMAILS"
+          : "NONE",
         profile_image: this.$refs.profileImageUploader.imageUrl,
         address_geo_cooridinates: this.geoCoordinates,
       };
