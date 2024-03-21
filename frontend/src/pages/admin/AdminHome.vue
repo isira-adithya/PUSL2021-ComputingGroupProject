@@ -37,7 +37,7 @@
     data() {
       return {
         imagePath1:
-          process.env.BASE_URL + "assets/images/home-images/home-pageBG.jpg",
+          process.env.BASE_URL + "./assets/images/admin-home/adbg.jpeg",
 
         cards: [
           { title: 'Manage Users', icon: 'user-icon.png', link: '/assets/html/Event_Submission.html', alt: 'User Icon' },
