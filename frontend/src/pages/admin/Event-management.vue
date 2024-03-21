@@ -46,6 +46,7 @@
 
 <script>
 import axios from "axios";
+import Notiflix from "notiflix";
 
 export default {
   data() {
@@ -62,6 +63,7 @@ export default {
       const apiUrl = "/api/admin/events";
 
       // Fetch events from the backend using Axios
+      Notiflix.Loading.arrows();
       axios
         .get(apiUrl)
         .then((response) => {
@@ -69,6 +71,9 @@ export default {
         })
         .catch((error) => {
           console.error("Error fetching events:", error);
+        })
+        .finally(() => {
+          Notiflix.Loading.remove();
         });
     },
     viewTicket(event) {
@@ -76,10 +81,47 @@ export default {
     },
     deleteEvent(event) {
       // Add logic to delete an event
-      const index = this.events.indexOf(event);
-      if (index !== -1) {
-        this.events.splice(index, 1);
-      }
+      // You can use the event.uuid to identify the event to delete
+
+      Notiflix.Confirm.show(
+        "Delete Event",
+        "Are you sure you want to delete this event?",
+        "Yes",
+        "No",
+        () => {
+          Notiflix.Loading.arrows();
+          axios
+            .delete(`/api/eventowner/events/${event.uuid}`)
+            .then((response) => {
+              Notiflix.Report.success(
+                "Success",
+                "Event deleted successfully",
+                "OK",
+                () => {
+                  this.fetchEvents(); // Fetch events again to update the list
+                }
+              );
+            })
+            .catch((error) => {
+              console.error("Error deleting event:", error);
+              Notiflix.Report.failure(
+                "Error",
+                "An error occurred while deleting the event",
+                "OK"
+              );
+            })
+            .finally(() => {
+              Notiflix.Loading.remove();
+            });
+          const index = this.events.indexOf(event);
+          if (index !== -1) {
+            this.events.splice(index, 1);
+          }
+        },
+        () => {
+          // Do nothing if the user clicks "No"
+        }
+      );
     },
   },
 };
