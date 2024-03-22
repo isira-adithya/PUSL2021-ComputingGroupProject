@@ -99,11 +99,12 @@ router.beforeEach((to, from, next) => {
             const session = JSON.parse(localStorage.getItem('session'));
             if (session.role == 'ADMIN') {
                 next();
+            } else {
+                next('/login');
             }
         } catch (error) {
             next('/login');
         }
-        next('/login');
     } else {
         next();
     }
