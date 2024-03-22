@@ -102,13 +102,16 @@
               <input
                 type="text"
                 class="form-control"
-                @input="handleGoogleMap()"
+                disabled
+                style="color: white;
+                      background-color: rgba(255, 255, 255, 0.2);
+                      margin-bottom: 10px;"
                 v-model="address"
               />
             </div>
 
             <!-- Google Maps Preview -->
-            <div class="mb-4">
+            <div class="mb-4" v-if="geoCoordinates != null">
               <GMapMap
                 :center="geoCoordinates"
                 :zoom="13"
@@ -128,11 +131,12 @@
 
             <!-- 2 column grid layout for inline styling -->
             <div class="row mb-4">
-              <div class="col">
+              <div class="col mt-4">
+                <h5 class="text-white">Notifications</h5>
                 <!-- Checkbox -->
                 <div class="form-check mt-2 text-white">
                   <label class="form-check-label">
-                    Enable Notifications?
+                    Emails
                   </label>
 
                   <input
@@ -146,7 +150,7 @@
                 </div>
               </div>
 
-              <div class="col text-end">
+              <div class="col text-end  mt-5">
                 <button
                   @click="updateProfile"
                   type="button"
@@ -190,6 +194,7 @@ export default {
           ? response.data.profile_image
           : "https://source.boringavatars.com/beam/240/";
         if (response.data["addr_geocoordinates"]) {
+            alert(123)
           console.log(
             `Geo Coordinates: `,
             response.data["addr_geocoordinates"]
@@ -200,7 +205,8 @@ export default {
             lat: parseFloat(lat),
             lng: parseFloat(lng),
           };
-          
+        } else {
+            this.geoCoordinates = null;
         }
         this.email_verified = response.data['email']['is_verified'];
         this.phone_verified = response.data['phone']['is_verified'];
@@ -229,34 +235,6 @@ export default {
     };
   },
   methods: {
-    handleGoogleMap: _.debounce(function () {
-      // const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${this.address}`;
-      const apiUrl = `/api/common/geoapify/geocode?address=${this.address}`;
-      Notiflix.Loading.standard("Loading Map...");
-      axios
-        .get(apiUrl)
-        .then((response) => {
-          if (response.data["success"]) {
-            const features = response.data["data"]["features"];
-            const formattedName = features[0]["properties"]["formatted"];
-            const coordinates = features[0]["geometry"]["coordinates"];
-            this.geoCoordinates = {
-              lat: coordinates[1],
-              lng: coordinates[0],
-            };
-          } else {
-            Notiflix.Notify.failure("Address not found");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          Notiflix.Notify.failure("Address not found");
-        })
-        .finally(() => {
-          Notiflix.Loading.remove(1000);
-        });
-    }, 1000),
-
     updateProfile() {
       const apiUrl = "/api/admin/users/" + this.$route.params.user_id;
       const data = {
