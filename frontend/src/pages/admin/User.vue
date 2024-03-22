@@ -11,7 +11,7 @@
                 </h3>
               </center>
               <br /><br />
-              <h5 class="mb-3 text-white-50">
+              <h5 class="mb-3 text-white">
                 Manage
                 <i
                   ><span>@{{ username }}'s</span> account.</i
@@ -157,7 +157,7 @@
       axios
         .get("/api/admin/users/" + this.$route.params.user_id)
         .then((response) => {
-          this.username = response.data.username;
+          this.username = response.data.user_name;
           this.email = response.data.email.email;
           this.fname = response.data.first_name;
           this.lname = response.data.last_name;
@@ -234,7 +234,7 @@
       }, 1000),
   
       updateProfile() {
-        const apiUrl = "/api/common/profile";
+        const apiUrl = "/api/admin/users/" + this.$route.params.user_id;
         const data = {
           first_name: this.fname,
           last_name: this.lname,
