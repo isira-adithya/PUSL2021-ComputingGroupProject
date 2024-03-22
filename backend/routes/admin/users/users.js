@@ -104,16 +104,15 @@ router.put('/:id', async (req, res) => {
         id
     } = req.params;
     const {
-        user_name,
         first_name,
         last_name,
         address,
-        addr_geocoordinates,
+        email,
+        email_verified,
+        phone,
+        phone_verified,
         notification_preference,
-        password,
         profile_image,
-        phone_id,
-        email_id,
         role,
         is_active,
         is_verified
