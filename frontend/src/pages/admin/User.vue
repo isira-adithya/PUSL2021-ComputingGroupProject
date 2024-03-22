@@ -164,7 +164,7 @@
           this.address = response.data.address;
           this.phone = response.data.phone.number;
           this.notification_enabled =
-            response.data.notification_preference == "ENABLED";
+            response.data.notification_preference == "EMAILS";
           this.role = response.data.role;
           this.$refs.profileImageUploader.imageUrl = response.data.profile_image
             ? response.data.profile_image
