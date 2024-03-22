@@ -35,6 +35,7 @@ import EventOwnerApproval from './pages/admin/EventOwnerApproval.vue';
 import TicketList from './pages/admin/TicketList.vue'
 import TicketView from './pages/admin/TicketView.vue'
 import UserManagement from './pages/admin/User-management.vue';
+import AdminUserVue from './pages/admin/User.vue';
 import EventManagement from './pages/admin/Event-management.vue';
 import AdminHome from './pages/admin/AdminHome.vue';
 
@@ -83,6 +84,7 @@ const routes = [
    
     {path: '/admin/eventowner-approval', component: EventOwnerApproval},
     {path: '/admin/user-management', component: UserManagement},
+    {path: '/admin/user-management/:user_id', component: AdminUserVue},
     {path: '/admin/event-management', component: EventManagement},
     {path: '/admin/adminhome', component: AdminHome }
 ];
@@ -99,28 +101,12 @@ router.beforeEach((to, from, next) => {
             const session = JSON.parse(localStorage.getItem('session'));
             if (session.role == 'ADMIN') {
                 next();
+            } else {
+                next('/login');
             }
         } catch (error) {
             next('/login');
         }
-        next('/login');
-    } else {
-        next();
-    }
-});
-
-// Router guard for admin routes
-router.beforeEach((to, from, next) => {
-    if (to.path.includes('/admin')) {
-        try {
-            const session = JSON.parse(localStorage.getItem('session'));
-            if (session.role == 'ADMIN') {
-                next();
-            }
-        } catch (error) {
-            next('/login');
-        }
-        next('/login');
     } else {
         next();
     }
