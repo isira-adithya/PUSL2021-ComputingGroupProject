@@ -3,6 +3,11 @@
     <div class="container">
       <div class="row">
         <div class="col">
+          <h1 class="text-white"><center>Event Management</center></h1> <!-- Add the heading here -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <div class="table-responsive">
             <table class="table table-bordered text-center text-white">
               <thead>
