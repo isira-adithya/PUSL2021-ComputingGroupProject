@@ -200,10 +200,10 @@ export default {
             lat: parseFloat(lat),
             lng: parseFloat(lng),
           };
-          console.log(response.data['email'])
-          this.email_verified = response.data['email']['is_verified'];
-          this.phone_verified = response.data['phone']['is_verified'];
+          
         }
+        this.email_verified = response.data['email']['is_verified'];
+        this.phone_verified = response.data['phone']['is_verified'];
       })
       .catch((error) => {
         console.log(error);
