@@ -37,6 +37,14 @@ router.get('/:id', async (req, res) => {
             user_id: parseInt(id)
         }
     });
+
+    if (user === null) {    
+        res.status(404).json({
+            message: 'User not found'
+        });
+        return;
+    }
+
     const emailAddress = await prisma.emailAddress.findFirst({
         where: {
             email_id: user.email_id
