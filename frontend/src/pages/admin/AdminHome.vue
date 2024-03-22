@@ -23,7 +23,7 @@
             <div v-for="(card, index) in cards" :key="index" class="col-sm-3 custom-card card text-center m-3">
               <img :src="card.icon" class="card-img-top mx-auto d-block" :alt="card.alt">
               <div class="card-body">
-                <a :href="card.link" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">{{ card.title }}</a>
+                <router-link :to="card.link" class="text-white text-decoration-none px-3 py-1 button-color rounded-1">{{ card.title }}</router-link>
               </div>
             </div>
           </div>
@@ -40,10 +40,10 @@
           process.env.BASE_URL + "./assets/images/admin-home/adbg.jpeg",
 
         cards: [
-          { title: 'Manage Users', icon: './assets/images/admin-home/mo.jpg', link: './pages/admin/User-management.vue', alt: 'User Icon' },
-          { title: 'Manage Events', icon: './assets/images/admin-home/mp.jpg', link: './pages/admin/Event-management.vue', alt: 'Calendar Icon' },
-          { title: 'Manage Tickets', icon: './assets/images/admin-home/mt.jpg', link: '/assets/html/Event_Submission.html', alt: 'Ticket Icon' },
-          { title: 'Approve Events', icon: './assets/images/admin-home/mu.jpg', link: '/assets/html/Event_Submission.html', alt: 'Clipboard Icon' }
+          { title: 'Manage Users', icon: './assets/images/admin-home/mo.jpg', link: '/admin/user-management', alt: 'User Icon' },
+          { title: 'Approve EventOwner Accounts', icon: './assets/images/admin-home/mu.jpg', link: '/admin/eventowner-approval', alt: 'Clipboard Icon' },
+          { title: 'Manage Events', icon: './assets/images/admin-home/mp.jpg', link: '/admin/event-management', alt: 'Calendar Icon' },
+          { title: 'Manage Tickets', icon: './assets/images/admin-home/mt.jpg', link: '/admin/tickets', alt: 'Ticket Icon' },
         ]
 
       }

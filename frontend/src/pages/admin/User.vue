@@ -11,10 +11,10 @@
               </h3>
             </center>
             <br /><br />
-            <h5 class="mb-3 text-white-50">
-              Hello
+            <h5 class="mb-3 text-white">
+              Manage
               <i
-                ><span>@{{ username }}</span> 👋</i
+                ><span>@{{ username }}'s</span> account.</i
               >
             </h5>
 
@@ -44,7 +44,7 @@
             <!-- Email and Phone -->
             <div class="row">
               <div class="col-6">
-                <div class="form-outline mb-4">
+                <div class="form-outline">
                   <label class="form-label text-white">Email</label>
                   <input
                     disabled
@@ -54,8 +54,18 @@
                     style="
                       color: white;
                       background-color: rgba(255, 255, 255, 0.2);
+                      margin-bottom: 10px;
                     "
                   />
+                  <!-- Add a checkbox to check whether email is verified or not -->
+                  <div class="form-check text-white mb-4">
+                    <label class="form-check-label"> Email Verified? </label>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      v-model="email_verified"
+                    />
+                  </div>
                 </div>
               </div>
               <div class="col-6">
@@ -69,8 +79,19 @@
                     style="
                       color: white;
                       background-color: rgba(255, 255, 255, 0.2);
+                      margin-bottom: 10px;
                     "
                   />
+                  <div class="form-check text-white mb-4">
+                    <label class="form-check-label">
+                      Phone Number Verified?
+                    </label>
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      v-model="phone_verified"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -81,13 +102,16 @@
               <input
                 type="text"
                 class="form-control"
-                @input="handleGoogleMap()"
+                disabled
+                style="color: white;
+                      background-color: rgba(255, 255, 255, 0.2);
+                      margin-bottom: 10px;"
                 v-model="address"
               />
             </div>
 
             <!-- Google Maps Preview -->
-            <div class="mb-4">
+            <div class="mb-4" v-if="geoCoordinates != null">
               <GMapMap
                 :center="geoCoordinates"
                 :zoom="13"
@@ -107,11 +131,12 @@
 
             <!-- 2 column grid layout for inline styling -->
             <div class="row mb-4">
-              <div class="col">
+              <div class="col mt-4">
+                <h5 class="text-white">Notifications</h5>
                 <!-- Checkbox -->
                 <div class="form-check mt-2 text-white">
                   <label class="form-check-label">
-                    Enable Notifications?
+                    Emails
                   </label>
 
                   <input
@@ -125,7 +150,7 @@
                 </div>
               </div>
 
-              <div class="col text-end">
+              <div class="col text-end  mt-5">
                 <button
                   @click="updateProfile"
                   type="button"
@@ -134,7 +159,6 @@
                   Save
                 </button>
               </div>
-
             </div>
           </form>
         </div>
@@ -143,8 +167,8 @@
     </div>
   </div>
 </template>
-    
-    <script>
+      
+      <script>
 import axios from "axios";
 import ImageUploader from "../../components/ImageUploader.vue";
 import _ from "lodash";
@@ -155,35 +179,40 @@ export default {
   components: { ImageUploader },
   mounted() {
     axios
-      .get("/api/common/profile")
+      .get("/api/admin/users/" + this.$route.params.user_id)
       .then((response) => {
-        this.username = response.data.username;
-        this.email = response.data.email;
+        this.username = response.data.user_name;
+        this.email = response.data.email.email;
         this.fname = response.data.first_name;
         this.lname = response.data.last_name;
         this.address = response.data.address;
-        this.phone = response.data.phone;
+        this.phone = response.data.phone.number;
         this.notification_enabled =
           response.data.notification_preference == "EMAILS";
         this.role = response.data.role;
         this.$refs.profileImageUploader.imageUrl = response.data.profile_image
           ? response.data.profile_image
           : "https://source.boringavatars.com/beam/240/";
-        if (response.data.address_geo_cooridinates) {
+        if (response.data["addr_geocoordinates"]) {
           console.log(
             `Geo Coordinates: `,
-            response.data.address_geo_cooridinates
+            response.data["addr_geocoordinates"]
           );
+          const lat = response.data["addr_geocoordinates"].split(",")[0];
+          const lng = response.data["addr_geocoordinates"].split(",")[1];
           this.geoCoordinates = {
-            lat: response.data.address_geo_cooridinates.lat,
-            lng: response.data.address_geo_cooridinates.lng,
+            lat: parseFloat(lat),
+            lng: parseFloat(lng),
           };
+        } else {
+            this.geoCoordinates = null;
         }
+        this.email_verified = response.data['email']['is_verified'];
+        this.phone_verified = response.data['phone']['is_verified'];
       })
       .catch((error) => {
         console.log(error);
       });
-
   },
   data() {
     return {
@@ -200,49 +229,26 @@ export default {
         lat: 1,
         lng: 1,
       },
+      email_verified: false,
+      phone_verified: false,
     };
   },
   methods: {
-    handleGoogleMap: _.debounce(function () {
-      // const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${this.address}`;
-      const apiUrl = `/api/common/geoapify/geocode?address=${this.address}`;
-      Notiflix.Loading.standard("Loading Map...");
-      axios
-        .get(apiUrl)
-        .then((response) => {
-          if (response.data["success"]) {
-            const features = response.data["data"]["features"];
-            const formattedName = features[0]["properties"]["formatted"];
-            const coordinates = features[0]["geometry"]["coordinates"];
-            this.geoCoordinates = {
-              lat: coordinates[1],
-              lng: coordinates[0],
-            };
-          } else {
-            Notiflix.Notify.failure("Address not found");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          Notiflix.Notify.failure("Address not found");
-        })
-        .finally(() => {
-          Notiflix.Loading.remove(1000);
-        });
-    }, 1000),
-
     updateProfile() {
-      const apiUrl = "/api/common/profile";
+      const apiUrl = "/api/admin/users/" + this.$route.params.user_id;
       const data = {
         first_name: this.fname,
         last_name: this.lname,
         address: this.address,
         phone: this.phone,
-        notification_preference: this.notification_enabled
-          ? "EMAILS"
-          : "NONE",
+        phone_verified: this.phone_verified,
+        email: this.email,
+        email_verified: this.email_verified,
+        notification_preference: this.notification_enabled ? "EMAILS" : "NONE",
         profile_image: this.$refs.profileImageUploader.imageUrl,
-        address_geo_cooridinates: this.geoCoordinates,
+        is_active: true,
+        is_verified: true,
+        role: this.role,
       };
       axios
         .put(apiUrl, data)
@@ -270,8 +276,8 @@ export default {
   },
 };
 </script>
-
-<style scoped>
+  
+  <style scoped>
 .form-control {
   border: none;
   border-radius: 0;
@@ -296,4 +302,4 @@ export default {
   color: #ffffff;
 }
 </style>
-      
+        
