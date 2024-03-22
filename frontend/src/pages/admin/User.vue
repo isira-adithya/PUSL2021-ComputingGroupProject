@@ -169,14 +169,16 @@
           this.$refs.profileImageUploader.imageUrl = response.data.profile_image
             ? response.data.profile_image
             : "https://source.boringavatars.com/beam/240/";
-          if (response.data.address_geo_cooridinates) {
+          if (response.data['addr_geocoordinates']) {
             console.log(
               `Geo Coordinates: `,
-              response.data.address_geo_cooridinates
+              response.data['addr_geocoordinates']
             );
+            const lat = response.data['addr_geocoordinates'].split(",")[0];
+            const lng = response.data['addr_geocoordinates'].split(",")[1];
             this.geoCoordinates = {
-              lat: response.data.address_geo_cooridinates.lat,
-              lng: response.data.address_geo_cooridinates.lng,
+              lat: parseFloat(lat),
+              lng: parseFloat(lng),
             };
           }
         })
