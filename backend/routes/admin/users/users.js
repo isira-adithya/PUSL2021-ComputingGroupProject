@@ -122,19 +122,26 @@ router.put('/:id', async (req, res) => {
             user_id: parseInt(id)
         },
         data: {
-            user_name,
-            first_name,
-            last_name,
-            address,
-            addr_geocoordinates,
-            notification_preference,
-            password,
-            profile_image,
-            phone_id,
-            email_id,
-            role,
-            is_active,
-            is_verified
+            first_name: first_name,
+            last_name: last_name,
+            address: address,
+            notification_preference: notification_preference,
+            profile_image: profile_image,
+            role: role,
+            is_active: is_active,
+            is_verified: is_verified,
+            email_address: {
+                update: {
+                    email: email,
+                    is_verified: email_verified
+                }
+            },
+            phone: {
+                update: {
+                    number: phone,
+                    is_verified: phone_verified
+                }
+            }
         }
     });
     res.json(result);
