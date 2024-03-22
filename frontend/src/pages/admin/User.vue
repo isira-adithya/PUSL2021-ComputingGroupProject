@@ -194,7 +194,6 @@ export default {
           ? response.data.profile_image
           : "https://source.boringavatars.com/beam/240/";
         if (response.data["addr_geocoordinates"]) {
-            alert(123)
           console.log(
             `Geo Coordinates: `,
             response.data["addr_geocoordinates"]
