@@ -6,6 +6,7 @@ import VueGoogleMaps from '@fawmi/vue-google-maps';
 // Components - General
 import TemplateVue from './Template.vue';
 import HomeVue from './pages/Home.vue';
+
 // Components - Auth
 import LoginVue from './pages/auth/Login.vue'; 
 import LogoutVue from './pages/auth/Logout.vue'; 
@@ -14,9 +15,11 @@ import ForgotPasswordVue from './pages/auth/Forgot-Password.vue';
 import PasswordResetVue from './pages/auth/Reset-Password.vue'; 
 import VerifyEmailVue from './pages/auth/Verify-Email.vue';
 import ContactUsVue from './pages/auth/Contact-us.vue'; 
+
 // Components - EventOwner
 import VerificationVue from './pages/eventowner/Verification.vue';
 import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
+
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
 
@@ -26,8 +29,11 @@ import EventsVue from './pages/public/Events.vue';
 import EventVue from './pages/public/Event.vue';
 import InteractiveMapVue from './components/InteractiveMap.vue';
 
+
 // Components - Admin
 import EventOwnerApproval from './pages/admin/EventOwnerApproval.vue';
+import TicketList from './pages/admin/TicketList.vue'
+import TicketView from './pages/admin/TicketView.vue'
 import UserManagement from './pages/admin/User-management.vue';
 import EventManagement from './pages/admin/Event-management.vue';
 import AdminHome from './pages/admin/AdminHome.vue';
@@ -69,8 +75,12 @@ const routes = [
     {path: '/events', component: EventsVue},
     {path: '/events/:uuid', component: EventVue},
     {path: '/map', component: InteractiveMapVue},
+    {path: '/map', component: InteractiveMapVue},
 
     //admin pages
+    {path: '/admin/tickets', component: TicketList},
+    {path: '/admin/ticket-view', component: TicketView},
+   
     {path: '/admin/eventowner-approval', component: EventOwnerApproval},
     {path: '/admin/user-management', component: UserManagement},
     {path: '/admin/event-management', component: EventManagement},
@@ -80,6 +90,23 @@ const routes = [
 const router = createRouter({
     history: createWebHashHistory(),
     routes,
+});
+
+// Router guard for admin routes
+router.beforeEach((to, from, next) => {
+    if (to.path.includes('/admin')) {
+        try {
+            const session = JSON.parse(localStorage.getItem('session'));
+            if (session.role == 'ADMIN') {
+                next();
+            }
+        } catch (error) {
+            next('/login');
+        }
+        next('/login');
+    } else {
+        next();
+    }
 });
 
 // Router guard for admin routes
