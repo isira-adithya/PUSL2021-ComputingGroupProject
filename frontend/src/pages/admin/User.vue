@@ -242,9 +242,14 @@ export default {
         last_name: this.lname,
         address: this.address,
         phone: this.phone,
+        phone_verified: this.phone_verified,
+        email: this.email,
+        email_verified: this.email_verified,
         notification_preference: this.notification_enabled ? "EMAILS" : "NONE",
         profile_image: this.$refs.profileImageUploader.imageUrl,
-        address_geo_cooridinates: this.geoCoordinates,
+        is_active: true,
+        is_verified: true,
+        role: this.role,
       };
       axios
         .put(apiUrl, data)
