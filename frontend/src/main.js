@@ -80,7 +80,6 @@ const routes = [
     {path: '/events', component: EventsVue},
     {path: '/events/:uuid', component: EventVue},
     {path: '/map', component: InteractiveMapVue},
-    {path: '/map', component: InteractiveMapVue},
 
     //admin pages
     {path: '/admin/tickets', component: TicketList},
