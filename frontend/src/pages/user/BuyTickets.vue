@@ -31,9 +31,10 @@
                   <textarea v-model="ticket.description" class="form-control white-bg " id="Description" rows="5"></textarea>
                 </div>
               </div>
-              <div>
-                <button type="submit" class="btn btn-primary">Buy</button>
-                <button type="button" @click="cancelPurchase" class="btn btn-danger">Cancel</button>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <button type="submit" class="btn text-white custom-button w-100">Buy</button>
+                </div>
               </div>
               </form>
               <br />
@@ -111,8 +112,12 @@
     margin-bottom: 0.2rem;
   }
 
-  a {
-    color: #ffffff;
+  .form-control{
+    border: none;  
+  }
+
+  .form-control:active{
+    box-shadow: none;
   }
 
   .main-container {
@@ -122,7 +127,14 @@
   }
 
   .white-bg {
-    color: #ffffff;
     background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .custom-button {
+    background-color: #111F4D;
+  }
+  
+  .custom-button:hover {
+    background-color: #020923 !important;
   }
 </style>
