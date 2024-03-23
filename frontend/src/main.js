@@ -23,6 +23,7 @@ import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
 import BuyTicket from './pages/user/BuyTickets.vue'
+import ReceiptListVue from './pages/user/ReceiptList.vue'
 
 //component - Public
 import AboutUsVue from './pages/public/AboutUs.vue';
@@ -75,6 +76,7 @@ const routes = [
     // User
     {path: '/user/profile', component: UserProfileVue},
     {path: '/user/buyticket', component: BuyTicket},
+    {path: '/user/receipt-list', component: ReceiptListVue},
 
     // Public pages
     {path: '/about-us', component: AboutUsVue},
