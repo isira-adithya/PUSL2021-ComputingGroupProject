@@ -2,8 +2,10 @@ import express from "express";
 import {
     PrismaClient
 } from '../../../modules/prisma_client/index.js';
+import {getApprovalLink} from '../../../modules/paypal/payments.js';
 const prisma  = new PrismaClient();
 const router = express.Router();
+
 
 router.get("/:ticket_id", async (req, res) => { 
     try {
@@ -72,6 +74,9 @@ router.post("/buy", async (req, res) => {
                 message: "Ticket not found",
             })
         }
+
+        const approvalLink = await getApprovalLink(ticket);
+        console.log(approvalLink);
 
         console.log(ticket)
 
