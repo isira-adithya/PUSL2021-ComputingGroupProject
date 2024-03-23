@@ -55,7 +55,7 @@
                   </li>
                 </ul>
                 <div class="card-body">
-                  <router-link :to="'/events/' + event.uuid" class="btn btn-primary mx-3 my-1 custom-button">Open</router-link>
+                  <router-link :to="'/events/' + event.uuid" class="btn btn-primary custom-button">Open</router-link>
                 </div>
               </div>
               <!-- Card layout ends here -->
