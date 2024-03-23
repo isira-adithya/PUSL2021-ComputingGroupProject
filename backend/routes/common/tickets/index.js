@@ -34,6 +34,13 @@ router.get("/receipts", async (req, res) => {
                 created_at: true,
             }
         });
+        for (let i = 0; i < receipts.length; i++) {
+            if (receipts[i].event == null) {
+                receipts[i].event = {
+                    name: "Event not found"
+                }
+            }
+        }
 
         res.json(receipts);
     } catch (error) {
