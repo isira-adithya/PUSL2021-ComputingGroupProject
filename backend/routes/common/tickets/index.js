@@ -31,9 +31,11 @@ router.get("/:ticket_id", async (req, res) => {
             },
             select: {
                 name: true,
+                images: true
             }
         });
         ticket.event_name = event.name;
+        ticket.event_images = event.images.split(",");
 
         if (ticket == null){
             res.status(400);
