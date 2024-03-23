@@ -78,7 +78,7 @@
                         <b>Description:</b><br>
                         <code>{{ ticket.description }}</code>
                       </p>
-                      <router-link :to="'/user/buyticket/' + ticket.ticket_id" class="btn btn-sm btn-dark">Buy</router-link>
+                      <router-link v-if="isLoggedIn" :to="'/user/buyticket/' + ticket.ticket_id" class="btn btn-sm btn-dark">Buy</router-link>
                     </div>
                   </div>
                 </div>
