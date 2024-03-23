@@ -6,13 +6,22 @@ import {getApprovalLink, executePayment} from '../../../modules/paypal/payments.
 const prisma  = new PrismaClient();
 const router = express.Router();
 
+function generateRandomString() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = 0; i < 8; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+
 router.get('/success', async (req, res) => {
     // paymentId, token, PayerID must be available
     if (!req.query.payment_id || !req.query.paymentId || !req.query.token || !req.query.PayerID) {
         res.send('Payment failed');
     }
 
-    const payment_id = req.query.payment_id;
+    const payment_id = parseInt(req.query.payment_id);
     const paymentId = req.query.paymentId;
     const token = req.query.token;
     const PayerID = req.query.PayerID;
@@ -35,10 +44,21 @@ router.get('/success', async (req, res) => {
                     payment_id: payment_id
                 },
                 data: {
-                    status: 'PAID',
-                    payer_id: PayerID,
-                    payment_id: paymentId,
-                    token: token
+                    status: 'PAID'
+                }
+            });
+
+            // Generate 8 letter all capital string
+            const ticketCode = generateRandomString();
+
+            await prisma.ticketReceipt.create({
+                data: {
+                    ticket_code: ticketCode,
+                    ticket_id: paymentRecord.ticket_id,
+                    cost: paymentRecord.amount,
+                    payment_method: 'PAYPAL',
+                    payment_id: payment_id,
+                    user_id: paymentRecord.user_id
                 }
             });
 
