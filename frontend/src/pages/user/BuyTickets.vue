@@ -59,7 +59,7 @@
                     disabled
                   />
                 </div>
-                <div class="col-md-6 mb-5">
+                <div class="col-md-6 mb-2">
                   <label for="Quantity" class="form-label text-white"
                     >Quantity</label
                   >
@@ -68,8 +68,21 @@
                     type="number"
                     class="form-control text-white"
                     id="Quantity"
+                    @change="total_price = ticket_quantity * ticket.price"
                   />
                 </div>
+              </div>
+              <div class="mb-5">
+                <label for="Total" class="form-label text-white"
+                  >Total Price ($)</label
+                >
+                <input
+                  v-model="total_price"
+                  type="text"
+                  class="form-control text-black"
+                  id="Total"
+                  disabled
+                />
               </div>
               <div class="row">
                 <div class="col-3"></div>
@@ -101,7 +114,8 @@ export default {
   data() {
     return {
       ticket: null,
-      ticket_quantity: 1,
+      ticket_quantity: 0,
+      total_price: 0,
     };
   },
   mounted() {
