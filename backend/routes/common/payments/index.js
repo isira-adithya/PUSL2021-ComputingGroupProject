@@ -3,6 +3,7 @@ import {
     PrismaClient
 } from '../../../modules/prisma_client/index.js';
 import {getApprovalLink, executePayment} from '../../../modules/paypal/payments.js';
+import {sendEmail} from '../../../modules/emails/mailgun.js';
 const prisma  = new PrismaClient();
 const router = express.Router();
 
@@ -15,18 +16,18 @@ function generateRandomString() {
     return result;
 }
 
-async function generateTicketReceiptInText(ticketReceipt, user){
-    return `Ticket Code: ${ticketReceipt.ticket_code}\nTicket ID: ${ticketReceipt.ticket_id}\nCost: ${ticketReceipt.cost}\nPayment Method: ${ticketReceipt.payment_method}\nPayment ID: ${ticketReceipt.payment_id}\nUsername: ${user.username}\nFull name: ${user.first_name} ${user.last_name}\nEmail: ${user.email_address.email}`;
+function generateTicketReceiptInText(ticketReceipt, user){
+    return `Ticket Code: ${ticketReceipt.ticket_code}\nTicket ID: ${ticketReceipt.ticket_id}\nCost: ${ticketReceipt.cost}\nPayment Method: ${ticketReceipt.payment_method}\nPayment ID: ${ticketReceipt.payment_id}\nUsername: ${user.user_name}\nFull name: ${user.first_name} ${user.last_name}\nEmail: ${user.email_address.email}`;
 }
 
-function generateTicketReceiptInHTML(ticketReceipt){
+function generateTicketReceiptInHTML(ticketReceipt, user){
     return `<h3>Receipt</h3>
     <p><b>Ticket Code:</b> ${ticketReceipt.ticket_code}</p>
     <p><b>Ticket ID:</b> ${ticketReceipt.ticket_id}</p>
     <p><b>Cost:</b> ${ticketReceipt.cost}</p>
     <p><b>Payment Method:</b> ${ticketReceipt.payment_method}</p>
     <p><b>Payment ID:</b> ${ticketReceipt.payment_id}</p>
-    <p><b>Username:</b> ${user.username}</p>
+    <p><b>Username:</b> ${user.user_name}</p>
     <p><b>Fullname:</b> ${user.first_name} ${user.last_name}</p>
     <p><b>Email:</b> ${user.email_address.email}</p>
     `
@@ -58,7 +59,7 @@ async function sendReceiptEmail(paymentId, userId){
         // Send email
         const textPart = generateTicketReceiptInText(ticketReceipt, user);
         const htmlPart = generateTicketReceiptInHTML(ticketReceipt, user);
-
+        await sendEmail([user.email_address.email], 'Ticket Receipt', textPart, htmlPart);
     }
 }
 
