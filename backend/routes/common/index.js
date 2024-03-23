@@ -10,6 +10,8 @@ import profileRouter from "./profile/index.js";
 import eventsRouter from "./events/index.js";
 // Comments API
 import commentsRouter from './comments/index.js';
+// Tickets API
+import ticketRouter from './tickets/index.js';
 
 // These endpoints can be accessed by both eventowners and users
 router.use("/geoapify", isLoggedIn);
@@ -18,6 +20,8 @@ router.use("/profile", isLoggedIn);
 router.use("/profile", profileRouter);
 router.use("/comments", isLoggedIn);
 router.use("/comments", commentsRouter);
+router.use("/tickets", isLoggedIn);
+router.use("/tickets", ticketRouter);
 router.use("/events", eventsRouter);
 
 
