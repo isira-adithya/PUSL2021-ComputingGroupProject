@@ -25,6 +25,22 @@
               :customCssLabel="'color: white;'"
             ></ImageUploader>
 
+            <!-- Role - ADMIN, EVENTOWNER, USER -->
+            <div class="row">
+              <div class="col-6">
+                <div class="form-outline mb-4 mt-2">
+                  <label class="form-label text-white">Role</label>
+                  <select  class="form-control" v-model="role">
+                    <option value="ADMIN">Admin</option>
+                    <option value="EVENT_OWNER">
+                      Event Owner
+                    </option>
+                    <option value="USER">User</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
             <!-- Firstname and Lastname -->
             <div class="row">
               <div class="col-6">
@@ -103,9 +119,11 @@
                 type="text"
                 class="form-control"
                 disabled
-                style="color: white;
-                      background-color: rgba(255, 255, 255, 0.2);
-                      margin-bottom: 10px;"
+                style="
+                  color: white;
+                  background-color: rgba(255, 255, 255, 0.2);
+                  margin-bottom: 10px;
+                "
                 v-model="address"
               />
             </div>
@@ -135,9 +153,7 @@
                 <h5 class="text-white">Notifications</h5>
                 <!-- Checkbox -->
                 <div class="form-check mt-2 text-white">
-                  <label class="form-check-label">
-                    Emails
-                  </label>
+                  <label class="form-check-label"> Emails </label>
 
                   <input
                     class="form-check-input"
@@ -150,7 +166,7 @@
                 </div>
               </div>
 
-              <div class="col text-end  mt-5">
+              <div class="col text-end mt-5">
                 <button
                   @click="updateProfile"
                   type="button"
@@ -205,10 +221,10 @@ export default {
             lng: parseFloat(lng),
           };
         } else {
-            this.geoCoordinates = null;
+          this.geoCoordinates = null;
         }
-        this.email_verified = response.data['email']['is_verified'];
-        this.phone_verified = response.data['phone']['is_verified'];
+        this.email_verified = response.data["email"]["is_verified"];
+        this.phone_verified = response.data["phone"]["is_verified"];
       })
       .catch((error) => {
         console.log(error);
