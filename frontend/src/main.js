@@ -39,6 +39,7 @@ import TicketList from './pages/admin/TicketList.vue';
 import TicketView from './pages/admin/TicketView.vue';
 import AdminUserVue from './pages/admin/User.vue';
 import AdminEvent from './pages/admin/Event.vue';
+import AdminEventManagement from './pages/admin/Event-management.vue';
 import AdminHome from './pages/admin/AdminHome.vue';
 import SupportTicketList from './pages/admin/SupportTicketList.vue';
 import SupportTicketView from './pages/admin/SupportTicketView.vue';
@@ -91,7 +92,7 @@ const routes = [
    
 
     {path: '/admin/user-management/:user_id', component: AdminUserVue},
-    {path: '/admin/event-management', component: EventManagement},
+    {path: '/admin/event-management', component: AdminEventManagement},
     {path: '/admin/adminhome', component: AdminHome },
     {path: '/admin/support-ticket-list', component: SupportTicketList},
     {path: '/admin/support-ticket-view', component: SupportTicketView},
