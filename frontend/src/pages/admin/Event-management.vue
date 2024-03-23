@@ -4,6 +4,7 @@
       <div class="row">
         <div class="col">
           <div class="table-responsive">
+            <h1 style="margin-bottom: 4%; margin-top: 3%"><center>Manage Events</center></h1>
             <table class="table table-bordered text-center text-white">
               <thead>
                 <tr>
@@ -25,7 +26,7 @@
                       class="btn btn-primary mr-md-3 mb-2 mb-md-0"
                       @click="viewTicket(event)"
                     >
-                      View Ticket
+                      Edit Event
                     </button>
                     <button
                       class="btn btn-danger ml-md-3 mb-2 mb-md-0"
