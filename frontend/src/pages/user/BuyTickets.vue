@@ -1,7 +1,7 @@
 <template>
   <div class="bg-black" v-if="ticket != null">
     <div class="mb-4 text-center p-5">
-      <h1 class="font-1 m-0 text-white">Buy Tickets for {{ ticket.event_name }}</h1>
+      <h1 class="font-1 m-0 text-white  mb-4">Buy Tickets for {{ ticket.event_name }}</h1>
       <img :src="ticket.event_images[0]" alt="">
       <br />
     </div>
