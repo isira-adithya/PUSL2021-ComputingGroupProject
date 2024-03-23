@@ -124,7 +124,6 @@
     border-radius: 10px;
   }
 
-
   
   .custom-button {
     background-color: #111F4D;
