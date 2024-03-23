@@ -6,9 +6,10 @@
     <div>
       <div class="container" v-if="receipt != null">
         <div class="row">
-          <div class="col-md-6 mx-auto text-left">
+          <div class="col-8 mx-auto text-left">
             <form>
               <div class="row mb-3">
+                <img :src="receipt.ticket.event.images.split(',')[0]" class="mb-5">
                 <div class="col-md-6">
                   <label for="id" class="form-label text-white"
                     >Receipt ID</label
@@ -21,13 +22,13 @@
                   />
                 </div>
                 <div class="col-md-6">
-                  <label for="name" class="form-label text-white"
-                    >Ticket Name</label
+                  <label for="EventName" class="form-label text-white"
+                    >Event Name</label
                   >
                   <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
-                    v-model="receipt.ticket.name"
+                    v-model="receipt.ticket.event.name"
                     disabled
                   />
                 </div>
@@ -43,13 +44,13 @@
                   />
                 </div>
                 <div class="col-md-6">
-                  <label for="EventName" class="form-label text-white"
-                    >Event Name</label
+                  <label for="name" class="form-label text-white"
+                    >Ticket Name</label
                   >
                   <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
-                    v-model="receipt.ticket.event.name"
+                    v-model="receipt.ticket.name"
                     disabled
                   />
                 </div>
@@ -77,13 +78,15 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6 mb-3">
-                  <button
-                    type="submit"
-                    class="btn text-white custom-button w-100"
+                <div class="col-3"></div>
+                <div class="col-6 mb-3">
+                  <div
+                  class="btn text-white custom-button w-100"
+                  @click="printTicket"
                   >
-                    Print
-                  </button>
+                  Print
+                </div>
+                <div class="col-3"></div>
                 </div>
               </div>
             </form>
@@ -105,7 +108,7 @@ export default {
       .get("/api/common/tickets/receipts/" + this.$route.params.id)
       .then((response) => {
         this.receipt = response.data;
-        this.ticket_price = this.receipt.payment.amount / this.receipt.payment.ticket_quantity;
+        this.ticket_price = (this.receipt.payment.amount / this.receipt.payment.ticket_quantity).toString() + "$";
       })
       .catch((error) => {
         console.error(error);
@@ -121,8 +124,7 @@ export default {
   },
   methods: {
     printTicket() {
-      // Print logic goes here
-      console.log("Printing ticket...");
+      window.print();
     },
   },
 };
