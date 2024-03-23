@@ -70,6 +70,7 @@ router.get("/receipts/:id", async (req, res) => {
                         event: {
                             select: {
                                 name: true,
+                                images: true
                             }
                         }
                     }
