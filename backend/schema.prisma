@@ -128,6 +128,7 @@ model TicketPayment {
   user            User            @relation(fields: [user_id], references: [user_id])
   ticket          Ticket          @relation(fields: [ticket_id], references: [ticket_id])
   TicketReceipt   TicketReceipt[]
+  created_at      DateTime?       @default(now())
 }
 
 model TicketReceipt {
@@ -141,6 +142,7 @@ model TicketReceipt {
   user           User          @relation(fields: [user_id], references: [user_id])
   payment        TicketPayment @relation(fields: [payment_id], references: [payment_id])
   ticket         Ticket        @relation(fields: [ticket_id], references: [ticket_id])
+  created_at     DateTime?     @default(now())
 }
 
 model Comment {
