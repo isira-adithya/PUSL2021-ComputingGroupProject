@@ -1,8 +1,7 @@
 <template>
-    <div>
-      <br /><br />
-      <div class="mb-4 text-center">
-        <h3 class="font-1">Buy Tickets</h3><br />
+    <div class="bg-black">
+      <div class="mb-4 text-center p-5">
+        <h1 class="font-1 m-0">Buy Tickets</h1>
       </div>
       <div>
         <div class="container">
@@ -10,30 +9,32 @@
   
             <div class="col-md-6 mx-auto text-left">
               <form @submit.prevent="submitForm">
-                <div class="row mb-3">
+                <div class="row mb-4">
                   <div class="col-md-6">
                     <label for="ID" class="form-label">Ticket ID</label>
-                    <input v-model="ticket.id" type="text" class="form-control white-bg no-border increased-height" id="ID">
+                    <input v-model="ticket.id" type="text" class="form-control white-bg " id="ID">
                   </div>
                   <div class="col-md-6">
                     <label for="Name" class="form-label">Event Name</label>
-                    <input v-model="ticket.name" type="text" class="form-control white-bg no-border increased-height" id="Name">
+                    <input v-model="ticket.name" type="text" class="form-control white-bg " id="Name">
                   </div>
                   <div class="col-md-6">
                     <label for="Price" class="form-label">Ticket Price</label>
-                    <input v-model="ticket.price" type="text" class="form-control white-bg no-border increased-height" id="Price">
+                    <input v-model="ticket.price" type="text" class="form-control white-bg  " id="Price">
                   </div>
                   <div class="col-md-6">
                     <label for="Quantity" class="form-label">Quantity</label>
-                    <input v-model="ticket.quantity" type="number" class="form-control white-bg no-border increased-height" id="Quantity">
+                    <input v-model="ticket.quantity" type="number" class="form-control white-bg " id="Quantity">
                   </div>
-                </div>
                 <div class="mb-3">
                   <label for="Description" class="form-label">Description</label>
-                  <textarea v-model="ticket.description" class="form-control white-bg no-border" id="Description" rows="5"></textarea>
+                  <textarea v-model="ticket.description" class="form-control white-bg " id="Description" rows="5"></textarea>
                 </div>
+              </div>
+              <div>
                 <button type="submit" class="btn btn-primary">Buy</button>
                 <button type="button" @click="cancelPurchase" class="btn btn-danger">Cancel</button>
+              </div>
               </form>
               <br />
             </div>
@@ -70,54 +71,58 @@
   </script>
   
 <style scoped>
-.custom-input {
-  border: none;
-  border-radius: 0;
-  margin-bottom: 3rem;
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  background-size: cover;
-  background-position: center;
-  padding-left: 40px; /* adjust the padding to accommodate the image */
-}
+  .bg-black{
+    min-height:75.9vh;
+  }
 
-.custom-input:focus {
-  background-color: rgba(255, 255, 255, 0.2);
-  box-shadow: none;
-  color: #ffffff;
-}
+  .custom-input {
+    border: none;
+    border-radius: 0;
+    margin-bottom: 3rem;
+    color: #ffffff;
+    background-color: rgb(0, 0, 0);
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    padding-left: 40px; /* adjust the padding to accommodate the image */
+  }
 
-.font-1 {
-  font-family: 'Stick No Bills', sans-serif;
-  margin-top: 20px;
-}
+  .custom-input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    color: #ffffff;
+  }
 
-.font-2 h2 {    
-  font-size: 23px;
-  font-weight: 750;
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
+  .font-1 {
+    font-family: 'Stick No Bills', sans-serif;
+    margin-top: 20px;
+  }
 
-label.form-label {
-  text-align: left;
-  display: block;
-  margin-bottom: 0.2rem;
-}
+  .font-2 h2 {    
+    font-size: 23px;
+    font-weight: 750;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
 
-a {
-  color: #ffffff;
-}
+  label.form-label {
+    text-align: left;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
 
-.main-container {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-}
+  a {
+    color: #ffffff;
+  }
 
-.white-bg {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.3);
-}
+  .main-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .white-bg {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 </style>
