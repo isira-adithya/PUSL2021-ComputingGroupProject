@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <h1 class="text-white"><center>Receipt List</center></h1>
+          <h1 class="text-white"><center>Your Tickets 🎫</center></h1>
         </div>
       </div>
       <div class="row">
@@ -38,21 +38,20 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+  mounted() {
+    axios.get("/api/common/tickets/receipts")
+      .then(response => {
+        this.receipts = response.data;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },
   data() {
     return {
-      receipts: [
-        {
-          id: 1,
-          eventName: 'Concert ABC',
-          ticketName: 'General Admission',
-          ticketPrice: '$50',
-          ticketCode: 'GA123456',
-          paymentMethod: 'Credit Card',
-          paymentDateTime: '2024-03-25 19:30:00'
-        },
-        // Add more receipt data as needed
-      ]
+      receipts: []
     };
   }
 };
