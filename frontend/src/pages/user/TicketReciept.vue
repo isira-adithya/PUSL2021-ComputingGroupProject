@@ -76,6 +76,19 @@
                     disabled
                   />
                 </div>
+                <div>
+                  <label for="Date/Time" class="form-label text-white"
+                    >Ticket Code</label
+                  >
+                  <pre class="text-white-50">This code is used to identify the ticket in an event.</pre>
+                  <pre class="text-white-50">Please store this code in a safe place.</pre>
+                  <input
+                    type="text"
+                    class="form-control white-bg no-border increased-height"
+                    v-model="receipt.ticket_code"
+                    disabled
+                  />
+                </div>
               </div>
               <div class="row">
                 <div class="col-3"></div>
