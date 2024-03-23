@@ -38,6 +38,23 @@ async function getApprovalLink(amount, description, return_url, cancel_url) {
     });
 }
 
+async function executePayment(paymentId, payerId) {
+    return new Promise((resolve, reject) => {
+        const execute_payment_json = {
+            "payer_id": payerId
+        };
+
+        PayPalRestSDK.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(payment);
+            }
+        });
+    });
+}
+
 export {
-    getApprovalLink
+    getApprovalLink,
+    executePayment
 }
