@@ -12,6 +12,8 @@ import eventsRouter from "./events/index.js";
 import commentsRouter from './comments/index.js';
 // Tickets API
 import ticketRouter from './tickets/index.js';
+// Payments API
+import paymentsRouter from './payments/index.js';
 
 // These endpoints can be accessed by both eventowners and users
 router.use("/geoapify", isLoggedIn);
@@ -22,6 +24,8 @@ router.use("/comments", isLoggedIn);
 router.use("/comments", commentsRouter);
 router.use("/tickets", isLoggedIn);
 router.use("/tickets", ticketRouter);
+router.use("/payments", isLoggedIn);
+router.use("/payments", paymentsRouter);
 router.use("/events", eventsRouter);
 
 
