@@ -13,18 +13,22 @@
               <tr>
                 <th scope="col">Event Name</th>
                 <th scope="col">Ticket Name</th>
-                <th scope="col">Ticket Price</th>
+                <th scope="col">Price</th>
                 <th scope="col">Payment Method</th>
                 <th scope="col">Payment Date/Time</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="receipt in receipts" :key="receipt.id">
                 <td class="align-middle">{{ receipt.ticket.event.name }}</td>
                 <td class="align-middle">{{ receipt.ticket.name }}</td>
-                <td class="align-middle">{{ receipt.payment.amount / receipt.payment.ticket_quantity }}</td>
+                <td class="align-middle">{{ receipt.payment.amount / receipt.payment.ticket_quantity }} $</td>
                 <td class="align-middle">{{ receipt.payment_method }}</td>
                 <td class="align-middle">{{ receipt.created_at }}</td>
+                <td class="align-middle">
+                  <router-link :to="`/user/tickets/${receipt.receipt_id}`" class="btn btn-primary">View</router-link>
+                </td>
               </tr>
             </tbody>
           </table>
