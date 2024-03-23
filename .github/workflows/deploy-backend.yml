@@ -49,6 +49,8 @@ jobs:
           NTFYAPIKEY: ${{ secrets.NTFYAPIKEY }}
           NTFYSENDERID: ${{ secrets.NTFYSENDERID }}
           MGUNKEY: ${{ secrets.MGUNKEY }}
+          PAYPAL_CLIENT_ID: ${{ secrets.PAYPAL_CLIENT_ID }}
+          PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
       - name: Modifying the config.js
         uses: DamianReeves/write-file-action@v1.0
         with:
