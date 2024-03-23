@@ -37,6 +37,7 @@ import TicketView from './pages/admin/TicketView.vue'
 import UserManagement from './pages/admin/User-management.vue';
 import AdminUserVue from './pages/admin/User.vue';
 import EventManagement from './pages/admin/Event-management.vue';
+import AdminEvent from './pages/admin/Event.vue';
 import AdminHome from './pages/admin/AdminHome.vue';
 
 // Bootstrap
@@ -86,6 +87,7 @@ const routes = [
     {path: '/admin/user-management', component: UserManagement},
     {path: '/admin/user-management/:user_id', component: AdminUserVue},
     {path: '/admin/event-management', component: EventManagement},
+    {path: '/admin/event-management/:uuid', component: AdminEvent},
     {path: '/admin/adminhome', component: AdminHome }
 ];
 
