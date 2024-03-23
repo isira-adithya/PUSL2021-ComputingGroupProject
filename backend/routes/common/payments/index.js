@@ -8,17 +8,46 @@ const router = express.Router();
 
 router.get('/success', async (req, res) => {
     // paymentId, token, PayerID must be available
-    if (!req.query.paymentId || !req.query.token || !req.query.PayerID) {
+    if (!req.query.payment_id || !req.query.paymentId || !req.query.token || !req.query.PayerID) {
         res.send('Payment failed');
     }
 
+    const payment_id = req.query.payment_id;
     const paymentId = req.query.paymentId;
     const token = req.query.token;
     const PayerID = req.query.PayerID;
 
     try {
         const payment = await executePayment(paymentId, PayerID);
-        console.log(payment)
+        if (payment['state'] == 'approved'){
+            const paymentRecord = await prisma.ticketPayment.findUnique({
+                where: {
+                    payment_id: payment_id
+                }
+            });
+            if (paymentRecord == null){
+                res.status(404);
+                res.contentType('text/html');
+                return res.send(`<p>Payment not found.</p>`);
+            }
+            await prisma.ticketPayment.update({
+                where: {
+                    payment_id: payment_id
+                },
+                data: {
+                    status: 'PAID',
+                    payer_id: PayerID,
+                    payment_id: paymentId,
+                    token: token
+                }
+            });
+
+            // TODO: send a receipt email
+        } else {
+            res.status(500);
+            res.contentType('text/html');
+            return res.send(`<p>Payment failed. Please try again later.</p>`);
+        }
     } catch (error) {
         console.log(error)
         res.status(500);
