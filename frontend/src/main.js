@@ -24,6 +24,7 @@ import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
 import UserProfileVue from './pages/user/Profile.vue';
 import BuyTicket from './pages/user/BuyTickets.vue'
 import ReceiptListVue from './pages/user/ReceiptList.vue'
+import TicketReciept from './pages/user/TicketReciept.vue'
 
 //component - Public
 import AboutUsVue from './pages/public/AboutUs.vue';
@@ -33,16 +34,15 @@ import InteractiveMapVue from './components/InteractiveMap.vue';
 
 
 // Components - Admin
-import EventOwnerApproval from './pages/admin/EventOwnerApproval.vue';
-import TicketList from './pages/admin/TicketList.vue'
-import TicketView from './pages/admin/TicketView.vue'
-import UserManagement from './pages/admin/User-management.vue';
+
+import TicketList from './pages/admin/TicketList.vue';
+import TicketView from './pages/admin/TicketView.vue';
 import AdminUserVue from './pages/admin/User.vue';
-import EventManagement from './pages/admin/Event-management.vue';
 import AdminEvent from './pages/admin/Event.vue';
 import AdminHome from './pages/admin/AdminHome.vue';
 import SupportTicketList from './pages/admin/SupportTicketList.vue';
 import SupportTicketView from './pages/admin/SupportTicketView.vue';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -77,6 +77,7 @@ const routes = [
     {path: '/user/profile', component: UserProfileVue},
     {path: '/user/buyticket', component: BuyTicket},
     {path: '/user/receipt-list', component: ReceiptListVue},
+    {path: '/user/ticketreciept', component: TicketReciept},
 
     // Public pages
     {path: '/about-us', component: AboutUsVue},
@@ -89,14 +90,15 @@ const routes = [
     {path: '/admin/tickets', component: TicketList},
     {path: '/admin/ticket-view', component: TicketView},
    
-    {path: '/admin/eventowner-approval', component: EventOwnerApproval},
-    {path: '/admin/user-management', component: UserManagement},
+
     {path: '/admin/user-management/:user_id', component: AdminUserVue},
     {path: '/admin/event-management', component: EventManagement},
     {path: '/admin/adminhome', component: AdminHome },
     {path: '/admin/support-ticket-list', component: SupportTicketList},
     {path: '/admin/support-ticket-view', component: SupportTicketView},
     {path: '/admin/event-management/:uuid', component: AdminEvent},
+    {path: '/admin/dashboard/:page', component: AdminDashboard},
+
 ];
 
 const router = createRouter({

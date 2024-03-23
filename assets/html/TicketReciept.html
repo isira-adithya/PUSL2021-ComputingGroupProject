@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Ticket</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Stick+No+Bills:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-size: cover;
+      background-attachment: fixed;
+      color: #ffffff;
+      background-color: #000000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-control {
+      border: none;
+      border-radius: 0;
+      margin-bottom: 3rem;
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+      padding-left: 40px; /* adjust the padding to accommodate the image */
+    }
+
+    .increased-height {
+      height: 50px;
+    }
+
+    .form-control:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: none;
+      color: #ffffff;
+    }
+
+    .form-control:disabled{
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+
+    .font-1 {
+      font-family: 'Stick No Bills', sans-serif;
+      margin-top: 20px;
+    }
+
+    .font-2 h2 {    
+      font-size: 23px;
+      font-weight: 750;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+
+    label.form-label {
+      text-align: left;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    a {
+      color: #ffffff;
+    }
+
+    .main-container {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .white-bg {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <br><br>
+  <div class="mb-4 text-center">
+    <h3 class="font-1">Ticket Reciept</h3><br>
+  </div>
+  <div>
+    <div class="container">
+      <div class="row">
+    
+        <div class="col-md-6 mx-auto text-left">
+          <form>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="id" class="form-label">Ticket ID</label>
+                <input type="text" class="form-control white-bg no-border increased-height" id="ID" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="name" class="form-label">Ticket Name</label>
+                <input type="text" class="form-control white-bg no-border increased-height" id="ID" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="price" class="form-label">Ticket Price</label>
+                <input type="text" class="form-control white-bg no-border increased-height" id="Price" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="EventName" class="form-label">Event Name</label>
+                <input type="text" class="form-control white-bg no-border increased-height" id="Name" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="PayMethod" class="form-label">Payment Method</label>
+                <input type="text" class="form-control white-bg no-border increased-height" id="Name" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="Date/Time" class="form-label">Payment Date/Time</label>
+                <input type="text" class="form-control white-bg no-border increased-height" id="Name" disabled>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary">Print</button>
+          </form>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

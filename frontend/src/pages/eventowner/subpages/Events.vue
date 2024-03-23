@@ -86,7 +86,7 @@ export default {
 <style scoped>
 
     .bg-black{
-      height: 75.9vh;
+      min-height: 75.9vh;
     }
   
       .custom-card {
