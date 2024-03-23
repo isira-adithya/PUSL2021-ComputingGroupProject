@@ -12,24 +12,24 @@
                 <div class="row mb-4">
                   <div class="col-md-6 mb-5">
                     <label for="ID" class="form-label text-white">Ticket ID</label>
-                    <input v-model="ticket.id" type="text" class="form-control white-bg " id="ID">
+                    <input v-model="ticket.id" type="text" class="form-control  text-white" id="ID">
                   </div>
                   <div class="col-md-6 mb-5">
                     <label for="Name" class="form-label text-white">Event Name</label>
-                    <input v-model="ticket.name" type="text" class="form-control white-bg " id="Name">
+                    <input v-model="ticket.name" type="text" class="form-control  text-white" id="Name">
+                  </div>
+                  <div class="mb-5 ">
+                    <label for="Description" class="form-label text-white">Description</label>
+                    <textarea v-model="ticket.description" class="form-control  text-white" id="Description" rows="5"></textarea>
                   </div>
                   <div class="col-md-6 mb-5">
                     <label for="Price" class="form-label text-white">Ticket Price</label>
-                    <input v-model="ticket.price" type="text" class="form-control white-bg  " id="Price">
+                    <input v-model="ticket.price" type="text" class="form-control text-white " id="Price">
                   </div>
                   <div class="col-md-6 mb-5">
-                    <label for="Quantity" class="form-label text-white">Quantity</label>
-                    <input v-model="ticket.quantity" type="number" class="form-control white-bg " id="Quantity">
+                      <label for="Quantity" class="form-label text-white">Quantity</label>
+                      <input v-model="ticket.quantity" type="number" class="form-control  text-white" id="Quantity">
                   </div>
-                <div class="mb-5 ">
-                  <label for="Description" class="form-label text-white">Description</label>
-                  <textarea v-model="ticket.description" class="form-control white-bg " id="Description" rows="5"></textarea>
-                </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-3">
@@ -109,13 +109,13 @@
   }
 
   .form-control{
+    background-color: rgba(255, 255, 255, 0.3);
     border: none;  
   }
 
   .form-control:focus{
     box-shadow: none;
     background-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
   }
 
   .main-container {
@@ -124,9 +124,7 @@
     border-radius: 10px;
   }
 
-  .white-bg {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
+
   
   .custom-button {
     background-color: #111F4D;
