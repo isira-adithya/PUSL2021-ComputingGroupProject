@@ -39,6 +39,16 @@
 
               <li class="nav-item">
                 <router-link
+                  :to="'/admin/dashboard/ticketlist'"
+                  href="#"
+                  :class="page=='ticketlist'?'nav-link active':'nav-link text-white'"
+                  aria-current="page">
+                  Ticket List
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link
                   :to="'/admin/dashboard/eventownerapproval'"
                   href="#"
                   :class="page=='eventownerapproval'?'nav-link active':'nav-link text-white'"
@@ -46,7 +56,6 @@
                   Event Owner Approval
                 </router-link>
               </li>
-
 
             </ul>
             <hr />
