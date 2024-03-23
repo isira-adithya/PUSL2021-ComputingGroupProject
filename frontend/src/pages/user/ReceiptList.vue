@@ -21,9 +21,9 @@
             </thead>
             <tbody>
               <tr v-for="receipt in receipts" :key="receipt.id">
-                <td class="align-middle">{{ receipt.eventName }}</td>
-                <td class="align-middle">{{ receipt.ticketName }}</td>
-                <td class="align-middle">{{ receipt.ticketPrice }}</td>
+                <td class="align-middle">{{ receipt.ticket.event.name }}</td>
+                <td class="align-middle">{{ receipt.ticket.name }}</td>
+                <td class="align-middle">{{ receipt.ticket.price }}</td>
                 <td class="align-middle">{{ receipt.ticketCode }}</td>
                 <td class="align-middle">{{ receipt.paymentMethod }}</td>
                 <td class="align-middle">{{ receipt.paymentDateTime }}</td>
