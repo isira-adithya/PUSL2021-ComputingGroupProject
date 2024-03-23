@@ -6,35 +6,75 @@
             <h5>Event Owner - Dashboard</h5>
             <hr />
             <ul class="nav px-lg-4 nav-pills flex-column mb-auto">
+
               <li class="nav-item">
                 <router-link
-                  :to="'/admin/dashboard/adminhome'"
+                  :to="'/admin/dashboard/usermanagement'"
                   href="#"
-                  :class="page=='adminhome'?'nav-link active':'nav-link text-white'"
+                  :class="page=='usermanagement'?'nav-link active':'nav-link text-white'"
                   aria-current="page">
-                  Home
+                  User Management
                 </router-link>
               </li>
               
+              <li class="nav-item">
+                <router-link
+                  :to="'/admin/dashboard/eventmanagement'"
+                  href="#"
+                  :class="page=='eventmanagement'?'nav-link active':'nav-link text-white'"
+                  aria-current="page">
+                  Event Management
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link
+                  :to="'/admin/dashboard/supportticketlist'"
+                  href="#"
+                  :class="page=='supportticketlist'?'nav-link active':'nav-link text-white'"
+                  aria-current="page">
+                  Support Ticket
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link
+                  :to="'/admin/dashboard/eventownerapproval'"
+                  href="#"
+                  :class="page=='eventownerapproval'?'nav-link active':'nav-link text-white'"
+                  aria-current="page">
+                  Event Owner Approval
+                </router-link>
+              </li>
+
+
             </ul>
             <hr />
           </div>
         </div>
         <div class="col" style="padding: 0px;">
-          <AdminHome v-if="page=='adminhome'"/>
-
-        </div>
+          <UserManagement v-if="page=='usermanagement'"/>
+          <EventManagement v-if="page=='eventmanagement'"/>
+          <SupportTicketList v-if="page=='supportticketlist'"/>
+          <EventOwnerApproval v-if="page=='eventownerapproval'"/>
+        </div> 
       </div>
     </div>
   </template>
     
     <script>
-import AdminHome from './AdminHome.vue';
-  
+
+import UserManagement from './User-management.vue';  
+import EventManagement from './Event-management.vue';
+import SupportTicketList from './SupportTicketList.vue';
+import EventOwnerApproval from './EventOwnerApproval.vue';
   export default {
     name: "AdminDashboardVue",
     components: {
-        AdminHome
+        UserManagement,
+        EventManagement,
+        SupportTicketList,
+        EventOwnerApproval,
     },
     mounted() {
       this.page = this.$route.path.split("/")[3];
@@ -44,7 +84,7 @@ import AdminHome from './AdminHome.vue';
     },
     data() {
       return {
-        page: "home"
+        page: "UserManagement"
       };
     },
     methods: {},
