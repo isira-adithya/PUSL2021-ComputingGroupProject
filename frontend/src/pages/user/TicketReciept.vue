@@ -1,7 +1,7 @@
 <template>
     <div class="bg-black">
       <div class="mb-4 text-center p-5">
-        <h3 class="font-1 m-0 text-white">Ticket Receipt</h3><br>
+        <h1 class="font-1 m-0 text-white">Ticket Receipt</h1>
       </div>
       <div>
         <div class="container">
@@ -34,7 +34,11 @@
                     <input type="text" class="form-control white-bg no-border increased-height" v-model="ticket.paymentDateTime" disabled>
                   </div>
                 </div>
-                <button type="button" class="btn btn-primary" @click="printTicket">Print</button>
+                <div class="row">
+                <div class="col-md-6 mb-3">
+                  <button type="submit" class="btn text-white custom-button w-100">Print</button>
+                </div>
+                </div>
               </form>
               <br>
             </div>
@@ -129,5 +133,14 @@
   .white-bg {
     color: #ffffff;
     background-color: rgba(255, 255, 255, 0.3);
+  }
+
+    
+  .custom-button {
+    background-color: #111F4D;
+  }
+  
+  .custom-button:hover {
+    background-color: #020923 !important;
   }
   </style>
