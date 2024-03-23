@@ -134,6 +134,10 @@ export default {
   },
   methods: {
     buyTicket() {
+      if (this.ticket_quantity <= 0) {
+        Notiflix.Notify.failure("Please enter a valid quantity!");
+        return;
+      }
       Notiflix.Confirm.show(
         "Buy Ticket",
         "Are you sure you want to buy this ticket?",
