@@ -1,7 +1,7 @@
 <template>
     <div class="bg-black">
       <div class="mb-4 text-center p-5">
-        <h1 class="font-1 m-0">Buy Tickets</h1>
+        <h1 class="font-1 m-0 text-white">Buy Tickets</h1><br />
       </div>
       <div>
         <div class="container">
@@ -10,24 +10,24 @@
             <div class="col-md-6 mx-auto text-left">
               <form @submit.prevent="submitForm">
                 <div class="row mb-4">
-                  <div class="col-md-6">
-                    <label for="ID" class="form-label">Ticket ID</label>
+                  <div class="col-md-6 mb-5">
+                    <label for="ID" class="form-label text-white">Ticket ID</label>
                     <input v-model="ticket.id" type="text" class="form-control white-bg " id="ID">
                   </div>
-                  <div class="col-md-6">
-                    <label for="Name" class="form-label">Event Name</label>
+                  <div class="col-md-6 mb-5">
+                    <label for="Name" class="form-label text-white">Event Name</label>
                     <input v-model="ticket.name" type="text" class="form-control white-bg " id="Name">
                   </div>
-                  <div class="col-md-6">
-                    <label for="Price" class="form-label">Ticket Price</label>
+                  <div class="col-md-6 mb-5">
+                    <label for="Price" class="form-label text-white">Ticket Price</label>
                     <input v-model="ticket.price" type="text" class="form-control white-bg  " id="Price">
                   </div>
-                  <div class="col-md-6">
-                    <label for="Quantity" class="form-label">Quantity</label>
+                  <div class="col-md-6 mb-5">
+                    <label for="Quantity" class="form-label text-white">Quantity</label>
                     <input v-model="ticket.quantity" type="number" class="form-control white-bg " id="Quantity">
                   </div>
-                <div class="mb-3">
-                  <label for="Description" class="form-label">Description</label>
+                <div class="mb-5 ">
+                  <label for="Description" class="form-label text-white">Description</label>
                   <textarea v-model="ticket.description" class="form-control white-bg " id="Description" rows="5"></textarea>
                 </div>
               </div>
