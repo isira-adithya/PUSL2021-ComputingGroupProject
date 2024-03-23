@@ -77,6 +77,16 @@
                     >Dashboard</router-link
                   >
                 </li>
+                <li
+                  v-if="isLoggedIn && role == 'ADMIN'"
+                  class="nav-item mx-2"
+                >
+                  <router-link
+                    to="/admin/dashboard/usermanagement"
+                    class="nav-link text-white"
+                    >Dashboard</router-link
+                  >
+                </li>
               </ul>
               <div
                 class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3"
