@@ -49,6 +49,67 @@ router.get("/receipts", async (req, res) => {
     }
 });
 
+router.get("/receipts/:id", async (req, res) => {
+    try {
+        // Check if the req.params.id is a number
+        if (isNaN(req.params.id)) {
+            res.status(400);
+            return res.json({
+                success: false,
+                message: "Invalid receipt id",
+            })
+        }
+
+        const receipt = await prisma.ticketReceipt.findUnique({
+            where: {
+                receipt_id: parseInt(req.params.id),
+                user_id: req.session.user_id,
+            },
+            select: {
+                ticket: {
+                    select: {
+                        name: true,
+                        price: true,
+                        event: {
+                            select: {
+                                name: true,
+                            }
+                        }
+                    }
+                },
+                payment: {
+                    select: {
+                        amount: true,
+                        status: true,
+                        ticket_quantity: true,
+                    }
+                },
+                receipt_id: true,
+                payment_method: true,
+                ticket_code: true,
+                created_at: true,
+            }
+        });
+
+        if (receipt == null) {
+            res.status(400);
+            return res.json({
+                success: false,
+                message: "Receipt not found",
+            })
+        }
+
+        res.json(receipt);
+    } catch (error) {
+        console.log(error);
+        res.status(500);
+        return res.json({
+            success: false,
+            message: "Internal server error",
+        })
+    }
+});
+
 router.get("/:ticket_id", async (req, res) => { 
     try {
 
