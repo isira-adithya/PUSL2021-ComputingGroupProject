@@ -61,6 +61,17 @@ router.get("/:ticket_id", async (req, res) => {
 router.post("/buy", async (req, res) => {
     try {
         const ticket_id = req.body.ticket_id;
+        const quantity = req.body.quantity;
+
+        // quantity must be a positive number
+        if (isNaN(quantity) || quantity <= 0) {
+            res.status(400);
+            return res.json({
+                success: false,
+                message: "Invalid quantity",
+            })
+        }
+
         const ticket = await prisma.ticket.findUnique({
             where: {
                 ticket_id: ticket_id,
@@ -75,13 +86,12 @@ router.post("/buy", async (req, res) => {
             })
         }
 
-        const approvalLink = await getApprovalLink(ticket);
+        const approvalLink = await getApprovalLink((ticket.price * ticket.price), "Ticket purchase", "http://www.eventhive.local/api/common/payments/success", "http://www.eventhive.local/api/common/payments/cancel");
         console.log(approvalLink);
 
-        console.log(ticket)
-
-        res.json({ message: "Ticket bought successfully" });
+        res.json({ success: true, approvalLink: approvalLink });
     } catch (error) {
+        console.log(error)
         res.status(500);
         return res.json({
             success: false,
