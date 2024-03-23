@@ -28,8 +28,12 @@ router.get("/receipts", async (req, res) => {
                     select: {
                         amount: true,
                         status: true,
+                        ticket_quantity: true,
                     }
-                }
+                },
+                payment_method: true,
+                ticket_code: true,
+                created_at: true,
             }
         });
 
