@@ -77,7 +77,8 @@ export default {
         });
     },
     viewTicket(event) {
-      this.$router.push(`/eventowner/dashboard/event/${event.uuid}`);
+      console.log(event)
+      this.$router.push(`/admin/event-management/${event.uuid}`);
     },
     deleteEvent(event) {
       // Add logic to delete an event
