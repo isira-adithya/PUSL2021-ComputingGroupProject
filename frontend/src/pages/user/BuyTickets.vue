@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-6 mb-5">
                   <label for="Price" class="form-label text-white"
-                    >Ticket Price</label
+                    >Ticket Price ($)</label
                   >
                   <input
                     v-model="ticket.price"
