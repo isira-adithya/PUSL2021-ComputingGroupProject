@@ -111,10 +111,10 @@ router.get('/success', async (req, res) => {
                 }
             });
 
-            // Generate 8 letter all capital string
-            const ticketCode = generateRandomString();
-
             for (let i = 0; i < paymentRecord.ticket_quantity; i++){
+                // Generate 8 letter all capital string
+                const ticketCode = generateRandomString();
+
                 await prisma.ticketReceipt.create({
                     data: {
                         ticket_code: ticketCode,
