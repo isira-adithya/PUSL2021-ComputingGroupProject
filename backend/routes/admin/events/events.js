@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 });
 
 // Get all events that are visible to the public
-router.get('/:id', async (req, res) => {
+router.get('/:uuid', async (req, res) => {
     const event = await prisma.event.findFirst({
         where: {
             uuid: req.params.uuid,
