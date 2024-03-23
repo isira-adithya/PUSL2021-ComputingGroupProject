@@ -78,7 +78,7 @@
                         <b>Description:</b><br>
                         <code>{{ ticket.description }}</code>
                       </p>
-                      <div @click="buyTicket(ticket)" class="btn btn-sm btn-dark">Buy</div>
+                      <router-link :to="'/user/buyticket/' + ticket.ticket_id" class="btn btn-sm btn-dark">Buy</router-link>
                     </div>
                   </div>
                 </div>
@@ -241,42 +241,6 @@ export default {
 
 
   methods: {
-    buyTicket(ticket) {
-      Notiflix.Confirm.show(
-        "Buy Ticket",
-        "Are you sure you want to buy this ticket?",
-        "Yes",
-        "No",
-        () => {
-          Notiflix.Loading.standard();
-          axios
-            .post(`/api/common/tickets/buy`, {
-              ticket_id: ticket.ticket_id
-            })
-            .then((response) => {
-              Notiflix.Notify.success("Ticket bought successfully!");
-
-              // Refresh the page
-              axios
-                .get(`/api/common/events/${this.uuid}`)
-                .then((response) => {
-                  this.event = response.data;
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            })
-            .catch((error) => {
-              Notiflix.Notify.failure("You have to login to buy a ticket!");
-              console.log(error);
-            })
-            .finally(() => {
-              Notiflix.Loading.remove();
-            });
-        },
-        function () {}
-      );
-    },
 
     addComment() {
       Notiflix.Loading.standard();
