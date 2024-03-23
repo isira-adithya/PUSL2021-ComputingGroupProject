@@ -30,10 +30,10 @@
                 />
                 <div class="card-body">
                   <h5 class="card-title">{{ event["name"] }}</h5>
-                  <p class="card-text">
+                  <p class="card-text" style="height: 100px; overflow: hidden;">
                     {{
                       event["description"].toString().length > 150
-                        ? event["description"].toString().substring(0, 150) + "..."
+                        ? event["description"].toString().substring(0, 117) + "..."
                         : event["description"]
                     }}
                   </p>
@@ -143,7 +143,6 @@ export default {
   padding: 20px;
   border: solid 2px #111f4d;
   flex-direction: column;
-  height: 100%;
   margin: auto;
 }
 
