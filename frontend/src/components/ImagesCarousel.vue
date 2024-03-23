@@ -4,7 +4,7 @@
       <div class="carousel-inner" id="carousel-items">
         <div v-for="(image, index) in images" :key="image">
           <div :class="(index == currentImageIndex) ? 'carousel-item active' : 'carousel-item'">
-            <img :style="`width:${imageWidth};height:${imageHeight};`" class="d-block w-100" :src="image" alt="First slide" />
+            <img class="d-block w-100" :src="image" alt="First slide" />
           </div>
         </div>
       </div>
@@ -27,17 +27,7 @@ export default {
     slideShowInterval: {
         type: Number,
         required: true,
-    },
-    imageWidth: {
-        type: String,
-        required: false,
-        default: "100%",
-    },
-    imageHeight: {
-        type: String,
-        required: false,
-        default: "auto",
-    },
+    }
   },
   components: {},
   mounted() {
