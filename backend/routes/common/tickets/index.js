@@ -6,6 +6,43 @@ import {getApprovalLink} from '../../../modules/paypal/payments.js';
 const prisma  = new PrismaClient();
 const router = express.Router();
 
+router.get("/receipts", async (req, res) => {
+    try {
+        const receipts = await prisma.ticketReceipt.findMany({
+            where: {
+                user_id: req.session.user_id,
+            },
+            select: {
+                ticket: {
+                    select: {
+                        name: true,
+                        price: true,
+                        event: {
+                            select: {
+                                name: true,
+                            }
+                        }
+                    }
+                },
+                payment: {
+                    select: {
+                        amount: true,
+                        status: true,
+                    }
+                }
+            }
+        });
+
+        res.json(receipts);
+    } catch (error) {
+        console.log(error);
+        res.status(500);
+        return res.json({
+            success: false,
+            message: "Internal server error",
+        })
+    }
+});
 
 router.get("/:ticket_id", async (req, res) => { 
     try {
