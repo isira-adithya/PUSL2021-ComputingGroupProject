@@ -39,6 +39,7 @@ import AdminUserVue from './pages/admin/User.vue';
 import EventManagement from './pages/admin/Event-management.vue';
 import AdminHome from './pages/admin/AdminHome.vue';
 import SupportTicketList from './pages/admin/SupportTicketList.vue';
+import SupportTicketView from './pages/admin/SupportTicketView.vue';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -89,6 +90,7 @@ const routes = [
     {path: '/admin/event-management', component: EventManagement},
     {path: '/admin/adminhome', component: AdminHome },
     {path: '/admin/support-ticket-list', component: SupportTicketList},
+    {path: '/admin/support-ticket-view', component: SupportTicketView},
 ];
 
 const router = createRouter({
