@@ -74,7 +74,7 @@ async function sendReceiptEmail(paymentId, userId){
         // Send email
         const textPart = generateTicketReceiptInText(ticketReceipt, ticket, user);
         const htmlPart = generateTicketReceiptInHTML(ticketReceipt, ticket, user);
-        await sendEmail([user.email_address.email], 'Ticket Receipt', textPart, htmlPart);
+        await sendEmail([user.email_address.email], `EventHive - Ticket Receipt - ${ticket.event.name}`, textPart, htmlPart);
     }
 }
 
@@ -147,7 +147,13 @@ router.get('/success', async (req, res) => {
         
     }
 
-    res.send('Payment successful');
+    return res.send(`
+    <h3>Payment Successful</h3>
+    <p>You will receive the ticket receipt in your email shortly.</p>
+    <br>
+    <pre><code>Redirecting to EventHive...</code></pre>
+    <script>window.setTimeout(()=>{window.location.href = '/#/events/'},5000)</script>
+    `);
 });
 
 router.get('/cancel', (req, res) => {
