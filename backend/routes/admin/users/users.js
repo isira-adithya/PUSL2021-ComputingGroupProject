@@ -9,6 +9,21 @@ const router = express.Router();
 // Get all users
 router.get('/', async (req, res) => {
     const users = await prisma.user.findMany();
+    for (let i = 0; i < users.length; i++) {
+        users[i].password = "";
+        const emailAddress = await prisma.emailAddress.findFirst({
+            where: {
+                email_id: users[i].email_id
+            }
+        });
+        const phoneNumber = await prisma.phoneNumber.findFirst({
+            where: {
+                phone_id: users[i].phone_id
+            }
+        });
+        users[i].email = emailAddress;
+        users[i].phone = phoneNumber;
+    }
     res.json(users);
 });
 
@@ -22,6 +37,26 @@ router.get('/:id', async (req, res) => {
             user_id: parseInt(id)
         }
     });
+
+    if (user === null) {    
+        res.status(404).json({
+            message: 'User not found'
+        });
+        return;
+    }
+
+    const emailAddress = await prisma.emailAddress.findFirst({
+        where: {
+            email_id: user.email_id
+        }
+    });
+    const phoneNumber = await prisma.phoneNumber.findFirst({
+        where: {
+            phone_id: user.phone_id
+        }
+    });
+    user.email = emailAddress;
+    user.phone = phoneNumber;
     res.json(user);
 });
 
@@ -69,16 +104,15 @@ router.put('/:id', async (req, res) => {
         id
     } = req.params;
     const {
-        user_name,
         first_name,
         last_name,
         address,
-        addr_geocoordinates,
+        email,
+        email_verified,
+        phone,
+        phone_verified,
         notification_preference,
-        password,
         profile_image,
-        phone_id,
-        email_id,
         role,
         is_active,
         is_verified
@@ -88,19 +122,26 @@ router.put('/:id', async (req, res) => {
             user_id: parseInt(id)
         },
         data: {
-            user_name,
-            first_name,
-            last_name,
-            address,
-            addr_geocoordinates,
-            notification_preference,
-            password,
-            profile_image,
-            phone_id,
-            email_id,
-            role,
-            is_active,
-            is_verified
+            first_name: first_name,
+            last_name: last_name,
+            address: address,
+            notification_preference: notification_preference,
+            profile_image: profile_image,
+            role: role,
+            is_active: is_active,
+            is_verified: is_verified,
+            email_address: {
+                update: {
+                    email: email,
+                    is_verified: email_verified
+                }
+            },
+            phone: {
+                update: {
+                    number: phone,
+                    is_verified: phone_verified
+                }
+            }
         }
     });
     res.json(result);
