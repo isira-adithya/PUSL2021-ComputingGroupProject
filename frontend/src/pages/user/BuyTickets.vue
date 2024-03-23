@@ -69,3 +69,55 @@
   };
   </script>
   
+<style scoped>
+.custom-input {
+  border: none;
+  border-radius: 0;
+  margin-bottom: 3rem;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  padding-left: 40px; /* adjust the padding to accommodate the image */
+}
+
+.custom-input:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  color: #ffffff;
+}
+
+.font-1 {
+  font-family: 'Stick No Bills', sans-serif;
+  margin-top: 20px;
+}
+
+.font-2 h2 {    
+  font-size: 23px;
+  font-weight: 750;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+label.form-label {
+  text-align: left;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+a {
+  color: #ffffff;
+}
+
+.main-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.white-bg {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+</style>
