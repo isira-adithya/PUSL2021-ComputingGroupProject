@@ -4,19 +4,19 @@
       <h1 class="font-1 m-0 text-white">Ticket Receipt</h1>
     </div>
     <div>
-      <div class="container" v-if="ticket != null">
+      <div class="container" v-if="receipt != null">
         <div class="row">
           <div class="col-md-6 mx-auto text-left">
             <form>
               <div class="row mb-3">
                 <div class="col-md-6">
                   <label for="id" class="form-label text-white"
-                    >Ticket ID</label
+                    >Receipt ID</label
                   >
                   <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
-                    v-model="ticket.id"
+                    v-model="receipt.receipt_id"
                     disabled
                   />
                 </div>
@@ -27,7 +27,7 @@
                   <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
-                    v-model="ticket.name"
+                    v-model="receipt.ticket.name"
                     disabled
                   />
                 </div>
@@ -38,7 +38,7 @@
                   <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
-                    v-model="ticket.price"
+                    v-model="ticket_price"
                     disabled
                   />
                 </div>
@@ -49,7 +49,7 @@
                   <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
-                    v-model="ticket.eventName"
+                    v-model="receipt.ticket.event.name"
                     disabled
                   />
                 </div>
@@ -60,7 +60,7 @@
                   <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
-                    v-model="ticket.paymentMethod"
+                    v-model="receipt.payment_method"
                     disabled
                   />
                 </div>
@@ -71,7 +71,7 @@
                   <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
-                    v-model="ticket.paymentDateTime"
+                    v-model="receipt.created_at"
                     disabled
                   />
                 </div>
@@ -104,7 +104,8 @@ export default {
     axios
       .get("/api/common/tickets/receipts/" + this.$route.params.id)
       .then((response) => {
-        this.ticket = response.data;
+        this.receipt = response.data;
+        this.ticket_price = this.receipt.payment.amount / this.receipt.payment.ticket_quantity;
       })
       .catch((error) => {
         console.error(error);
@@ -114,7 +115,8 @@ export default {
   },
   data() {
     return {
-      ticket: null,
+      receipt: null,
+      ticket_price: 0
     };
   },
   methods: {
