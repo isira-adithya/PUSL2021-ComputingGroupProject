@@ -1,6 +1,7 @@
 <template>
+  <div class="bg-black " style="[background]">
   <div v-if="events != null">
-    <div class="column m-2">
+    <div style="margin-bottom: 20px;">
       <EventFilterVue
         :url_query="''"
         @eventFilterChanged="handleEventFilterChanged"
@@ -18,7 +19,7 @@
           :key="event.id"
           class="col-xl-4 col-xxl-3 col-lg-4 col-md-10 col-sm-10 m-2"
         >
-          <div class="card">
+          <div class="card custom-card">
             <ImagesCarouselVue
               class="card-img-top rounded border"
               v-if="event.images != null"
@@ -63,7 +64,7 @@
             <div class="card-body">
               <router-link
                 :to="'/events/' + event.uuid"
-                class="btn btn-primary mx-3 my-1"
+                class="btn btn-primary mx-3 my-1 custom-button"
                 >Open</router-link
               >
             </div>
@@ -72,13 +73,13 @@
       </div>
     </div>
     <div v-else class="text-center mt-4 mb-4">
-      <h3>No events found</h3>
-
+      <h3 class="text-white">No events found</h3>
     </div>
   </div>
+</div>
 </template>
-  
-  <script>
+
+<script>
 import axios from "axios";
 import Notiflix from "notiflix";
 import ImagesCarouselVue from "../../components/ImagesCarousel.vue";
@@ -133,3 +134,47 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bg-black{
+      min-height: 75.9vh;
+      color: white;
+    }
+
+
+.custom-card {
+  width: 300px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 20px;
+  border: solid 2px #111f4d;
+  flex-direction: column;
+  height: 100%;
+  margin:  auto; 
+}
+
+.custom-card img {
+  max-width: 200px;
+  height: 300px;
+}
+
+.list-group-item {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border: none;
+}
+
+.custom-button {
+  background-color: #111f4d;
+  border: none;
+  width: 100%; 
+}
+
+.custom-button:hover {
+  background-color: #020923 !important;
+}
+
+.text-white {
+  color: #ffffff;
+}
+</style>
