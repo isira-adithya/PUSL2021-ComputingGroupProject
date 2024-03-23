@@ -16,12 +16,13 @@ function generateRandomString() {
     return result;
 }
 
-function generateTicketReceiptInText(ticketReceipt, user){
-    return `Ticket Code: ${ticketReceipt.ticket_code}\nTicket ID: ${ticketReceipt.ticket_id}\nCost: ${ticketReceipt.cost}\nPayment Method: ${ticketReceipt.payment_method}\nPayment ID: ${ticketReceipt.payment_id}\nUsername: ${user.user_name}\nFull name: ${user.first_name} ${user.last_name}\nEmail: ${user.email_address.email}`;
+function generateTicketReceiptInText(ticketReceipt, ticket, user){
+    return `Event Name: ${ticket.event.event_name}\nEvent URL: https://eventhive.live/#/events/${ticket.event.uuid}\nTicket Code: ${ticketReceipt.ticket_code}\nTicket ID: ${ticketReceipt.ticket_id}\nCost: ${ticketReceipt.cost}\nPayment Method: ${ticketReceipt.payment_method}\nPayment ID: ${ticketReceipt.payment_id}\nUsername: ${user.user_name}\nFull name: ${user.first_name} ${user.last_name}\nEmail: ${user.email_address.email}`;
 }
 
-function generateTicketReceiptInHTML(ticketReceipt, user){
+function generateTicketReceiptInHTML(ticketReceipt, ticket, user){
     return `<h3>Receipt</h3>
+    <p><b>Event Name:</b> <a href="https://eventhive.live/#/events/${ticket.event.uuid}">${ticket.event.event_name}</a></p>
     <p><b>Ticket Code:</b> ${ticketReceipt.ticket_code}</p>
     <p><b>Ticket ID:</b> ${ticketReceipt.ticket_id}</p>
     <p><b>Cost:</b> ${ticketReceipt.cost}</p>
@@ -55,10 +56,24 @@ async function sendReceiptEmail(paymentId, userId){
             }
         }
     });
+    const ticket = await prisma.ticket.findUnique({
+        where: {
+            ticket_id: ticketReceipts[0].ticket_id
+        }, 
+        select: {
+            event_id: true,
+            event: {
+                select: {
+                    event_name: true,
+                    uuid: true
+                }
+            }
+        }
+    });
     for (let ticketReceipt of ticketReceipts){
         // Send email
-        const textPart = generateTicketReceiptInText(ticketReceipt, user);
-        const htmlPart = generateTicketReceiptInHTML(ticketReceipt, user);
+        const textPart = generateTicketReceiptInText(ticketReceipt, ticket, user);
+        const htmlPart = generateTicketReceiptInHTML(ticketReceipt, ticket, user);
         await sendEmail([user.email_address.email], 'Ticket Receipt', textPart, htmlPart);
     }
 }
