@@ -17,12 +17,12 @@ function generateRandomString() {
 }
 
 function generateTicketReceiptInText(ticketReceipt, ticket, user){
-    return `Event Name: ${ticket.event.event_name}\nEvent URL: https://eventhive.live/#/events/${ticket.event.uuid}\nTicket Code: ${ticketReceipt.ticket_code}\nTicket ID: ${ticketReceipt.ticket_id}\nCost: ${ticketReceipt.cost}\nPayment Method: ${ticketReceipt.payment_method}\nPayment ID: ${ticketReceipt.payment_id}\nUsername: ${user.user_name}\nFull name: ${user.first_name} ${user.last_name}\nEmail: ${user.email_address.email}`;
+    return `Event Name: ${ticket.event.name}\nEvent URL: https://eventhive.live/#/events/${ticket.event.uuid}\nTicket Code: ${ticketReceipt.ticket_code}\nTicket ID: ${ticketReceipt.ticket_id}\nCost: ${ticketReceipt.cost}\nPayment Method: ${ticketReceipt.payment_method}\nPayment ID: ${ticketReceipt.payment_id}\nUsername: ${user.user_name}\nFull name: ${user.first_name} ${user.last_name}\nEmail: ${user.email_address.email}`;
 }
 
 function generateTicketReceiptInHTML(ticketReceipt, ticket, user){
     return `<h3>Receipt</h3>
-    <p><b>Event Name:</b> <a href="https://eventhive.live/#/events/${ticket.event.uuid}">${ticket.event.event_name}</a></p>
+    <p><b>Event Name:</b> <a href="https://eventhive.live/#/events/${ticket.event.uuid}">${ticket.event.name}</a></p>
     <p><b>Ticket Code:</b> ${ticketReceipt.ticket_code}</p>
     <p><b>Ticket ID:</b> ${ticketReceipt.ticket_id}</p>
     <p><b>Cost:</b> ${ticketReceipt.cost}</p>
@@ -64,7 +64,7 @@ async function sendReceiptEmail(paymentId, userId){
             event_id: true,
             event: {
                 select: {
-                    event_name: true,
+                    name: true,
                     uuid: true
                 }
             }
