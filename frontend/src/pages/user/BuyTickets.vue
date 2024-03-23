@@ -68,13 +68,16 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6 mb-3">
+                <div class="col-3"></div>
+                <div class="col-6 mb-3">
                   <button
-                    type="submit"
-                    class="btn text-white custom-button w-100"
+                  @click="buyTicket()"
+                  type="submit"
+                  class="btn btn-primary custom-button w-100"
                   >
-                    Buy
-                  </button>
+                  Buy
+                </button>
+                <div class="col-3"></div>
                 </div>
               </div>
             </form>
@@ -112,15 +115,6 @@ export default {
       });
   },
   methods: {
-    submitForm() {
-      // Logic to handle form submission
-      console.log("Form submitted");
-      console.log("Ticket Data:", this.ticket);
-    },
-    cancelPurchase() {
-      // Logic to handle cancellation
-      console.log("Purchase cancelled");
-    },
     buyTicket() {
       Notiflix.Confirm.show(
         "Buy Ticket",
