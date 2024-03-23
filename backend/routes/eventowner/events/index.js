@@ -317,7 +317,8 @@ router.put(
             // Update the event in the database
             const eventObj = await prisma.event.update({
                 where: {
-                    uuid: req.params.uuid
+                    uuid: req.params.uuid,
+                    owner_id: req.session.user_id
                 },
                 data: {
                     name: req.body.name,

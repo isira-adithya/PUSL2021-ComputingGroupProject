@@ -22,6 +22,7 @@ import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
 
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
+import BuyTicket from './pages/user/BuyTickets.vue'
 
 //component - Public
 import AboutUsVue from './pages/public/AboutUs.vue';
@@ -37,6 +38,7 @@ import TicketView from './pages/admin/TicketView.vue'
 import UserManagement from './pages/admin/User-management.vue';
 import AdminUserVue from './pages/admin/User.vue';
 import EventManagement from './pages/admin/Event-management.vue';
+import AdminEvent from './pages/admin/Event.vue';
 import AdminHome from './pages/admin/AdminHome.vue';
 import SupportTicketList from './pages/admin/SupportTicketList.vue';
 import SupportTicketView from './pages/admin/SupportTicketView.vue';
@@ -71,7 +73,8 @@ const routes = [
     { path: '/eventowner/dashboard/event/:uuid', component: EventOwnerDashboardVue},
     
     // User
-    { path: '/user/profile', component: UserProfileVue},
+    {path: '/user/profile', component: UserProfileVue},
+    {path: '/user/buyticket', component: BuyTicket},
 
     // Public pages
     {path: '/about-us', component: AboutUsVue},
@@ -91,6 +94,7 @@ const routes = [
     {path: '/admin/adminhome', component: AdminHome },
     {path: '/admin/support-ticket-list', component: SupportTicketList},
     {path: '/admin/support-ticket-view', component: SupportTicketView},
+    {path: '/admin/event-management/:uuid', component: AdminEvent},
 ];
 
 const router = createRouter({

@@ -51,7 +51,7 @@
           </div>
         </template>
       </div>
-      <div v-else>
+      <div v-else >
         <p>No pending verifications</p>
       </div>
     </div>
@@ -129,6 +129,7 @@ export default {
   background-color: #000000ea;
   color: white;
   padding: 20px;
+  min-height:75.9vh;
 }
 
 .verification-section {
