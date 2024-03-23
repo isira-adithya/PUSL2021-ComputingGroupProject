@@ -41,7 +41,6 @@ import AdminUserVue from './pages/admin/User.vue';
 import AdminEvent from './pages/admin/Event.vue';
 import AdminEventManagement from './pages/admin/Event-management.vue';
 import AdminUserManagement from './pages/admin/User-management.vue';
-import AdminHome from './pages/admin/AdminHome.vue';
 import SupportTicketList from './pages/admin/SupportTicketList.vue';
 import SupportTicketView from './pages/admin/SupportTicketView.vue';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -90,12 +89,9 @@ const routes = [
     //admin pages
     {path: '/admin/tickets', component: TicketList},
     {path: '/admin/ticket-view', component: TicketView},
-   
-
     {path: '/admin/user-management/', component: AdminUserManagement},
     {path: '/admin/user-management/:user_id', component: AdminUserVue},
     {path: '/admin/event-management', component: AdminEventManagement},
-    {path: '/admin/adminhome', component: AdminHome },
     {path: '/admin/support-ticket-list', component: SupportTicketList},
     {path: '/admin/support-ticket-view', component: SupportTicketView},
     {path: '/admin/event-management/:uuid', component: AdminEvent},
