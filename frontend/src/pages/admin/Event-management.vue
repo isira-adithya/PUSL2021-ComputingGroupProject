@@ -3,6 +3,11 @@
     <div class="container">
       <div class="row">
         <div class="col">
+          <h1 class="text-white"><center>Event Management</center></h1> <!-- Add the heading here -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <div class="table-responsive">
             <table class="table table-bordered text-center text-white">
               <thead>
@@ -23,9 +28,9 @@
                   <td class="align-middle">
                     <button
                       class="btn btn-primary mr-md-3 mb-2 mb-md-0"
-                      @click="viewTicket(event)"
+                      @click="viewEvent(event)"
                     >
-                      View Ticket
+                      View Event
                     </button>
                     <button
                       class="btn btn-danger ml-md-3 mb-2 mb-md-0"
