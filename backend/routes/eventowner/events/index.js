@@ -332,10 +332,13 @@ router.put(
                 }
             });
 
-            // Delete tickets related to this event
-            await prisma.ticket.deleteMany({
+            // Set event_id of tickets to null
+            await prisma.ticket.updateMany({
                 where: {
                     event_id: eventObj.event_id
+                },
+                data: {
+                    event_id: null
                 }
             });
             // Add tickets to the database
