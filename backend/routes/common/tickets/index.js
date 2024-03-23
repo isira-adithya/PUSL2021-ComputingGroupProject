@@ -86,7 +86,7 @@ router.post("/buy", async (req, res) => {
             })
         }
 
-        const approvalLink = await getApprovalLink((ticket.price * ticket.price), "Ticket purchase", "http://www.eventhive.local/api/common/payments/success", "http://www.eventhive.local/api/common/payments/cancel");
+        const approvalLink = await getApprovalLink((ticket.price * quantity), "Ticket purchase", "http://www.eventhive.local/api/common/payments/success", "http://www.eventhive.local/api/common/payments/cancel");
         console.log(approvalLink);
 
         res.json({ success: true, approvalLink: approvalLink });
