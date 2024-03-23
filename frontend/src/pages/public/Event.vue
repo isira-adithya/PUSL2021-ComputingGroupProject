@@ -72,12 +72,13 @@
                     <div>
                       <h5><i>{{ ticket.name }}</i></h5>
                       <p class="mt-3">
-                        <b>Price:</b> {{ ticket.price }} €
+                        <b>Price:</b> {{ ticket.price }} $
                       </p>
                       <p>
                         <b>Description:</b><br>
                         <code>{{ ticket.description }}</code>
                       </p>
+                      <router-link v-if="isLoggedIn" :to="'/user/buyticket/' + ticket.ticket_id" class="btn btn-sm btn-dark">Buy</router-link>
                     </div>
                   </div>
                 </div>
@@ -240,6 +241,7 @@ export default {
 
 
   methods: {
+
     addComment() {
       Notiflix.Loading.standard();
       axios

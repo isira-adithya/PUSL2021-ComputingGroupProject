@@ -75,7 +75,7 @@ const routes = [
     
     // User
     {path: '/user/profile', component: UserProfileVue},
-    {path: '/user/buyticket', component: BuyTicket},
+    {path: '/user/buyticket/:id', component: BuyTicket},
     {path: '/user/receipt-list', component: ReceiptListVue},
     {path: '/user/ticketreciept', component: TicketReciept},
 
@@ -83,7 +83,6 @@ const routes = [
     {path: '/about-us', component: AboutUsVue},
     {path: '/events', component: EventsVue},
     {path: '/events/:uuid', component: EventVue},
-    {path: '/map', component: InteractiveMapVue},
     {path: '/map', component: InteractiveMapVue},
 
     //admin pages

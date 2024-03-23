@@ -29,28 +29,30 @@ model EmailAddress {
 }
 
 model User {
-  user_id                        Int                  @id @default(autoincrement())
-  user_name                      String               @unique
-  first_name                     String
-  last_name                      String
-  address                        String
-  addr_geocoordinates            String?              @default("0,0") // lat, long
-  notification_preference        String               @default("NONE") // EMAILS, SMS, PUSH, ALL, NONE
-  password                       String
-  profile_image                  String?
-  phone_id                       Int
-  email_id                       Int
-  role                           String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
-  is_active                      Boolean              @default(false)
-  is_verified                    Boolean              @default(false)
-  last_notification_check        DateTime?            @default(now())
-  PasswordResetToken             PasswordResetToken[]
-  Notification                   Notification[]
-  Event                          Event[]
-  Verification                   Verification[]
-  phone                          PhoneNumber          @relation(fields: [phone_id], references: [phone_id])
-  email_address                  EmailAddress         @relation(fields: [email_id], references: [email_id])
-  Comment                        Comment[]
+  user_id                 Int                  @id @default(autoincrement())
+  user_name               String               @unique
+  first_name              String
+  last_name               String
+  address                 String
+  addr_geocoordinates     String?              @default("0,0") // lat, long
+  notification_preference String               @default("NONE") // EMAILS, SMS, PUSH, ALL, NONE
+  password                String
+  profile_image           String?
+  phone_id                Int
+  email_id                Int
+  role                    String               @default("VISITOR") // VISITOR, EVENT_OWNER, ADMIN
+  is_active               Boolean              @default(false)
+  is_verified             Boolean              @default(false)
+  last_notification_check DateTime?            @default(now())
+  PasswordResetToken      PasswordResetToken[]
+  Notification            Notification[]
+  Event                   Event[]
+  Verification            Verification[]
+  phone                   PhoneNumber          @relation(fields: [phone_id], references: [phone_id])
+  email_address           EmailAddress         @relation(fields: [email_id], references: [email_id])
+  Comment                 Comment[]
+  TicketPayment           TicketPayment[]
+  TicketReceipt           TicketReceipt[]
 }
 
 model PasswordResetToken {
@@ -74,7 +76,7 @@ model Notification {
 }
 
 model Verification {
-  verification_id     Int     @id @default(autoincrement())
+  verification_id     Int       @id @default(autoincrement())
   verification_notes  String?
   verification_status String? // VERIFIED, PENDING, REJECTED, N/A
   face_image_link     String?
@@ -82,7 +84,7 @@ model Verification {
   nicfront_image_link String?
   owner_id            Int?
   admin_messages      String?
-  user                User?   @relation(fields: [owner_id], references: [user_id])
+  user                User?     @relation(fields: [owner_id], references: [user_id])
   created_at          DateTime? @default(now())
 }
 
@@ -106,12 +108,39 @@ model Event {
 }
 
 model Ticket {
-  ticket_id   Int    @id @default(autoincrement())
-  price       Int
-  name        String
-  description String @db.VarChar(512)
-  event_id    Int
-  event       Event  @relation(fields: [event_id], references: [event_id])
+  ticket_id     Int             @id @default(autoincrement())
+  price         Int
+  name          String
+  description   String          @db.VarChar(512)
+  event_id      Int
+  event         Event           @relation(fields: [event_id], references: [event_id])
+  TicketPayment TicketPayment[]
+  TicketReceipt TicketReceipt[]
+}
+
+model TicketPayment {
+  payment_id      Int             @id @default(autoincrement())
+  ticket_id       Int
+  ticket_quantity Int
+  user_id         Int
+  amount          Int
+  status          String          @default("PENDING") // PENDING, PAID, FAILED
+  user            User            @relation(fields: [user_id], references: [user_id])
+  ticket          Ticket          @relation(fields: [ticket_id], references: [ticket_id])
+  TicketReceipt   TicketReceipt[]
+}
+
+model TicketReceipt {
+  receipt_id     Int           @id @default(autoincrement())
+  payment_id     Int
+  cost           Int
+  payment_method String
+  user_id        Int
+  ticket_id      Int
+  ticket_code    String
+  user           User          @relation(fields: [user_id], references: [user_id])
+  payment        TicketPayment @relation(fields: [payment_id], references: [payment_id])
+  ticket         Ticket        @relation(fields: [ticket_id], references: [ticket_id])
 }
 
 model Comment {
@@ -123,4 +152,3 @@ model Comment {
   user       User   @relation(fields: [user_id], references: [user_id])
   event      Event  @relation(fields: [event_id], references: [uuid])
 }
-

@@ -82,8 +82,8 @@ export default {
           Notiflix.Loading.remove();
         });
     },
-    viewTicket(event) {
-      this.$router.push(`/eventowner/dashboard/event/${event.uuid}`);
+    viewEvent(event) {
+      this.$router.push(`/admin/event-management/${event.uuid}`);
     },
     deleteEvent(event) {
       // Add logic to delete an event
