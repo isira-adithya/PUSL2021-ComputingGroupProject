@@ -384,13 +384,6 @@ router.delete('/:uuid', async (req, res) => {
     }
 
     try {
-        // Delete tickets associated with the events first
-        await prisma.ticket.deleteMany({
-            where: {
-                event_id: event.event_id
-            }
-        });
-        
         await prisma.event.delete({
             where: {
                 uuid: req.params.uuid
