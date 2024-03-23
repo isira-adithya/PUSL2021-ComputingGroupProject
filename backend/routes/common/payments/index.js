@@ -18,6 +18,7 @@ router.get('/success', async (req, res) => {
 
     try {
         const payment = await executePayment(paymentId, PayerID);
+        console.log(payment)
     } catch (error) {
         console.log(error)
         res.status(500);
@@ -32,6 +33,10 @@ router.get('/success', async (req, res) => {
     }
 
     res.send('Payment successful');
+});
+
+router.get('/cancel', (req, res) => {
+    return res.redirect('/#/events/');
 });
 
 export default router;
