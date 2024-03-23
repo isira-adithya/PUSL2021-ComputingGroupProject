@@ -23,6 +23,8 @@ import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
 import BuyTicket from './pages/user/BuyTickets.vue'
+import ReceiptListVue from './pages/user/ReceiptList.vue'
+import TicketReciept from './pages/user/TicketReciept.vue'
 
 //component - Public
 import AboutUsVue from './pages/public/AboutUs.vue';
@@ -37,6 +39,9 @@ import TicketList from './pages/admin/TicketList.vue';
 import TicketView from './pages/admin/TicketView.vue';
 import AdminUserVue from './pages/admin/User.vue';
 import AdminEvent from './pages/admin/Event.vue';
+import AdminHome from './pages/admin/AdminHome.vue';
+import SupportTicketList from './pages/admin/SupportTicketList.vue';
+import SupportTicketView from './pages/admin/SupportTicketView.vue';
 import AdminDashboard from './pages/admin/AdminDashboard';
 
 // Bootstrap
@@ -71,6 +76,8 @@ const routes = [
     // User
     {path: '/user/profile', component: UserProfileVue},
     {path: '/user/buyticket/:id', component: BuyTicket},
+    {path: '/user/receipt-list', component: ReceiptListVue},
+    {path: '/user/ticketreciept', component: TicketReciept},
 
     // Public pages
     {path: '/about-us', component: AboutUsVue},
@@ -84,6 +91,10 @@ const routes = [
    
 
     {path: '/admin/user-management/:user_id', component: AdminUserVue},
+    {path: '/admin/event-management', component: EventManagement},
+    {path: '/admin/adminhome', component: AdminHome },
+    {path: '/admin/support-ticket-list', component: SupportTicketList},
+    {path: '/admin/support-ticket-view', component: SupportTicketView},
     {path: '/admin/event-management/:uuid', component: AdminEvent},
     {path: '/admin/dashboard/:page', component: AdminDashboard},
 

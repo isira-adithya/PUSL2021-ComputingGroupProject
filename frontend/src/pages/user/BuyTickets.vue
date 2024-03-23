@@ -210,7 +210,11 @@ label.form-label {
   background-color: #111f4d;
 }
 
-.custom-button:hover {
-  background-color: #020923 !important;
-}
+  .custom-button {
+    background-color: #111F4D;
+  }
+  
+  .custom-button:hover {
+    background-color: #020923 !important;
+  }
 </style>
