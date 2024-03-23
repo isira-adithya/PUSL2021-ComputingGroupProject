@@ -88,11 +88,7 @@
     padding-left: 40px; /* adjust the padding to accommodate the image */
   }
 
-  .custom-input:focus {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: none;
-    color: #ffffff;
-  }
+
 
   .font-1 {
     font-family: 'Stick No Bills', sans-serif;
@@ -116,8 +112,10 @@
     border: none;  
   }
 
-  .form-control:active{
+  .form-control:focus{
     box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
   }
 
   .main-container {
