@@ -221,7 +221,6 @@ router.put(
                     delete ticket.ticket_id;
                     ticket.event_id = eventObj.event_id;
                 });
-                console.log(tickets)
 
                 // Add tickets to the database
                 await prisma.ticket.createMany({
