@@ -9,6 +9,7 @@ PayPalRestSDK.configure({
 
 async function getApprovalLink(amount, description, return_url, cancel_url) {
     return new Promise((resolve, reject) => {
+        const formattedAmount = parseFloat(amount.replace(/[^0-9.-]+/g, "")).toFixed(2);
         const payment = {
             "intent": "sale",
             "payer": {
@@ -16,7 +17,7 @@ async function getApprovalLink(amount, description, return_url, cancel_url) {
             },
             "transactions": [{
                 "amount": {
-                    "total": amount,
+                    "total": formattedAmount,
                     "currency": "USD"
                 },
                 "description": description
