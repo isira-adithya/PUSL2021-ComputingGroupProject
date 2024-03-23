@@ -9,7 +9,7 @@
           <div class="col-8 mx-auto text-left">
             <form>
               <div class="row mb-3">
-                <img :src="receipt.ticket.event.images.split(',')[0]" class="mb-5">
+                <img v-if="receipt.ticket.event != null" :src="receipt.ticket.event.images.split(',')[0]" class="mb-5">
                 <div class="col-md-6">
                   <label for="id" class="form-label text-white"
                     >Receipt ID</label
