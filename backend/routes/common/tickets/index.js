@@ -16,7 +16,6 @@ router.get("/receipts", async (req, res) => {
                 ticket: {
                     select: {
                         name: true,
-                        price: true,
                         event: {
                             select: {
                                 name: true,
@@ -27,13 +26,11 @@ router.get("/receipts", async (req, res) => {
                 payment: {
                     select: {
                         amount: true,
-                        status: true,
                         ticket_quantity: true,
                     }
                 },
                 receipt_id: true,
                 payment_method: true,
-                ticket_code: true,
                 created_at: true,
             }
         });
