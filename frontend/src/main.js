@@ -33,12 +33,13 @@ import InteractiveMapVue from './components/InteractiveMap.vue';
 
 // Components - Admin
 import EventOwnerApproval from './pages/admin/EventOwnerApproval.vue';
-import TicketList from './pages/admin/TicketList.vue'
-import TicketView from './pages/admin/TicketView.vue'
+import TicketList from './pages/admin/TicketList.vue';
+import TicketView from './pages/admin/TicketView.vue';
 import UserManagement from './pages/admin/User-management.vue';
 import AdminUserVue from './pages/admin/User.vue';
 import EventManagement from './pages/admin/Event-management.vue';
 import AdminHome from './pages/admin/AdminHome.vue';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
@@ -88,7 +89,8 @@ const routes = [
     {path: '/admin/user-management', component: UserManagement},
     {path: '/admin/user-management/:user_id', component: AdminUserVue},
     {path: '/admin/event-management', component: EventManagement},
-    {path: '/admin/adminhome', component: AdminHome }
+    {path: '/admin/dashboard/:page', component: AdminDashboard}
+
 ];
 
 const router = createRouter({
