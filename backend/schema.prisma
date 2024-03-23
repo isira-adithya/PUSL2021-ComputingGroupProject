@@ -131,14 +131,16 @@ model TicketPayment {
 }
 
 model TicketReceipt {
-  receipt_id  Int           @id @default(autoincrement())
-  payment_id  Int
-  user_id     Int
-  ticket_id   Int
-  ticket_code String
-  user        User          @relation(fields: [user_id], references: [user_id])
-  payment     TicketPayment @relation(fields: [payment_id], references: [payment_id])
-  ticket      Ticket        @relation(fields: [ticket_id], references: [ticket_id])
+  receipt_id     Int           @id @default(autoincrement())
+  payment_id     Int
+  cost           Int
+  payment_method String
+  user_id        Int
+  ticket_id      Int
+  ticket_code    String
+  user           User          @relation(fields: [user_id], references: [user_id])
+  payment        TicketPayment @relation(fields: [payment_id], references: [payment_id])
+  ticket         Ticket        @relation(fields: [ticket_id], references: [ticket_id])
 }
 
 model Comment {
