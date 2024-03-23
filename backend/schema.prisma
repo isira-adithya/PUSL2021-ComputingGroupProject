@@ -123,3 +123,4 @@ model Comment {
   user       User   @relation(fields: [user_id], references: [user_id])
   event      Event  @relation(fields: [event_id], references: [uuid])
 }
+

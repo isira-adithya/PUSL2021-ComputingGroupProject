@@ -1,6 +1,11 @@
 <template>
   <div class="bgbody">
     <div class="container">
+       <div class="row">
+        <div class="col">
+          <h1 class="text-white"><center>User Management</center></h1> <!-- Add the heading here -->
+        </div>
+      </div>
       <button class="btn btn-primary mb-3" @click="addUserOrAdmin">
         Add New User / Administrator
       </button>
