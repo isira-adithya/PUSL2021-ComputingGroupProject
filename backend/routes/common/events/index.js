@@ -121,7 +121,7 @@ router.get("/:uuid", async (req, res) => {
     // Send tickets associated with the event
     const tickets = await prisma.ticket.findMany({
         where: {
-            event: event.event_id
+            event_id: event.event_id
         }
     });
     event.tickets = tickets;
