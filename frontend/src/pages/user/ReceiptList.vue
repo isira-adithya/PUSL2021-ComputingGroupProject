@@ -8,25 +8,25 @@
       </div>
       <div class="row">
         <div class="col">
-          <table v-if="receipts.length > 0" class="table table-bordered text-center text-white">
+          <table v-if="receipts.length > 0" class="table table-striped text-center text-white">
             <thead class="">
               <tr>
-                <th scope="col">Event Name</th>
-                <th scope="col">Ticket Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Payment Method</th>
-                <th scope="col">Payment Date/Time</th>
-                <th scope="col">Actions</th>
+                <th scope="col" class="bg-black text-white">Event Name</th>
+                <th scope="col" class="bg-black text-white">Ticket Name</th>
+                <th scope="col" class="bg-black text-white">Price</th>
+                <th scope="col" class="bg-black text-white">Payment Method</th>
+                <th scope="col" class="bg-black text-white">Payment Date/Time</th>
+                <th scope="col" class="bg-black text-white">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="receipt in receipts" :key="receipt.id">
-                <td class="align-middle">{{ receipt.ticket.event.name }}</td>
-                <td class="align-middle">{{ receipt.ticket.name }}</td>
-                <td class="align-middle">{{ receipt.payment.amount / receipt.payment.ticket_quantity }} $</td>
-                <td class="align-middle">{{ receipt.payment_method }}</td>
-                <td class="align-middle">{{ receipt.created_at }}</td>
-                <td class="align-middle">
+                <td class="align-middle bg-black" style="color:aliceblue;">{{ receipt.ticket.event.name }}</td>
+                <td class="align-middle bg-black" style="color:aliceblue;">{{ receipt.ticket.name }}</td>
+                <td class="align-middle bg-black" style="color:aliceblue;">{{ receipt.payment.amount / receipt.payment.ticket_quantity }} $</td>
+                <td class="align-middle bg-black" style="color:aliceblue;">{{ receipt.payment_method }}</td>
+                <td class="align-middle bg-black" style="color:aliceblue;">{{ receipt.created_at }}</td>
+                <td class="align-middle bg-black" style="color:aliceblue;">
                   <router-link :to="`/user/tickets/${receipt.receipt_id}`" class="btn btn-primary">View</router-link>
                 </td>
               </tr>
