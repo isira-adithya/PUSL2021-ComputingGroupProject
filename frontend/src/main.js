@@ -22,6 +22,7 @@ import EventOwnerDashboardVue from './pages/eventowner/Dashboard.vue';
 
 // Components - User
 import UserProfileVue from './pages/user/Profile.vue';
+import BuyTicket from './pages/user/BuyTickets.vue'
 
 //component - Public
 import AboutUsVue from './pages/public/AboutUs.vue';
@@ -71,7 +72,8 @@ const routes = [
     { path: '/eventowner/dashboard/event/:uuid', component: EventOwnerDashboardVue},
     
     // User
-    { path: '/user/profile', component: UserProfileVue},
+    {path: '/user/profile', component: UserProfileVue},
+    {path: '/user/buyticket', component: BuyTicket},
 
     // Public pages
     {path: '/about-us', component: AboutUsVue},
