@@ -31,6 +31,7 @@ router.get("/receipts", async (req, res) => {
                         ticket_quantity: true,
                     }
                 },
+                receipt_id: true,
                 payment_method: true,
                 ticket_code: true,
                 created_at: true,
