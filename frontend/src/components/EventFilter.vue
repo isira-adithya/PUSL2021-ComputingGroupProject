@@ -1,8 +1,9 @@
 <template>
-  <div class="mt-4">
-    <div class="row mb-3">
-      <div class="col-3">
-        <label for="location" class="form-label">Location:</label>
+  <div class="container">
+    <div class="row justify-content-center mb-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+        <!-- Location Input -->
+        <label for="location" class="form-label text-white">Location:</label>
         <input
           id="location"
           v-model="filters.location"
@@ -11,8 +12,9 @@
           @keyup="filters.geoCoordinates = ''"
         />
       </div>
-      <div class="col-3">
-        <label for="eventType" class="form-label">Event Type:</label>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+        <!-- Event Type Select -->
+        <label for="eventType" class="form-label text-white">Event Type:</label>
         <select id="eventType" v-model="filters.eventType" class="form-select">
           <option value="">Select Event Type</option>
           <option value="Musical">Musical</option>
@@ -23,8 +25,9 @@
           <option value="Other">Other</option>
         </select>
       </div>
-      <div class="col-6">
-        <label class="form-label">Date Range:</label>
+      <div class="col-lg-4 col-md-12 col-sm-12">
+        <!-- Date Range Inputs -->
+        <label class="form-label text-white">Date Range:</label>
         <div class="input-group">
           <input
             type="date"
@@ -42,25 +45,23 @@
         </div>
       </div>
     </div>
-    <div class="row mb-3">
-      <div class="col-4 text-center">
+    <div class="row mb-3 justify-content-center">
+      <!-- Find Near Me Button -->
+      <div class="col-lg-4 col-md-6 col-sm-12 text-center mb-3">
         <button class="btn btn-primary mt-4" @click="findNearMe">
           Find Events Near Me
         </button>
       </div>
-      <div class="col-4"></div>
-      <div class="col-4 text-center">
-        <button
-          class="btn btn-dark mt-4"
-          @click="toggleInteractiveMapMode"
-        >
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3"></div>
+      <!-- Show/Hide Interactive Map Button -->
+      <div class="col-lg-4 col-md-12 col-sm-12 text-center">
+        <button class="btn btn-dark mt-4" @click="toggleInteractiveMapMode">
           {{ isInteractiveMapMode ? "Hide" : "Show" }} Interactive Map
         </button>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import Notiflix from "notiflix";
 
@@ -112,24 +113,16 @@ export default {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
             });
-
-            // Reset this.filter.location
             this.filters.location = "";
-
-            // You can now use this.userCoordinates to filter events near the user's location
             console.log("User coordinates:", this.filters.geoCoordinates);
           },
           (error) => {
             console.error("Error getting location:", error);
-
             this.filters.geoCoordinates = JSON.stringify({
               latitude: 8.4074843,
               longitude: 81.1450867,
             });
-
-            // Reset this.filter.location
             this.filters.location = "";
-
             Notiflix.Notify.failure("Error getting location:", error.message);
           }
         );
@@ -144,13 +137,13 @@ export default {
       this.isInteractiveMapMode = !this.isInteractiveMapMode;
       this.emitChanges();
     },
-    emitChanges(){
-      this.$emit('eventFilterChanged', {
+    emitChanges() {
+      this.$emit("eventFilterChanged", {
         isInteractiveMapMode: this.isInteractiveMapMode,
         url_query: this.url_query,
-        filters: this.filters
+        filters: this.filters,
       });
-    }
+    },
   },
 };
 </script>
