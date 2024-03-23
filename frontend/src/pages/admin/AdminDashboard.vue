@@ -3,7 +3,7 @@
       <div class="row" style="width: 100%; margin-left: 0px;">
         <div class="col-lg-2 col-4" style="padding: 0px;">
           <div class="d-flex flex-column px-3 text-white bg-black" style="height:100%;">
-            <h5>Event Owner - Dashboard</h5>
+            <h5>Admin - Dashboard</h5>
             <hr />
             <ul class="nav px-lg-4 nav-pills flex-column mb-auto">
 
@@ -57,6 +57,7 @@
           <EventManagement v-if="page=='eventmanagement'"/>
           <SupportTicketList v-if="page=='supportticketlist'"/>
           <EventOwnerApproval v-if="page=='eventownerapproval'"/>
+          <TicketList v-if="page=='ticketlist'"/>
         </div> 
       </div>
     </div>
@@ -68,6 +69,7 @@ import UserManagement from './User-management.vue';
 import EventManagement from './Event-management.vue';
 import SupportTicketList from './SupportTicketList.vue';
 import EventOwnerApproval from './EventOwnerApproval.vue';
+import TicketList from './TicketList.vue';
   export default {
     name: "AdminDashboardVue",
     components: {
@@ -75,6 +77,7 @@ import EventOwnerApproval from './EventOwnerApproval.vue';
         EventManagement,
         SupportTicketList,
         EventOwnerApproval,
+        TicketList,
     },
     mounted() {
       this.page = this.$route.path.split("/")[3];
