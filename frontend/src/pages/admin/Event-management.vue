@@ -81,7 +81,7 @@ export default {
           Notiflix.Loading.remove();
         });
     },
-    viewTicket(event) {
+    viewEvent(event) {
       console.log(event)
       this.$router.push(`/admin/event-management/${event.uuid}`);
     },
