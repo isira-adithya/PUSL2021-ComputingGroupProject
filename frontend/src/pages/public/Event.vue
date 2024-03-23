@@ -72,7 +72,7 @@
                     <div>
                       <h5><i>{{ ticket.name }}</i></h5>
                       <p class="mt-3">
-                        <b>Price:</b> {{ ticket.price }} €
+                        <b>Price:</b> {{ ticket.price }} $
                       </p>
                       <p>
                         <b>Description:</b><br>
