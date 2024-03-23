@@ -3,6 +3,11 @@
     <div class="container">
       <div class="row">
         <div class="col">
+          <h1 class="text-white"><center>Event Management</center></h1> <!-- Add the heading here -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <div class="table-responsive">
             <h1 style="margin-bottom: 4%; margin-top: 3%"><center>Manage Events</center></h1>
             <table class="table table-bordered text-center text-white">
@@ -24,9 +29,9 @@
                   <td class="align-middle">
                     <button
                       class="btn btn-primary mr-md-3 mb-2 mb-md-0"
-                      @click="viewTicket(event)"
+                      @click="viewEvent(event)"
                     >
-                      Edit Event
+                      Edit event
                     </button>
                     <button
                       class="btn btn-danger ml-md-3 mb-2 mb-md-0"
