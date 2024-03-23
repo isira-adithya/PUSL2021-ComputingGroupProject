@@ -86,8 +86,19 @@ router.post("/buy", async (req, res) => {
             })
         }
 
-        const approvalLink = await getApprovalLink((ticket.price * quantity), "Ticket purchase", "http://www.eventhive.local/api/common/payments/success", "http://www.eventhive.local/api/common/payments/cancel");
-        console.log(approvalLink);
+        const price = ticket.price * quantity;
+        // Creating a new payment record
+        const ticketPayment = await prisma.ticketPayment.create({
+            data: {
+                user_id: req.session.user_id,
+                ticket_id: ticket_id,
+                ticket_quantity: quantity,
+                amount: price,
+                status: "PENDING",
+            }
+        });
+
+        const approvalLink = await getApprovalLink(price, "Ticket purchase", `http://www.eventhive.local/api/common/payments/success?payment_id=${ticketPayment.payment_id}`, "http://www.eventhive.local/api/common/payments/cancel");
 
         res.json({ success: true, approvalLink: approvalLink });
     } catch (error) {
