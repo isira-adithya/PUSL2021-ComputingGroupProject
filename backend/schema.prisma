@@ -125,24 +125,24 @@ model TicketPayment {
   user_id         Int?
   amount          Int
   status          String          @default("PENDING") // PENDING, PAID, FAILED
-  user            User?            @relation(fields: [user_id], references: [user_id], onDelete: SetNull)
-  ticket          Ticket?          @relation(fields: [ticket_id], references: [ticket_id], onDelete: SetNull)
+  user            User?           @relation(fields: [user_id], references: [user_id], onDelete: SetNull)
+  ticket          Ticket?         @relation(fields: [ticket_id], references: [ticket_id], onDelete: SetNull)
   TicketReceipt   TicketReceipt[]
   created_at      DateTime?       @default(now())
 }
 
 model TicketReceipt {
-  receipt_id     Int           @id @default(autoincrement())
+  receipt_id     Int            @id @default(autoincrement())
   payment_id     Int?
   cost           Int
   payment_method String
   user_id        Int
   ticket_id      Int?
   ticket_code    String
-  user           User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  user           User           @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   payment        TicketPayment? @relation(fields: [payment_id], references: [payment_id], onDelete: SetNull)
   ticket         Ticket?        @relation(fields: [ticket_id], references: [ticket_id], onDelete: SetNull)
-  created_at     DateTime?     @default(now())
+  created_at     DateTime?      @default(now())
 }
 
 model Comment {
@@ -151,6 +151,6 @@ model Comment {
   event_id   String
   comment    String @db.VarChar(512)
   stars      Int    @default(0)
-  user       User?   @relation(fields: [user_id], references: [user_id], onDelete: SetNull)
+  user       User?  @relation(fields: [user_id], references: [user_id], onDelete: SetNull)
   event      Event  @relation(fields: [event_id], references: [uuid], onDelete: Cascade)
 }
