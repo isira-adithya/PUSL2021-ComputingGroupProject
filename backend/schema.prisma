@@ -112,8 +112,8 @@ model Ticket {
   price         Int
   name          String
   description   String          @db.VarChar(512)
-  event_id      Int
-  event         Event           @relation(fields: [event_id], references: [event_id], onDelete: Cascade)
+  event_id      Int?
+  event         Event?          @relation(fields: [event_id], references: [event_id], onDelete: SetNull)
   TicketPayment TicketPayment[]
   TicketReceipt TicketReceipt[]
 }
