@@ -13,7 +13,54 @@ function generateRandomString() {
       result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;
-  }
+}
+
+async function generateTicketReceiptInText(ticketReceipt, user){
+    return `Ticket Code: ${ticketReceipt.ticket_code}\nTicket ID: ${ticketReceipt.ticket_id}\nCost: ${ticketReceipt.cost}\nPayment Method: ${ticketReceipt.payment_method}\nPayment ID: ${ticketReceipt.payment_id}\nUsername: ${user.username}\nFull name: ${user.first_name} ${user.last_name}\nEmail: ${user.email_address.email}`;
+}
+
+function generateTicketReceiptInHTML(ticketReceipt){
+    return `<h3>Receipt</h3>
+    <p><b>Ticket Code:</b> ${ticketReceipt.ticket_code}</p>
+    <p><b>Ticket ID:</b> ${ticketReceipt.ticket_id}</p>
+    <p><b>Cost:</b> ${ticketReceipt.cost}</p>
+    <p><b>Payment Method:</b> ${ticketReceipt.payment_method}</p>
+    <p><b>Payment ID:</b> ${ticketReceipt.payment_id}</p>
+    <p><b>Username:</b> ${user.username}</p>
+    <p><b>Fullname:</b> ${user.first_name} ${user.last_name}</p>
+    <p><b>Email:</b> ${user.email_address.email}</p>
+    `
+    ;
+}
+
+async function sendReceiptEmail(paymentId, userId){
+    const ticketReceipts = await prisma.ticketReceipt.findMany({
+        where: {
+            payment_id: paymentId
+        }
+    });
+    const user = await prisma.user.findUnique({
+        where: {
+            user_id: userId
+        },
+        select: {
+            first_name: true,
+            last_name: true,
+            user_name: true,
+            email_address: {
+                select: {
+                    email: true
+                }
+            }
+        }
+    });
+    for (let ticketReceipt of ticketReceipts){
+        // Send email
+        const textPart = generateTicketReceiptInText(ticketReceipt, user);
+        const htmlPart = generateTicketReceiptInHTML(ticketReceipt, user);
+
+    }
+}
 
 router.get('/success', async (req, res) => {
     // paymentId, token, PayerID must be available
@@ -51,18 +98,21 @@ router.get('/success', async (req, res) => {
             // Generate 8 letter all capital string
             const ticketCode = generateRandomString();
 
-            await prisma.ticketReceipt.create({
-                data: {
-                    ticket_code: ticketCode,
-                    ticket_id: paymentRecord.ticket_id,
-                    cost: paymentRecord.amount,
-                    payment_method: 'PAYPAL',
-                    payment_id: payment_id,
-                    user_id: paymentRecord.user_id
-                }
-            });
+            for (let i = 0; i < paymentRecord.ticket_quantity; i++){
+                await prisma.ticketReceipt.create({
+                    data: {
+                        ticket_code: ticketCode,
+                        ticket_id: paymentRecord.ticket_id,
+                        cost: paymentRecord.amount / paymentRecord.ticket_quantity,
+                        payment_method: 'PAYPAL',
+                        payment_id: payment_id,
+                        user_id: paymentRecord.user_id
+                    }
+                });
+            }
 
             // TODO: send a receipt email
+            sendReceiptEmail(payment_id, paymentRecord.user_id);
         } else {
             res.status(500);
             res.contentType('text/html');
