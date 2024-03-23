@@ -82,7 +82,6 @@ export default {
         });
     },
     viewEvent(event) {
-      console.log(event)
       this.$router.push(`/admin/event-management/${event.uuid}`);
     },
     deleteEvent(event) {
