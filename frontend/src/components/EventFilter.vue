@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="row justify-content-center mb-3">
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
         <!-- Location Input -->
-        <label for="location" class="form-label">Location:</label>
+        <label for="location" class="form-label text-white">Location:</label>
         <input
           id="location"
           v-model="filters.location"
@@ -12,9 +12,9 @@
           @keyup="filters.geoCoordinates = ''"
         />
       </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
         <!-- Event Type Select -->
-        <label for="eventType" class="form-label">Event Type:</label>
+        <label for="eventType" class="form-label text-white">Event Type:</label>
         <select id="eventType" v-model="filters.eventType" class="form-select">
           <option value="">Select Event Type</option>
           <option value="Musical">Musical</option>
@@ -25,9 +25,9 @@
           <option value="Other">Other</option>
         </select>
       </div>
-      <div class="col-lg-6 col-md-8 col-sm-12 mb-3">
+      <div class="col-lg-4 col-md-12 col-sm-12">
         <!-- Date Range Inputs -->
-        <label class="form-label">Date Range:</label>
+        <label class="form-label text-white">Date Range:</label>
         <div class="input-group">
           <input
             type="date"
@@ -45,16 +45,16 @@
         </div>
       </div>
     </div>
-    <div class="row justify-content-center mb-3">
+    <div class="row mb-3 justify-content-center">
       <!-- Find Near Me Button -->
-      <div class="col-lg-4 col-md-6 col-sm-6 text-center mb-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 text-center mb-3">
         <button class="btn btn-primary mt-4" @click="findNearMe">
           Find Events Near Me
         </button>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-6"></div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3"></div>
       <!-- Show/Hide Interactive Map Button -->
-      <div class="col-lg-4 col-md-6 col-sm-6 text-center mb-3">
+      <div class="col-lg-4 col-md-12 col-sm-12 text-center">
         <button class="btn btn-dark mt-4" @click="toggleInteractiveMapMode">
           {{ isInteractiveMapMode ? "Hide" : "Show" }} Interactive Map
         </button>
@@ -62,7 +62,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import Notiflix from "notiflix";
 

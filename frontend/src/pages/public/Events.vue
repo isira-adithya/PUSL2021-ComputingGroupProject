@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black" style="[background]">
+  <div class="bg-black" :style="{ color: isInteractiveMapMode ? 'black' : 'white' }">
     <div v-if="events != null">
       <div style="margin-bottom: 20px;">
         <EventFilterVue
@@ -69,7 +69,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 import Notiflix from "notiflix";
