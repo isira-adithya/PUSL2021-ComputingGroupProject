@@ -41,14 +41,18 @@
 
 <script>
 import axios from 'axios';
+import Notiflix from 'notiflix';
 export default {
   mounted() {
+    Notiflix.Loading.arrows();
     axios.get("/api/common/tickets/receipts")
       .then(response => {
         this.receipts = response.data;
       })
       .catch(error => {
         console.error(error);
+      }).finally(() => {
+        Notiflix.Loading.remove();
       });
   },
   data() {
