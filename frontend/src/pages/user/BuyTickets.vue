@@ -18,8 +18,9 @@
                   <input
                     v-model="ticket.name"
                     type="text"
-                    class="form-control text-white"
+                    class="form-control text-black"
                     id="ID"
+                    disabled
                   />
                 </div>
                 <div class="col-md-6 mb-5">
@@ -29,8 +30,9 @@
                   <input
                     v-model="ticket.event_name"
                     type="text"
-                    class="form-control text-white"
+                    class="form-control text-black"
                     id="Name"
+                    disabled
                   />
                 </div>
                 <div class="mb-5">
@@ -39,9 +41,10 @@
                   >
                   <textarea
                     v-model="ticket.description"
-                    class="form-control text-white"
+                    class="form-control text-black"
                     id="Description"
                     rows="5"
+                    disabled
                   ></textarea>
                 </div>
                 <div class="col-md-6 mb-5">
@@ -51,8 +54,9 @@
                   <input
                     v-model="ticket.price"
                     type="text"
-                    class="form-control text-white"
+                    class="form-control text-black"
                     id="Price"
+                    disabled
                   />
                 </div>
                 <div class="col-md-6 mb-5">
@@ -126,22 +130,18 @@ export default {
           axios
             .post(`/api/common/tickets/buy`, {
               ticket_id: this.ticket.ticket_id,
+              quantity: this.ticket_quantity
             })
             .then((response) => {
-              Notiflix.Notify.success("Ticket bought successfully!");
-
-              // Refresh the page
-              axios
-                .get(`/api/common/events/${this.uuid}`)
-                .then((response) => {
-                  this.event = response.data;
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
+              const paymentResponse = response.data;
+              if (paymentResponse['success']){
+                window.location.href = paymentResponse['approvalLink'];
+              } else {
+                Notiflix.Notify.failure("Failed to buy ticket!");
+              }
             })
             .catch((error) => {
-              Notiflix.Notify.failure("You have to login to buy a ticket!");
+              Notiflix.Notify.failure("Something went wrong. Please try again later.");
               console.log(error);
             })
             .finally(() => {
