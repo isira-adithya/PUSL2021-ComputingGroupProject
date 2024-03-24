@@ -154,6 +154,30 @@ router.get("/tickets", async (req, res) => {
     return res.json(tickets);
 });
 
+router.delete("/tickets/:ticket_id", async (req, res) => {
+    const ticket_id = req.params.ticket_id;
+    try {
+        await prisma.ticket.delete({
+            where: {
+                ticket_id: ticket_id,
+                event: {
+                    owner_id: req.session.user_id
+                }
+            }
+        });
+        return res.json({
+            success: true,
+            msg: "Ticket deleted successfully."
+        });
+    } catch (error) {
+        console.error(error);
+        return res.json({
+            success: false,
+            msg: "Failed to delete ticket."
+        });
+    }
+});
+
 // routes
 router.use("/mobile-verification", MobileVerificationRouter);
 router.use("/file", FileUploadHandler);
