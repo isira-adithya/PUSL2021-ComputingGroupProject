@@ -94,6 +94,8 @@ router.post(
                     nicfront_image_link: req.body['nic_back'],
                 }
             });
+
+            console.log(`[VERIFICATION] Verification request created for user: ${req.session['user_id']}`)
         } catch (error) {
             console.error(error)
             res.status(500)
@@ -255,7 +257,7 @@ router.delete("/tickets/:ticket_id", async (req, res) => {
                 }
             }
         });
-        console.log(result);
+        console.log(`[TICKET] Ticket deleted: ${ticket_id} by user: ${req.session.user_id}`)
         return res.json({
             success: true,
             msg: "Ticket deleted successfully."

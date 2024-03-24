@@ -194,7 +194,7 @@ router.post(
                 });
             }
 
-
+            console.log(`[EVENT CREATE] Event ID ${eventObj.event_id} created by user ID ${req.session.user_id}`)
             return res.json({
                 success: true,
                 msg: "Event created successfully"
@@ -357,10 +357,10 @@ router.put(
             }
 
 
-
+            console.log(`[EVENT UPDATE] Event ID ${eventObj.event_id} updated by user ID ${req.session.user_id}`)
             return res.json({
                 success: true,
-                msg: "Event created successfully"
+                msg: "Event updated successfully"
             })
         } catch (err) {
             console.error(err);
@@ -390,6 +390,8 @@ router.delete('/:uuid', async (req, res) => {
                 uuid: req.params.uuid
             }
         });
+
+        console.log(`[EVENT DELETE] Event ID ${event.event_id} deleted by user ID ${req.session.user_id}`);
 
         return res.json({
             success: true,

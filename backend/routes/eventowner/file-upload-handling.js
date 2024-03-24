@@ -39,7 +39,7 @@ router.post(
 
             try {
                 const signedUrl = await generateSignedUploadURL(`eventowner/${req.session['user_id']}/files/images/${filename}`, contentType, true);
-
+                console.log(`[FILE UPLOAD] Signed URL: ${signedUrl} | [USER ID]: ${req.session['user_id']}`);
                 return res.json({
                     success: true,
                     upload_url: signedUrl

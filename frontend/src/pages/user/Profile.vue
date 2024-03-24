@@ -102,7 +102,13 @@
                   fullscreenControl: false,
                   disableDefaultUI: true,
                 }"
+              >
+              <GMapMarker
+                :position="geoCoordinates"
+                :clickable="false"
+                :draggable="false"
               />
+              </GMapMap>
             </div>
 
             <!-- 2 column grid layout for inline styling -->
