@@ -291,10 +291,9 @@ router.post(
                 }
             });
 
-            if (emailAddress == null){
-                let user = null;
-            } else {
-                let user = await prisma.user.findFirst({
+            let user = null;
+            if (emailAddress != null){
+                user = await prisma.user.findFirst({
                     where: {
                         email_id: emailAddress.email_id
                     }
