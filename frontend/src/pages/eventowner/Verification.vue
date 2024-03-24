@@ -132,7 +132,7 @@ export default {
     section1() {
       return {
         background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)), url(${this.imagePath1})`, // Dynamically set the URL   
-       
+        
       };
     },
     
@@ -220,6 +220,9 @@ export default {
 </script>
 
 <style scoped>
+  .section1{
+    min-height: 75.9vh;
+  }
   .font-2 {
   font-family: 'Stick No Bills', sans-serif;
   margin-top: 9%;
