@@ -18,22 +18,22 @@ const router = express.Router();
 router.post(
     '/signup',
     body("username").notEmpty().isLength({
-        max: 20
+        max: 128
     }),
     body("firstname").notEmpty().isLength({
-        max: 20
+        max: 128
     }),
     body("lastname").notEmpty().isLength({
-        max: 20
+        max: 128
     }),
     body("email").notEmpty().isLength({
-        max: 32
+        max: 128
     }),
     body("phone").isLength({
         max: 32
     }).isMobilePhone(),
     body("address").notEmpty().isLength({
-        max: 256
+        max: 1024
     }),
     body("password").notEmpty().isLength({
         min: 8
@@ -168,7 +168,7 @@ router.post(
 router.post(
     '/login',
     body("username").notEmpty().isLength({
-        max: 20
+        max: 128
     }),
     body("password").notEmpty().isLength({
         min: 8
@@ -273,7 +273,7 @@ router.delete('/logout', (req, res) => {
 router.post(
     '/reset-password/request',
     body("username").notEmpty().isLength({
-        max: 20
+        max: 128
     }),
     async (req, res) => {
         // Input Validation
