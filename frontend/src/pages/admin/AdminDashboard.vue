@@ -31,6 +31,7 @@
                 <router-link
                   :to="'/admin/dashboard/supportticketlist'"
                   href="#"
+                  v-if="false"
                   :class="page=='supportticketlist'?'nav-link active':'nav-link text-white'"
                   aria-current="page">
                   Support Ticket
