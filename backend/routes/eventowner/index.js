@@ -155,9 +155,20 @@ router.get("/tickets", async (req, res) => {
 });
 
 router.delete("/tickets/:ticket_id", async (req, res) => {
-    const ticket_id = req.params.ticket_id;
+    
+    // check if the ticket_id is a number
+    if (isNaN(req.params.ticket_id)) {
+        res.status(400);
+        return res.json({
+            success: false,
+            msg: "Invalid ticket id."
+        });
+    }
+    
+    const ticket_id = parseInt(req.params.ticket_id);
+
     try {
-        await prisma.ticket.delete({
+        const result = await prisma.ticket.delete({
             where: {
                 ticket_id: ticket_id,
                 event: {
@@ -165,12 +176,14 @@ router.delete("/tickets/:ticket_id", async (req, res) => {
                 }
             }
         });
+        console.log(result);
         return res.json({
             success: true,
             msg: "Ticket deleted successfully."
         });
     } catch (error) {
         console.error(error);
+        res.status(500);
         return res.json({
             success: false,
             msg: "Failed to delete ticket."
