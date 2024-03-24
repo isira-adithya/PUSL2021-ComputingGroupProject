@@ -1,5 +1,5 @@
 <template>
-<div class="background-container">
+<div id="section1" :style="[section1, section]" class="background-container">
   <div class="container">
     <div class="row">
       <div class="col-lg-3"></div>
@@ -12,8 +12,8 @@
           <div class="form-outline mb-2">
             
             <label class="form-label text-white-60" for="form2Example1">Role</label><br>
-            <button @click="role = 'VISITOR'" :class="(role == 'VISITOR') ? 'btn btn-success btn-sm me-2' : 'btn btn-sm me-2'">Visitor</button>
-            <button @click="role = 'EVENT_OWNER'" :class="(role == 'EVENT_OWNER') ? 'btn btn-success btn-sm ms-2' : 'btn btn-sm ms-2'">Event Owner</button>
+            <button @click="role = 'VISITOR'" :class="(role == 'VISITOR') ? 'btn btn-success btn-sm me-2' : 'btn text-white btn-outline-success btn-sm me-2'">Visitor</button>
+            <button @click="role = 'EVENT_OWNER'" :class="(role == 'EVENT_OWNER') ? 'btn btn-success btn-sm ms-2' : 'btn text-white btn-outline-success btn-sm ms-2'">Event Owner</button>
             
           </div>
           <br>
@@ -161,6 +161,7 @@ export default {
       repeat_password: "",
       role: "VISITOR", 
       shouldRemember: "",
+      imagePath1: process.env.BASE_URL + 'assets/images/EventsPic6.jpeg',
     };
   },
   methods: {
@@ -172,6 +173,12 @@ export default {
 
       if (this.password.length < 8){
         Notiflix.Notify.failure("Password should be longer than 8 characters")
+        return;
+      }
+
+      // Check if the phone number is valid and Sri lankan
+      if (this.phone.length != 12 || !this.phone.startsWith("+94")){
+        Notiflix.Report.failure("Invalid phone number", "Phone number should be Sri Lankan, and should start with +94", "OK");
         return;
       }
 
@@ -206,6 +213,24 @@ export default {
           
         });
     },
+  },
+  computed: {
+    section(){
+      return{
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+      };
+    },
+    section1() {
+      return {
+        background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url(${this.imagePath1})`, // Dynamically set the URL   
+       
+      };
+    },
+    
+
+    
+
   },
 };
 </script>

@@ -6,16 +6,6 @@
           <h5>Event Owner - Dashboard</h5>
           <hr />
           <ul class="nav px-lg-4 nav-pills flex-column mb-auto">
-            <li class="nav-item">
-              <router-link
-                :to="'/eventowner/dashboard/analytics'"
-                href="#"
-                :class="page=='analytics'?'nav-link active':'nav-link text-white'"
-                aria-current="page"
-              >
-                Analytics
-              </router-link>
-            </li>
 
             <li class="nav-item">
               <router-link
@@ -38,15 +28,27 @@
                 Events
               </router-link>
             </li>
+
+            <li class="nav-item">
+              <router-link
+                :to="'/eventowner/dashboard/tickets'"
+                href="#"
+                :class="page=='tickets'?'nav-link active':'nav-link text-white'"
+                aria-current="page"
+              >
+                Tickets
+              </router-link>
+            </li>
           </ul>
           <hr />
         </div>
       </div>
       <div class="col" style="padding: 0px;">
-        <EventOwnerAnalyticsVue v-if="page=='analytics'"/>
         <AddEventVue v-if="page=='add-event'"/>
         <EventVue v-if="page=='event'"/>
         <EventsVue v-if="page=='events'"/>
+        <TicketsVue v-if="page=='tickets'"/>
+        <TicketPaymentVue v-if="page=='ticket-payments'"/>
       </div>
     </div>
   </div>
@@ -56,15 +58,17 @@
 import AddEventVue from './subpages/AddEvent.vue';
 import EventVue from './subpages/Event.vue';
 import EventsVue from './subpages/Events.vue';
-import EventOwnerAnalyticsVue from './subpages/EventOwnerAnalytics.vue';
+import TicketsVue from './subpages/Tickets.vue';
+import TicketPaymentVue from './subpages/Ticket-Payment.vue';
 
 export default {
   name: "EventOwnerDashboardVue",
   components: {
-    EventOwnerAnalyticsVue,
     AddEventVue,
     EventVue,
-    EventsVue
+    EventsVue,
+    TicketsVue,
+    TicketPaymentVue
   },
   mounted() {
     this.page = this.$route.path.split("/")[3];
@@ -74,7 +78,7 @@ export default {
   },
   data() {
     return {
-      page: "analytics"
+      page: "events"
     };
   },
   methods: {},

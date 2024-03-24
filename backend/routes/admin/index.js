@@ -1,14 +1,9 @@
 import express from 'express';
-import {
-    PrismaClient
-} from '../../modules/prisma_client/index.js';
-import {
-    query, body, validationResult
-} from 'express-validator';
-
-const prisma = new PrismaClient()
+import EventsRouter from './events/events.js';
+import UsersRouter from './users/users.js';
+import TicketsRouter from './tickets/index.js';
+import VerificationRouter from './verifications/verifications.js';
 const router = express.Router();
-
 
 // Using middleware to check authentication and authorization of /admin
 const checkAuth = (req, res, next) => {
@@ -30,11 +25,10 @@ const checkAuth = (req, res, next) => {
 }
 
 router.use(checkAuth);
+router.use("/events", EventsRouter);
+router.use("/users", UsersRouter);
+router.use("/verifications", VerificationRouter);
+router.use("/tickets", TicketsRouter);
 
-router.get("/test", (req, res) => {
-    return res.json({
-        success: true
-    });
-})
 
 export default router;

@@ -1,0 +1,74 @@
+name: Deploy to Production (Backend)
+
+on:
+  workflow_dispatch:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [20]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Cloning the repository
+        uses: actions/checkout@v3
+      - name: Using Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Installing Node Modules
+        run: cd backend; npm install; cd ..;
+      - name: Removing sensitive files
+        run: |
+          rm .git/ -rd
+          rm .github/ -rd
+      - name: Adding Variables to the config.js
+        uses: bluwy/substitute-string-action@v1
+        id: sub
+        with:
+          _input-file: ./backend/config.template
+          PRODHOST: ${{ secrets.PRODHOST }}
+          SQLSH: ${{ secrets.SQLSH }}
+          SQLSP: ${{ secrets.SQLSP }}
+          SQLSU: ${{ secrets.SQLSU }}
+          SQLSPWD: ${{ secrets.SQLSPWD }}
+          SQLSDB: ${{ secrets.SQLSDB }}
+          EXPRESS_SESSION_SECRETS_ARR: ${{ secrets.EXPRESS_SESSION_SECRETS_ARR }}
+          S3EURL: ${{ secrets.S3EURL }}
+          S3BN: ${{ secrets.S3BN }}
+          S3R: ${{ secrets.S3R }}
+          S3SK: ${{ secrets.S3SK }}
+          S3AK: ${{ secrets.S3AK }}
+          GEOAPIK: ${{ secrets.GEOAPIK }}
+          NTFYUSERID: ${{ secrets.NTFYUSERID }}
+          NTFYAPIKEY: ${{ secrets.NTFYAPIKEY }}
+          NTFYSENDERID: ${{ secrets.NTFYSENDERID }}
+          MGUNKEY: ${{ secrets.MGUNKEY }}
+          PAYPAL_CLIENT_ID: ${{ secrets.PAYPAL_CLIENT_ID }}
+          PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
+      - name: Modifying the config.js
+        uses: DamianReeves/write-file-action@v1.0
+        with:
+          path: ./backend/config.js
+          contents: ${{ steps.sub.outputs.result }}
+          write-mode: overwrite
+      - name: Modifying the .env
+        uses: DamianReeves/write-file-action@v1.0
+        with:
+          path: ./backend/.env
+          contents: ${{ secrets.ENV_FILE }}
+          write-mode: overwrite
+      - name: Pushing to Digital Ocean Server
+        uses: burnett01/rsync-deployments@5.2
+        with:
+          switches: -avzr --delete --omit-dir-times --no-perms
+          path: ./backend/
+          remote_path: /app/backend/
+          remote_host: ${{ secrets.DO_SERVER_IP }}
+          remote_user: ${{ secrets.DO_SERVER_USER }}
+          remote_key: ${{ secrets.DO_SERVER_SSH_KEY }}

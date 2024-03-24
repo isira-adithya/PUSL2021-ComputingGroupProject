@@ -15,6 +15,28 @@
 </VirtualHost>
 ```
 
+### Nginx Config
+```
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /app/frontend;
+        index index.html;
+
+        server_name eventhive.local www.eventhive.local;
+
+        location /api/ {
+                proxy_pass http://127.0.0.1:8654/;
+                include proxy_params;
+        }
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+```
+
 ### /etc/hosts
 ```
   127.0.0.1      www.eventhive.local
