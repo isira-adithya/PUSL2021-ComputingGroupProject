@@ -32,7 +32,7 @@
                 </tr>
               </tbody>
             </table>
-            <p v-else class="text-white" style="font-size: 150%;">No Old Tickets To View</p>
+            <p v-else class="text-white" style="font-size: 150%;">No Tickets To View</p>
           </div>
         </div>
       </div>
