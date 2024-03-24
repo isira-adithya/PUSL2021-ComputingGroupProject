@@ -75,7 +75,6 @@ export default {
   },
   updated() {
     this.page = this.$route.path.split("/")[3];
-    console.log(this.page)
   },
   data() {
     return {
