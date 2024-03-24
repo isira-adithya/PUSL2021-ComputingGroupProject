@@ -7,39 +7,34 @@
         </div>
       </div>
       <div class="row">
-        <div class="col" style="margin-bottom: 10px;">
-          <h3 class="text-white mb-2">Filter by ticket read status</h3><br><br>
-          <button class="btn btn-primary mb-3 mr-2" @click="filterByStatus('new')">New Tickets</button>
-          <button class="btn btn-primary mb-3" @click="filterByStatus('viewed')">Already Viewed Ticket</button>
-        </div>
-      </div>
-      <div class="row">
         <div class="col">
           <!-- Event Table -->
-          <table v-if="filteredEvents.length > 0" class="table table-bordered text-center text-white">
+          <table v-if="tickets.length > 0" class="table table-bordered text-center text-white">
             <thead class="">
               <tr>
                 <th scope="col">Ticket ID</th>
-                <th scope="col">Full Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Created At</th>
+                <th scope="col">Ticket Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Event</th>
+                <th scope="col">Price</th>
                 <th scope="col">Operations</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="event in filteredEvents" :key="event.id">
-                <td class="align-middle">{{ event.id }}</td>
-                <td class="align-middle">{{ event.fullName }}</td>
-                <td class="align-middle">{{ event.email }}</td>
-                <td class="align-middle">{{ event.createdAt }}</td>
+              <tr v-for="ticket in tickets" :key="ticket.ticket_id">
+                <td class="align-middle">{{ ticket.ticket_id }}</td>
+                <td class="align-middle">{{ ticket.name }}</td>
+                <td class="align-middle"><router-link :to="`/admin/user-management/${ticket.event.user.user_id}`">{{ ticket.event.user.user_name }}</router-link></td>
+                <td class="align-middle"><router-link :to="`/admin/event-management/${ticket.event.uuid}`">{{ ticket.event.name }}</router-link></td>
+                <td class="align-middle">{{ ticket.price }}</td>
                 <td class="align-middle">
-                  <button class="btn btn-primary mb-3" @click="viewEvent(event.id)">View Ticket</button>
-                  <button class="btn btn-danger mb-3" @click="deleteEvent(event.id)">Delete</button>
+                  <router-link :to="`/admin/dashboard/ticket/${ticket.ticket_id}`" class="btn btn-primary mb-3">View Payments</router-link>
+                  <button class="btn btn-danger mb-3" @click="deleteTicket(ticket)">Delete</button>
                 </td>
               </tr>
             </tbody>
           </table>
-          <p v-else class="text-white" style="font-size: 150%;">No Old Tickets To View</p>
+          <p v-else class="text-white" style="font-size: 150%;">No Tickets To View</p>
         </div>
       </div>
     </div>
@@ -47,44 +42,39 @@
 </template>
 
 <script>
+import axios from 'axios';
+import Notiflix from 'notiflix';
 export default {
+  name: "TicketsVue",
   data() {
     return {
-      events: [
-        { id: 1, fullName: 'Sanuth Karunagoda', email: 'example@gmail.com', createdAt: '2024-01-21', viewed: false },
-        // Add more Ticket data as needed
-      ],
-      filterStatus: 'all' // Default status filter
+      tickets: [],
     };
   },
   computed: {
-    filteredEvents() {
-      if (this.filterStatus === 'new') {
-        return this.events.filter(event => !event.viewed);
-      } else if (this.filterStatus === 'viewed') {
-        const viewedEvents = this.events.filter(event => event.viewed);
-        if (viewedEvents.length === 0) {
-          // Display a message if there are no viewed events
-          console.log("No past tickets to view");
-        }
-        return viewedEvents;
-      } else {
-        return this.events; // No filter applied
-      }
-    }
+      
   },
   methods: {
-    filterByStatus(status) {
-      this.filterStatus = status;
-    },
-    viewEvent(eventId) {
-      // Implement view event functionality
-      console.log("Viewing event with ID:", eventId);
-    },
-    deleteEvent(eventId) {
-      // Implement delete event functionality
-      console.log("Deleting event with ID:", eventId);
-    }
+      deleteTicket(ticket) {
+          Notiflix.Confirm.show('Delete Ticket', 'Are you sure you want to delete this ticket?', 'Yes', 'No', () => {
+              axios.delete(`/api/admin/tickets/${ticket.ticket_id}`).then((response) => {
+                  Notiflix.Report.success('Success', 'Ticket Deleted Successfully', 'OK');
+                  this.tickets = this.tickets.filter((t) => t.ticket_id !== ticket.ticket_id);
+              }).catch((error) => {
+                  Notiflix.Report.failure('Error', 'Ticket Deletion Failed', 'OK');
+              });
+          });
+      },  
+  },
+  mounted() {
+      Notiflix.Loading.dots();
+      axios.get("/api/admin/tickets").then((response) => {
+        this.tickets = response.data;
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
+        Notiflix.Loading.remove();
+      });
   }
 };
 </script>

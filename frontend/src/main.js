@@ -36,7 +36,6 @@ import InteractiveMapVue from './components/InteractiveMap.vue';
 // Components - Admin
 
 import TicketList from './pages/admin/TicketList.vue';
-import TicketView from './pages/admin/TicketView.vue';
 import AdminUserVue from './pages/admin/User.vue';
 import AdminEvent from './pages/admin/Event.vue';
 import AdminEventManagement from './pages/admin/Event-management.vue';
@@ -89,7 +88,6 @@ const routes = [
 
     //admin pages
     {path: '/admin/tickets', component: TicketList},
-    {path: '/admin/ticket-view', component: TicketView},
     {path: '/admin/user-management/', component: AdminUserManagement},
     {path: '/admin/user-management/:user_id', component: AdminUserVue},
     {path: '/admin/event-management', component: AdminEventManagement},
@@ -97,6 +95,7 @@ const routes = [
     {path: '/admin/support-ticket-view', component: SupportTicketView},
     {path: '/admin/event-management/:uuid', component: AdminEvent},
     {path: '/admin/dashboard/:page', component: AdminDashboard},
+    {path: '/admin/dashboard/ticket/:id', component: AdminDashboard},
 
 ];
 

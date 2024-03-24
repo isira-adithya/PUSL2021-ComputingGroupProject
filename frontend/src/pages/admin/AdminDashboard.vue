@@ -31,6 +31,7 @@
                 <router-link
                   :to="'/admin/dashboard/supportticketlist'"
                   href="#"
+                  v-if="false"
                   :class="page=='supportticketlist'?'nav-link active':'nav-link text-white'"
                   aria-current="page">
                   Support Ticket
@@ -39,9 +40,9 @@
 
               <li class="nav-item">
                 <router-link
-                  :to="'/admin/dashboard/ticketlist'"
+                  :to="'/admin/dashboard/tickets'"
                   href="#"
-                  :class="page=='ticketlist'?'nav-link active':'nav-link text-white'"
+                  :class="page=='tickets'?'nav-link active':'nav-link text-white'"
                   aria-current="page">
                   Ticket List
                 </router-link>
@@ -66,7 +67,8 @@
           <EventManagement v-if="page=='eventmanagement'"/>
           <SupportTicketList v-if="page=='supportticketlist'"/>
           <EventOwnerApproval v-if="page=='eventownerapproval'"/>
-          <TicketList v-if="page=='ticketlist'"/>
+          <TicketList v-if="page=='tickets'"/>
+          <TicketPayment v-if="page=='ticket'"/>
         </div> 
       </div>
     </div>
@@ -79,6 +81,7 @@ import EventManagement from './Event-management.vue';
 import SupportTicketList from './SupportTickets.vue';
 import EventOwnerApproval from './EventOwnerApproval.vue';
 import TicketList from './TicketList.vue';
+import TicketPayment from './Ticket-Payment.vue';
   export default {
     name: "AdminDashboardVue",
     components: {
@@ -87,6 +90,7 @@ import TicketList from './TicketList.vue';
         SupportTicketList,
         EventOwnerApproval,
         TicketList,
+        TicketPayment
     },
     mounted() {
       this.page = this.$route.path.split("/")[3];

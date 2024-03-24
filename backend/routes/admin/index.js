@@ -1,6 +1,7 @@
 import express from 'express';
 import EventsRouter from './events/events.js';
 import UsersRouter from './users/users.js';
+import TicketsRouter from './tickets/index.js';
 import VerificationRouter from './verifications/verifications.js';
 const router = express.Router();
 
@@ -27,6 +28,7 @@ router.use(checkAuth);
 router.use("/events", EventsRouter);
 router.use("/users", UsersRouter);
 router.use("/verifications", VerificationRouter);
+router.use("/tickets", TicketsRouter);
 
 
 export default router;
