@@ -89,7 +89,6 @@ export default {
 .bgbody {
   background-color: rgba(0, 0, 0, 0.95);
   color: white;
-  height: 100vh;
   min-height: 75.9vh;
 }
 
