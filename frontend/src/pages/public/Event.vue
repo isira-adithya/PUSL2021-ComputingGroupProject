@@ -102,7 +102,9 @@
       fullscreenControl: false,
       disableDefaultUI: true,
     }"
-  />
+  >
+    <GMapMarker :position="geoCoordinates"/>
+  </GMapMap>
 </div>
 
             <!-- Add Comment form -->

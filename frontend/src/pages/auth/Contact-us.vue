@@ -29,8 +29,8 @@
                   Address: Pitipana Thalagala Rd, Homagama, <br> 
                   Call Us: (+94) (011) 5445000 <br>
                   Fax: (+94) (011) 2324167 <br>
-                  E-mail: support@eventhive.com, <br>
-                          info@eventhive.com
+                  E-mail: support@eventhive.live, <br>
+                          info@eventhive.live
                          
                 </p>
               </div>

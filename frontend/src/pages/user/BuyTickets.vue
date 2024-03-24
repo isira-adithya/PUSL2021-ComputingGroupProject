@@ -18,7 +18,7 @@
                   <input
                     v-model="ticket.name"
                     type="text"
-                    class="form-control text-black"
+                    class="form-control text-info bg-dark"
                     id="ID"
                     disabled
                   />
@@ -30,7 +30,7 @@
                   <input
                     v-model="ticket.event_name"
                     type="text"
-                    class="form-control text-black"
+                    class="form-control text-info bg-dark"
                     id="Name"
                     disabled
                   />
@@ -41,7 +41,7 @@
                   >
                   <textarea
                     v-model="ticket.description"
-                    class="form-control text-black"
+                    class="form-control text-info bg-dark"
                     id="Description"
                     rows="5"
                     disabled
@@ -54,7 +54,7 @@
                   <input
                     v-model="ticket.price"
                     type="text"
-                    class="form-control text-black"
+                    class="form-control text-info bg-dark"
                     id="Price"
                     disabled
                   />
@@ -66,7 +66,7 @@
                   <input
                     v-model="ticket_quantity"
                     type="number"
-                    class="form-control text-white"
+                    class="form-control text-white bg-dark"
                     id="Quantity"
                     @change="total_price = ticket_quantity * ticket.price"
                   />
@@ -79,7 +79,7 @@
                 <input
                   v-model="total_price"
                   type="text"
-                  class="form-control text-black"
+                  class="form-control text-info bg-dark"
                   id="Total"
                   disabled
                 />
