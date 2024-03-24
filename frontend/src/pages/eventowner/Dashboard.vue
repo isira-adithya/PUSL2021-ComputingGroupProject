@@ -28,15 +28,26 @@
                 Events
               </router-link>
             </li>
+
+            <li class="nav-item">
+              <router-link
+                :to="'/eventowner/dashboard/tickets'"
+                href="#"
+                :class="page=='tickets'?'nav-link active':'nav-link text-white'"
+                aria-current="page"
+              >
+                Tickets
+              </router-link>
+            </li>
           </ul>
           <hr />
         </div>
       </div>
       <div class="col" style="padding: 0px;">
-        <EventOwnerAnalyticsVue v-if="page=='analytics'"/>
         <AddEventVue v-if="page=='add-event'"/>
         <EventVue v-if="page=='event'"/>
         <EventsVue v-if="page=='events'"/>
+        <TicketsVue v-if="page=='tickets'"/>
       </div>
     </div>
   </div>
@@ -46,13 +57,15 @@
 import AddEventVue from './subpages/AddEvent.vue';
 import EventVue from './subpages/Event.vue';
 import EventsVue from './subpages/Events.vue';
+import TicketsVue from './subpages/Tickets.vue';
 
 export default {
   name: "EventOwnerDashboardVue",
   components: {
     AddEventVue,
     EventVue,
-    EventsVue
+    EventsVue,
+    TicketsVue
   },
   mounted() {
     this.page = this.$route.path.split("/")[3];
@@ -62,7 +75,7 @@ export default {
   },
   data() {
     return {
-      page: "analytics"
+      page: "events"
     };
   },
   methods: {},
