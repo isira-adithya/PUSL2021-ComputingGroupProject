@@ -19,12 +19,23 @@
                   <label for="EventName" class="form-label text-white"
                     >Event Name</label
                   >
-                  <input
+                  <template v-if="payment.ticket.event != null">
+                    <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
                     v-model="payment.ticket.event.name"
                     disabled
                   />
+                  </template>
+                  <template v-else>
+                    <input
+                    type="text"
+                    class="form-control white-bg no-border increased-height"
+                    value="Event Deleted"
+                    disabled 
+                  />
+                  </template>
+                  
                 </div>
                 <div class="col-md-6">
                   <label for="name" class="form-label text-white"
