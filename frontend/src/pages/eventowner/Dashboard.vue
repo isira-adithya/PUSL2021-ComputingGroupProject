@@ -6,16 +6,6 @@
           <h5>Event Owner - Dashboard</h5>
           <hr />
           <ul class="nav px-lg-4 nav-pills flex-column mb-auto">
-            <li class="nav-item">
-              <router-link
-                :to="'/eventowner/dashboard/analytics'"
-                href="#"
-                :class="page=='analytics'?'nav-link active':'nav-link text-white'"
-                aria-current="page"
-              >
-                Analytics
-              </router-link>
-            </li>
 
             <li class="nav-item">
               <router-link
@@ -56,12 +46,10 @@
 import AddEventVue from './subpages/AddEvent.vue';
 import EventVue from './subpages/Event.vue';
 import EventsVue from './subpages/Events.vue';
-import EventOwnerAnalyticsVue from './subpages/EventOwnerAnalytics.vue';
 
 export default {
   name: "EventOwnerDashboardVue",
   components: {
-    EventOwnerAnalyticsVue,
     AddEventVue,
     EventVue,
     EventsVue
