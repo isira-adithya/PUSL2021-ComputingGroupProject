@@ -107,6 +107,5 @@ h1{
   margin-bottom: 5%;
   margin-top: 5%;
   font-family: 'Stick No Bills', sans-serif;
-  
 }
 </style>
