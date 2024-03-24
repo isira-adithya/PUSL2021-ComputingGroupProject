@@ -9,8 +9,12 @@
           <div class="col-8 mx-auto text-left">
             <form>
               <div class="row mb-3">
-                <img v-if="payment.ticket.event != null" :src="payment.ticket.event.images.split(',')[0]" class="mb-5">
-                
+                <img
+                  v-if="payment.ticket.event != null"
+                  :src="payment.ticket.event.images.split(',')[0]"
+                  class="mb-5"
+                />
+
                 <div>
                   <label for="EventName" class="form-label text-white"
                     >Event Name</label
@@ -46,7 +50,66 @@
                 </div>
               </div>
               <div v-if="payment.payments.length > 0">
-                Hello
+                <h4 class="text-white mb-4">Payments</h4>
+                <table
+                  class="table table-striped text-center text-white"
+                >
+                  <thead class="">
+                    <tr>
+                      <th scope="col" class="bg-black text-white">
+                        Username
+                      </th>
+                      <th scope="col" class="bg-black text-white">
+                        Email
+                      </th>
+                      <th scope="col" class="bg-black text-white">
+                        Paid At
+                      </th>
+                      <th scope="col" class="bg-black text-white">
+                        Payment Method
+                      </th>
+                      <th scope="col" class="bg-black text-white">
+                        Ticket Code
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="paymentObj in payment.payments" :key="paymentObj">
+                      <td
+                        class="align-middle bg-black"
+                        style="color: aliceblue"
+                      >
+                        {{ paymentObj.payment.user.user_name }}
+                      </td>
+                      <td
+                        class="align-middle bg-black"
+                        style="color: aliceblue"
+                      >
+                        {{ paymentObj.payment.user.email_address.email }}
+                      </td>
+                      <td
+                        class="align-middle bg-black"
+                        style="color: aliceblue"
+                      >
+                        {{
+                          paymentObj.created_at
+                        }}
+                      </td>
+                      <td
+                        class="align-middle bg-black"
+                        style="color: aliceblue"
+                      >
+                        {{ paymentObj.payment_method }}
+                      </td>
+                      <td
+                        class="align-middle bg-black"
+                        style="color: aliceblue"
+                      >
+                        {{ paymentObj.ticket_code }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </form>
             <br />
@@ -58,8 +121,8 @@
 </template>
   
   <script>
-import axios from 'axios';
-import Notiflix from 'notiflix';
+import axios from "axios";
+import Notiflix from "notiflix";
 export default {
   mounted() {
     Notiflix.Loading.arrows();
@@ -67,18 +130,19 @@ export default {
       .get("/api/eventowner/ticket-payments/" + this.$route.params.id)
       .then((response) => {
         this.payment = response.data;
-        this.ticket_price = (this.payment.ticket.price).toString() + "$";
+        this.ticket_price = this.payment.ticket.price.toString() + "$";
       })
       .catch((error) => {
         console.error(error);
-      }).finally(() => {
+      })
+      .finally(() => {
         Notiflix.Loading.remove();
       });
   },
   data() {
     return {
       payment: null,
-      ticket_price: 0
+      ticket_price: 0,
     };
   },
   methods: {
