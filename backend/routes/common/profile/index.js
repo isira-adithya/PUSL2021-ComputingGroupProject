@@ -19,6 +19,15 @@ router.get("/", isLoggedIn, async (req, res) => {
         }
     });
 
+    if (user === null) {
+        res.status(404);
+        return res.json({
+            success: false,
+            msg: "User not found"
+        });
+    }
+    
+
     const phoneObj = await prisma.phoneNumber.findUnique({
         where: {
             phone_id: user.phone_id
