@@ -2,14 +2,121 @@
 
 ![Alt](https://repobeats.axiom.co/api/embed/150fb164e2ac3a0d83f8f2e0aaa4652f3a15f58a.svg "Repobeats analytics image")
 
-## Description
+---
+#### Live Website
+To view a live demo, visit https://www.eventhive.live/  
+
+![]()
+
+---
+#### Project Details
+
+- Group ID: **B9**
+- Module Code: **PUSL2021**
+- Module Name: **Computing Group Project**
+- Year: **2023 / 2024**
+- Batch: **PLY Batch 11**
+- University: [University of Plymouth](https://www.plymouth.ac.uk/)
+- Partner University: [NSBM Green University](https://www.nsbm.ac.lk/)
+
+---
+#### Team Members
+
+- Isira Adithya *(Ruwanpathiranage Ruwanpathirana)* - `Team Leader`, `Fullstack Developer`
+  - Contribution:  
+     - Backend Development
+     - Database Development
+     - CI/CD
+     - Creating Report 
+     - Paypal Integration
+  - Socials  
+     - [Github](https://github.com/isira-adithya/)
+     - [Website](https://isiraadithya.com/)
+     - [Blog](https://blog.isiraadithya.com/)
+     - [LinkedIn](https://www.linkedin.com/in/isiraadithya/)
+     - [Twitter](https://twitter.com/isira_adithya)
+     - [Facebook](https://www.facebook.com/isiraadithyaruwanpathirana/)
+     - [Instagram](https://www.instagram.com/isira_adithya/)
+    
+- Hashen Ruwanpura - `Team Member`, `UI/UX Developer`
+  - Contributions
+    - Frontend Developments
+    - UI Designs
+    - Diagram Design (Use Case, Class, Sequence)
+    - Creating Report 
+  - Socials
+    - [Github](https://github.com/hashen-ruwanpura)
+    - [LinkedIn](https://www.linkedin.com/in/hashen-ruwanpura-184a1b283)
+    - [Instagram](https://www.instagram.com/__.hashh.r__/)
+    - [Facebook](https://www.facebook.com/hashen.ruwanpura?mibextid=JRoKGi)
+    - [Twitter](https://twitter.com/HashenRuwanpur3)
+    
+- Nesith Perera - `Team Member`, `UI/UX Developer`
+  - Contribution:  
+     - Frontend Development
+     - UI Designs
+     - Diagram Design (Use Case, Class, Sequance)
+     - Creating Report 
+     - Database Data Enrty 
+  - Socials  
+     - [Github](https://github.com/Nesithp-Perera)
+     - [Website](https://www.nesithperera.com/)
+     - [LinkedIn](www.linkedin.com/in/nesithperera)
+     - [Instagram](https://www.instagram.com/___nesith_perera___/)
+  
+- Sanuth Karunagoda - `Team Member`, `UI/UX Developer`, `Frontend Developer`
+  - Contribution:  
+     - Frontend Developments
+     - UI/UX development
+     - UI Designs
+     - Diagram Design (Use Case, Class diagram, Sequence diagram)
+     - Creating Report    
+  - Socials  
+     - [Github](https://github.com/KPSBKarunagoda/)
+     - [LinkedIn](www.linkedin.com/in/sanuth-karungoda-403001257)
+     - [Twitter](https://twitter.com/Sanuth20448687)
+     - [Instagram](https://www.instagram.com/sanuth.karunagoda/)
+    
+- Thiyara Bandara - `Team member`, `Frontend Developer`
+  - Contributions
+    - Frontend Developments
+    - Diagram Design (ER Diagram, Relational Schema)
+    - Database Design
+    - Reviewing the Report
+- Chandesh Gunawardena *(Rakitha Gunawardena)* - `Team member`, `Frontend Developer`
+  - Contribution:
+    - Frontend Developer
+  - Socials
+    - [Github](https://github.com/chandeshg/)
+    - [LinkedIn](https://www.linkedin.com/in/chandesh-/)
+    - [Instagram](https://www.instagram.com/chandesh.g/)
 
 
-In an era where technology is used in every corner of the world, our initial idea was to make a system called ‘Event Hive’ where people could use a website in order to see and be notified about the upcoming and ongoing events in their local area, this website will have two main roles, event owners and visitors. 
-The event owners will be able to post their event after a verification process done by the backend staff, they will have a separate user interface to change the image, date, description, venues and to display the time of the events and the system will be updated accordingly. Furthermore, event owners can make their contact information public (so, visitors can contact them) and they can mention ticket prices to participate in the event.
-The visitors will have another separate user interface which is able to view different types of events like Musical Events, Charity Events, Sports Events around the country with all the information such as images, date, venue, description, time, contact information, ticket prices etc. And if needed the visitors will have an option to filter and select a specific area through their location to find nearby events. 
-This system will also have a review and commentary section which can be used by the users when the event is ongoing or after concluded. 
-The system will also have a notification system where the users will be notified when a new event is registered. Notifications will be sent through emails. The users will have the option to have this functionality on or off. 
-This system can be accessible by both mobile and PC users via a Web Browser. 
-This system will be powered by a Linux Server, an Apache web server, and a MySQL database. The system will be available to users at all times.
+#### Features
+- Online Shopping
+- Avoid Shopping collisions
+- Online Payment handling through Paypal
+- Role based authorization (Admin, User)
+- Password Hashing
+- Email notifications
+  - Email Verification
+  - Password Reset
+  - Order Receipts
+  - Order Cancellation
+- Visualization of the customer feedback (Customer Comments/Reviews, Analytics Charts)
+- Wishlists
+- This software has been fortified to mitigate vulnerabilities outlined in the OWASP Top 10, including but not limited to Cross-Site Scripting (XSS), SQL Injection (SQLi), Cross-Site Request Forgery (CSRF), and vulnerabilities associated with insecure file uploads.
 
+#### Technologies Used
+
+- [Java Development Kit 21](https://jdk.java.net/21/) *(JDK 21)*
+- [Tomcat 10 Web Server](https://tomcat.apache.org/download-10.cgi)
+- [Java Servlets](https://www.oracle.com/java/technologies/java-servlet-tec.html)
+- [JavaServer Pages / JSP](https://www.oracle.com/java/technologies/jspt.html)
+- [JavaServer Pages Standard Tag Library](https://tomcat.apache.org/taglibs/standard/)
+- [MariaDB](https://mariadb.org/)
+- [Paypal Software Development Kit](https://developer.paypal.com/)
+- [SMTP](https://datatracker.ietf.org/doc/html/rfc5321)
+
+
+<img src="https://contrib.rocks/image?repo=isira-adithya/PUSL2024">
