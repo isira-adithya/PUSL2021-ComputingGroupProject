@@ -127,7 +127,7 @@ export default {
   mounted() {
     Notiflix.Loading.arrows();
     axios
-      .get("/api/eventowner/ticket-payments/" + this.$route.params.id)
+      .get("/api/admin/tickets/payments/" + this.$route.params.id)
       .then((response) => {
         this.payment = response.data;
         this.ticket_price = this.payment.ticket.price.toString() + "$";
