@@ -98,7 +98,13 @@
                   fullscreenControl: false,
                   disableDefaultUI: true,
                 }"
+              >
+              <GMapMarker
+                :position="event.location_geocoordinates"
+                :clickable="false"
+                :draggable="false"
               />
+              </GMapMap>
             </div>
 
             <!-- Add a checkbox to check whether this event contains tickets to purchase -->
