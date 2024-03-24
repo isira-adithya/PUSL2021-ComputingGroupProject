@@ -109,10 +109,10 @@
             class="col-md-12 text-white justify-content-center align-items-center"
           >
             <div class="pt-3">
-              <a
-                href=""
+              <router-link
+                to="/events"
                 class="button-color text-white text-decoration-none px-3 py-1 rounded-1"
-                >EVENTS</a
+                >EVENTS</router-link
               >
             </div>
           </div>
@@ -149,11 +149,12 @@
             class="col-md-12 text-white justify-content-center align-items-center"
           >
             <div class="pt-3">
-              <a
-                href=""
+              <router-link
+                to="/signup"
                 class="button-color text-white text-decoration-none px-3 py-1 rounded-1"
-                >PUBLISH</a
               >
+                PUBLISH
+              </router-link>
             </div>
           </div>
         </div>

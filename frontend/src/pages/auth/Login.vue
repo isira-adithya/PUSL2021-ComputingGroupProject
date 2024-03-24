@@ -19,7 +19,7 @@
               <input name="password" type="password" class="form-control" v-model="password" />
             </div>
 
-            <div class="form-check mb-3 mt-2 ms-4" >
+            <div class="form-check mb-3 mt-2 ms-4" v-if="false">
                 <input
                   class="form-check-input"
                   type="checkbox"
@@ -95,7 +95,7 @@ export default {
 
           Notiflix.Notify.success("Success!", "", "OK");
           localStorage.setItem("isLoggedIn", JSON.stringify(true));
-          this.$parent.isLoggedIn = true;
+          this.$parent.$parent.isLoggedIn = true;
           window.setTimeout(() => {
             Notiflix.Loading.remove();
             this.$router.push("/user/profile");

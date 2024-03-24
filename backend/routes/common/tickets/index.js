@@ -206,7 +206,7 @@ router.post("/buy", async (req, res) => {
             }
         });
 
-        const approvalLink = await getApprovalLink(price, "Ticket purchase", `http://www.eventhive.local/api/common/payments/success?payment_id=${ticketPayment.payment_id}`, "http://www.eventhive.local/api/common/payments/cancel");
+        const approvalLink = await getApprovalLink(price, "Ticket purchase", `https://www.eventhive.live/api/common/payments/success?payment_id=${ticketPayment.payment_id}`, "https://www.eventhive.live/api/common/payments/cancel");
 
         res.json({ success: true, approvalLink: approvalLink });
     } catch (error) {
