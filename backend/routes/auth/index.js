@@ -153,6 +153,7 @@ router.post(
                     profile_image: null
                 },
             });
+            console.log(`[AUTH:SIGNUP] User ${req.body["username"]} created successfully`);
 
             res.status(201).json({
                 msg: 'User created successfully'
@@ -248,6 +249,8 @@ router.post(
             req.session.email_address_verified = emailObj.is_verified;
             req.session.last_updated = Date.now();
 
+            console.log(`[AUTH:LOGIN] User ${req.body["username"]} logged in successfully`);
+
             res.status(200).json({
                 msg: 'Login successful'
             });
@@ -264,6 +267,9 @@ router.delete('/logout', (req, res) => {
     if (req.session.isLoggedIn) {
         req.session = null;
     }
+
+    console.log(`[AUTH:LOGOUT] User logged out successfully`)
+
     res.status(200).json({
         msg: 'Logout successful'
     });
@@ -415,6 +421,8 @@ router.post(
                     user_id: tokenOwner.user.user_id
                 },
             });
+
+            console.log(`[AUTH:RESET-PASSWORD] Password reset for ${tokenOwner.user.user_name} successful`)
 
             res.status(200).json({
                 msg: 'Password reset successful'
