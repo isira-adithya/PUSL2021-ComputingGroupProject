@@ -26,7 +26,7 @@
             <div class="row justify-content-left mt-4">
               <div class="col-md-8 text-left mb-3">
                 <p>
-                  Pitipana - Thalagala Rd, Homagama, <br>
+                  Address: Pitipana Thalagala Rd, Homagama, <br> 
                   Call Us: (+94) (011) 5445000 <br>
                   Fax: (+94) (011) 2324167 <br>
                   E-mail: support@eventhive.com, <br>
