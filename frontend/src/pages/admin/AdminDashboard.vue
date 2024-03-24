@@ -68,6 +68,7 @@
           <SupportTicketList v-if="page=='supportticketlist'"/>
           <EventOwnerApproval v-if="page=='eventownerapproval'"/>
           <TicketList v-if="page=='tickets'"/>
+          <TicketPayment v-if="page=='ticket'"/>
         </div> 
       </div>
     </div>
@@ -80,6 +81,7 @@ import EventManagement from './Event-management.vue';
 import SupportTicketList from './SupportTickets.vue';
 import EventOwnerApproval from './EventOwnerApproval.vue';
 import TicketList from './TicketList.vue';
+import TicketPayment from './Ticket-Payment.vue';
   export default {
     name: "AdminDashboardVue",
     components: {
@@ -88,6 +90,7 @@ import TicketList from './TicketList.vue';
         SupportTicketList,
         EventOwnerApproval,
         TicketList,
+        TicketPayment
     },
     mounted() {
       this.page = this.$route.path.split("/")[3];
