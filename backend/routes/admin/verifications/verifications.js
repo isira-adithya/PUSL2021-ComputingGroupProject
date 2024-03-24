@@ -71,6 +71,14 @@ router.post('/:id', async (req, res) => {
                     verification_status: 'APPROVED'
                 }
             });
+            await prisma.user.update({
+                where: {
+                    user_id: verification.owner_id
+                },
+                data: {
+                    is_verified: true
+                }
+            });
             break;
         case 'REJECTED':
             await prisma.verification.update({
