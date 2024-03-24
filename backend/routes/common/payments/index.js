@@ -152,7 +152,7 @@ router.get('/success', async (req, res) => {
     <p>You will receive the ticket receipt in your email shortly.</p>
     <br>
     <pre><code>Redirecting to EventHive...</code></pre>
-    <script>window.setTimeout(()=>{window.location.href = '/#/events/'},5000)</script>
+    <script>window.setTimeout(()=>{window.location.href = '/#/user/tickets'},5000)</script>
     `);
 });
 
