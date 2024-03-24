@@ -11,21 +11,23 @@
           <table class="table table-bordered text-center text-white">
             <thead class="">
               <tr>
+                <th scope="col">Name</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Phone</th>
-                <th scope="col">Name</th>
                 <th scope="col">Address</th>
+                <th scope="col">Role</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(user, index) in users" :key="index">
-                <td class="align-middle">{{ user.email.email }}</td>
-                <td class="align-middle">{{ user.phone.number }}</td>
                 <td class="align-middle">
                   {{ user.first_name }} {{ user.last_name }}
                 </td>
+                <td class="align-middle">{{ user.email.email }}</td>
+                <td class="align-middle">{{ user.phone.number }}</td>
                 <td class="align-middle">{{ user.address }}</td>
+                <td class="align-middle">{{ user.role }}</td>
                 <td class="align-middle">
                   <button
                     class="btn btn-primary me-2"
