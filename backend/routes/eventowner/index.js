@@ -134,6 +134,18 @@ router.get("/tickets", async (req, res) => {
             event: {
                 owner_id: req.session.user_id
             }
+        },
+        select: {
+            ticket_id: true,
+            event: {
+                select: {
+                    name: true,
+                    event_id: true,
+                }
+            },
+            price: true,
+            name: true,
+            description: true
         }
     })
     if (tickets == null) {
