@@ -14,6 +14,7 @@
               <tr>
                 <th scope="col">Ticket ID</th>
                 <th scope="col">Ticket Name</th>
+                <th scope="col">Username</th>
                 <th scope="col">Event</th>
                 <th scope="col">Price</th>
                 <th scope="col">Operations</th>
@@ -23,7 +24,8 @@
               <tr v-for="ticket in tickets" :key="ticket.ticket_id">
                 <td class="align-middle">{{ ticket.ticket_id }}</td>
                 <td class="align-middle">{{ ticket.name }}</td>
-                <td class="align-middle">{{ ticket.event.name }}</td>
+                <td class="align-middle"><router-link :to="`/admin/user-management/${ticket.event.user.user_id}`">{{ ticket.event.user.user_name }}</router-link></td>
+                <td class="align-middle"><router-link :to="`/admin/event-management/${ticket.event.uuid}`">{{ ticket.event.name }}</router-link></td>
                 <td class="align-middle">{{ ticket.price }}</td>
                 <td class="align-middle">
                   <router-link :to="`/eventowner/dashboard/ticket-payments/${ticket.ticket_id}`" class="btn btn-primary mb-3">View Payments</router-link>
