@@ -4,31 +4,32 @@
       <h1 class="font-1 m-0 text-white">Ticket Receipt</h1>
     </div>
     <div>
-      <div class="container" v-if="receipt != null">
+      <div class="container" v-if="payment != null">
         <div class="row">
           <div class="col-8 mx-auto text-left">
             <form>
               <div class="row mb-3">
-                <img v-if="receipt.ticket.event != null" :src="receipt.ticket.event.images.split(',')[0]" class="mb-5">
-                <div class="col-md-6">
-                  <label for="id" class="form-label text-white"
-                    >Receipt ID</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control white-bg no-border increased-height"
-                    v-model="receipt.receipt_id"
-                    disabled
-                  />
-                </div>
-                <div class="col-md-6">
+                <img v-if="payment.ticket.event != null" :src="payment.ticket.event.images.split(',')[0]" class="mb-5">
+                
+                <div>
                   <label for="EventName" class="form-label text-white"
                     >Event Name</label
                   >
                   <input
                     type="text"
                     class="form-control white-bg no-border increased-height"
-                    v-model="receipt.ticket.event.name"
+                    v-model="payment.ticket.event.name"
+                    disabled
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="name" class="form-label text-white"
+                    >Ticket Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control white-bg no-border increased-height"
+                    v-model="payment.ticket.name"
                     disabled
                   />
                 </div>
@@ -43,64 +44,9 @@
                     disabled
                   />
                 </div>
-                <div class="col-md-6">
-                  <label for="name" class="form-label text-white"
-                    >Ticket Name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control white-bg no-border increased-height"
-                    v-model="receipt.ticket.name"
-                    disabled
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label for="PayMethod" class="form-label text-white"
-                    >Payment Method</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control white-bg no-border increased-height"
-                    v-model="receipt.payment_method"
-                    disabled
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label for="Date/Time" class="form-label text-white"
-                    >Payment Date/Time</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control white-bg no-border increased-height"
-                    v-model="receipt.created_at"
-                    disabled
-                  />
-                </div>
-                <div>
-                  <label for="Date/Time" class="form-label text-white"
-                    >Ticket Code</label
-                  >
-                  <pre class="text-white-50">This code is used to identify the ticket in an event.</pre>
-                  <pre class="text-white-50">Please store this code in a safe place.</pre>
-                  <input
-                    type="text"
-                    class="form-control white-bg no-border increased-height"
-                    v-model="receipt.ticket_code"
-                    disabled
-                  />
-                </div>
               </div>
-              <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6 mb-3">
-                  <div
-                  class="btn text-white custom-button w-100"
-                  @click="printTicket"
-                  >
-                  Print
-                </div>
-                <div class="col-3"></div>
-                </div>
+              <div v-if="payment.payments.length > 0">
+                Hello
               </div>
             </form>
             <br />
@@ -120,8 +66,8 @@ export default {
     axios
       .get("/api/eventowner/ticket-payments/" + this.$route.params.id)
       .then((response) => {
-        this.receipt = response.data;
-        this.ticket_price = (this.receipt.payment.amount / this.receipt.payment.ticket_quantity).toString() + "$";
+        this.payment = response.data;
+        this.ticket_price = (this.payment.ticket.price).toString() + "$";
       })
       .catch((error) => {
         console.error(error);
@@ -131,7 +77,7 @@ export default {
   },
   data() {
     return {
-      receipt: null,
+      payment: null,
       ticket_price: 0
     };
   },
