@@ -24,7 +24,7 @@
               <tr v-for="ticket in tickets" :key="ticket.ticket_id">
                 <td class="align-middle">{{ ticket.ticket_id }}</td>
                 <td class="align-middle">{{ ticket.name }}</td>
-                <template v-if="ticket.event.user != null">
+                <template v-if="ticket.event != null">
                   <td class="align-middle"><router-link :to="`/admin/user-management/${ticket.event.user.user_id}`">{{ ticket.event.user.user_name }}</router-link></td>
                   <td class="align-middle"><router-link :to="`/admin/event-management/${ticket.event.uuid}`">{{ ticket.event.name }}</router-link></td>
                 </template>
