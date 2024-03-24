@@ -154,7 +154,7 @@ router.get("/tickets", async (req, res) => {
     return res.json(tickets);
 });
 
-router.get("/tickets/:id", async (req, res) => {
+router.get("/ticket-payments/:id", async (req, res) => {
 
     // check if the ticket_id is a number
     if (isNaN(req.params.id)) {
