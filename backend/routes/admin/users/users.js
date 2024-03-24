@@ -153,7 +153,10 @@ router.delete('/:id', async (req, res) => {
     } = req.params;
     const result = await prisma.user.delete({
         where: {
-            user_id: parseInt(id)
+            user_id: parseInt(id),
+            role: {
+                not: 'ADMIN'
+            }
         }
     });
     res.json(result);
