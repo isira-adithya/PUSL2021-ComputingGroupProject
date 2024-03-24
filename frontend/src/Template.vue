@@ -62,6 +62,16 @@
                     >Profile</router-link
                   >
                 </li>
+                <li v-if="!isLoggedIn" class="nav-item mx-2">
+                  <router-link to="/contact-us" class="nav-link text-white"
+                    >Contact us</router-link
+                  >
+                </li>
+                <li v-if="!isLoggedIn" class="nav-item mx-2">
+                  <router-link to="/about-us" class="nav-link text-white"
+                    >About us</router-link
+                  >
+                </li>
                 <li
                   v-if="isLoggedIn && role == 'EVENT_OWNER'"
                   class="nav-item mx-2"
@@ -123,8 +133,8 @@
             </p>
           </div>
           <div class="col-md-6 text-center nav-item mb-4">
-            <router-link class=" text-white text-decoration-none px-3 py-1 button-color rounded-1 m-1" to="/about-us">About Us</router-link>  
-            <router-link class="text-white text-decoration-none px-3 py-1 button-color rounded-1 m-1" to="/contact-us">Contact Us</router-link>
+            <router-link class=" text-white text-decoration-none px-3 py-1 rounded-1 m-1" to="/about-us">About Us</router-link>  
+            <router-link class="text-white text-decoration-none px-3 py-1 rounded-1 m-1" to="/contact-us">Contact Us</router-link>
           </div>
           <div class="col-md-3 text-center text-md-r">
             <div class="footer-icons ml-md-4 d-flex justify-content-center justify-content-md-end">

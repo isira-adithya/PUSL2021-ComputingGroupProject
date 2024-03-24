@@ -24,8 +24,14 @@
               <tr v-for="ticket in tickets" :key="ticket.ticket_id">
                 <td class="align-middle">{{ ticket.ticket_id }}</td>
                 <td class="align-middle">{{ ticket.name }}</td>
-                <td class="align-middle"><router-link :to="`/admin/user-management/${ticket.event.user.user_id}`">{{ ticket.event.user.user_name }}</router-link></td>
-                <td class="align-middle"><router-link :to="`/admin/event-management/${ticket.event.uuid}`">{{ ticket.event.name }}</router-link></td>
+                <template v-if="ticket.event != null">
+                  <td class="align-middle"><router-link :to="`/admin/user-management/${ticket.event.user.user_id}`">{{ ticket.event.user.user_name }}</router-link></td>
+                  <td class="align-middle"><router-link :to="`/admin/event-management/${ticket.event.uuid}`">{{ ticket.event.name }}</router-link></td>
+                </template>
+                <template v-else>
+                  <td class="align-middle">[USER_NOT_FOUND]</td>
+                  <td class="align-middle">[EVENT_DELETED]</td>
+                </template>
                 <td class="align-middle">{{ ticket.price }}</td>
                 <td class="align-middle">
                   <router-link :to="`/admin/dashboard/ticket/${ticket.ticket_id}`" class="btn btn-primary mb-3">View Payments</router-link>
@@ -84,6 +90,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.95);
   color: white;
   height: 100vh;
+  min-height: 75.9vh;
 }
 
 .table-bordered th,
@@ -100,6 +107,5 @@ h1{
   margin-bottom: 5%;
   margin-top: 5%;
   font-family: 'Stick No Bills', sans-serif;
-  
 }
 </style>
