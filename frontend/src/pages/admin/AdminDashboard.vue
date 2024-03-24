@@ -76,7 +76,7 @@
 
 import UserManagement from './User-management.vue';  
 import EventManagement from './Event-management.vue';
-import SupportTicketList from './SupportTicketList.vue';
+import SupportTicketList from './SupportTickets.vue';
 import EventOwnerApproval from './EventOwnerApproval.vue';
 import TicketList from './TicketList.vue';
   export default {

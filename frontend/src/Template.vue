@@ -77,7 +77,7 @@
                   class="nav-item mx-2"
                 >
                   <router-link
-                    to="/eventowner/dashboard/analytics"
+                    to="/eventowner/dashboard/add-event"
                     class="nav-link text-white"
                     >Dashboard</router-link
                   >
