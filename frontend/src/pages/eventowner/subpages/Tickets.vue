@@ -26,8 +26,8 @@
                   <td class="align-middle">{{ ticket.event.name }}</td>
                   <td class="align-middle">{{ ticket.price }}</td>
                   <td class="align-middle">
-                    <button class="btn btn-primary mb-3" @click="viewEvent(event.id)">View</button>
-                    <button class="btn btn-danger mb-3" @click="deleteEvent(event.id)">Delete</button>
+                    <router-link :to="`/eventowner/dashboard/tickets/${ticket.ticket_id}`" class="btn btn-primary mb-3">View</router-link>
+                    <button class="btn btn-danger mb-3" @click="deleteTicket(ticket)">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -53,7 +53,16 @@ import Notiflix from 'notiflix';
         
     },
     methods: {
-      
+        deleteTicket(ticket) {
+            Notiflix.Confirm.show('Delete Ticket', 'Are you sure you want to delete this ticket?', 'Yes', 'No', () => {
+                axios.delete(`/api/eventowner/tickets/${ticket.ticket_id}`).then((response) => {
+                    Notiflix.Report.success('Success', 'Ticket Deleted Successfully', 'OK');
+                    this.tickets = this.tickets.filter((t) => t.ticket_id !== ticket.ticket_id);
+                }).catch((error) => {
+                    Notiflix.Report.failure('Error', 'Ticket Deletion Failed', 'OK');
+                });
+            });
+        },  
     },
     mounted() {
         Notiflix.Loading.dots();
