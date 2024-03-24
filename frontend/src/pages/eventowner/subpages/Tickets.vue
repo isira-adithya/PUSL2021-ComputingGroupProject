@@ -13,20 +13,20 @@
               <thead class="">
                 <tr>
                   <th scope="col">Ticket ID</th>
-                  <th scope="col">Full Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Created At</th>
+                  <th scope="col">Ticket Name</th>
+                  <th scope="col">Event</th>
+                  <th scope="col">Price</th>
                   <th scope="col">Operations</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="ticket in tickets" :key="ticket.ticket_id">
-                  <td class="align-middle">{{ ticket.id }}</td>
-                  <td class="align-middle">{{ event.fullName }}</td>
-                  <td class="align-middle">{{ event.email }}</td>
-                  <td class="align-middle">{{ event.createdAt }}</td>
+                  <td class="align-middle">{{ ticket.ticket_id }}</td>
+                  <td class="align-middle">{{ ticket.name }}</td>
+                  <td class="align-middle">{{ ticket.event.name }}</td>
+                  <td class="align-middle">{{ ticket.price }}</td>
                   <td class="align-middle">
-                    <button class="btn btn-primary mb-3" @click="viewEvent(event.id)">View Ticket</button>
+                    <button class="btn btn-primary mb-3" @click="viewEvent(event.id)">View</button>
                     <button class="btn btn-danger mb-3" @click="deleteEvent(event.id)">Delete</button>
                   </td>
                 </tr>
