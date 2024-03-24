@@ -136,6 +136,9 @@ router.get("/tickets", async (req, res) => {
             }
         }
     })
+    if (tickets == null) {
+        return res.json([]);
+    }
     return res.json(tickets);
 });
 
