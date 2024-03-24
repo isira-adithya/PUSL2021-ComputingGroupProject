@@ -60,7 +60,7 @@ model PasswordResetToken {
   token           String @unique
   user_id         Int    @unique
   createdAt       Int
-  user            User   @relation(fields: [user_id], references: [user_id])
+  user            User   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
 
 model Notification {
@@ -72,7 +72,7 @@ model Notification {
   sent_at             DateTime?
   content_hash        String?   @db.VarChar(512)
   user_id             Int?
-  user                User?     @relation(fields: [user_id], references: [user_id])
+  user                User?     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
 
 model Verification {
@@ -84,7 +84,7 @@ model Verification {
   nicfront_image_link String?
   owner_id            Int?
   admin_messages      String?
-  user                User?     @relation(fields: [owner_id], references: [user_id])
+  user                User?     @relation(fields: [owner_id], references: [user_id], onDelete: SetNull)
   created_at          DateTime? @default(now())
 }
 
@@ -102,7 +102,7 @@ model Event {
   visibility              String    @default("private")
   uuid                    String    @unique
   owner_id                Int?
-  user                    User?     @relation(fields: [owner_id], references: [user_id])
+  user                    User?     @relation(fields: [owner_id], references: [user_id], onDelete: Cascade)
   Ticket                  Ticket[]
   Comment                 Comment[]
 }
@@ -112,43 +112,45 @@ model Ticket {
   price         Int
   name          String
   description   String          @db.VarChar(512)
-  event_id      Int
-  event         Event           @relation(fields: [event_id], references: [event_id])
+  event_id      Int?
+  event         Event?          @relation(fields: [event_id], references: [event_id], onDelete: SetNull)
   TicketPayment TicketPayment[]
   TicketReceipt TicketReceipt[]
 }
 
 model TicketPayment {
   payment_id      Int             @id @default(autoincrement())
-  ticket_id       Int
+  ticket_id       Int?
   ticket_quantity Int
-  user_id         Int
+  user_id         Int?
   amount          Int
   status          String          @default("PENDING") // PENDING, PAID, FAILED
-  user            User            @relation(fields: [user_id], references: [user_id])
-  ticket          Ticket          @relation(fields: [ticket_id], references: [ticket_id])
+  user            User?           @relation(fields: [user_id], references: [user_id], onDelete: SetNull)
+  ticket          Ticket?         @relation(fields: [ticket_id], references: [ticket_id], onDelete: SetNull)
   TicketReceipt   TicketReceipt[]
+  created_at      DateTime?       @default(now())
 }
 
 model TicketReceipt {
-  receipt_id     Int           @id @default(autoincrement())
-  payment_id     Int
+  receipt_id     Int            @id @default(autoincrement())
+  payment_id     Int?
   cost           Int
   payment_method String
   user_id        Int
-  ticket_id      Int
+  ticket_id      Int?
   ticket_code    String
-  user           User          @relation(fields: [user_id], references: [user_id])
-  payment        TicketPayment @relation(fields: [payment_id], references: [payment_id])
-  ticket         Ticket        @relation(fields: [ticket_id], references: [ticket_id])
+  user           User           @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  payment        TicketPayment? @relation(fields: [payment_id], references: [payment_id], onDelete: SetNull)
+  ticket         Ticket?        @relation(fields: [ticket_id], references: [ticket_id], onDelete: SetNull)
+  created_at     DateTime?      @default(now())
 }
 
 model Comment {
   comment_id Int    @id @default(autoincrement())
-  user_id    Int
+  user_id    Int?
   event_id   String
   comment    String @db.VarChar(512)
   stars      Int    @default(0)
-  user       User   @relation(fields: [user_id], references: [user_id])
-  event      Event  @relation(fields: [event_id], references: [uuid])
+  user       User?  @relation(fields: [user_id], references: [user_id], onDelete: SetNull)
+  event      Event  @relation(fields: [event_id], references: [uuid], onDelete: Cascade)
 }

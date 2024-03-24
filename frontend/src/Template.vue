@@ -52,6 +52,11 @@
                     >Events</router-link
                   >
                 </li>
+                <li v-if="isLoggedIn" class="nav-item mx-2">
+                  <router-link class="nav-link text-white" to="/user/tickets"
+                    >Tickets</router-link
+                  >
+                </li>
                 <li class="nav-item mx-2">
                   <router-link class="nav-link text-white" to="/about-us"
                     >About Us</router-link

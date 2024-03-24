@@ -21,10 +21,10 @@ export default {
     Notiflix.Loading.standard();
     axios.delete("/api/auth/logout").then((data)=>{
       Notiflix.Loading.remove();
+      localStorage.setItem("isLoggedIn", JSON.stringify(false));
+      localStorage.setItem("session", null);
+      this.$parent.$parent.isLoggedIn = false;
       Notiflix.Report.success("Logout Success", "You can safely navigate away from the website now.", "OK", () => {
-        localStorage.setItem("isLoggedIn", JSON.stringify(false));
-        localStorage.setItem("session", null);
-        this.$parent.isLoggedIn = false;
         this.$router.push("/");
       });
     }).catch((err) => {

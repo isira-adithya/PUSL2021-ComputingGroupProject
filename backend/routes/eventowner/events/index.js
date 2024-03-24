@@ -332,20 +332,21 @@ router.put(
                 }
             });
 
-            // Delete tickets related to this event
-            await prisma.ticket.deleteMany({
+            // Set event_id of tickets to null
+            await prisma.ticket.updateMany({
                 where: {
                     event_id: eventObj.event_id
+                },
+                data: {
+                    event_id: null
                 }
             });
             // Add tickets to the database
             if (tickets != null && tickets.length > 0) {
                 // Adding event_id of tickets and removing id
                 tickets.forEach(ticket => {
-                    if (ticket.id != null){
-                        ticket.ticket_id = ticket.id;
-                        delete ticket.id;
-                    }
+                    delete ticket.id;
+                    delete ticket.ticket_id;
                     ticket.event_id = eventObj.event_id;
                 });
 
@@ -384,13 +385,6 @@ router.delete('/:uuid', async (req, res) => {
     }
 
     try {
-        // Delete tickets associated with the events first
-        await prisma.ticket.deleteMany({
-            where: {
-                event_id: event.event_id
-            }
-        });
-        
         await prisma.event.delete({
             where: {
                 uuid: req.params.uuid

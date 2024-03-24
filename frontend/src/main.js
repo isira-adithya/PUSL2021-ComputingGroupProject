@@ -77,8 +77,8 @@ const routes = [
     // User
     {path: '/user/profile', component: UserProfileVue},
     {path: '/user/buyticket/:id', component: BuyTicket},
-    {path: '/user/receipt-list', component: ReceiptListVue},
-    {path: '/user/ticketreciept', component: TicketReciept},
+    {path: '/user/tickets', component: ReceiptListVue},
+    {path: '/user/tickets/:id', component: TicketReciept},
 
     // Public pages
     {path: '/about-us', component: AboutUsVue},

@@ -11,7 +11,7 @@
       <div v-if="events && events.length > 0">
         <InteractiveMapVue v-if="isInteractiveMapMode" :events="events"></InteractiveMapVue>
         <!-- Centered container for cards -->
-        <div class="d-flex justify-content-center flex-wrap">
+        <div v-if="!isInteractiveMapMode" class="d-flex justify-content-center flex-wrap">
           <div
             v-for="event in events"
             :key="event.id"
