@@ -129,7 +129,7 @@ router.get("/:uuid", async (req, res) => {
     // Send comments associated with the event
     const comments = await prisma.comment.findMany({
         where: {
-            event_id: event.id
+            event_id: event.uuid
         }
     });
     // For each comment, get the username by comment.user_id
