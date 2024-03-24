@@ -40,9 +40,9 @@
 
               <li class="nav-item">
                 <router-link
-                  :to="'/admin/dashboard/ticketlist'"
+                  :to="'/admin/dashboard/tickets'"
                   href="#"
-                  :class="page=='ticketlist'?'nav-link active':'nav-link text-white'"
+                  :class="page=='tickets'?'nav-link active':'nav-link text-white'"
                   aria-current="page">
                   Ticket List
                 </router-link>
@@ -67,7 +67,7 @@
           <EventManagement v-if="page=='eventmanagement'"/>
           <SupportTicketList v-if="page=='supportticketlist'"/>
           <EventOwnerApproval v-if="page=='eventownerapproval'"/>
-          <TicketList v-if="page=='ticketlist'"/>
+          <TicketList v-if="page=='tickets'"/>
         </div> 
       </div>
     </div>
