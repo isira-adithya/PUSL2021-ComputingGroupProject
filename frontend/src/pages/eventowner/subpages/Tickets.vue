@@ -26,7 +26,7 @@
                   <td class="align-middle">{{ ticket.event.name }}</td>
                   <td class="align-middle">{{ ticket.price }}</td>
                   <td class="align-middle">
-                    <router-link :to="`/eventowner/dashboard/tickets-payments/${ticket.ticket_id}`" class="btn btn-primary mb-3">View Payments</router-link>
+                    <router-link :to="`/eventowner/dashboard/ticket-payments/${ticket.ticket_id}`" class="btn btn-primary mb-3">View Payments</router-link>
                     <button class="btn btn-danger mb-3" @click="deleteTicket(ticket)">Delete</button>
                   </td>
                 </tr>

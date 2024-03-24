@@ -48,6 +48,7 @@
         <EventVue v-if="page=='event'"/>
         <EventsVue v-if="page=='events'"/>
         <TicketsVue v-if="page=='tickets'"/>
+        <TicketPaymentVue v-if="page=='ticket-payments'"/>
       </div>
     </div>
   </div>
@@ -58,6 +59,7 @@ import AddEventVue from './subpages/AddEvent.vue';
 import EventVue from './subpages/Event.vue';
 import EventsVue from './subpages/Events.vue';
 import TicketsVue from './subpages/Tickets.vue';
+import TicketPaymentVue from './subpages/Ticket-Payment.vue';
 
 export default {
   name: "EventOwnerDashboardVue",
@@ -65,13 +67,15 @@ export default {
     AddEventVue,
     EventVue,
     EventsVue,
-    TicketsVue
+    TicketsVue,
+    TicketPaymentVue
   },
   mounted() {
     this.page = this.$route.path.split("/")[3];
   },
   updated() {
     this.page = this.$route.path.split("/")[3];
+    console.log(this.page)
   },
   data() {
     return {
