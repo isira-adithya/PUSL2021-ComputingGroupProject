@@ -44,6 +44,7 @@ router.post(
             }
             
             await sendSms(phoneNumber.number, `Please use the code ${pinCode} to verify your https://eventhive.live account.`);
+            console.log(`[PIN] Sent to ${phoneNumber.number}`)
 
             return res.json({
                 success: true,
@@ -95,6 +96,7 @@ router.post(
 
                 // Updating the session
                 req.session['phone_number_verified'] = true;
+                console.log(`[PIN] Verified ${phoneNumber.number}`)
 
                 return res.json({
                     success: true,
