@@ -202,6 +202,7 @@ router.get("/ticket-payments/:id", async (req, res) => {
             cost: true,
             created_at: true,
             payment_method: true,
+            ticket_code: true,
             payment: {
                 select: {
                     status: true,
