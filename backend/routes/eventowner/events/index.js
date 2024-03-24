@@ -391,6 +391,8 @@ router.delete('/:uuid', async (req, res) => {
             }
         });
 
+        console.log(`[EVENT DELETE] Event ID ${event.event_id} deleted by user ID ${req.session.user_id}`);
+
         return res.json({
             success: true,
             msg: "Event deleted successfully"
