@@ -31,8 +31,8 @@ Event Hive is a dynamic web platform designed to revolutionize the way people di
 We would like to express our gratitude to the following individuals and organizations for their contributions and support:
 
 - [Ruwanpathiranage Ruwanpathirana](https://github.com/isira-adithya) (Backend development, authentication, database integration, payment integration, mapping, notifications)
-- [Kangara Bandara](https://github.com/KPSBKarunagoda) (Database design, sample data, frontend pages, email templates)
-- [Kalehe Karunagoda](https://github.com/ThiyaraBandara) (UI/UX design, frontend development, testing)
+- [Kangara Bandara](https://github.com/ThiyaraBandara) (Database design, sample data, frontend pages, email templates)
+- [Kalehe Karunagoda](https://github.com/KPSBKarunagoda) (UI/UX design, frontend development, testing)
 - [Hashen Ruwanpura](https://github.com/hashen-ruwanpura) (Frontend development, UI design, report writing, testing, and maintenance)
 - [Amarasinhage Perera](https://github.com/Nesithp-Perera) (Frontend development, UI design, report writing, testing)
 
