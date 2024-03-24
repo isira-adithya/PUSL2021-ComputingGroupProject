@@ -73,6 +73,7 @@ const routes = [
     { path: '/eventowner/verification', component: VerificationVue},
     { path: '/eventowner/dashboard/:page', component: EventOwnerDashboardVue},
     { path: '/eventowner/dashboard/event/:uuid', component: EventOwnerDashboardVue},
+    { path: '/eventowner/dashboard/ticket-payments/:id', component: EventOwnerDashboardVue},
     
     // User
     {path: '/user/profile', component: UserProfileVue},
