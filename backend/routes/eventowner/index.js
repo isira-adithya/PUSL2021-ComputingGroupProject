@@ -178,6 +178,7 @@ router.get("/ticket-payments/:id", async (req, res) => {
                 select: {
                     name: true,
                     event_id: true,
+                    images: true
                 }
             },
             price: true,
