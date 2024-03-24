@@ -6,15 +6,6 @@
           <h1 class="text-white"><center>User Management</center></h1> <!-- Add the heading here -->
         </div>
       </div>
-      <button class="btn btn-primary mb-3" @click="addUserOrAdmin">
-        Add New User / Administrator
-      </button>
-      <span style="margin-right: 10px"></span>
-      <button class="btn btn-primary mb-3" @click="seeAllAdministrators">
-        See All Administrators
-      </button>
-      <br />
-      <br />
       <div class="row">
         <div class="col">
           <table class="table table-bordered text-center text-white">
