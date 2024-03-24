@@ -57,16 +57,6 @@
                     >Tickets</router-link
                   >
                 </li>
-                <li class="nav-item mx-2">
-                  <router-link class="nav-link text-white" to="/about-us"
-                    >About Us</router-link
-                  >
-                </li>
-                <li class="nav-item mx-2">
-                  <router-link class="nav-link text-white" to="/contact-us"
-                    >Contact Us</router-link
-                  >
-                </li>
                 <li v-if="isLoggedIn" class="nav-item mx-2">
                   <router-link to="/user/profile" class="nav-link text-white"
                     >Profile</router-link
@@ -127,15 +117,17 @@
       <hr class="white-hr my-4" />
       <div class="container">
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-3">
             <p class="mb-4 text-center text-md-left">
               Copyright&copy; Event Hive 2024.
             </p>
           </div>
-          <div class="col-md-6 text-center text-md-r">
-            <div
-              class="footer-icons ml-md-4 d-flex justify-content-center justify-content-md-end"
-            >
+          <div class="col-md-6 text-center nav-item mb-4">
+            <router-link class=" text-white text-decoration-none px-3 py-1 button-color rounded-1 m-1" to="/about-us">About Us</router-link>  
+            <router-link class="text-white text-decoration-none px-3 py-1 button-color rounded-1 m-1" to="/contact-us">Contact Us</router-link>
+          </div>
+          <div class="col-md-3 text-center text-md-r">
+            <div class="footer-icons ml-md-4 d-flex justify-content-center justify-content-md-end">
               <a href="#" target="_blank">
                 <img
                   src="/assets/images/linkdin_Icon.png"
@@ -326,6 +318,7 @@ export default {
 .nav-link:hover {
   color: rgb(207, 206, 206) !important;
 }
+
 
 .footer-bg-black {
   background-color: black;
